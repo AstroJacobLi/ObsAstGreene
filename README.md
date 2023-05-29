@@ -1,44 +1,44 @@
-# quantecon-mini-example
-
-A short example showing how to write a lecture series using Jupyter Book 2.0.
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/AstroJacobLi/ObsAstGreene/HEAD)
+# Observational Astronomy Course Website
 
 [![Jupyter Book Badge](https://jupyterbook.org/badge.svg)](<http://jiaxuanli.me/ObsAstGreene/docs/index.html>)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/AstroJacobLi/ObsAstGreene/HEAD)
 
-## Creating an Conda Environment
+A course designed for Princeton majors and non-majors interested in understanding astronomical data. 
 
+Maintained by Jenny Greene, Jared Siegel, Jiaxuan Li. 
+
+## How to build the book?
+### Creating an Conda Environment
+In order to compile this book, you will need to create a conda environment with the necessary dependencies.
 The conda environment is provided as `environment.yml`. This environment is used for all testing by Github Actions and can be setup by:
-
 1. `conda env create -f environment.yml`
 2. `conda activate obsastro`
 
-## Building a Jupyter Book
-
-Run the following command in your terminal:
+### Building the Jupyter Book
+After `cd` into the `ObsAstGreene` folder, run the following command in your terminal:
 
 ```bash
-jb build mini_book/
+jb build book/
 ```
 
 If you would like to work with a clean build, you can empty the build folder by running:
 
 ```bash
-jb clean mini_book/
+jb clean book/
 ```
 
-If jupyter execution is cached, this command will not delete the cached folder. 
+If Jupyter execution is cached, this command will not delete the cached folder. 
 
 To remove the build folder (including `cached` executables), you can run:
 
 ```bash
-jb clean --all mini_book/
+jb clean --all book/
 ```
 
-## Publishing this Jupyter Book
+### Publishing this Jupyter Book
 
 This repository is published automatically to `gh-pages` upon `push` to the `master` branch.
 
-## Notes
+### Notes
 
-This repository is used as a test case for [jupyter-book](https://github.com/executablebooks/jupyter-book) and 
-a `requirements.txt` file is provided to support this `CI` application.
+This repository is built based on [quantecon-mini-example](https://github.com/executablebooks/quantecon-mini-example). A more in-depth tutorial can be found [here](https://jupyterbook.org/start/overview.html).
