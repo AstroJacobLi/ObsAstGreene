@@ -8,7 +8,7 @@ description: >-
   A Gateway to Science: Observational Astronomy in the James Webb Era
 
 execute:
-  execute_notebooks           : auto
+  execute_notebooks           : cache
 
 # HTML-specific settings
 html:
