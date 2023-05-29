@@ -9,3 +9,5 @@ dependencies:
   - matplotlib
   - pip:
     - jupyter-book
+    - jupyterlab
+    - astropy
