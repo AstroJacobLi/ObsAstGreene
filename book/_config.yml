@@ -1,17 +1,19 @@
 title : Observational Astronomy
 author: Jenny Greene, Jared Siegel, Jiaxuan Li
-logo: 'pton.png'
+copyright: "2023"
+logo: 'jwst.png'
 
 # Short description about the book
 description: >-
   A Gateway to Science: Observational Astronomy in the James Webb Era
 
 execute:
-  execute_notebooks           : cache
+  execute_notebooks           : auto
 
 # HTML-specific settings
 html:
-  home_page_in_navbar         : false
+  favicon: favicon.ico
+  home_page_in_navbar: false
 
 
 # Information about where the book exists on the web
@@ -22,7 +24,7 @@ repository:
 
 launch_buttons:
   notebook_interface: "jupyterlab"  # or "classic"
-  binderhub_url: "https://mybinder.org/v2/gh/AstroJacobLi/ObsAstGreene/HEAD"
+  binderhub_url: "https://mybinder.org"
   colab_url: "https://colab.research.google.com"
 
 # LaTeX settings
