@@ -7,9 +7,9 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Setting up Your Python Environment &#8212; Scientific Python QuickStart</title>
+    <title>Setting up Your Python Environment &#8212; Observational Astronomy</title>
   
   
   
@@ -64,6 +64,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'docs/getting_started';</script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="An Introductory Example" href="python_by_example.html" />
@@ -143,18 +144,20 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="../_static/qe-logo-large.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/qe-logo-large.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../_static/jwst.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/jwst.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        <ul class="current nav bd-sidenav">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to Python</span></p>
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="about_py.html">About Python</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Setting up Your Python Environment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="python_by_example.html">An Introductory Example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="learn_more.html">Learn More</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting notebook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Test notebook</a></li>
 </ul>
 
     </div>
@@ -201,11 +204,77 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/AstroJacobLi/ObsAstGreene/main/?urlpath=lab/tree/book/docs/getting_started.md" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/AstroJacobLi/ObsAstGreene/blob/main//book/docs/getting_started.md" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
 <div class="dropdown dropdown-download-buttons">
   <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
     <i class="fas fa-download"></i>
   </button>
   <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/docs/getting_started.ipynb" target="_blank"
+   class="btn btn-sm btn-download-notebook-button dropdown-item"
+   title="Download notebook file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
       
       
       
@@ -559,7 +628,7 @@ your code.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/4c8113ad9548cbf7df1c9d766cfd1b2be85b54bf7267acbb0c9d0ffb890e968e.png" src="../_images/4c8113ad9548cbf7df1c9d766cfd1b2be85b54bf7267acbb0c9d0ffb890e968e.png" />
+<img alt="../_images/e7343a09a1f7aa7fb34994cdb902425898b4c8594488e0f47b8516e85d92b020.png" src="../_images/e7343a09a1f7aa7fb34994cdb902425898b4c8594488e0f47b8516e85d92b020.png" />
 </div>
 </div>
 <p>Don’t worry about the details for now — let’s just run it and see
@@ -742,7 +811,7 @@ run as discussed above.</p>
   <div class="footer-item">
     
 <p class="component-author">
-By Thomas J. Sargent and John Stachurski
+By Jenny Greene, Jared Siegel, Jiaxuan Li
 </p>
 
   </div>
@@ -751,7 +820,7 @@ By Thomas J. Sargent and John Stachurski
     
   <p class="copyright">
     
-      © Copyright 2022.
+      © Copyright 2023.
       <br/>
     
   </p>
