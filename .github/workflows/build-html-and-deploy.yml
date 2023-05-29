@@ -5,6 +5,9 @@ on:
   push:
     branches:
       - main
+permissions:
+  contents: write
+  
 jobs:
   build-html-and-deploy:
     runs-on: ubuntu-latest
@@ -27,11 +30,9 @@ jobs:
       - name: Build Obs Astro
         shell: bash -l {0}
         run: jb build book/
-
+    
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@3.7.1
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: book/_build/html
-          CLEAN: true
+          folder: book/_build/html
+          branch: gh-pages
