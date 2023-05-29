@@ -361,6 +361,9 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rcParams</span><span class="p">,</span> <span class="n">cycler</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">import</span> <span class="nn">astropy</span>
 </pre></div>
 </div>
 </div>
@@ -368,53 +371,41 @@ document.write(`
 <p>Let’s download the images</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">astropy</span>
-<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;/Users/jiaxuanli/Dropbox/Data/UNCOVER/&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+  <span class="kn">import</span> <span class="nn">google.colab</span>
+  <span class="n">IN_COLAB</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">except</span><span class="p">:</span>
+  <span class="n">IN_COLAB</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">IN_COLAB</span><span class="p">:</span>
+  <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s1">&#39;~/ObsAstroData/&#39;</span><span class="p">)</span>
+  <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;~/ObsAstroData/&#39;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="s1">&#39;cutoutRGB_NIRCAM.pkl&#39;</span><span class="p">):</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Data is already there&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Download data&#39;</span><span class="p">)</span>
+  <span class="o">!</span>wget<span class="w"> </span>https://tigress-web.princeton.edu/~jiaxuanl/cutoutRGB_NIRCAM.pkl
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">os</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">astropy</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;/Users/jiaxuanli/Dropbox/Data/UNCOVER/&#39;</span><span class="p">)</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">8</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>   <span class="n">IN_COLAB</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">IN_COLAB</span><span class="p">:</span>
+<span class="ne">----&gt; </span><span class="mi">8</span>   <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s1">&#39;~/ObsAstroData/&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>   <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;~/ObsAstroData/&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="s1">&#39;cutoutRGB_NIRCAM.pkl&#39;</span><span class="p">):</span>
 
-<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;/Users/jiaxuanli/Dropbox/Data/UNCOVER/&#39;
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;~/ObsAstroData/&#39;
 </pre></div>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>wget<span class="w"> </span>https://tigress-web.princeton.edu/~jiaxuanl/cutoutRGB_NIRCAM.pkl
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--2023-05-29 15:20:07--  https://tigress-web.princeton.edu/~jiaxuanl/cutoutRGB_NIRCAM.pkl
-Resolving tigress-web.princeton.edu (tigress-web.princeton.edu)... 128.112.173.29
-Connecting to tigress-web.princeton.edu (tigress-web.princeton.edu)|128.112.173.29|:443... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 15542813 (15M)
-Saving to: ‘cutoutRGB_NIRCAM.pkl’
-
-cutoutRGB_NIRCAM.pk 100%[===================&gt;]  14.82M  11.0MB/s    in 1.4s    
-
-2023-05-29 15:20:09 (11.0 MB/s) - ‘cutoutRGB_NIRCAM.pkl’ saved [15542813/15542813]
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pickle</span>
-</pre></div>
-</div>
-</div>
-</div>
+<p>The data has been downloaded to <code class="docutils literal notranslate"><span class="pre">~/ObsAstroData/</span></code> folder if you are using your own computer. If you are using <code class="docutils literal notranslate"><span class="pre">colab</span></code>, the data is downloaded to the <code class="docutils literal notranslate"><span class="pre">file</span></code> folder.</p>
+<p>Now we open the data using <code class="docutils literal notranslate"><span class="pre">pickle</span></code> and plot the images.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;./cutoutRGB_NIRCAM.pkl&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
