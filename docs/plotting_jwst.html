@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>About Python &#8212; Observational Astronomy</title>
+    <title>Plotting JWST images &#8212; Observational Astronomy</title>
   
   
   
@@ -61,12 +61,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/about_py';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/plotting_jwst';</script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Setting up Your Python Environment" href="getting_started.html" />
-    <link rel="prev" title="Observational Astronomy" href="index.html" />
+    <link rel="next" title="Test notebook" href="notebooks.html" />
+    <link rel="prev" title="An Introductory Example" href="python_by_example.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -151,10 +151,10 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to Python</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">About Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about_py.html">About Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Setting up Your Python Environment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="python_by_example.html">An Introductory Example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="plotting_jwst.html">Plotting JWST images</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Plotting JWST images</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks.html">Test notebook</a></li>
 </ul>
 
@@ -210,7 +210,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://mybinder.org/v2/gh/AstroJacobLi/ObsAstGreene/main/?urlpath=lab/tree/book/docs/about_py.md" target="_blank"
+      <li><a href="https://mybinder.org/v2/gh/AstroJacobLi/ObsAstGreene/main/?urlpath=lab/tree/book/docs/plotting_jwst.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onBinder"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -228,7 +228,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://colab.research.google.com/github/AstroJacobLi/ObsAstGreene/blob/main//book/docs/about_py.md" target="_blank"
+      <li><a href="https://colab.research.google.com/github/AstroJacobLi/ObsAstGreene/blob/main//book/docs/plotting_jwst.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -259,24 +259,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/docs/about_py.ipynb" target="_blank"
-   class="btn btn-sm btn-download-notebook-button dropdown-item"
-   title="Download notebook file"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-code"></i>
-  </span>
-<span class="btn__text-container">.ipynb</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li><a href="../_sources/docs/about_py.md" target="_blank"
+      <li><a href="../_sources/docs/plotting_jwst.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -286,7 +269,7 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -345,9 +328,7 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
+
 </div></div>
       
     </div>
@@ -358,27 +339,11 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>About Python</h1>
+    <h1>Plotting JWST images</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-python">What’s Python?</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-uses">Common Uses</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relative-popularity">Relative Popularity</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#features">Features</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#syntax-and-design">Syntax and Design</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scientific-programming">Scientific Programming</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bibliography">Bibliography</a></li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -388,111 +353,139 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="about-python">
-<span id="about-py"></span><h1>About Python<a class="headerlink" href="#about-python" title="Permalink to this heading">#</a></h1>
-<blockquote>
-<div><p>“Python has gotten sufficiently weapons grade that we don’t descend
-into R anymore. Sorry, R people. I used to be one of you but we no
-longer descend into R.” – Chris Wiggins</p>
-</div></blockquote>
-<section id="what-s-python">
-<h2>What’s Python?<a class="headerlink" href="#what-s-python" title="Permalink to this heading">#</a></h2>
-<p><a class="reference external" href="https://www.python.org">Python</a> is a general-purpose programming
-language conceived in 1989 by Dutch programmer <a class="reference external" href="https://en.wikipedia.org/wiki/Guido_van_Rossum">Guido van
-Rossum</a>.</p>
-<p>Python is free and open source, with development coordinated through the
-<a class="reference external" href="https://www.python.org/psf/">Python Software Foundation</a>.</p>
-<p>Python has experienced rapid adoption in the last decade and is now one
-of the most commonly used programming languages.</p>
-<p>Popular textbooks on Python programming include <span id="id1">[]</span> and <span id="id2">[]</span>.</p>
-<section id="common-uses">
-<h3>Common Uses<a class="headerlink" href="#common-uses" title="Permalink to this heading">#</a></h3>
-<p>Python is a general-purpose language used in almost all application domains
-such as</p>
-<ul class="simple">
-<li><p>communications</p></li>
-<li><p>web development</p></li>
-<li><p>CGI and graphical user interfaces</p></li>
-<li><p>game development</p></li>
-<li><p>multimedia, data processing, security, etc., etc., etc.</p></li>
-</ul>
-<p>Python is beginner-friendly and routinely used to teach computer science and
-programming in top computer science programs.</p>
-<p>Python is particularly popular within the scientific and data science
-communities.</p>
-<p>It is steadily <a class="reference external" href="https://news.efinancialcareers.com/us-en/3002556/python-replaced-excel-banking">replacing familiar tools like
-Excel</a>
-in the fields of finance and banking.</p>
-</section>
-<section id="relative-popularity">
-<h3>Relative Popularity<a class="headerlink" href="#relative-popularity" title="Permalink to this heading">#</a></h3>
-<p>The following chart, produced using Stack Overflow Trends, shows one
-measure of the relative popularity of Python</p>
-<figure class="align-default">
-<a class="reference internal image-reference" href="../_images/python_vs_matlab.png"><img alt="../_images/python_vs_matlab.png" src="../_images/python_vs_matlab.png" style="width: 457.2px; height: 288.0px;" /></a>
-</figure>
-<p>The figure indicates not only that Python is widely used but also that
-adoption of Python has accelerated significantly since 2012.</p>
-<p>This is driven at least in part by uptake in the scientific
-domain, particularly in rapidly growing fields like data science.</p>
-<p>For example, the popularity of <a class="reference external" href="http://pandas.pydata.org/">pandas</a>, a
-library for data analysis with Python has exploded, as seen here.</p>
-<p>(The corresponding time path for MATLAB is shown for comparison)</p>
-<figure class="align-default">
-<a class="reference internal image-reference" href="../_images/pandas_vs_matlab.png"><img alt="../_images/pandas_vs_matlab.png" src="../_images/pandas_vs_matlab.png" style="width: 474.49px; height: 287.5px;" /></a>
-</figure>
-<p>Note that pandas takes off in 2012, which is the same year that we see
-Python’s popularity begin to spike in the first figure.</p>
-<p>Overall, it’s clear that</p>
-<ul class="simple">
-<li><p>Python is <a class="reference external" href="http://spectrum.ieee.org/computing/software/the-2017-top-programming-languages">one of the most popular programming languages worldwide</a>.</p></li>
-<li><p>Python is a major tool for scientific computing, accounting for a
-rapidly rising share of scientific work around the globe.</p></li>
-</ul>
-</section>
-<section id="features">
-<h3>Features<a class="headerlink" href="#features" title="Permalink to this heading">#</a></h3>
-<p>Python is a <a class="reference external" href="https://en.wikipedia.org/wiki/High-level_programming_language">high-level language</a>
-suitable for rapid development.</p>
-<p>It has a relatively small core language supported by many libraries.</p>
-<p>Multiple programming styles are supported (procedural, object-oriented, functional, etc.)</p>
-<p>Python is interpreted rather than compiled.</p>
-</section>
-<section id="syntax-and-design">
-<h3>Syntax and Design<a class="headerlink" href="#syntax-and-design" title="Permalink to this heading">#</a></h3>
-<p>One nice feature of Python is its elegant syntax — we’ll see many
-examples later on.</p>
-<p>Elegant code might sound superfluous but in fact it’s highly beneficial
-because it makes the syntax easy to read and easy to remember.</p>
-<p>Remembering how to read from files, sort dictionaries and other such
-routine tasks means that you don’t need to break your flow in order to
-hunt down correct syntax.</p>
-<p>Closely related to elegant syntax is an elegant design.</p>
-<p>Features like iterators, generators, decorators and list comprehensions
-make Python highly expressive, allowing you to get more done with less
-code.</p>
-<p><a class="reference external" href="https://en.wikipedia.org/wiki/Namespace">Namespaces</a> improve
-productivity by cutting down on bugs and syntax errors.</p>
-</section>
-</section>
-<section id="scientific-programming">
-<h2>Scientific Programming<a class="headerlink" href="#scientific-programming" title="Permalink to this heading">#</a></h2>
-<p>Python has become one of the core languages of scientific computing.</p>
-<p>It’s either the dominant player or a major player in</p>
-<ul class="simple">
-<li><p><a class="reference external" href="http://scikit-learn.org/stable/">machine learning and data science</a></p></li>
-<li><p><a class="reference external" href="http://www.astropy.org/">astronomy</a></p></li>
-<li><p><a class="reference external" href="https://wiki.python.org/moin/PythonForArtificialIntelligence">artificial intelligence</a></p></li>
-<li><p><a class="reference external" href="http://chemlab.github.io/chemlab/">chemistry</a></p></li>
-<li><p><a class="reference external" href="http://biopython.org/wiki/Main_Page">computational biology</a></p></li>
-<li><p><a class="reference external" href="https://pypi.org/project/meteorology/">meteorology</a></p></li>
-</ul>
-<p>Its popularity in economics is also beginning to rise.</p>
-</section>
-<section id="bibliography">
-<h2>Bibliography<a class="headerlink" href="#bibliography" title="Permalink to this heading">#</a></h2>
-<!-- ```{bibliography} ../_bibliography/references.bib
-``` --></section>
+  <section class="tex2jax_ignore mathjax_ignore" id="plotting-jwst-images">
+<span id="file-types-notebooks"></span><h1>Plotting JWST images<a class="headerlink" href="#plotting-jwst-images" title="Permalink to this heading">#</a></h1>
+<p>In this notebook, we will have a taste of the real data of James Webb Space Telescope. We take the images from the <a class="reference external" href="https://jwst-uncover.github.io/DR1.html">UNCOVER</a> survey and plot them using <code class="docutils literal notranslate"><span class="pre">python</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rcParams</span><span class="p">,</span> <span class="n">cycler</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s download the images</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">astropy</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;/Users/jiaxuanli/Dropbox/Data/UNCOVER/&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">os</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">astropy</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;/Users/jiaxuanli/Dropbox/Data/UNCOVER/&#39;</span><span class="p">)</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;/Users/jiaxuanli/Dropbox/Data/UNCOVER/&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>wget<span class="w"> </span>https://tigress-web.princeton.edu/~jiaxuanl/cutoutRGB_NIRCAM.pkl
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--2023-05-29 15:20:07--  https://tigress-web.princeton.edu/~jiaxuanl/cutoutRGB_NIRCAM.pkl
+Resolving tigress-web.princeton.edu (tigress-web.princeton.edu)... 128.112.173.29
+Connecting to tigress-web.princeton.edu (tigress-web.princeton.edu)|128.112.173.29|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 15542813 (15M)
+Saving to: ‘cutoutRGB_NIRCAM.pkl’
+
+cutoutRGB_NIRCAM.pk 100%[===================&gt;]  14.82M  11.0MB/s    in 1.4s    
+
+2023-05-29 15:20:09 (11.0 MB/s) - ‘cutoutRGB_NIRCAM.pkl’ saved [15542813/15542813]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pickle</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;./cutoutRGB_NIRCAM.pkl&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict_keys([&#39;rIMG&#39;, &#39;rWCS&#39;, &#39;rHDR&#39;, &#39;rfilt&#39;, &#39;gIMG&#39;, &#39;gWCS&#39;, &#39;gHDR&#39;, &#39;gfilt&#39;, &#39;bIMG&#39;, &#39;bWCS&#39;, &#39;bHDR&#39;, &#39;bfilt&#39;])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arcsinh</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;bIMG&#39;</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7fcdb1041550&gt;
+</pre></div>
+</div>
+<img alt="../_images/a8bf26d6161cdc10a125f5419ac5b8f9dee993a6af05b10805d1544310b84d14.png" src="../_images/a8bf26d6161cdc10a125f5419ac5b8f9dee993a6af05b10805d1544310b84d14.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;bIMG&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/l4/x41n5z4j4q9gypsb58tdh24c0000gn/T/ipykernel_48679/3008184174.py:1: RuntimeWarning: invalid value encountered in log10
+  plt.imshow(np.log10(data[&#39;bIMG&#39;] + 1))
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7fcd680d6a30&gt;
+</pre></div>
+</div>
+<img alt="../_images/5b43473190c4ceb903857ce1c1540c4d435a453e21c725ae75d732abe317de15.png" src="../_images/5b43473190c4ceb903857ce1c1540c4d435a453e21c725ae75d732abe317de15.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.visualization</span> <span class="kn">import</span> <span class="n">make_lupton_rgb</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img_rgb</span> <span class="o">=</span> <span class="n">make_lupton_rgb</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;rIMG&#39;</span><span class="p">],</span> <span class="mf">0.85</span> <span class="o">*</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;gIMG&#39;</span><span class="p">],</span> <span class="mf">1.1</span> <span class="o">*</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;bIMG&#39;</span><span class="p">],</span> <span class="n">Q</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">stretch</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img_rgb</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7fcd8263d610&gt;
+</pre></div>
+</div>
+<img alt="../_images/7885a8e268f26a51b5cf1bf36eaf8820001a685299b3f7bfd6074c7096cc836d.png" src="../_images/7885a8e268f26a51b5cf1bf36eaf8820001a685299b3f7bfd6074c7096cc836d.png" />
+</div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -527,20 +520,20 @@ productivity by cutting down on bugs and syntax errors.</p>
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="index.html"
+       href="python_by_example.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Observational Astronomy</p>
+        <p class="prev-next-title">An Introductory Example</p>
       </div>
     </a>
     <a class="right-next"
-       href="getting_started.html"
+       href="notebooks.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Setting up Your Python Environment</p>
+        <p class="prev-next-title">Test notebook</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -553,28 +546,6 @@ productivity by cutting down on bugs and syntax errors.</p>
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-python">What’s Python?</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-uses">Common Uses</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relative-popularity">Relative Popularity</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#features">Features</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#syntax-and-design">Syntax and Design</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scientific-programming">Scientific Programming</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bibliography">Bibliography</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>
