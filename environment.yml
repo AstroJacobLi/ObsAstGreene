@@ -1,4 +1,4 @@
-name: qe-mini-example
+name: obsastro
 channels:
   - default
 dependencies:
@@ -8,5 +8,4 @@ dependencies:
   - pandas
   - matplotlib
   - pip:
-    - quantecon
     - jupyter-book

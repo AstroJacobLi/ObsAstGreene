@@ -1,13 +1,14 @@
 # quantecon-mini-example
 
 A short example showing how to write a lecture series using Jupyter Book 2.0.
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/AstroJacobLi/ObsAstGreene/HEAD)
 
 ## Creating an Conda Environment
 
 The conda environment is provided as `environment.yml`. This environment is used for all testing by Github Actions and can be setup by:
 
 1. `conda env create -f environment.yml`
-2. `conda activate qe-mini-example`
+2. `conda activate obsastro`
 
 ## Building a Jupyter Book
 

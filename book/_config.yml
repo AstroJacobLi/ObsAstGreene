@@ -1,0 +1,35 @@
+title : Observational Astronomy
+author: Jenny Greene, Jared Siegel, Jiaxuan Li
+logo: 'pton.png'
+
+# Short description about the book
+description: >-
+  A Gateway to Science: Observational Astronomy in the James Webb Era
+
+execute:
+  execute_notebooks           : cache
+
+# HTML-specific settings
+html:
+  home_page_in_navbar         : false
+
+
+# Information about where the book exists on the web
+repository:
+  url                       : https://github.com/AstroJacobLi/ObsAstGreene  # Online location of your book
+  path_to_book              : book/  # Optional path to your book, relative to the repository root
+  branch                    : main/  # Which branch of the repository should be used when creating links (optional)
+
+launch_buttons:
+  notebook_interface: "jupyterlab"  # or "classic"
+  binderhub_url: "https://mybinder.org/v2/gh/AstroJacobLi/ObsAstGreene/HEAD"
+  colab_url: "https://colab.research.google.com"
+
+# LaTeX settings
+bibtex_bibfiles:
+   - _bibliography/references.bib
+
+latex:
+  latex_engine: "pdflatex"
+  latex_documents:
+    targetname: book.tex
