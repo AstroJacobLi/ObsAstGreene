@@ -24,14 +24,14 @@ jobs:
           environment-file: environment.yml
           activate-environment: qe-mini-example
 
-      - name: Build QuantEcon Mini Example
+      - name: Build Obs Astro
         shell: bash -l {0}
-        run: jb build mini_book/
+        run: jb build book/
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: mini_book/_build/html
+          FOLDER: book/_build/html
           CLEAN: true
