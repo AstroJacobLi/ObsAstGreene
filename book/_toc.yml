@@ -10,3 +10,7 @@ parts:
   - file: docs/functions
   - file: docs/plotting_jwst
   - file: docs/notebooks
+- caption: Statistics and detector
+  chapters:
+  - file: docs/basic_stat
+  - file: docs/intro_gaia_star
