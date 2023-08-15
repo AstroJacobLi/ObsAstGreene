@@ -432,7 +432,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
 </pre></div>
 </div>
 </div>
@@ -456,9 +456,9 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[6 6 3 1 5 2 2 4 4 3 2 1 2 2 6 6 1 3 2 3 4 3 3 4 2 3 2 4 6 1 3 3 6 2 4 2 3
- 1 2 2 1 1 3 6 2 5 2 5 5 6 4 6 3 5 2 3 6 6 6 3 4 6 6 2 2 1 1 6 1 3 1 4 2 1
- 2 5 5 5 3 2 5 3 2 2 3 4 3 3 3 6 1 6 1 5 5 1 5 2 3 3]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2 1 2 5 3 2 6 5 1 1 4 1 5 2 5 2 1 5 2 2 1 2 4 6 2 6 5 1 6 1 1 6 4 1 4 5 5
+ 3 4 2 2 1 6 6 4 4 3 6 6 1 2 1 4 4 1 3 4 4 3 1 1 6 6 6 3 3 6 1 1 1 4 6 1 2
+ 1 3 4 6 6 4 4 2 1 1 3 3 1 1 6 6 6 2 6 6 6 4 6 4 1 3]
 </pre></div>
 </div>
 </div>
@@ -472,7 +472,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>26
 </pre></div>
 </div>
 </div>
@@ -484,7 +484,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17
 </pre></div>
 </div>
 </div>
@@ -498,12 +498,12 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The frequency of 1 is 15
-The frequency of 2 is 23
-The frequency of 3 is 23
-The frequency of 4 is 10
-The frequency of 5 is 12
-The frequency of 6 is 17
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The frequency of 1 is 26
+The frequency of 2 is 15
+The frequency of 3 is 11
+The frequency of 4 is 17
+The frequency of 5 is 8
+The frequency of 6 is 23
 </pre></div>
 </div>
 </div>
@@ -518,8 +518,8 @@ The frequency of 6 is 17
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1 2 3 4 5 6] [15 23 23 10 12 17]
-[(1, 15), (2, 23), (3, 23), (4, 10), (5, 12), (6, 17)]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1 2 3 4 5 6] [26 15 11 17  8 23]
+[(1, 26), (2, 15), (3, 11), (4, 17), (5, 8), (6, 23)]
 </pre></div>
 </div>
 </div>
@@ -538,7 +538,7 @@ The frequency of 6 is 17
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Number of rolls: 100&#39;)
 </pre></div>
 </div>
-<img alt="../_images/7bf7bf861006c3f36d8af3d1e91bfac0309f856c141b11156de15e933e01ed72.png" src="../_images/7bf7bf861006c3f36d8af3d1e91bfac0309f856c141b11156de15e933e01ed72.png" />
+<img alt="../_images/0540f7a3be0934900d40ccf3a94a838234aab5f11e093dec6d24deef203afadc.png" src="../_images/0540f7a3be0934900d40ccf3a94a838234aab5f11e093dec6d24deef203afadc.png" />
 </div>
 </div>
 <p>Is the dice fair? Seems no from the figure above, because the frequencies of all numbers are not the same. This contradicts our assumption of using <code class="docutils literal notranslate"><span class="pre">np.random.randint</span></code> where the random variable should be random. What’s happening here?</p>
@@ -563,13 +563,13 @@ The frequency of 6 is 17
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1 2 3 4 5 6] [1693 1675 1657 1636 1624 1715]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1 2 3 4 5 6] [1613 1675 1696 1667 1676 1673]
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Number of rolls: 10000&#39;)
 </pre></div>
 </div>
-<img alt="../_images/313a6d7c6499adf6d87105760777bff131c9573bc5c1e321119efdf85ad839de.png" src="../_images/313a6d7c6499adf6d87105760777bff131c9573bc5c1e321119efdf85ad839de.png" />
+<img alt="../_images/5f699f2885f7344885d94ad6e2cab751a4c5c759ee804e26fb4697a2ef566e35.png" src="../_images/5f699f2885f7344885d94ad6e2cab751a4c5c759ee804e26fb4697a2ef566e35.png" />
 </div>
 </div>
 <p>Okay! Now the dice looks much fairer! This exercise shows us an important thing: the conclusion is often subject to statistical uncertainty when the sample size is too small.</p>
@@ -582,7 +582,7 @@ The frequency of 6 is 17
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.1693 0.1675 0.1657 0.1636 0.1624 0.1715]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.1613 0.1675 0.1696 0.1667 0.1676 0.1673]
 </pre></div>
 </div>
 </div>
@@ -602,7 +602,7 @@ The frequency of 6 is 17
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Number of rolls: 10000&#39;)
 </pre></div>
 </div>
-<img alt="../_images/8bc49ff8b4b3d5b862f3384518544e772899e1e42eabc96a3603346e46821af6.png" src="../_images/8bc49ff8b4b3d5b862f3384518544e772899e1e42eabc96a3603346e46821af6.png" />
+<img alt="../_images/2e8750008a976e7e35ca51d5a5dc073d8bd5d46b036573d582f8e59c7459f179.png" src="../_images/2e8750008a976e7e35ca51d5a5dc073d8bd5d46b036573d582f8e59c7459f179.png" />
 </div>
 </div>
 </section>
