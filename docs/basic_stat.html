@@ -368,7 +368,11 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#we-will-learn">We will learn:</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#we-will-use-them-to-understand">We will use them to understand</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-variable-histogram-probability">Random variable, histogram, probability</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-median-standard-deviation">Mean, median, standard deviation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-median-standard-deviation">Mean, Median, Standard Deviation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#outlier">Outlier</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-normal-distribution">Gaussian (normal) distribution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#poisson-distribution-and-its-relation-to-gaussian">Poisson distribution and its relation to Gaussian</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-noisy-image">A noisy image</a></li>
 </ul>
             </nav>
         </div>
@@ -413,8 +417,8 @@ document.write(`
 
 <span class="c1"># We can beautify our plots by changing the matpltlib setting a little</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">18</span>
-<span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.linewidth&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;serif&quot;</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.linewidth&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;serif&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -422,22 +426,22 @@ document.write(`
 </section>
 <section id="random-variable-histogram-probability">
 <h2>Random variable, histogram, probability<a class="headerlink" href="#random-variable-histogram-probability" title="Permalink to this heading">#</a></h2>
-<p>Let’s look at a cubic dice with faces numbered from 1 to 6. When you roll a dice once, you write down the number on the top (e.g., 4). Then when you roll it again, you might see a different number (e.g., 2). You can repeat this many times, and you will probably see all six numbers. An event such as a dice roll is called a <strong>random event</strong>. The outcome of a dice roll is a <strong>random variable</strong>. Let’s denote the random variable of a dice roll as <span class="math notranslate nohighlight">\(X\)</span>, so the value of <span class="math notranslate nohighlight">\(X\)</span> must be in <span class="math notranslate nohighlight">\(\{1, 2, 3, 4, 5, 6\}\)</span>. One must realize that a random variable is a variable – it can have different values <span class="math notranslate nohighlight">\(x\)</span> when repeating the random event.</p>
-<p>Let’s use Python to generate random numbers to get a sense of rolling a “fair” dice. <code class="docutils literal notranslate"><span class="pre">np.random.randint</span></code> (or <code class="docutils literal notranslate"><span class="pre">scipy.stats.randint</span></code>) provides a nice function to generate a random variable that is an integer between 1 and 6.</p>
+<p>Let’s look at a cubic die with faces numbered from 1 to 6. When you roll a die once, you write down the number on the top (e.g., 4). Then when you roll it again, you might see a different number (e.g., 2). You can repeat this many times, and you will probably see all six numbers. An event such as a die roll is called a <strong>random event</strong>. The outcome of a die roll is a <strong>random variable</strong>. Let’s denote the random variable of a die roll as <span class="math notranslate nohighlight">\(X\)</span>, so the value of <span class="math notranslate nohighlight">\(X\)</span> must be in <span class="math notranslate nohighlight">\(\{1, 2, 3, 4, 5, 6\}\)</span>. One must realize that a random variable is a variable – it can have different values <span class="math notranslate nohighlight">\(x\)</span> when repeating the random event.</p>
+<p>Let’s use Python to generate random numbers to get a sense of rolling a “fair” die. <code class="docutils literal notranslate"><span class="pre">np.random.randint</span></code> (or <code class="docutils literal notranslate"><span class="pre">scipy.stats.randint</span></code>) provides a nice function to generate a random variable that is an integer between 1 and 6.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># run this cell many times, as if you are rolling a dice</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># run this cell many times, as if you are rolling a die</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">6</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span> <span class="c1"># notice that `high` is one plus the highest number of our random variable. This trick is common in python.</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5
 </pre></div>
 </div>
 </div>
 </div>
-<p>Now you see what a random variable looks like. Shall we roll a dice for 100 times and record all the outcomes?</p>
+<p>Now you see what a random variable looks like. Shall we roll a die for 100 times and record all the outcomes?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N_roll</span> <span class="o">=</span> <span class="mi">100</span>
@@ -456,35 +460,35 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[5 4 6 5 4 4 4 1 5 1 5 4 1 5 6 4 6 6 4 6 5 6 1 6 4 6 2 6 1 6 6 2 1 5 2 3 4
- 3 4 6 4 1 3 3 4 2 4 1 5 4 1 2 4 3 6 4 2 3 1 6 1 2 4 2 5 2 3 3 2 2 2 6 1 2
- 6 1 5 3 5 3 5 1 2 6 5 6 2 6 2 3 1 5 5 5 4 4 1 6 1 5]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2 2 2 2 6 4 3 4 5 1 2 3 3 2 4 2 2 4 3 2 5 6 6 3 2 5 6 3 1 6 4 2 4 5 2 1 3
+ 5 5 3 3 5 2 3 6 1 3 5 2 4 5 2 1 3 1 2 5 5 2 2 1 1 1 2 6 1 1 1 3 1 1 6 6 4
+ 3 3 6 5 3 6 5 4 3 3 5 2 6 4 4 2 1 4 2 4 4 5 1 5 4 5]
 </pre></div>
 </div>
 </div>
 </div>
-<p>Here we use a list <code class="docutils literal notranslate"><span class="pre">outcomes</span></code> to store the outcome from each roll. The <code class="docutils literal notranslate"><span class="pre">for</span></code> loop is used to repeat the dice roll for <code class="docutils literal notranslate"><span class="pre">N_roll</span></code> times. It is a good practice to define variables like <code class="docutils literal notranslate"><span class="pre">N_roll</span></code> in your code, because if you want to change the number of dice rolls to 10000, you can just change <code class="docutils literal notranslate"><span class="pre">N_roll</span> <span class="pre">=</span> <span class="pre">10000</span></code> without touching other code. The benefit of this practice will manifest itself as we go on in this course. Also, it is usually more convenient to work with numpy arrays than python lists.</p>
+<p>Here we use a list <code class="docutils literal notranslate"><span class="pre">outcomes</span></code> to store the outcome from each roll. The <code class="docutils literal notranslate"><span class="pre">for</span></code> loop is used to repeat the die roll for <code class="docutils literal notranslate"><span class="pre">N_roll</span></code> times. It is a good practice to define variables like <code class="docutils literal notranslate"><span class="pre">N_roll</span></code> in your code, because if you want to change the number of dice rolls to 10000, you can just change <code class="docutils literal notranslate"><span class="pre">N_roll</span> <span class="pre">=</span> <span class="pre">10000</span></code> without touching other code. The benefit of this practice will manifest itself as we go on in this course. Also, it is usually more convenient to work with numpy arrays than python lists.</p>
 <p>Our next task is to check the frequency of the outcome being each number between 1 and 6.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">outcomes</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># this shows the frequency of &quot;1&quot; in our 100 dice rolls</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">outcomes</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># this shows the frequency of &quot;1&quot; in the 100 rolls</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">outcomes</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span> <span class="c1"># this shows the frequency of &quot;1&quot; in our 100 dice rolls</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">outcomes</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span> <span class="c1"># this shows the frequency of &quot;4&quot; in the 100 rolls</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>19
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15
 </pre></div>
 </div>
 </div>
@@ -498,12 +502,12 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The frequency of 1 is 17
-The frequency of 2 is 16
-The frequency of 3 is 11
-The frequency of 4 is 19
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The frequency of 1 is 16
+The frequency of 2 is 22
+The frequency of 3 is 18
+The frequency of 4 is 15
 The frequency of 5 is 17
-The frequency of 6 is 20
+The frequency of 6 is 12
 </pre></div>
 </div>
 </div>
@@ -518,8 +522,8 @@ The frequency of 6 is 20
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1 2 3 4 5 6] [17 16 11 19 17 20]
-[(1, 17), (2, 16), (3, 11), (4, 19), (5, 17), (6, 20)]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1 2 3 4 5 6] [16 22 18 15 17 12]
+[(1, 16), (2, 22), (3, 18), (4, 15), (5, 17), (6, 12)]
 </pre></div>
 </div>
 </div>
@@ -538,10 +542,10 @@ The frequency of 6 is 20
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Number of rolls: 100&#39;)
 </pre></div>
 </div>
-<img alt="../_images/030b9759c387b86e75184455fc8bac7d837c7bc030ffb82306f218d664275236.png" src="../_images/030b9759c387b86e75184455fc8bac7d837c7bc030ffb82306f218d664275236.png" />
+<img alt="../_images/559ccf584169ad78f0995c5355d5d9bfd17a739fef81e991cbee945240b740d2.png" src="../_images/559ccf584169ad78f0995c5355d5d9bfd17a739fef81e991cbee945240b740d2.png" />
 </div>
 </div>
-<p>Is the dice fair? Seems no from the figure above, because the frequencies of all numbers are not the same. This contradicts our assumption of using <code class="docutils literal notranslate"><span class="pre">np.random.randint</span></code> where the random variable should be random. What’s happening here?</p>
+<p>Is the die fair? Seems no from the figure above, because the frequencies of all numbers are not the same. This contradicts our assumption of using <code class="docutils literal notranslate"><span class="pre">np.random.randint</span></code> where the random variable should be random. What’s happening here?</p>
 <p>Let’s increase <code class="docutils literal notranslate"><span class="pre">N_roll</span></code> to 10000:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -563,16 +567,16 @@ The frequency of 6 is 20
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1 2 3 4 5 6] [1647 1647 1673 1681 1679 1673]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1 2 3 4 5 6] [1646 1664 1685 1681 1700 1624]
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Number of rolls: 10000&#39;)
 </pre></div>
 </div>
-<img alt="../_images/1dd3624a4abc5d40d9943874c05ddb66866cbfdb830cb6495e0629af30f71289.png" src="../_images/1dd3624a4abc5d40d9943874c05ddb66866cbfdb830cb6495e0629af30f71289.png" />
+<img alt="../_images/8469b3ff2130956c8ac87518fb669079088def5f3e700bd53ff939e7090fbe0b.png" src="../_images/8469b3ff2130956c8ac87518fb669079088def5f3e700bd53ff939e7090fbe0b.png" />
 </div>
 </div>
-<p>Okay! Now the dice looks much fairer! This exercise shows us an important thing: the conclusion is often subject to statistical uncertainty when the sample size is too small.</p>
+<p>Okay! Now the histogram looks much fairer! This exercise shows us an important thing: the conclusion is often subject to statistical uncertainty when the sample size is too small.</p>
 <p>Let’s calculate the chance of the outcome being each number:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -582,12 +586,12 @@ The frequency of 6 is 20
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.1647 0.1647 0.1673 0.1681 0.1679 0.1673]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.1646 0.1664 0.1685 0.1681 0.17   0.1624]
 </pre></div>
 </div>
 </div>
 </div>
-<p>If the dice is fair, the chances should all be 1/6 = 0.1667. In math, this “chance” is referred to as “probability”. In <code class="docutils literal notranslate"><span class="pre">plt.hist</span></code> function, you can turn on <code class="docutils literal notranslate"><span class="pre">density=True</span></code> to plot the “normalized frequency” (each frequency divided by the sum of all frequencies, i.e., total number of rolls). The normalized frequencies are very close to the probability 1/6 (red dashed line).</p>
+<p>If the die is fair, the chances should all be 1/6 = 0.1667. In math, this “chance” is referred to as “probability”. In <code class="docutils literal notranslate"><span class="pre">plt.hist</span></code> function, you can turn on <code class="docutils literal notranslate"><span class="pre">density=True</span></code> to plot the “normalized frequency” (each frequency divided by the sum of all frequencies, i.e., total number of rolls). The normalized frequencies are very close to the probability 1/6 (red dashed line).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">outcomes</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">rwidth</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -602,12 +606,499 @@ The frequency of 6 is 20
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Number of rolls: 10000&#39;)
 </pre></div>
 </div>
-<img alt="../_images/2f897c90eff71a0ed024be27676667c1da8f36b889cbf3c65a45c4868a8e0cfb.png" src="../_images/2f897c90eff71a0ed024be27676667c1da8f36b889cbf3c65a45c4868a8e0cfb.png" />
+<img alt="../_images/25ea8b97a91b1fd212670079ff286c249e3ecc6f5368c659ec8a1e155f927e58.png" src="../_images/25ea8b97a91b1fd212670079ff286c249e3ecc6f5368c659ec8a1e155f927e58.png" />
 </div>
 </div>
 </section>
 <section id="mean-median-standard-deviation">
-<h2>Mean, median, standard deviation<a class="headerlink" href="#mean-median-standard-deviation" title="Permalink to this heading">#</a></h2>
+<h2>Mean, Median, Standard Deviation<a class="headerlink" href="#mean-median-standard-deviation" title="Permalink to this heading">#</a></h2>
+<p>These are the most useful statistics and are of great importance in astronomical data. If we have a set of data <span class="math notranslate nohighlight">\(\{x_1, x_2, \dots, x_{n}\}\)</span>, these statistics are defined to be:</p>
+<ul class="simple">
+<li><p>Mean: <span class="math notranslate nohighlight">\(\overline{x} = \dfrac{1}{n}(x_1 + x_2 + \cdots + x_n)\)</span></p></li>
+<li><p>Median: “the middle number”. This is found by ordering all data and picking out the one in the middle (or if there are two middle numbers, taking the mean of those two numbers)</p></li>
+<li><p>Standard deviation: it measures how disperse the data is. $<span class="math notranslate nohighlight">\(\sigma = \sqrt{\frac{(x_i - \overline{x})^2}{n}}\)</span>$</p></li>
+<li><p>Variance: it is typically the square of standard deviation, <span class="math notranslate nohighlight">\(\sigma^2\)</span>.</p></li>
+</ul>
+<p>(maybe add a footnote to discuss the unbias estimator for sample variance, i.e., N-1 v.s. N)</p>
+<p>Let’s generate some data by sampling from a <strong><a class="reference external" href="https://en.wikipedia.org/wiki/Continuous_uniform_distribution">uniform distribution</a></strong> from 0 to 1, and calculate their mean, median, and standard deviation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># sample from a uniform distribution U(0, 1)</span>
+<span class="n">n_sample</span> <span class="o">=</span> <span class="mi">200</span> <span class="c1"># sample size</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n_sample</span><span class="p">,))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Take a look at the data</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.78992779 0.48185908 0.2512758  0.99462716 0.48425006 0.9619015
+ 0.35117387 0.17445252 0.12391267 0.86538609]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Indeed, they are decimals between 0 and 1. Is there a way to <strong>visualize</strong> their distribution? Yes, we just learned about <strong>histogram</strong>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">5</span><span class="p">);</span> <span class="c1"># indeed, it looks like a uniform distribution</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/112058f7179f7c61d57890cf612c9eed9ce6a389da1febdcf6dd0c64d9ee9f7d.png" src="../_images/112058f7179f7c61d57890cf612c9eed9ce6a389da1febdcf6dd0c64d9ee9f7d.png" />
+</div>
+</div>
+<p><em>Sidenote: if you add “;” to a line of code in Python, it will suppress the output from that code.</em></p>
+<p><code class="docutils literal notranslate"><span class="pre">numpy</span></code> provides some handy functions to do basic statistics.</p>
+<p>Sidenote: it is a good practice to check the documentation of the Python function to make sure you’re using it properly. In Jupyter notebook/lab, try to type <code class="docutils literal notranslate"><span class="pre">Shift+Tab</span></code> around the function. What happens?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.44908411331515496, 0.41394010765395783, 0.28761777933439486)
+</pre></div>
+</div>
+</div>
+</div>
+<p>To verify that <code class="docutils literal notranslate"><span class="pre">np.std</span></code> does return the standard deviation, we calculate it manually following <span class="math notranslate nohighlight">\(\sigma = \sqrt{(x_i - \overline{x})^2/ n}\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">data</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)))</span>
+<span class="c1"># Okay, `np.std` does its job pretty well.</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.2876177793343949
+</pre></div>
+</div>
+</div>
+</div>
+<p>From <a class="reference external" href="https://en.wikipedia.org/wiki/Continuous_uniform_distribution">Wikipedia</a> (you can also calculate by yourselves), the mean, median, and standard deviation of a uniform distribution <span class="math notranslate nohighlight">\(U[a, b]\)</span> are <span class="math notranslate nohighlight">\((a+b)/2\)</span>, <span class="math notranslate nohighlight">\((a+b)/2\)</span>, and <span class="math notranslate nohighlight">\(\sqrt{3} (b-a)/ 6\)</span>. Do our numerical results agree with these analytical expressions?</p>
+</section>
+<section id="outlier">
+<h2>Outlier<a class="headerlink" href="#outlier" title="Permalink to this heading">#</a></h2>
+<p>An additional data point with a value of 100 (aka outlier) was added to the above data set unknowingly.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">data</span><span class="p">,</span> <span class="p">[</span><span class="mi">100</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s still calculate mean, median, and standard deviation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.9443623018061243, 0.4161605054553519, 7.010164707326367)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Oooops! The mean and standard deviation are completely off, but the median remains similar to what we had above. <strong>An outlier, being unusually small or unusually large, can greatly affect the mean but not affect the median much!</strong> Consider using median if you worry about outliers! We will illustrate this point more when we play with the calibration files.</p>
+</section>
+<section id="gaussian-normal-distribution">
+<h2>Gaussian (normal) distribution<a class="headerlink" href="#gaussian-normal-distribution" title="Permalink to this heading">#</a></h2>
+<p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Normal_distribution">normal distribution</a> is <em>the</em> most important distribution in statistics. The probability distribution function (PDF) has a <em>beautiful</em> form of
+$<span class="math notranslate nohighlight">\(
+p(x) = \frac{1}{\sqrt{2\pi} \sigma} e^{-\frac{(x-\mu)^2}{2\sigma^2}},
+\)</span><span class="math notranslate nohighlight">\(
+where \)</span>e=2.71828..<span class="math notranslate nohighlight">\( is the base of natural logarithms, and \)</span>\mu<span class="math notranslate nohighlight">\( and \)</span>\sigma<span class="math notranslate nohighlight">\( control the centroid and the width (dispersion) of the distribution, respectively. A normal distribution is often written as \)</span>\mathcal{N}(\mu, \sigma^2)$. Its PDF has a bell-like shape.</p>
+<p>For a random variable following a normal distribution, its mean is <span class="math notranslate nohighlight">\(\mu\)</span> and its standard deviation is <span class="math notranslate nohighlight">\(\sigma\)</span>. Let’s check it by sampling from a standard normal distribution, whose <span class="math notranslate nohighlight">\(\mu=0\)</span> and <span class="math notranslate nohighlight">\(\sigma=1\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_sample</span> <span class="o">=</span> <span class="mi">10000</span> <span class="c1"># sample size</span>
+<span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span> <span class="c1"># standard normal distribution</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n_sample</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(10000,)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="c1"># Indeed, the mean and median of this data is very close to 0. The standard deviation is very close to 1. </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-0.0088146221924208, -0.007435018442105677, 1.0033496157168333)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s visualize it</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/b65bf773f8c094cc10ffb05ef627aaab6f1615b821c9902f75eccbb2caadb8db.png" src="../_images/b65bf773f8c094cc10ffb05ef627aaab6f1615b821c9902f75eccbb2caadb8db.png" />
+</div>
+</div>
+<p>From this histogram, we indeed see that the distribution is centered at 0 and has a bell-like shape. More importantly, we see that most data points fall within <span class="math notranslate nohighlight">\([-3, 3]\)</span>. Let’s try to count how many data points are outside of <span class="math notranslate nohighlight">\([-3, 3]\)</span>. This is equivalent to asking how many data points are <span class="math notranslate nohighlight">\(&gt;3\)</span> away from the mean <span class="math notranslate nohighlight">\(\mu=0\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>24
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fraction</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Only </span><span class="si">{</span><span class="n">fraction</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">}</span><span class="s1">% of the data points are outside of [-3, 3].&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Only 0.24% of the data points are outside of [-3, 3].
+</pre></div>
+</div>
+</div>
+</div>
+<p>Sidenote: here I’m using <code class="docutils literal notranslate"><span class="pre">f-string</span></code> to format a string in python. See <a class="reference external" href="https://realpython.com/python-f-strings/">here</a> for more information.</p>
+<p>More generally speaking, for a random variable following a normal distribution <span class="math notranslate nohighlight">\(\mathcal{N}(\mu, \sigma^2)\)</span>, the chance of being <span class="math notranslate nohighlight">\(3\sigma\)</span> away from the mean value <span class="math notranslate nohighlight">\(\mu\)</span> is very very slim (rigorously speaking, <span class="math notranslate nohighlight">\(P(|x-\mu|&gt;3\sigma) = 0.0027\)</span>).</p>
+<p>This leads us to the <strong><a class="reference external" href="https://en.wikipedia.org/wiki/68%E2%80%9395%E2%80%9399.7_rule">“68–95–99.7 rule”</a></strong>, which describes the fact that, for a normal distribution, the percentage of values that lie within <span class="math notranslate nohighlight">\(1\sigma\)</span>, <span class="math notranslate nohighlight">\(2\sigma\)</span>, and <span class="math notranslate nohighlight">\(3\sigma\)</span> from the mean is 68%, 95%, and 99.7%.</p>
+<div class="math notranslate nohighlight">
+\[
+P(-1\sigma &lt; x-\mu &lt; 1\sigma) = 0.68,\quad P(-2\sigma &lt; x-\mu &lt; 2\sigma) = 0.95,\quad P(-3\sigma &lt; x-\mu &lt; 3\sigma) = 0.997
+\]</div>
+<p>It is useful to remember these three numbers.</p>
+</section>
+<section id="poisson-distribution-and-its-relation-to-gaussian">
+<h2>Poisson distribution and its relation to Gaussian<a class="headerlink" href="#poisson-distribution-and-its-relation-to-gaussian" title="Permalink to this heading">#</a></h2>
+<p>Named after the French mathematician Siméon Denis Poisson (Poisson in French means fish 🐟), a <a class="reference external" href="https://en.wikipedia.org/wiki/Poisson_distribution">Poisson distribution</a> describes the probability of a given number of events occurring in a fixed interval of time if these events occur with a known constant mean rate. Because now the probability is a function the “number” of events, the Poisson distribution is a discrete distribution – the values sampled from a Poisson distribution are all positive integers.</p>
+<p>The PDF of a Poisson distribution is
+$<span class="math notranslate nohighlight">\(
+P(X=k) = \frac{\lambda^k e^{-\lambda}}{k!},
+\)</span><span class="math notranslate nohighlight">\(
+where \)</span>\lambda<span class="math notranslate nohighlight">\( is the mean event rate, and \)</span>!$ is factorial.</p>
+<p>In astronomy, the number of photon that we receive in a certain period of time (say during a 1000s exposure) follows a Poisson distribution. The mean rate of photons from a star is a known constant (it’s related to the so-called flux). In the following, let’s explore the Poisson distribution by studying the number of observed photons.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Assume the average number of photon from a star is 10 during a 900s exposure</span>
+<span class="n">photon_rate</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="c1"># We &quot;observe&quot; this star for 500 times. Each time we can count how many photons we get, denoted by $x$. </span>
+<span class="c1"># This is equivalent to sampling from a Poisson distribution with $\lambda = 4$</span>
+<span class="n">n_exposure</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">photon_counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">poisson</span><span class="p">(</span><span class="n">photon_rate</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n_exposure</span><span class="p">,))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">photon_counts</span><span class="p">[:</span><span class="mi">30</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([7, 4, 4, 2, 1, 4, 7, 3, 4, 5, 6, 2, 1, 5, 4, 1, 5, 4, 4, 4, 4, 7,
+       5, 6, 6, 6, 2, 2, 3, 3])
+</pre></div>
+</div>
+</div>
+</div>
+<p>This means we get different numbers of photons in different exposures. How are they distributed?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">photon_counts</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/5249ea677972f4d97b0ef4dd31cecc9375f43d2c2623ef1169fcc96e32fc6c54.png" src="../_images/5249ea677972f4d97b0ef4dd31cecc9375f43d2c2623ef1169fcc96e32fc6c54.png" />
+</div>
+</div>
+<p>We have several observations from the above figure:</p>
+<ul class="simple">
+<li><p>The distribution does not extend to the negative half of the x-axis. This is because Poisson distribution is only defined for <span class="math notranslate nohighlight">\(x&gt;=0\)</span>.</p></li>
+<li><p>It does not look like a bell. Instead, the shape is not quite axisymmetric. We call it “skewed”.</p></li>
+<li><p>It seems like the number of photons covers a wide range, but is centered around <code class="docutils literal notranslate"><span class="pre">photon_rate=4</span></code>. Let’s calculate the mean, median, and variance.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">photon_counts</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">photon_counts</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">photon_counts</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(4.041, 4.0, 4.019318999999999)
+</pre></div>
+</div>
+</div>
+</div>
+<p>It is striking that the mean, and variance are all very close to the <span class="math notranslate nohighlight">\(\lambda=\)</span> <code class="docutils literal notranslate"><span class="pre">photon_rate</span></code> <span class="math notranslate nohighlight">\(=4\)</span>. Actually, for a Poisson distribution, its mean and variance are indeed <span class="math notranslate nohighlight">\(\lambda\)</span>. So the standard deviation is <span class="math notranslate nohighlight">\(\sqrt{\lambda}\)</span>. That means a Poission distribution with a larger <span class="math notranslate nohighlight">\(\lambda\)</span> is also “wider” or “more dispersed”.</p>
+<p>Now let’s move to the bright side: assume the photon rate is very large, <code class="docutils literal notranslate"><span class="pre">photon_rate=2000</span></code>. And we take 10000 exposures.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">photon_rate</span> <span class="o">=</span> <span class="mi">2000</span>
+<span class="n">n_exposure</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">photon_counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">poisson</span><span class="p">(</span><span class="n">photon_rate</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n_exposure</span><span class="p">,))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">photon_counts</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/95274013c3fcfb6a70639a9163b9d20888c24fbb3d00626235c22f37e77f1d16.png" src="../_images/95274013c3fcfb6a70639a9163b9d20888c24fbb3d00626235c22f37e77f1d16.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">photon_counts</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">photon_counts</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">photon_counts</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2000.355, 2001.0, 2006.0763749999996)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now this Poisson distribution looks a lot more similar to a Gaussian distribution. Let’s sample a Gaussian distribution with the same mean (<code class="docutils literal notranslate"><span class="pre">photon_rate</span></code>) and standard deviation (<code class="docutils literal notranslate"><span class="pre">np.sqrt(photon_rate)</span></code>) as this Poisson distribution, and compare.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gaussian_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">photon_rate</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">photon_rate</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n_exposure</span><span class="p">,))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">photon_counts</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Poisson&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">gaussian_data</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Gaussian&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fc524397700&gt;
+</pre></div>
+</div>
+<img alt="../_images/165cd14504092f2a82d6464cd620fd49c3fd74ae2c7f2f7fb959a6d7dfd3aea0.png" src="../_images/165cd14504092f2a82d6464cd620fd49c3fd74ae2c7f2f7fb959a6d7dfd3aea0.png" />
+</div>
+</div>
+<p>Yes! They do look very very similar now. <strong>For large <span class="math notranslate nohighlight">\(\lambda\)</span>, a normal distribution is an excellent approximation to a Poisson distribution.</strong></p>
+</section>
+<section id="a-noisy-image">
+<h2>A noisy image<a class="headerlink" href="#a-noisy-image" title="Permalink to this heading">#</a></h2>
+<p>Most astronomical data are in the form of image. An image is typically a two-dimentional array. In this section, we will try to simulate an image of a flat object which emits photon at a constant rate (<code class="docutils literal notranslate"><span class="pre">photon_rate=4</span></code>). We will also understand how to possibly reduce the noise in images.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As we introduced above, each pixel of the image should follow a Poisson distribution with <span class="math notranslate nohighlight">\(\lambda=4\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s define an image size, e.g., 200 x 200</span>
+<span class="n">img_size</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">photon_rate</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">poisson</span><span class="p">(</span><span class="n">photon_rate</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">img_size</span><span class="p">,</span> <span class="n">img_size</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;binary&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/05129dea8be13444937982ff4e25092912ce2dd5c4622d3a7279af6e9f323907.png" src="../_images/05129dea8be13444937982ff4e25092912ce2dd5c4622d3a7279af6e9f323907.png" />
+</div>
+</div>
+<p>This looks like the <strong>“snow screen”</strong> when an old TV has no connection! It is indeed what a noisy image look like!</p>
+<p>It would be interesting to calculate the mean and variance of this noisy image. The function <code class="docutils literal notranslate"><span class="pre">np.mean</span></code> and <code class="docutils literal notranslate"><span class="pre">np.var</span></code> supports high-dimensional data inputs, and you can even calculate the mean or std along a specific axis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">img</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">img</span><span class="p">)</span> <span class="c1"># nice Poisson distribution</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(4.00275, 3.9754924375000003)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This calculate the mean for each column of the noisy image</span>
+<span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([3.975, 4.045, 4.015, 3.985, 3.875, 4.08 , 3.8  , 3.68 , 3.89 ,
+       3.98 , 3.985, 3.9  , 3.9  , 4.14 , 4.05 , 3.96 , 4.25 , 4.095,
+       4.03 , 3.91 , 3.98 , 4.14 , 4.15 , 3.85 , 3.905, 3.86 , 4.125,
+       3.815, 3.895, 3.77 , 3.775, 3.99 , 3.85 , 3.92 , 3.945, 3.905,
+       4.07 , 4.085, 4.04 , 4.06 , 4.355, 4.155, 3.805, 3.935, 3.99 ,
+       4.245, 4.03 , 4.02 , 3.92 , 3.92 , 3.73 , 3.765, 4.055, 4.255,
+       3.925, 4.2  , 3.78 , 4.085, 4.055, 3.795, 3.955, 3.9  , 3.91 ,
+       3.95 , 3.885, 4.05 , 3.945, 4.06 , 4.18 , 4.07 , 4.01 , 4.075,
+       4.01 , 3.875, 3.845, 3.95 , 4.015, 4.045, 3.98 , 3.99 , 3.98 ,
+       3.79 , 3.92 , 3.885, 4.175, 4.06 , 3.945, 3.75 , 3.805, 3.985,
+       4.07 , 4.225, 4.14 , 4.205, 3.87 , 3.825, 4.225, 3.995, 3.805,
+       3.925, 4.07 , 3.615, 3.87 , 4.04 , 3.825, 4.01 , 4.115, 4.15 ,
+       3.99 , 4.055, 4.05 , 3.945, 4.065, 3.755, 4.16 , 3.995, 4.025,
+       4.18 , 3.915, 3.88 , 4.005, 4.285, 3.905, 3.91 , 3.825, 4.16 ,
+       3.855, 4.28 , 4.12 , 3.865, 3.955, 4.15 , 4.045, 3.945, 3.895,
+       4.   , 4.475, 3.915, 3.81 , 3.91 , 4.13 , 4.105, 4.02 , 4.005,
+       3.92 , 4.165, 4.315, 4.015, 3.91 , 3.855, 4.105, 3.925, 4.135,
+       4.02 , 4.03 , 4.065, 4.11 , 4.075, 3.99 , 3.935, 3.94 , 4.015,
+       3.89 , 3.98 , 4.245, 3.935, 4.29 , 3.99 , 3.87 , 4.245, 4.09 ,
+       4.235, 3.915, 3.835, 3.86 , 4.16 , 4.045, 3.96 , 3.93 , 3.89 ,
+       4.05 , 4.055, 3.93 , 4.36 , 3.96 , 3.945, 4.055, 4.11 , 4.28 ,
+       4.01 , 4.08 , 4.18 , 3.99 , 3.99 , 4.375, 4.1  , 4.185, 3.995,
+       3.76 , 3.995])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We can also plot the histogram for the pixel values.</span>
+<span class="c1"># You need to &quot;flatten&quot; the 2-D image to a 1-D array</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">);</span> <span class="c1"># looks like Poisson</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1a53c3548e079d1314eed4798c4b6c92c951a4503cdcd0fd42a75734efb0297c.png" src="../_images/1a53c3548e079d1314eed4798c4b6c92c951a4503cdcd0fd42a75734efb0297c.png" />
+</div>
+</div>
+<p>We discuss the concept “signal-to-noise ratio” (S/N, or SNR) here. The signal we want to receive from this image is <span class="math notranslate nohighlight">\(\lambda=4\)</span>, which is the average photon rate from the object. However, the image is quite noisy. The standard deviation of pixel values is a proxy for how noisy the image is. Therefore, the SNR of this image is:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SNR</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">img</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">SNR</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.0075344209315906
+</pre></div>
+</div>
+</div>
+</div>
+<p>In fact, for a Poisson distribution with <span class="math notranslate nohighlight">\(\lambda=4\)</span>, <code class="docutils literal notranslate"><span class="pre">mean=4</span></code>, <code class="docutils literal notranslate"><span class="pre">std=2</span></code>, so the SNR should just be 2.</p>
+<p>SNR=2 is too low for any science. But you might have heard that stacking images will reduce the noise. Why not taking 16 exposures and combining them together?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img_size</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">photon_rate</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">img_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">16</span><span class="p">):</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">poisson</span><span class="p">(</span><span class="n">photon_rate</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">img_size</span><span class="p">,</span> <span class="n">img_size</span><span class="p">))</span>
+    <span class="n">img_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+    
+<span class="n">img_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">img_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img_list</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(16, 200, 200)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Remember that each pixel follows a Poisson distribution with <span class="math notranslate nohighlight">\(\lambda=4\)</span>. For a pixel at a given location, it now has 16 different values from 16 exposures. We can calculate the mean or median of these values as a way to “combine” these exposure. This can be done using <code class="docutils literal notranslate"><span class="pre">np.mean(img_list,</span> <span class="pre">axis=0)</span></code> or <code class="docutils literal notranslate"><span class="pre">np.median(img_list,</span> <span class="pre">axis=0)</span></code>. <code class="docutils literal notranslate"><span class="pre">axis=0</span></code> means we are averaging along the first axis of <code class="docutils literal notranslate"><span class="pre">img_list</span></code>, i.e., averaging over different exposures.</p>
+<p>After combining these exposures, we show the combined image using the same scale as the one above.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img_avg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">img_list</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img_avg</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;binary&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">12</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/00245b08e58861eb3aef45c5fd7d20b24a49b2bf9a52bab24fc22bd9e878b8fb.png" src="../_images/00245b08e58861eb3aef45c5fd7d20b24a49b2bf9a52bab24fc22bd9e878b8fb.png" />
+</div>
+</div>
+<p>The combined image is much smoother than a single exposure image! If you increase the number of exposures, the combined image will even smoother. Another way to look at this is to plot the histogram of pixel values:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Single exposure&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">img_avg</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Combined&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2c8727cf670ae86cd893e02a6d572223683cff19dde2fb7ca088f76cd896ad92.png" src="../_images/2c8727cf670ae86cd893e02a6d572223683cff19dde2fb7ca088f76cd896ad92.png" />
+</div>
+</div>
+<p>After combining 16 exposures, the pixel values are much more concentrated around <span class="math notranslate nohighlight">\(\lambda=4\)</span> compared with the pixel values of a single exposure. What’s the SNR for this combined image?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SNR_avg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">img_avg</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">img_avg</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">SNR_avg</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.032105344192761
+</pre></div>
+</div>
+</div>
+</div>
+<p>By combining 16 exposures, we boost the SNR by a factor of 4! Again, an effective way to fight down noise is to combine lots of exposures. More generally, SNR is proportional to <span class="math notranslate nohighlight">\(\sqrt{N}\)</span> where <span class="math notranslate nohighlight">\(N\)</span> is the number of exposures combined.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s define an image size, e.g., 200 x 200</span>
+<span class="n">img_size</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">photon_rate</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">poisson</span><span class="p">(</span><span class="n">photon_rate</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">img_size</span><span class="p">,</span> <span class="n">img_size</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 
@@ -682,7 +1173,11 @@ The frequency of 6 is 20
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#we-will-learn">We will learn:</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#we-will-use-them-to-understand">We will use them to understand</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-variable-histogram-probability">Random variable, histogram, probability</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-median-standard-deviation">Mean, median, standard deviation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-median-standard-deviation">Mean, Median, Standard Deviation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#outlier">Outlier</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-normal-distribution">Gaussian (normal) distribution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#poisson-distribution-and-its-relation-to-gaussian">Poisson distribution and its relation to Gaussian</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-noisy-image">A noisy image</a></li>
 </ul>
   </nav></div>
 
