@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Test notebook &#8212; Observational Astronomy</title>
   
@@ -65,6 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Basic Statistics" href="basic_stat.html" />
     <link rel="prev" title="Plotting JWST images" href="plotting_jwst.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -155,6 +156,17 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="python_by_example.html">An Introductory Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plotting_jwst.html">Plotting JWST images</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Test notebook</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistics and detector</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="basic_stat.html">Basic Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_gaia_star.html">Prerequisites</a></li>
+
+
+
+
+
+
 </ul>
 
     </div>
@@ -393,7 +405,7 @@ For example, here’s some sample Matplotlib code:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;contextlib.ExitStack at 0x7fa71856ec70&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;contextlib.ExitStack at 0x7fb9a3fd2820&gt;
 </pre></div>
 </div>
 </div>
@@ -422,7 +434,7 @@ For example, here’s some sample Matplotlib code:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/669ed9ca52edff2851045aeafccd6f855f4d163ea9713cb0f374ff6852774c82.png" src="../_images/669ed9ca52edff2851045aeafccd6f855f4d163ea9713cb0f374ff6852774c82.png" />
+<img alt="../_images/dba7422480eb59236eab9f6f84a99352b7920187b76b7539a13031f2e0277d79.png" src="../_images/dba7422480eb59236eab9f6f84a99352b7920187b76b7539a13031f2e0277d79.png" />
 </div>
 </div>
 <p>Note that the image above is captured and displayed in your site.</p>
@@ -431,7 +443,7 @@ For example, here’s some sample Matplotlib code:</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Text(0.5, 1.0, &#39;Smoother linez&#39;)]
 </pre></div>
 </div>
-<img alt="../_images/d08298de7c7506abc8388254f1670d3ebd9268b30ccc2b4ee65cfa7ab25973c1.png" src="../_images/d08298de7c7506abc8388254f1670d3ebd9268b30ccc2b4ee65cfa7ab25973c1.png" />
+<img alt="../_images/76f3017ea9a1d99671643b2e468658ca1ae808ef61cc21b12ee9e30eac7c6e61.png" src="../_images/76f3017ea9a1d99671643b2e468658ca1ae808ef61cc21b12ee9e30eac7c6e61.png" />
 </div>
 </div>
 <aside class="margin sidebar">
@@ -465,7 +477,7 @@ For reference, <a class="reference download internal" download="" href="../_down
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="../_images/5a420440c801848259c014f1711f9f0bbf46aacaacb0550f8151931ad27de0ce.png" src="../_images/5a420440c801848259c014f1711f9f0bbf46aacaacb0550f8151931ad27de0ce.png" />
+<img alt="../_images/05ce423bbb7e73cc56194dfbb9d3c12a56d0128ce253c161f5aec74491d75f56.png" src="../_images/05ce423bbb7e73cc56194dfbb9d3c12a56d0128ce253c161f5aec74491d75f56.png" />
 </div>
 </div>
 <p>Which works well if you’d like to quickly display cell output without cluttering your content with code.
@@ -573,18 +585,12 @@ depend on an underlying Python kernel to work.</p>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">7</span><span class="o">-</span><span class="n">e9c2d2cfabcc</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">folium</span>
 <span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">m</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span>
 <span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="n">location</span><span class="o">=</span><span class="p">[</span><span class="mf">45.372</span><span class="p">,</span> <span class="o">-</span><span class="mf">121.6972</span><span class="p">],</span>
 <span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="n">zoom_start</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
 <span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">tiles</span><span class="o">=</span><span class="s1">&#39;Stamen Terrain&#39;</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">folium</span><span class="o">.</span><span class="n">Marker</span><span class="p">(</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="n">location</span><span class="o">=</span><span class="p">[</span><span class="mf">45.3288</span><span class="p">,</span> <span class="o">-</span><span class="mf">121.6625</span><span class="p">],</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="n">popup</span><span class="o">=</span><span class="s1">&#39;Mt. Hood Meadows&#39;</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span>     <span class="n">icon</span><span class="o">=</span><span class="n">folium</span><span class="o">.</span><span class="n">Icon</span><span class="p">(</span><span class="n">icon</span><span class="o">=</span><span class="s1">&#39;cloud&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="p">)</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
 
 <span class="ne">ModuleNotFoundError</span>: No module named &#39;folium&#39;
 </pre></div>
@@ -661,6 +667,15 @@ For more information browse the pages in this site, and <span class="xref myst">
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Plotting JWST images</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="basic_stat.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Basic Statistics</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div></div>
   
