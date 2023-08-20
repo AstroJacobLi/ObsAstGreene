@@ -8,9 +8,11 @@ parts:
   - file: docs/getting_started
   - file: docs/python_by_example
   - file: docs/functions
-  - file: docs/plotting_jwst
   - file: docs/notebooks
 - caption: Statistics and detector
   chapters:
   - file: docs/basic_stat
+  - file: docs/calibration_frames
+  - file: docs/img_simulation
   - file: docs/intro_gaia_star
+  - file: docs/plotting_jwst
