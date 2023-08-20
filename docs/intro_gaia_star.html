@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Prerequisites &#8212; Observational Astronomy</title>
+    <title>Introduction to Gaia data &#8212; Observational Astronomy</title>
   
   
   
@@ -67,7 +67,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Basic Statistics" href="basic_stat.html" />
+    <link rel="next" title="Plotting JWST images" href="plotting_jwst.html" />
+    <link rel="prev" title="Construction of an artificial (but realistic) image" href="img_simulation.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -155,19 +156,21 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="about_py.html">About Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Setting up Your Python Environment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="python_by_example.html">An Introductory Example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="plotting_jwst.html">Plotting JWST images</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks.html">Test notebook</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistics and detector</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="basic_stat.html">Basic Statistics</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Prerequisites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calibration_frames.html">Calibration frames</a></li>
 
 
 
+<li class="toctree-l1"><a class="reference internal" href="img_simulation.html">Construction of an artificial (but realistic) image</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Introduction to Gaia data</a></li>
 
 
 
+<li class="toctree-l1"><a class="reference internal" href="plotting_jwst.html">Plotting JWST images</a></li>
 </ul>
 
     </div>
@@ -353,7 +356,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Prerequisites</h1>
+    <h1>Introduction to Gaia data</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -363,10 +366,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Prerequisites</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#new-texttt-python-skills">New <span class="math notranslate nohighlight">\(\texttt{python}\)</span> skills</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#astro-concepts">Astro concepts</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#what-data-set-are-we-looking-at">What data set are we looking at?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Introduction to Gaia data</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#new-texttt-python-skills">New <span class="math notranslate nohighlight">\(\texttt{python}\)</span> skills</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#astro-concepts">Astro concepts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-data-set-are-we-looking-at">What data set are we looking at?</a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-a-table-with-texttt-pandas">1. Reading a table with <span class="math notranslate nohighlight">\(\texttt{pandas}\)</span></a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-in-the-table-and-how-can-we-access-it">What’s in the table and how can we access it?</a></li>
 </ul>
@@ -385,17 +391,19 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="prerequisites">
-<h1>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-gaia-data">
+<h1>Introduction to Gaia data<a class="headerlink" href="#introduction-to-gaia-data" title="Permalink to this heading">#</a></h1>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading">#</a></h2>
 <p><span class="math notranslate nohighlight">\(\texttt{numpy}\)</span> and <span class="math notranslate nohighlight">\(\texttt{matplotlib}\)</span>.</p>
 <p>Some familiarity with astronomy coordinate systems.</p>
 </section>
 <section id="new-texttt-python-skills">
-<h1>New <span class="math notranslate nohighlight">\(\texttt{python}\)</span> skills<a class="headerlink" href="#new-texttt-python-skills" title="Permalink to this heading">#</a></h1>
+<h2>New <span class="math notranslate nohighlight">\(\texttt{python}\)</span> skills<a class="headerlink" href="#new-texttt-python-skills" title="Permalink to this heading">#</a></h2>
 <p><span class="math notranslate nohighlight">\(\texttt{pandas}\)</span>: a package for loading and manipulating tables of data (you can think of this as <span class="math notranslate nohighlight">\(\texttt{python}\)</span>’s version of excel or google sheets).</p>
 </section>
 <section id="astro-concepts">
-<h1>Astro concepts<a class="headerlink" href="#astro-concepts" title="Permalink to this heading">#</a></h1>
+<h2>Astro concepts<a class="headerlink" href="#astro-concepts" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>The Gaia mission</p></li>
 <li><p>Magnitude and absolute magnitude scales</p></li>
@@ -419,8 +427,9 @@ document.write(`
 </div>
 </section>
 <section id="what-data-set-are-we-looking-at">
-<h1>What data set are we looking at?<a class="headerlink" href="#what-data-set-are-we-looking-at" title="Permalink to this heading">#</a></h1>
+<h2>What data set are we looking at?<a class="headerlink" href="#what-data-set-are-we-looking-at" title="Permalink to this heading">#</a></h2>
 <p>(To do: picture of Gaia statalite and verys short overview of the mission)</p>
+</section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="reading-a-table-with-texttt-pandas">
 <h1>1. Reading a table with <span class="math notranslate nohighlight">\(\texttt{pandas}\)</span><a class="headerlink" href="#reading-a-table-with-texttt-pandas" title="Permalink to this heading">#</a></h1>
@@ -1014,13 +1023,22 @@ since \)</span> \log_{10}L \propto M <span class="math notranslate nohighlight">
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="basic_stat.html"
+       href="img_simulation.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Basic Statistics</p>
+        <p class="prev-next-title">Construction of an artificial (but realistic) image</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="plotting_jwst.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Plotting JWST images</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div></div>
   
@@ -1040,10 +1058,13 @@ since \)</span> \log_{10}L \propto M <span class="math notranslate nohighlight">
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Prerequisites</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#new-texttt-python-skills">New <span class="math notranslate nohighlight">\(\texttt{python}\)</span> skills</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#astro-concepts">Astro concepts</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#what-data-set-are-we-looking-at">What data set are we looking at?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Introduction to Gaia data</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#new-texttt-python-skills">New <span class="math notranslate nohighlight">\(\texttt{python}\)</span> skills</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#astro-concepts">Astro concepts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-data-set-are-we-looking-at">What data set are we looking at?</a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-a-table-with-texttt-pandas">1. Reading a table with <span class="math notranslate nohighlight">\(\texttt{pandas}\)</span></a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-in-the-table-and-how-can-we-access-it">What’s in the table and how can we access it?</a></li>
 </ul>

@@ -61,10 +61,14 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'docs/calibration_frames';</script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Construction of an artificial (but realistic) image" href="img_simulation.html" />
+    <link rel="prev" title="Basic Statistics" href="basic_stat.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -152,19 +156,21 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="about_py.html">About Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Setting up Your Python Environment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="python_by_example.html">An Introductory Example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="plotting_jwst.html">Plotting JWST images</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks.html">Test notebook</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistics and detector</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="basic_stat.html">Basic Statistics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="intro_gaia_star.html">Prerequisites</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Calibration frames</a></li>
 
 
 
+<li class="toctree-l1"><a class="reference internal" href="img_simulation.html">Construction of an artificial (but realistic) image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_gaia_star.html">Introduction to Gaia data</a></li>
 
 
 
+<li class="toctree-l1"><a class="reference internal" href="plotting_jwst.html">Plotting JWST images</a></li>
 </ul>
 
     </div>
@@ -360,8 +366,17 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-deal-with-outliers-median-v-s-mean-sigma-clipping">How to deal with outliers: median v.s. mean, sigma-clipping</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Calibration frames</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-frames">1. Bias frames</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-a-bias-frame">Read a bias frame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combine-bias-frames-to-make-master-bias">Combine bias frames to make “master” bias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sigma-clipping">Sigma-clipping</a></li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dark-frame">2. Dark frame</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#flat-fielding">3. Flat fielding</a></li>
+</ul>
+
             </nav>
         </div>
     </div>
@@ -374,15 +389,30 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="calibration-frames">
 <h1>Calibration frames<a class="headerlink" href="#calibration-frames" title="Permalink to this heading">#</a></h1>
-<section id="how-to-deal-with-outliers-median-v-s-mean-sigma-clipping">
-<h2>How to deal with outliers: median v.s. mean, sigma-clipping<a class="headerlink" href="#how-to-deal-with-outliers-median-v-s-mean-sigma-clipping" title="Permalink to this heading">#</a></h2>
-<p>Example: combining bias frames</p>
-<p>Further familiar with operations on numpy arrays</p>
-<p>data io</p>
-<p><a class="reference external" href="https://www.astropy.org/ccd-reduction-and-photometry-guide/v/dev/notebooks/01-01-astronomical-CCD-image-components.html">https://www.astropy.org/ccd-reduction-and-photometry-guide/v/dev/notebooks/01-01-astronomical-CCD-image-components.html</a></p>
+<p><strong>Prerequisites</strong></p>
+<ul class="simple">
+<li><p>Basic statistics (covered in <a class="reference internal" href="basic_stat.html"><span class="doc std std-doc">this notebook</span></a>)</p></li>
+<li><p>Knowledge about CCD, bias, dark, and flat frames.</p></li>
+</ul>
+<p><strong>We will learn</strong></p>
+<ul class="simple">
+<li><p>What do bias, dark, and flat frames look like</p></li>
+<li><p>How to deal with outliers; sigma-clipping.</p></li>
+<li><p>How to combine individual calibration frames to make “master” calibration frames.</p></li>
+<li><p>Further familiarize with operations on numpy arrays and data I/O.</p></li>
+</ul>
+<p><strong>Reference</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.astropy.org/ccd-reduction-and-photometry-guide/v/dev/notebooks/01-01-astronomical-CCD-image-components.html">Here</a> is a <strong>great</strong> tutorial on CCD data reduction. Please check out!!</p></li>
+<li><p>Howell, S., Handbook of CCD Astronomy, Second Ed, Cambridge University Press 2006</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">I</span> <span class="pre">suppose</span> <span class="pre">Jenny</span> <span class="pre">already</span> <span class="pre">introduced</span> <span class="pre">bias,</span> <span class="pre">dark,</span> <span class="pre">flat</span> <span class="pre">frames.</span> <span class="pre">Here</span> <span class="pre">I</span> <span class="pre">will</span> <span class="pre">demonstrate</span> <span class="pre">what</span> <span class="pre">real</span> <span class="pre">bias</span> <span class="pre">frames</span> <span class="pre">look</span> <span class="pre">like,</span> <span class="pre">and</span> <span class="pre">why</span> <span class="pre">we</span> <span class="pre">need</span> <span class="pre">to</span> <span class="pre">stack</span> <span class="pre">them.</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s start with importing our packages</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> autoreload
+<span class="o">%</span><span class="k">autoreload</span> 2
+
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">scipy</span>
 <span class="kn">import</span> <span class="nn">matplotlib</span>
@@ -390,303 +420,373 @@ document.write(`
 
 <span class="c1"># We can beautify our plots by changing the matpltlib setting a little</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">18</span>
-<span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
-<span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.linewidth&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;serif&quot;</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">80</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.linewidth&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
 </pre></div>
 </div>
 </div>
 </div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">google.colab</span>
+    <span class="n">IN_COLAB</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="n">IN_COLAB</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">IN_COLAB</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;../_static/ObsAstroData/calibration_frames/bias/&quot;</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">&quot;../_static/ObsAstroData/calibration_frames/bias/&quot;</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;../_static/ObsAstroData/calibration_frames/&#39;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="s1">&#39;b0860c1.fits&#39;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Data is already there&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Download data&#39;</span><span class="p">)</span>
+<span class="c1">#     !wget https://tigress-web.princeton.edu/~jiaxuanl/cutoutRGB_NIRCAM.pkl</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Download data
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="bias-frames">
+<h1>1. Bias frames<a class="headerlink" href="#bias-frames" title="Permalink to this heading">#</a></h1>
+<p>As introduced in class, a voltage is applied to every pixel to make sure the pixel value is always positive. This voltage introduces a “bias” to pixel values. However, this bias is slightly different for each pixel and might change over time. Therefore, we need to take some zero-time exposures (such that dark current and real photons don’t contribute to the pixel values) to characterize the bias.</p>
+<p>Below we load bias frames taken using the camera of IFU-M on the 6.5 m <a class="reference external" href="https://en.wikipedia.org/wiki/Magellan_Telescopes">Magellan telescope</a> in Chile.</p>
+<section id="read-a-bias-frame">
+<h2>Read a bias frame<a class="headerlink" href="#read-a-bias-frame" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">fits</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">kuaizi.display</span> <span class="kn">import</span> <span class="n">display_single</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>It’s our first time reading a FITS file. FITS (Flexible Image Transport System) format is widely used in astronomy for images and tables. The following code will read the file <code class="docutils literal notranslate"><span class="pre">b0854c1.fits</span></code>, which is a list containing only one HDU (Header Data Unit).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./bias/b0860c1.fits&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">fits</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">os</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">kuaizi.display</span> <span class="kn">import</span> <span class="n">display_single</span>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;astropy.io.fits.hdu.image.PrimaryHDU object at 0x7f67f0487d30&gt;]
+</pre></div>
+</div>
+</div>
+</div>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p><code class="docutils literal notranslate"><span class="pre">.info()</span></code> is quite helpful for understanding the structure of a FITS file.</p>
+</aside>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./bias/b0860c1.fits&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Filename: ./bias/b0860c1.fits
+No.    Name      Ver    Type      Cards   Dimensions   Format
+  0  PRIMARY       1 PrimaryHDU     143   (2176, 1156)   int16 (rescales to uint16)   
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we know that this file has one HDU, which is an image containing 2176 * 1156 pixels. The data type in <code class="docutils literal notranslate"><span class="pre">int16</span></code>. We can check the header of the HDU.</p>
+<div class="cell tag_output_scroll docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hdu</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./bias/b0860c1.fits&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">hdu</span><span class="o">.</span><span class="n">header</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SIMPLE  =                    T                                                  
+BITPIX  =                   16                                                  
+NAXIS   =                    2                                                  
+NAXIS1  =                 2176                                                  
+NAXIS2  =                 1156                                                  
+BSCALE  =           1.00000000         / real=bzero+bscale*value                
+BZERO   =       32768.00000000                                                  
+BUNIT   = &#39;DU/PIXEL&#39;                                                            
+ORIGIN  = &#39;LCO/OCIW&#39;                                                            
+OBSERVER= &#39;Bailey&#39;                     / observer name                          
+TELESCOP= &#39;Clay&#39;                       / telescope                              
+SITENAME= &#39;LCO&#39;                                                                 
+SITEALT =                 2405         / meters                                 
+SITELAT =            -29.01423                                                  
+SITELONG=            -70.69242                                                  
+TIMEZONE=                    4                                                  
+DATE-OBS= &#39;2023-03-21T10:50:38&#39;        / (start)                                
+UT-DATE = &#39;2023-03-21&#39;                 / UT date (start)                        
+UT-TIME = &#39;10:50:38&#39;                   / UT time (start) 39038 seconds          
+UT-END  = &#39;10:50:39&#39;                   / UT time (end) 39039 seconds            
+LC-TIME = &#39;07:50:38&#39;                   / local time (start) 28238 seconds       
+NIGHT   = &#39;20Mar2023&#39;                  / local night                            
+MJD     =          60024.45183         / modified Julian day                    
+INSTRUME= &#39;IFUM&#39;                       / instrument name                        
+SCALE   =                0.250         / arcsec/pixel                           
+EGAIN   =                0.680         / electrons/DU                           
+ENOISE  =                2.700         / electrons/read                         
+NOPAMPS =                    4         / # of op-amps                           
+OPAMP   =                    1         / this op-amp                            
+CHOFFX  =              256.000         / x-offset [arcsec]                      
+CHOFFY  =              257.000         / y-offset [arcsec]                      
+DISPAXIS=                    1         / disperser axis                         
+RA      = &#39; 17:57:11.9&#39;                / right ascension                        
+RA-D    =          269.2997917         / degrees                                
+DEC     = &#39;-28:59:59.0&#39;                / declination                            
+DEC-D   =          -28.9997222         / degrees                                
+EQUINOX =           2000.00000         / of above coordinates                   
+EPOCH   =           2023.21768         / epoch (start)                          
+AIRMASS =                1.000         / airmass (start)                        
+ST      =              64960.8         / sidereal time: 18:02:41 (start)        
+ROTANGLE=               273.69         / rotator offset angle                   
+TEL-AZIM=                 90.0         / telescope azimuth                      
+TEL-ELEV=                 90.0         / telescope elevation                    
+T-DOME  =                 13.9         / dome temperature [C]                   
+T-CELL  =                 12.4         / primary cell temperature [C]           
+T-TRUSS =                  8.7         / telescope truss temperature [C]        
+WX-TEMP =                 13.6         / weather station temperature [C]        
+FILENAME= &#39;b0860c1&#39;                                                             
+OBJECT  = &#39;1x2 bias&#39;                   / object name                            
+COMMENT =                              / comment                                
+EXPTYPE = &#39;Bias&#39;                       / exposure type                          
+EXPTIME =                0.000         / exposure time                          
+NLOOPS  =                  250         / # of loops per sequence                
+LOOP    =                    7         / # within this sequence                 
+BINNING = &#39;1x2&#39;                        / binning                                
+SPEED   = &#39;Slow&#39;                       / readout speed                          
+NOVERSCN=                  128         / overscan pixels                        
+NBIASLNS=                  128         / bias lines                             
+BIASSEC = &#39;[2049:2176,1029:1156]&#39;      / NOAO: bias section                     
+DATASEC = &#39;[1:2048,1:1028]&#39;            / NOAO: data section                     
+TRIMSEC = &#39;[1:2048,1:1028]&#39;            / NOAO: trim section                     
+SUBRASTR= &#39;none&#39;                       / full frame                             
+TEMPCCD =               -109.9         / CCD temperature [C]                    
+SHOE    = &#39;B&#39;                                                                   
+IFU     = &#39;LSB&#39;                                                                 
+IFUENC  =                -1801         / IFU encoder                            
+OCCULTOR= &#39;Science Gap&#39;                                                         
+OCCENC  =                98000         / occultor encoder                       
+SLIDE   = &#39;LoRes&#39;                                                               
+SLIDEENC=               4061.0         / slide encoder                          
+SLIDESTP=               285126         / slide step                             
+LO-ELEV = &#39;9.1301&#39;                     / step= -107184                          
+HI-AZIM = &#39;-0.55001?&#39;                  / step= -14143                           
+HI-ELEV = &#39;0.40001?&#39;                   / step= 10286                            
+FOCUS   =                196.1         / step= 1961                             
+FILTER  = &#39;BK7&#39;                                                                 
+SLITNAME= &#39;80&#39;                         / 607 526                                
+BENEAR  =                    0         / lamp level (0..10)                     
+LIHE    =                    0         / lamp level (0..10)                     
+THXE    =                    0         / lamp level (0..10)                     
+LAMPS   = &#39;Off&#39;                        / lamp combo                             
+LED-UV  =                    0         / LED level (0..4096)                    
+LED-BL  =                    0         / LED level (0..4096)                    
+LED-VI  =                    0         / LED level (0..4096)                    
+LED-NR  =                    0         / LED level (0..4096)                    
+LED-FR  =                    0         / LED level (0..4096)                    
+LED-IR  =                    0         / LED level (0..4096)                    
+LEDS    = &#39;Off&#39;                        / LED combo                              
+CONFIGFL= &#39;unknown&#39;                    / configuration file                     
+TEMP01  =               14.500         / IFU_Entrance                           
+TEMP02  =               13.750         / IFU_Top                                
+TEMP03  =               13.812         / Fiber_Exit                             
+TEMP04  =               25.100         / IFU_Motor                              
+TEMP05  =               24.600         / IFU_Drive                              
+TEMP06  =               19.688         / IFU_Hoffman                            
+TEMP07  =               20.562         / IFU_Shoebox                            
+TEMP08  =               13.375         / Cradle_R                               
+TEMP09  =               13.188         / Cradle_B                               
+TEMP10  =               13.562         / Echelle_R                              
+TEMP11  =               13.438         / Echelle_B                              
+TEMP12  =               13.688         / Prism_R                                
+TEMP13  =               13.375         / Prism_B                                
+TEMP14  =               13.250         / LoResGrating_R                         
+TEMP15  =               13.250         / LoResGrating_B                         
+ADC-STGE= &#39;in&#39;                         / ADC stage                              
+ADC-CTRL= &#39;auto&#39;                       / ADC control                            
+MIRROR  = &#39;in&#39;                         / Mirror stage                           
+DCU-FFS = &#39;retracted&#39;                  / DCU FF-Screen                          
+DCU-LMPS= &#39;Off&#39;                        / DCU lamps                              
+SOFTWARE= &#39;Version beta (0071) (Oct  5 2022, 17:02:27)&#39;                         
+FITSVERS= &#39;0.070&#39;                      / FITS header version                    
+COMMENT                                                                         
+COMMENT                                                                         
+COMMENT                                                                         
+COMMENT                                                                         
+COMMENT                                                                         
+COMMENT                                                                         
+COMMENT                                                                         
+COMMENT                                                                         
+COMMENT                                                                         
+COMMENT                                                                         
+COMMENT                                                                         
+COMMENT                                                                         
+COMMENT                                                                         
+COMMENT                                                                         
+COMMENT                                                                         
+COMMENT                                                                         
+COMMENT                                                                         
+COMMENT                                                                         
+COMMENT                                                                         
+COMMENT                                                                         
+COMMENT                                                                         
+COMMENT                                                                         
+COMMENT                                                                         
+COMMENT                                                                         
+COMMENT                                                                         
+COMMENT                                                                         
+COMMENT                                                                         
+COMMENT                                                                         
+COMMENT                                                                         
+COMMENT                                                                         
+COMMENT                                                                         
+COMMENT                                                                         
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s read the data array.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img</span> <span class="o">=</span> <span class="n">hdu</span><span class="o">.</span><span class="n">data</span>
+<span class="n">img</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[817, 817, 817, ..., 816, 813, 819],
+       [816, 818, 820, ..., 817, 818, 828],
+       [809, 827, 817, ..., 812, 814, 816],
+       ...,
+       [813, 810, 815, ..., 814, 816, 823],
+       [821, 818, 816, ..., 823, 820, 816],
+       [812, 819, 815, ..., 819, 816, 814]], dtype=uint16)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">img</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(817.0, 10.545205968480271)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The pixel values in this bias frame are centered around ~817, and have a dispersion of ~10.5. This dispersion is largely contributed by the read-out noise, a noise that added to each pixel when reading the charge out. Read-out noise may be viewed as a “toll” that must be paid for reading the stored charge.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">img</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Thanks to the bias voltage, none of the pixels are negative. We can further visualize the bias frame as follows.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>We provide a function <code class="docutils literal notranslate"><span class="pre">show_image</span></code> to help visualize astronomical images that typically have a large dynamical range. Please feel free to use it.</p>
+</aside>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">show_image</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_image</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">show_colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/029dfb4984cd1cc6849a142389811c96220b6f03f8457a252f9bb38ecd893e09.png" src="../_images/029dfb4984cd1cc6849a142389811c96220b6f03f8457a252f9bb38ecd893e09.png" />
+</div>
+</div>
+<p>The bias frame shows some spatial patterns: some rows have a lower bias value than others. We also see some distinct “bright” pixels. They could be either bad pixels, or caused by Cosmic Rays (CR). As a consequence, when we plot the histogram of pixel values, we will see some outliers from the bulk of pixels.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>This figure highlights the difference between linear (left) and logarithmic (right) scales when plotting histogram. The number of outliers is too small to be visible in the left histogram with a linear scale in the y-axis. Logarithmic scale comes to save us. When you encounter a dataset that spans a huge dynamical range, maybe you should consider using <code class="docutils literal notranslate"><span class="pre">log</span></code> scale.</p>
+</aside>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="p">[</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">]</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;kuaizi&#39;
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;/Users/jiaxuanl/Dropbox (Princeton)/Data/IFU-M/Mar22/&#39;</span>
-<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">biases</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./b0</span><span class="si">{</span><span class="n">ind</span><span class="si">}</span><span class="s1">c1.fits&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span> <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">854</span><span class="p">,</span> <span class="mi">904</span><span class="p">)])</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">med_bias</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">biases</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">display_single</span><span class="p">(</span><span class="n">med_bias</span><span class="p">,</span> <span class="n">scale_bar</span><span class="o">=</span><span class="kc">False</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/70be82f1902b2ca2029b77c8595c55ea4b2e8e87286d3fba80105e0126435815.png" src="../_images/70be82f1902b2ca2029b77c8595c55ea4b2e8e87286d3fba80105e0126435815.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">biases</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./b0</span><span class="si">{</span><span class="n">ind</span><span class="si">}</span><span class="s1">c3.fits&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span> <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">854</span><span class="p">,</span> <span class="mi">954</span><span class="p">)])</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">med_bias</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">biases</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">med_bias</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">880</span><span class="p">,</span> <span class="mi">890</span><span class="p">),</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">biases</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">880</span><span class="p">,</span> <span class="mi">890</span><span class="p">),</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0.07918839, 0.09270868, 0.11524701, 0.11717704, 0.13348542,
-        0.11965244, 0.09276024, 0.08258593, 0.07653809, 0.09065677]),
- array([880., 881., 882., 883., 884., 885., 886., 887., 888., 889., 890.]),
- [&lt;matplotlib.patches.Polygon at 0x7fd658dd04f0&gt;])
-</pre></div>
-</div>
-<img alt="../_images/1daa3119e80d02e74d7d2b23b43fef1b07906c2b99ac0aed11cd0198929f0d24.png" src="../_images/1daa3119e80d02e74d7d2b23b43fef1b07906c2b99ac0aed11cd0198929f0d24.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">z</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">):</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">biases</span><span class="p">[</span><span class="n">z</span><span class="p">][</span><span class="mi">1001</span><span class="p">,</span> <span class="p">:],</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">870</span><span class="p">,</span> <span class="mi">900</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C0&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
-    
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">biases</span><span class="p">[:</span><span class="mi">50</span><span class="p">,</span> <span class="mi">1001</span><span class="p">,</span> <span class="p">:],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> 
-         <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">880</span><span class="p">,</span> <span class="mi">890</span><span class="p">),</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0.        , 0.        , 0.        , 0.        , 0.        ,
-        0.        , 0.        , 0.        , 0.        , 0.        ,
-        0.        , 0.00690926, 0.00921234, 0.05066789, 0.07600184,
-        0.1658222 , 0.27176416, 0.36388761, 0.58728696, 0.68631967,
-        0.69322893, 0.65177338, 0.52970981, 0.34776601, 0.25103639,
-        0.15891294, 0.08060801, 0.04836481, 0.00921234, 0.00460617,
-        0.00690926, 0.        , 0.        , 0.        , 0.        ,
-        0.        , 0.        , 0.        , 0.        , 0.        ,
-        0.        , 0.        , 0.        , 0.        , 0.        ,
-        0.        , 0.        , 0.        , 0.        , 0.        ]),
- array([880. , 880.2, 880.4, 880.6, 880.8, 881. , 881.2, 881.4, 881.6,
-        881.8, 882. , 882.2, 882.4, 882.6, 882.8, 883. , 883.2, 883.4,
-        883.6, 883.8, 884. , 884.2, 884.4, 884.6, 884.8, 885. , 885.2,
-        885.4, 885.6, 885.8, 886. , 886.2, 886.4, 886.6, 886.8, 887. ,
-        887.2, 887.4, 887.6, 887.8, 888. , 888.2, 888.4, 888.6, 888.8,
-        889. , 889.2, 889.4, 889.6, 889.8, 890. ]),
- [&lt;matplotlib.patches.Polygon at 0x7fd6d01bcca0&gt;])
-</pre></div>
-</div>
-<img alt="../_images/e85bcca9183de18a98da18a0cdefaddb7adcd164c2d307f65431428065cc3c39.png" src="../_images/e85bcca9183de18a98da18a0cdefaddb7adcd164c2d307f65431428065cc3c39.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">z</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">med_bias</span><span class="p">[</span><span class="mi">30</span><span class="o">+</span><span class="n">z</span><span class="p">,</span> <span class="p">:],</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">880</span><span class="p">,</span> <span class="mi">890</span><span class="p">),</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C0&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
-    
-<span class="c1"># plt.hist(np.mean(biases[:50, 1001, :], axis=0), </span>
-<span class="c1">#          range=(880, 890), density=True, bins=50, histtype=&#39;step&#39;, color=&#39;r&#39;)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/d660ef2d3def74625128bd9304cdb4925ec41bab9d78fe2fbd519cbd5f108b04.png" src="../_images/d660ef2d3def74625128bd9304cdb4925ec41bab9d78fe2fbd519cbd5f108b04.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">biases</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1001</span><span class="p">,</span> <span class="p">:]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([885., 879., 886., ..., 890., 885., 885.])
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">biases</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1001</span><span class="p">,</span> <span class="p">:]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([884., 885., 881., ..., 880., 884., 888.])
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">biases</span><span class="p">[:</span><span class="mi">50</span><span class="p">,</span> <span class="mi">1001</span><span class="p">,</span> <span class="p">:],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([886.04, 885.42, 884.88, ..., 885.3 , 884.02, 884.58])
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">biases</span><span class="p">[:</span><span class="mi">50</span><span class="p">,</span> <span class="mi">1001</span><span class="p">,</span> <span class="p">:],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">med_bias</span><span class="p">[</span><span class="mi">1001</span><span class="p">,</span> <span class="p">:],</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">880</span><span class="p">,</span> <span class="mi">890</span><span class="p">),</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">biases</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1001</span><span class="p">,</span> <span class="p">:],</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">880</span><span class="p">,</span> <span class="mi">890</span><span class="p">),</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0.06232763, 0.08383894, 0.09817981, 0.11693326, 0.12741313,
-        0.12630998, 0.09376724, 0.08880309, 0.09376724, 0.10865968]),
- array([880., 881., 882., 883., 884., 885., 886., 887., 888., 889., 890.]),
- [&lt;matplotlib.patches.Polygon at 0x7fd65e4baac0&gt;])
-</pre></div>
-</div>
-<img alt="../_images/9c34099396c3a9f80e24c00ebb27e8767dc2049a2cd7ce6d703c0a2bfa20df45.png" src="../_images/9c34099396c3a9f80e24c00ebb27e8767dc2049a2cd7ce6d703c0a2bfa20df45.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_single</span><span class="p">(</span><span class="n">master_bias</span><span class="p">,</span> <span class="n">scale_bar</span><span class="o">=</span><span class="kc">False</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/36db94d8f1b01b1f59f2ac17ffdfd30bb7ecccbb7f7bc52698641bab4e44deb1.png" src="../_images/36db94d8f1b01b1f59f2ac17ffdfd30bb7ecccbb7f7bc52698641bab4e44deb1.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">biases</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">stds</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([3.00000e+00, 1.90000e+01, 9.80000e+01, 4.76000e+02, 1.67600e+03,
-        5.34000e+03, 1.42750e+04, 3.27760e+04, 6.39940e+04, 1.10213e+05,
-        1.71044e+05, 2.30816e+05, 2.84336e+05, 3.09153e+05, 3.09408e+05,
-        2.79246e+05, 2.30395e+05, 1.72589e+05, 1.20858e+05, 7.73560e+04,
-        4.57320e+04, 2.49560e+04, 1.26960e+04, 5.88700e+03, 2.67200e+03,
-        1.12400e+03, 4.65000e+02, 2.36000e+02, 1.75000e+02, 2.19000e+02]),
- array([2.        , 2.13333333, 2.26666667, 2.4       , 2.53333333,
-        2.66666667, 2.8       , 2.93333333, 3.06666667, 3.2       ,
-        3.33333333, 3.46666667, 3.6       , 3.73333333, 3.86666667,
-        4.        , 4.13333333, 4.26666667, 4.4       , 4.53333333,
-        4.66666667, 4.8       , 4.93333333, 5.06666667, 5.2       ,
-        5.33333333, 5.46666667, 5.6       , 5.73333333, 5.86666667,
-        6.        ]),
- &lt;BarContainer object of 30 artists&gt;)
-</pre></div>
-</div>
-<img alt="../_images/741f745c6d7aab1eee6bb65674ad74ca764507bec374d1294b6a2ea618d696ba.png" src="../_images/741f745c6d7aab1eee6bb65674ad74ca764507bec374d1294b6a2ea618d696ba.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_single</span><span class="p">(</span><span class="n">stds</span><span class="p">,</span> <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/0fcc77960cee36097fa52d873489a5f48f1746fa5fb910d597ff8aa8a77e9c56.png" src="../_images/0fcc77960cee36097fa52d873489a5f48f1746fa5fb910d597ff8aa8a77e9c56.png" />
-<img alt="../_images/0fcc77960cee36097fa52d873489a5f48f1746fa5fb910d597ff8aa8a77e9c56.png" src="../_images/0fcc77960cee36097fa52d873489a5f48f1746fa5fb910d597ff8aa8a77e9c56.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_single</span><span class="p">(</span><span class="n">med_bias</span><span class="p">,</span> <span class="n">scale_bar</span><span class="o">=</span><span class="kc">False</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/9031f07ee27495e9dc12bfea43bfb61fb7dedbb8232251da42ce08d54ea8cc2b.png" src="../_images/9031f07ee27495e9dc12bfea43bfb61fb7dedbb8232251da42ce08d54ea8cc2b.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;/Users/jiaxuanl/Dropbox (Princeton)/Data/IFU-M/&#39;</span>
-<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Pixel value [counts]&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Pixel value [counts]&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;log Frequency&#39;</span><span class="p">)</span>
 
-<span class="n">sci</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./Mar22/b1190c1.fits&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
-<span class="n">twi</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./Mar22/b1204c1.fits&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
-<span class="n">bias</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./Mar22/b0855c1.fits&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
-<span class="n">bias</span> <span class="o">=</span> <span class="n">bias</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">bias</span><span class="p">[:,</span> <span class="mi">2048</span><span class="p">:],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)[:,</span><span class="kc">None</span><span class="p">]</span> <span class="c1"># overscan</span>
-<span class="n">bias</span> <span class="o">=</span> <span class="n">bias</span><span class="p">[:</span><span class="mi">1028</span><span class="p">,</span> <span class="p">:</span><span class="mi">2048</span><span class="p">]</span>
-<span class="c1"># bias = bias - np.mean(bias[1028:1155, 2048:]) # overscan</span>
-<span class="c1"># bias = bias[:1028, :2048]</span>
-<span class="c1"># master_bias = fits.open(&#39;./bbiasc1.fits&#39;)[0].data</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/8358ba781b9d66ce3d13ac44f8647471c87a149a0747764af63ef2d96656095a.png" src="../_images/8358ba781b9d66ce3d13ac44f8647471c87a149a0747764af63ef2d96656095a.png" />
 </div>
+</div>
+<p>During the Magellan observation, we took many bias frames (why??). So let’s load another bias frame. What do you expect? Will it be very different from the one above?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># display_single((bias - np.median(bias[1028:, :], axis=0)[None, :]));</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_image</span><span class="p">(</span><span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./bias/b0861c1.fits&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/98a7d00edb7731a39ab83cd6a2416cd007848a741c63dd5ed7cfa2a7b6624a81.png" src="../_images/98a7d00edb7731a39ab83cd6a2416cd007848a741c63dd5ed7cfa2a7b6624a81.png" />
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">biases</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./b0</span><span class="si">{</span><span class="n">ind</span><span class="si">}</span><span class="s1">c3.fits&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span> <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">854</span><span class="p">,</span> <span class="mi">954</span><span class="p">)])</span>
+</div>
+<p>Yeah, the bright spots changed their positions in the image. So it does seem like they are caused by cosmic rays.</p>
+</section>
+<section id="combine-bias-frames-to-make-master-bias">
+<h2>Combine bias frames to make “master” bias<a class="headerlink" href="#combine-bias-frames-to-make-master-bias" title="Permalink to this heading">#</a></h2>
+<p>We have already learned from <a class="reference internal" href="basic_stat.html"><span class="doc std std-doc">this notebook</span></a> that combining images will reduce the noise level. Belowe we try to combine 40 bias frames.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Here I use <a class="reference external" href="https://docs.python.org/3/tutorial/datastructures.html">“Nested List Comprehensions”</a> to construct a list. This is equivalent to the following snippet, but is much shorter.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">biases</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">860</span><span class="p">,</span> <span class="mi">900</span><span class="p">):</span>
+    <span class="n">biases</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s1">&#39;./b0</span><span class="si">{</span><span class="n">ind</span><span class="si">}</span><span class="s1">c1.fits&#39;</span>
+        <span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
+</aside>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">biases</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">854</span><span class="p">,</span> <span class="mi">884</span><span class="p">):</span>
-    <span class="n">bias</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./Mar22/b0</span><span class="si">{</span><span class="n">ind</span><span class="si">}</span><span class="s1">c3.fits&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
-    <span class="n">bias</span> <span class="o">=</span> <span class="n">bias</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">bias</span><span class="p">[:,</span> <span class="mi">2048</span><span class="p">:],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)[:,</span><span class="kc">None</span><span class="p">]</span> <span class="c1"># overscan</span>
-<span class="c1">#     bias = bias - np.median(bias[1028:, :], axis=0)[None,:] # overscan</span>
-    <span class="n">bias</span> <span class="o">=</span> <span class="n">bias</span><span class="p">[:</span><span class="mi">1028</span><span class="p">,</span> <span class="p">:</span><span class="mi">2048</span><span class="p">]</span>
-    <span class="n">biases</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bias</span><span class="p">)</span>
-<span class="n">biases</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">biases</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">biases</span> <span class="o">=</span> <span class="p">[</span><span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./bias/b0</span><span class="si">{</span><span class="n">ind</span><span class="si">}</span><span class="s1">c1.fits&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span> <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">860</span><span class="p">,</span> <span class="mi">900</span><span class="p">)]</span>
+<span class="n">biases</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">biases</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -698,21 +798,136 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(30, 1028, 2048)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(40, 1156, 2176)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_single</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">biases</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">));</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We have introduced how to calculate the mean and median image using the `axis` argument.</span>
+<span class="c1"># Check `basic_stat.ipynb`</span>
+<span class="n">med_bias</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">biases</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">mean_bias</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">biases</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="p">[</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">]</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">show_image</span><span class="p">(</span><span class="n">med_bias</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">fig</span><span class="o">=</span><span class="n">fig</span><span class="p">,)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="s1">&#39;Median-combined&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> 
+         <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax1</span><span class="o">.</span><span class="n">transAxes</span><span class="p">)</span>
+
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">show_image</span><span class="p">(</span><span class="n">mean_bias</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">fig</span><span class="o">=</span><span class="n">fig</span><span class="p">,)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="s1">&#39;Mean-combined&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> 
+         <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax2</span><span class="o">.</span><span class="n">transAxes</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ccb79b8257f58cbab526191a77a19b43628b3fa6aa5c0730d420f06bb60e7df5.png" src="../_images/ccb79b8257f58cbab526191a77a19b43628b3fa6aa5c0730d420f06bb60e7df5.png" />
+<img alt="../_images/3844c6daf7c4febc014aec67946b14dc7a93eb8ae2c7dc13d9838d500aeed86a.png" src="../_images/3844c6daf7c4febc014aec67946b14dc7a93eb8ae2c7dc13d9838d500aeed86a.png" />
 </div>
 </div>
+<p>Wow! The cosmic rays are everywhere in the mean-combined image! The vast difference between the median-combined and mean-combined images highlights that the mean is far less immune to outliers (i.e., cosmic rays) than the median. Because of this, we often use median to combine images.</p>
+<p>The histogram below shows again that combining individual bias frames will help reduce the read-out noise, thus boost the SNR.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">biases</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+         <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">795</span><span class="p">,</span> <span class="mi">840</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Single bias frames&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">21</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">biases</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+         <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">795</span><span class="p">,</span> <span class="mi">840</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C0&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">med_bias</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+         <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">795</span><span class="p">,</span> <span class="mi">840</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;40 biases combined&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Pixel value [counts]&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper center&#39;</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.15</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ff68cf52d5f0fa50c6b18ae039260a480d3d7d411e99bccfc79d25a38dc34182.png" src="../_images/ff68cf52d5f0fa50c6b18ae039260a480d3d7d411e99bccfc79d25a38dc34182.png" />
+</div>
+</div>
+</section>
+<section id="sigma-clipping">
+<h2>Sigma-clipping<a class="headerlink" href="#sigma-clipping" title="Permalink to this heading">#</a></h2>
+<p>In astronomy, there is yet another way to deal with outliers.</p>
+<p>Recall that for a Gaussian distribution, the probability for a data point being <span class="math notranslate nohighlight">\(&gt;3\sigma\)</span> away from the mean <span class="math notranslate nohighlight">\(\mu\)</span> is very very slim. So if we see such a data point that is quite far from the center of the data set, it is probably an outlier and should be removed. This is the idea of <strong>sigma clipping</strong>.</p>
+<p>In the following, we flag out pixels that are <span class="math notranslate nohighlight">\(&gt;3\sigma\)</span> away from the median value (we don’t use the mean value because it is heavily biased by these cosmic rays). You can see the cosmic rays being marked as red in the figure below (they are tiny dots).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hdu</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./bias/b0860c1.fits&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">hdu</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">med</span><span class="p">,</span> <span class="n">std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">img</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="n">flag</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">img</span> <span class="o">-</span> <span class="n">med</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">std</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_image</span><span class="p">(</span><span class="n">flag</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Reds&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">show_colorbar</span><span class="o">=</span><span class="kc">False</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/86d1e10a53f597f4bef314a8d605c73a5255cd075c8d626e64b1be352726470e.png" src="../_images/86d1e10a53f597f4bef314a8d605c73a5255cd075c8d626e64b1be352726470e.png" />
+</div>
+</div>
+<p>We can replace these outlier pixels with <code class="docutils literal notranslate"><span class="pre">np.nan</span></code> (not a number, typically used to indicate a bad value). Then we repeat this for all 40 bias frames and combine them.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This might be slow</span>
+<span class="n">biases_clipped</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">860</span><span class="p">,</span> <span class="mi">900</span><span class="p">):</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./bias/b0</span><span class="si">{</span><span class="n">ind</span><span class="si">}</span><span class="s1">c1.fits&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">med</span><span class="p">,</span> <span class="n">std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">img</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+    <span class="n">flag</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">img</span> <span class="o">-</span> <span class="n">med</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">std</span><span class="p">)</span>
+    <span class="n">img</span><span class="p">[</span><span class="n">flag</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+    <span class="n">biases_clipped</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="n">biases_clipped</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">biases_clipped</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># might be slow</span>
+<span class="n">med_bias_clipped</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmedian</span><span class="p">(</span><span class="n">biases_clipped</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">mean_bias_clipped</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">biases_clipped</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="p">[</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">]</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">show_image</span><span class="p">(</span><span class="n">med_bias_clipped</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">fig</span><span class="o">=</span><span class="n">fig</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mf">816.6</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">818.4</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="s1">&#39;Median-combined, sigma-clipped&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> 
+         <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax1</span><span class="o">.</span><span class="n">transAxes</span><span class="p">)</span>
+
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">show_image</span><span class="p">(</span><span class="n">mean_bias_clipped</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">fig</span><span class="o">=</span><span class="n">fig</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mf">816.6</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">818.4</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="s1">&#39;Mean-combined, sigma-clipped&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> 
+         <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax2</span><span class="o">.</span><span class="n">transAxes</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1528018b890737e36a1f09838528b54a21f3d3af67567c2d11bc9146103ee152.png" src="../_images/1528018b890737e36a1f09838528b54a21f3d3af67567c2d11bc9146103ee152.png" />
+</div>
+</div>
+<p>Yeah! After sigma-clipping, the mean-combined image looks much better and very similar to the median-combined one. This sigma-clipping trick is quite common in astronomy. We used a threshold of 3-sigma and only clipped once. You can repeat the procedure for several times to make sure all outliers are flagged. Actually, <code class="docutils literal notranslate"><span class="pre">astropy</span></code> already provides us a function <code class="docutils literal notranslate"><span class="pre">sigma_clip</span></code> to do these jobs. Let’s check it out.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.stats</span> <span class="kn">import</span> <span class="n">sigma_clip</span>
@@ -722,231 +937,94 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filtered_data</span> <span class="o">=</span> <span class="n">sigma_clip</span><span class="p">(</span><span class="n">biases</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">maxiters</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-                           <span class="n">cenfunc</span><span class="o">=</span><span class="s1">&#39;median&#39;</span><span class="p">,</span> <span class="n">stdfunc</span><span class="o">=</span><span class="s1">&#39;std&#39;</span><span class="p">,</span> 
-                           <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-                           <span class="n">masked</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">astropy_clipped</span> <span class="o">=</span> <span class="n">sigma_clip</span><span class="p">(</span><span class="n">biases</span><span class="p">,</span>  <span class="c1"># the bias frames before sigma-clipping</span>
+                             <span class="n">sigma</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>  <span class="c1"># threshould is 3-sigma</span>
+                             <span class="n">maxiters</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>  <span class="c1"># do clipping for 5 times at most</span>
+                             <span class="n">cenfunc</span><span class="o">=</span><span class="s1">&#39;median&#39;</span><span class="p">,</span> <span class="n">stdfunc</span><span class="o">=</span><span class="s1">&#39;std&#39;</span><span class="p">,</span>
+                             <span class="c1"># use median and standard deviation to calculate clipping criterion</span>
+                             <span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="c1"># calc median and std for each bias frame</span>
+                             <span class="n">masked</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">med_bias</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">filtered_data</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># might be slow</span>
+<span class="n">med_bias_apy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmedian</span><span class="p">(</span><span class="n">astropy_clipped</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">mean_bias_apy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmean</span><span class="p">(</span><span class="n">astropy_clipped</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_single</span><span class="p">(</span><span class="n">med_bias</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/d3db2a9985c173cc9ae45171b876d18d7f84becac33fc380f8f2aa98c5b22591.png" src="../_images/d3db2a9985c173cc9ae45171b876d18d7f84becac33fc380f8f2aa98c5b22591.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filtered_data</span><span class="o">.</span><span class="n">shape</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(30, 1028, 2048)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_single</span><span class="p">(</span><span class="n">sci</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/a6463e26e118c91029235cb913a9ce45bb82256d95e9cd508ca7681bd3bd146e.png" src="../_images/a6463e26e118c91029235cb913a9ce45bb82256d95e9cd508ca7681bd3bd146e.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">med_bias</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">((</span><span class="n">biases</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">biases</span><span class="p">[:,</span> <span class="mi">1028</span><span class="p">:</span><span class="mi">1155</span><span class="p">,</span> <span class="mi">2048</span><span class="p">:],</span> <span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">med_bias</span> <span class="o">=</span> <span class="n">med_bias</span><span class="p">[:</span><span class="mi">1028</span><span class="p">,</span> <span class="p">:</span><span class="mi">2048</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bias</span><span class="o">.</span><span class="n">shape</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1156, 2176)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">bias</span><span class="p">[:</span><span class="mi">2047</span><span class="p">,</span> <span class="p">:],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sci</span><span class="p">[:</span><span class="mi">2047</span><span class="p">,</span> <span class="p">:],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">twi</span><span class="p">[:</span><span class="mi">2047</span><span class="p">,</span> <span class="p">:],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">2176</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="p">[</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">]</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">2048</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span> <span class="mi">900</span><span class="p">)</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">show_image</span><span class="p">(</span><span class="n">med_bias_apy</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">fig</span><span class="o">=</span><span class="n">fig</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mf">816.6</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">818.4</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="s1">&#39;Median-combined, astropy sigma-clipped&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> 
+         <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax1</span><span class="o">.</span><span class="n">transAxes</span><span class="p">)</span>
+
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">show_image</span><span class="p">(</span><span class="n">mean_bias_apy</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">fig</span><span class="o">=</span><span class="n">fig</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mf">816.6</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">818.4</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="s1">&#39;Mean-combined, astropy sigma-clipped&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> 
+         <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax2</span><span class="o">.</span><span class="n">transAxes</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(800.0, 900.0)
-</pre></div>
-</div>
-<img alt="../_images/397ad6f9e9938030a1eeac184f5486427f1b40857082fb2e9f4895f277dd1f65.png" src="../_images/397ad6f9e9938030a1eeac184f5486427f1b40857082fb2e9f4895f277dd1f65.png" />
+<img alt="../_images/8c62e1a4505d5142aef645832ab08952864db97d6978faa3e46feadd12bec145.png" src="../_images/8c62e1a4505d5142aef645832ab08952864db97d6978faa3e46feadd12bec145.png" />
 </div>
 </div>
+<p>We can write the median-combined image to a FITS file for future usage.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_single</span><span class="p">(</span><span class="n">bias</span><span class="p">[</span><span class="mi">1028</span><span class="p">:</span><span class="mi">1155</span><span class="p">,</span> <span class="p">:],</span> <span class="n">scale_bar</span><span class="o">=</span><span class="kc">False</span><span class="p">);</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hdu</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">PrimaryHDU</span><span class="p">(</span><span class="n">med_bias_clipped</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">))</span>
+<span class="n">hdulist</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">HDUList</span><span class="p">([</span><span class="n">hdu</span><span class="p">])</span>
+<span class="n">hdulist</span><span class="o">.</span><span class="n">writeto</span><span class="p">(</span><span class="s1">&#39;./bias/master_bias.fits&#39;</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/6179d9b4b8d16f9d4401852fc475773c6a9e17e350a5dae520c56f2cf949db8b.png" src="../_images/6179d9b4b8d16f9d4401852fc475773c6a9e17e350a5dae520c56f2cf949db8b.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">bias</span><span class="p">[:,</span> <span class="mi">500</span><span class="p">:</span><span class="mi">600</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.964860680805017
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mf">2.7</span> <span class="o">/</span> <span class="mf">0.68</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.9705882352941178
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bias</span><span class="o">.</span><span class="n">shape</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1156, 2176)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bias</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">master_bias</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([      0.,       0.,       0.,       0., 1363518.,  741826.,
-              0.,       0.,       0.,       0.]),
- array([-10.,  -8.,  -6.,  -4.,  -2.,   0.,   2.,   4.,   6.,   8.,  10.]),
- [&lt;matplotlib.patches.Polygon at 0x7fd658b15580&gt;])
-</pre></div>
-</div>
-<img alt="../_images/c96a9672b6ba3b80175edd8a0dbfd4908b9a31bf51fa517dc5279475e44a655d.png" src="../_images/c96a9672b6ba3b80175edd8a0dbfd4908b9a31bf51fa517dc5279475e44a655d.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">bias</span> <span class="o">-</span> <span class="n">master_bias</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11.22369262482501
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_single</span><span class="p">(</span><span class="n">bias</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/145787bc519d13d8d9eb77eb261b23350711b410f94e295e3b887e9431fb7dea.png" src="../_images/145787bc519d13d8d9eb77eb261b23350711b410f94e295e3b887e9431fb7dea.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_single</span><span class="p">(</span><span class="n">master_bias</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/2df2e1f7b9e11cdde55d27ce55d6fd2bd49511f9ec5aa49ffaff285d22a85a1e.png" src="../_images/2df2e1f7b9e11cdde55d27ce55d6fd2bd49511f9ec5aa49ffaff285d22a85a1e.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_single</span><span class="p">(</span><span class="n">bias</span><span class="p">[:,</span> <span class="mi">500</span><span class="p">:</span><span class="mi">1500</span><span class="p">]);</span> <span class="c1"># [:1028, :2048]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/72256b13f5921037718e13d6c177acce758843d62da83619284204afb2b90eb2.png" src="../_images/72256b13f5921037718e13d6c177acce758843d62da83619284204afb2b90eb2.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bias</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_single</span><span class="p">(</span><span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./bbiasc1.fits&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/2df2e1f7b9e11cdde55d27ce55d6fd2bd49511f9ec5aa49ffaff285d22a85a1e.png" src="../_images/2df2e1f7b9e11cdde55d27ce55d6fd2bd49511f9ec5aa49ffaff285d22a85a1e.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display_single</span><span class="p">(</span><span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./IFUM_IRAF_0/ifum/TEST_Data/Biases/bbiasc1.fits&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/2df2e1f7b9e11cdde55d27ce55d6fd2bd49511f9ec5aa49ffaff285d22a85a1e.png" src="../_images/2df2e1f7b9e11cdde55d27ce55d6fd2bd49511f9ec5aa49ffaff285d22a85a1e.png" />
 </div>
 </div>
 </section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="dark-frame">
+<h1>2. Dark frame<a class="headerlink" href="#dark-frame" title="Permalink to this heading">#</a></h1>
+<p>Just to give you a flavor of dark frame, here we show the five dark frames that we took during the Magellan observation. They are full of cosmic rays. We construct a master dark frame by combining them using median.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">darks</span> <span class="o">=</span> <span class="p">[</span><span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./dark/b</span><span class="si">{</span><span class="n">ind</span><span class="si">}</span><span class="s1">c1.fits&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span> <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1212</span><span class="p">,</span> <span class="mi">1217</span><span class="p">)]</span>
+<span class="n">darks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">darks</span><span class="p">)</span>
+<span class="n">med_dark</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">darks</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="p">[</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">]</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">show_image</span><span class="p">(</span><span class="n">darks</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">fig</span><span class="o">=</span><span class="n">fig</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="s1">&#39;Single dark frame (3600s)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> 
+         <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax1</span><span class="o">.</span><span class="n">transAxes</span><span class="p">)</span>
+
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">show_image</span><span class="p">(</span><span class="n">med_dark</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">fig</span><span class="o">=</span><span class="n">fig</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="s1">&#39;Master dark frame (median-combined)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> 
+         <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax2</span><span class="o">.</span><span class="n">transAxes</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/acc158f8e49428bd6cf1e7ea4be42394302bc659cd0b1285c3ab0a9a2987c92b.png" src="../_images/acc158f8e49428bd6cf1e7ea4be42394302bc659cd0b1285c3ab0a9a2987c92b.png" />
+</div>
+</div>
+<p>The light area in the lower left corner is due to sensor glow, which is light emitted by the electronics of the CCD. The counts in a dark frame scales linearly with time. The exposure time for a dark frame is typically similar to (or longer than) the exposure time of your science frames.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="flat-fielding">
+<h1>3. Flat fielding<a class="headerlink" href="#flat-fielding" title="Permalink to this heading">#</a></h1>
 </section>
 
     <script type="text/x-thebe-config">
@@ -980,6 +1058,24 @@ document.write(`
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="basic_stat.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Basic Statistics</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="img_simulation.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Construction of an artificial (but realistic) image</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div></div>
   
 </div>
@@ -998,8 +1094,17 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-deal-with-outliers-median-v-s-mean-sigma-clipping">How to deal with outliers: median v.s. mean, sigma-clipping</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Calibration frames</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-frames">1. Bias frames</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-a-bias-frame">Read a bias frame</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combine-bias-frames-to-make-master-bias">Combine bias frames to make “master” bias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sigma-clipping">Sigma-clipping</a></li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dark-frame">2. Dark frame</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#flat-fielding">3. Flat fielding</a></li>
+</ul>
+
   </nav></div>
 
 </div></div>
