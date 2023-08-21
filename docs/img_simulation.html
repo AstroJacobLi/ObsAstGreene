@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Construction of an artificial (but realistic) image &#8212; Observational Astronomy</title>
+    <title>Homework: Simulate an artificial image &#8212; Observational Astronomy</title>
   
   
   
@@ -165,7 +165,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Construction of an artificial (but realistic) image</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Homework: Simulate an artificial image</a></li>
 <li class="toctree-l1"><a class="reference internal" href="intro_gaia_star.html">Introduction to Gaia data</a></li>
 
 
@@ -356,7 +356,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Construction of an artificial (but realistic) image</h1>
+    <h1>Homework: Simulate an artificial image</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -366,11 +366,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imports">Imports</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-a-blank-image">Start: a blank image</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-some-read-noise">Add some read noise</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bias">Bias</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dark-current">Dark current</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-out-noise">Read-out noise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bias">Bias</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#now-create-realistic-bias-frame-by-adding-bias-and-read-noise-together">Now create realistic bias frame by adding bias and read noise together.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dark-frame">Dark frame</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sky-background">Sky background</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-the-backgrounds-in-an-astronomical-image">Summary of the backgrounds in an astronomical image</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-demo">Interactive demo</a></li>
@@ -392,81 +394,42 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="construction-of-an-artificial-but-realistic-image">
-<h1>Construction of an artificial (but realistic) image<a class="headerlink" href="#construction-of-an-artificial-but-realistic-image" title="Permalink to this heading">#</a></h1>
-<p>From <a class="reference external" href="http://www.astropy.org/ccd-reduction-and-photometry-guide/v/dev/notebooks/01-03-Construction-of-an-artificial-but-realistic-image.html">http://www.astropy.org/ccd-reduction-and-photometry-guide/v/dev/notebooks/01-03-Construction-of-an-artificial-but-realistic-image.html</a></p>
-<p>Before we move on to looking at a real image, let’s spend a few minutes getting
-comfortable with what each of the different sources of counts look like in an
-artificial image. The advantage is that we can control how much of each count
-source goes into the image. Looking at extreme examples can help build an
-understanding of what’s going on in your images.</p>
-<section id="imports">
-<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this heading">#</a></h2>
-<p>Almost all of the notebooks in this tutorial will start with the import of the
-Python packages needed for that notebook. The lines below set up
-<a class="reference external" href="https://matplotlib.org/">matplotlib</a>, a widely used plotting package.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="homework-simulate-an-artificial-image">
+<h1>Homework: Simulate an artificial image<a class="headerlink" href="#homework-simulate-an-artificial-image" title="Permalink to this heading">#</a></h1>
+<p><strong>Prerequisites</strong></p>
+<ul class="simple">
+<li><p>Basic statistics (covered in <a class="reference internal" href="basic_stat.html"><span class="doc std std-doc">this notebook</span></a>)</p></li>
+<li><p>Knowledge about CCD, bias, dark, and flat frames.</p></li>
+</ul>
+<p><strong>Goal</strong></p>
+<ul class="simple">
+<li><p>Understand the <a class="reference external" href="https://en.wikipedia.org/wiki/Data_generating_process">data generating process</a></p></li>
+</ul>
+<p><strong>Reference</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.astropy.org/ccd-reduction-and-photometry-guide/v/dev/notebooks/01-01-astronomical-CCD-image-components.html">Here</a> is a <strong>great</strong> tutorial on CCD data reduction. Please check out!!</p></li>
+<li><p>Howell, S., Handbook of CCD Astronomy, Second Ed, Cambridge University Press 2006</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">show_image</span>
+<span class="c1"># fix a random number generator</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up the random number generator, allowing a seed to be set from the environment</span>
-<span class="n">seed</span> <span class="o">=</span> <span class="mi">42</span>
-
-<span class="k">if</span> <span class="n">seed</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">seed</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
-    
-<span class="c1"># This is the generator to use for any image component which changes in each image, e.g. read noise</span>
-<span class="c1"># or Poisson error</span>
-<span class="n">noise_rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>The Python file referenced below, <code class="docutils literal notranslate"><span class="pre">convenience_functions.py</span></code>, contains a
-few functions for convenient display of images in a notebook.</p>
-<p>You can get a copy of this file a few ways.</p>
-<ol class="arabic simple">
-<li><p>If you are running the notebooks in your browser then this link will open the
-file in another Jupyter Lab tab: <span class="xref myst">convenience_functions.py</span>. You can
-also read/edit it in your preferred editor, but it’s handy to know that editing
-Python files in the Jupyter notebook environment is possible.</p></li>
-<li><p>If you are reading the book online you can view a copy of the file
-here: <a class="reference external" href="https://github.com/astropy/ccd-reduction-and-photometry-guide/blob/main/notebooks/convenience_functions.py">convenience_functions.py</a></p></li>
-<li><p>If you want a copy of the file without doing a copy/paste, you can
-download or clone this repository, including the notebooks and code,
-at <a class="github reference external" href="https://github.com/astropy/ccd-reduction-and-photometry-guide">astropy/ccd-reduction-and-photometry-guide</a>
-(click on the green “Code” button for options)</p></li>
-</ol>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">show_image</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
 <section id="start-a-blank-image">
 <h2>Start: a blank image<a class="headerlink" href="#start-a-blank-image" title="Permalink to this heading">#</a></h2>
-<p>We’ll begin with the simplest possible image: an array of zeros. The dimensions
-of the image below are chosen to match some real images we’ll be working with
-later.</p>
+<p>This is easy! We use <code class="docutils literal notranslate"><span class="pre">np.zeros</span></code> to construct an array full of zeros. We will add signals and noises as we proceed.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">synthetic_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_image</span><span class="p">(</span><span class="n">synthetic_image</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">show_image</span><span class="p">(</span><span class="n">synthetic_image</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -478,15 +441,14 @@ later.</p>
 </div>
 </div>
 </section>
-<section id="add-some-read-noise">
-<h2>Add some read noise<a class="headerlink" href="#add-some-read-noise" title="Permalink to this heading">#</a></h2>
-<p>With each of the things we add, we’ll write a small function for adding so that
-it’s easier to experiment with different values. Read noise has a Gaussian
-distribution; the standard deviation of the Gaussian (in counts) is the read
-noise (in electrons) divided by the gain (in electrons per count). Read noise is
-almost always given in electrons.</p>
-<p>Note that each time you run this function you’ll get a different set of pixels
-so that it behaves like real noise.</p>
+<section id="read-out-noise">
+<h2>Read-out noise<a class="headerlink" href="#read-out-noise" title="Permalink to this heading">#</a></h2>
+<p>When we read out an image from a CCD, some small random noise is added to each pixel. This “read-out” noise follows a Gaussian distribution centered at zero. Typically you can find the “width” of this Gaussian in the CCD operating manual. For example, let’s assume that the CCD manual said the read-out noise is <code class="docutils literal notranslate"><span class="pre">READ</span> <span class="pre">NOISE:</span> <span class="pre">4e-</span> <span class="pre">rms</span></code> and the gain we used is <code class="docutils literal notranslate"><span class="pre">GAIN</span> <span class="pre">=</span> <span class="pre">2</span> <span class="pre">e-</span> <span class="pre">/</span> <span class="pre">ADU</span></code>. This means that the standard deviation of the read-out noise is 4 electron per read-out. Read noise of a CCD is almost always given in electrons, but images are typically in counts (ADUs). To convert electrons to counts (ADUs), we have to devide the number of electrons by gain (electrons per count). Therefore, the standard deviation of read-out noise in counts is 2.</p>
+<p>Below we write a function <code class="docutils literal notranslate"><span class="pre">read_noise</span></code> to generate the read-out noise to be added to the blank image that we generated above. Note that each time you run this function you’ll get a different set of pixels so that it behaves like real noise.</p>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Here we demonstrate how to write docstrings for a Python function. <strong>It is always a good practice to write docstring for your code.</strong> <a class="reference external" href="https://pandas.pydata.org/docs/development/contributing_docstring.html">Here</a> is a nice guide to how to write good docstrings. GitHub copilot can also help you write docstrings (try it!)</p>
+</aside>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">read_noise</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">amount</span><span class="p">,</span> <span class="n">gain</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
@@ -495,18 +457,20 @@ so that it behaves like real noise.</p>
 <span class="sd">    </span>
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    </span>
 <span class="sd">    image: numpy array</span>
-<span class="sd">        Image whose shape the noise array should match.</span>
+<span class="sd">        To which we add the read noise. </span>
 <span class="sd">    amount : float</span>
-<span class="sd">        Amount of read noise, in electrons.</span>
+<span class="sd">        The rms of read noise, in electrons.</span>
 <span class="sd">    gain : float, optional</span>
 <span class="sd">        Gain of the camera, in units of electrons/ADU.</span>
+<span class="sd">        </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    noise: numpy array</span>
+<span class="sd">        The read noise frame</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">shape</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span>
-    
-    <span class="n">noise</span> <span class="o">=</span> <span class="n">noise_rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="n">amount</span><span class="o">/</span><span class="n">gain</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">shape</span><span class="p">)</span>
-    
+    <span class="n">noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="n">amount</span> <span class="o">/</span> <span class="n">gain</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">shape</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">noise</span>
 </pre></div>
 </div>
@@ -514,47 +478,24 @@ so that it behaves like real noise.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">noise_im</span> <span class="o">=</span> <span class="n">synthetic_image</span> <span class="o">+</span> <span class="n">read_noise</span><span class="p">(</span><span class="n">synthetic_image</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-<span class="n">show_image</span><span class="p">(</span><span class="n">noise_im</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">noise_im</span> <span class="o">=</span> <span class="n">synthetic_image</span> <span class="o">+</span> <span class="n">read_noise</span><span class="p">(</span><span class="n">synthetic_image</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">gain</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">show_image</span><span class="p">(</span><span class="n">noise_im</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Read noise&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;20&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Read noise&#39;)
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 640x480 with 0 Axes&gt;
-</pre></div>
-</div>
-<img alt="../_images/b134cfd163c78e1fabd046fdf9823356e8c1708a873c3e32be833cd839762214.png" src="../_images/b134cfd163c78e1fabd046fdf9823356e8c1708a873c3e32be833cd839762214.png" />
+<img alt="../_images/ffae7f310646243e49dcbbbc4a1762638eca9eab452f848daceb6d1453337c6f.png" src="../_images/ffae7f310646243e49dcbbbc4a1762638eca9eab452f848daceb6d1453337c6f.png" />
 </div>
 </div>
 </section>
 <section id="bias">
 <h2>Bias<a class="headerlink" href="#bias" title="Permalink to this heading">#</a></h2>
-<p>Bias is an offset voltage (which translates into some non-zero number of counts)
-added to every pixel in the image to ensure that when voltages are converted to
-counts there is never a negative count. Note that in the noise image above, some
-counts are positive and some are negative, as you would expect for a Gaussian
-distribution centered on zero. Pixel values are typically read out from the
-electronics as <em>positive</em> numbers, though. Adding a constant voltage, which
-corresponds to a constant, positive number, ensures that even an image which
-consists entirely of noise has no negative values.</p>
-<p>The bias value is roughly the same across the CCD chip, though it’s not uncommon
-to have “bad” columns and pixels in which the bias level is consistently offset
-from the rest of the chip.</p>
-<p>To model a bias image, we create a uniform array and, optionally, add in some
-“bad” columns. The bad columns are exaggerated here to ensure they are visible.</p>
-<p>The bad columns in a CCD are typically stable over a very long time. A random
-number generator is used below to pick which columns in our CCD are bad, but
-we’ll use a seed to make sure that each time we generate the bias we get the
-same bad columns (and pixel values within the bad columns).</p>
-<p>This stability is what makes it possible to correct for the effect in real
-images.</p>
-<p>Finally, note that the bias doesn’t depend on exposure time. That’s because a
-bias exposure is a zero-second exposure in which the camera simply reads the
-chip out.</p>
+<p>As we have already discussed in <a class="reference internal" href="calibration_frames.html"><span class="doc std std-doc">Calibration Frames</span></a>, bias is a positive offset added to each pixel to make sure the counts are non-negative. If there is no this offset, as we see in the above image, some pixels are negative.</p>
+<p>As shown in <a class="reference internal" href="calibration_frames.html"><span class="doc std std-doc">Calibration Frames</span></a>, the bias value is roughly the same across the CCD, but there is still some spatial patterns including “bad” columns. To model such a bias, we create a uniform array and add some “bad” columns. Note that the bias is not a function of exposure time and does not have read-out noise.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bias</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">realistic</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -563,35 +504,41 @@ chip out.</p>
 <span class="sd">    </span>
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    </span>
 <span class="sd">    image: numpy array</span>
-<span class="sd">        Image whose shape the bias array should match.</span>
+<span class="sd">        To which we will add the bias. </span>
 <span class="sd">    value: float</span>
-<span class="sd">        Bias level to add.</span>
+<span class="sd">        Bias level to add, in counts.</span>
 <span class="sd">    realistic : bool, optional</span>
-<span class="sd">        If ``True``, add some columns with somewhat higher bias value (a not uncommon thing)</span>
+<span class="sd">        If ``True``, add some &quot;bad&quot; columns with higher bias value</span>
+<span class="sd">        </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    bias_im: numpy array</span>
+<span class="sd">        The bias frame</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># This is the whole thing: the bias is really suppose to be a constant offset!</span>
-    <span class="n">bias_im</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">image</span><span class="p">)</span> <span class="o">+</span> <span class="n">value</span>
+    <span class="n">shape</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span>
+    <span class="c1"># This is the bias frame with the same bias value for all pixels</span>
+    <span class="n">bias_im</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span> <span class="o">*</span> <span class="n">value</span>
     
-    <span class="c1"># If we want a more realistic bias we need to do a little more work. </span>
+    <span class="c1"># Try to add &quot;bad&quot; columns</span>
     <span class="k">if</span> <span class="n">realistic</span><span class="p">:</span>
-        <span class="n">shape</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span>
-        <span class="n">number_of_colums</span> <span class="o">=</span> <span class="mi">5</span>
-        
         <span class="c1"># We want a random-looking variation in the bias, but unlike the readnoise the bias should </span>
-        <span class="c1"># *not* change from image to image, so we make sure to always generate the same &quot;random&quot; numbers.</span>
-        <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">8392</span><span class="p">)</span>  <span class="c1"># 20180520</span>
-        <span class="n">columns</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="n">number_of_colums</span><span class="p">)</span>
-        <span class="c1"># This adds a little random-looking noise into the data.</span>
-        <span class="n">col_pattern</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.1</span> <span class="o">*</span> <span class="n">value</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="c1"># not change from image to image, so we make sure to always generate the same &quot;random&quot; numbers.</span>
+        <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">number_of_colums</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
         
-        <span class="c1"># Make the chosen columns a little brighter than the rest...</span>
+        <span class="c1"># Randomly select which columns are bad</span>
+        <span class="n">columns</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="n">number_of_colums</span><span class="p">)</span>
+        
+        <span class="c1"># This will add a little random-looking noise into the data.</span>
+        <span class="c1"># This `col_pattern` is added to the global bias value to represent &quot;bad&quot; columns</span>
+        <span class="n">col_pattern</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.03</span> <span class="o">*</span> <span class="n">value</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
         <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">:</span>
+            <span class="c1"># Here `c` is the index of &quot;bad&quot; columns</span>
             <span class="n">bias_im</span><span class="p">[:,</span> <span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span> <span class="o">+</span> <span class="n">col_pattern</span>
             
-    <span class="k">return</span> <span class="n">bias_im</span>
-        
+    <span class="k">return</span> <span class="n">bias_im</span>        
 </pre></div>
 </div>
 </div>
@@ -599,8 +546,8 @@ chip out.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bias_only</span> <span class="o">=</span> <span class="n">bias</span><span class="p">(</span><span class="n">synthetic_image</span><span class="p">,</span> <span class="mi">1100</span><span class="p">,</span> <span class="n">realistic</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">show_image</span><span class="p">(</span><span class="n">bias_only</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Bias alone, bad columns included&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;20&#39;</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">show_image</span><span class="p">(</span><span class="n">bias_only</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Bias alone, bad columns included&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -608,45 +555,37 @@ chip out.</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Bias alone, bad columns included&#39;)
 </pre></div>
 </div>
-<img alt="../_images/1645cdc6bab5263ae4b382e5b7503be57a1f199479d222161ae2053be743d922.png" src="../_images/1645cdc6bab5263ae4b382e5b7503be57a1f199479d222161ae2053be743d922.png" />
+<img alt="../_images/14b03fefe4b326c8914aa140dc521507ea39f023249a53933f534cf4c3cae434.png" src="../_images/14b03fefe4b326c8914aa140dc521507ea39f023249a53933f534cf4c3cae434.png" />
 </div>
 </div>
+<section id="now-create-realistic-bias-frame-by-adding-bias-and-read-noise-together">
+<h3>Now create realistic bias frame by adding bias and read noise together.<a class="headerlink" href="#now-create-realistic-bias-frame-by-adding-bias-and-read-noise-together" title="Permalink to this heading">#</a></h3>
+<p>Note that we did not include any cosmic rays.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bias_noise_im</span> <span class="o">=</span> <span class="n">noise_im</span> <span class="o">+</span> <span class="n">bias_only</span>
-<span class="n">show_image</span><span class="p">(</span><span class="n">bias_noise_im</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Realistic bias frame (includes read noise)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;20&#39;</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">show_image</span><span class="p">(</span><span class="n">bias_noise_im</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Realistic bias frame&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Realistic bias frame (includes read noise)&#39;)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Realistic bias frame&#39;)
 </pre></div>
 </div>
-<img alt="../_images/54b7137edfb920f2c09a3051cc7dbc9cf4d0194e0c651107c7798ec574b1eb7a.png" src="../_images/54b7137edfb920f2c09a3051cc7dbc9cf4d0194e0c651107c7798ec574b1eb7a.png" />
+<img alt="../_images/08052bb1c9b014ad9d067983d3aad18f168df56caf37a3dd04a61ebcda48a935.png" src="../_images/08052bb1c9b014ad9d067983d3aad18f168df56caf37a3dd04a61ebcda48a935.png" />
 </div>
 </div>
 </section>
-<section id="dark-current">
-<h2>Dark current<a class="headerlink" href="#dark-current" title="Permalink to this heading">#</a></h2>
-<p>Dark current depends on the temperature of the sensor. The amount of dark counts
-in an image also depends on the exposure time. Dark current is typically very
-small (0.1 electrons/pixel/second or less). Dark counts in this function are
-calculated by multiplying the input dark current by the input exposure time
-after converting the dark current unit from electrons to counts using the gain.</p>
-<p>A small fraction of pixels are “hot”: their dark current is much larger than the
-rest of the pixels. Hot pixels are modeled here by choosing a subset of the
-pixels to have a dark current 10,000 times larger than the input dark current.
-This exaggerates the effect to make those pixels more visible.</p>
-<p>The location and current of hot pixels is typically stable over long periods of
-time, which makes it straightforward to remove their effect from science images
-by subtracting them out.</p>
-<p>A dark frame (or dark image) is an image taken with the camera shutter closed.</p>
+</section>
+<section id="dark-frame">
+<h2>Dark frame<a class="headerlink" href="#dark-frame" title="Permalink to this heading">#</a></h2>
+<p>For modern cooled CCD, the dark current is typically very small (0.1 electrons/pixel/second or less).
+Dark counts in the function below are calculated by multiplying the dark current by the exposure time
+after converting the dark current unit from electrons to counts using the gain. Notice that the dark counts follow a Poisson distribution. So it will look noisy.</p>
+<p>However, as we seen in <a class="reference internal" href="calibration_frames.html"><span class="doc std std-doc">Calibration Frames</span></a>, some pixels as “hot” pixels. Their dark current is much larger than the other pixels.</p>
 <p>The function below simulates dark current only, i.e. it does <em>not</em> simulate the
 read noise that is a part of any actual dark frame from a CCD.</p>
-<p>Note that the simulation dark image looks noisy even though it doesn’t include
-read noise. This is because the number of electrons generated obey a Poisson
-distribution.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">dark_current</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">current</span><span class="p">,</span> <span class="n">exposure_time</span><span class="p">,</span> <span class="n">gain</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">hot_pixels</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -655,7 +594,6 @@ distribution.</p>
 <span class="sd">    </span>
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    </span>
 <span class="sd">    image : numpy array</span>
 <span class="sd">        Image whose shape the cosmic array should match.</span>
 <span class="sd">    current : float</span>
@@ -666,33 +604,31 @@ distribution.</p>
 <span class="sd">    gain : float, optional</span>
 <span class="sd">        Gain of the camera, in units of electrons/ADU.</span>
 <span class="sd">    strength : float, optional</span>
-<span class="sd">        Pixel count in the cosmic rays.    </span>
+<span class="sd">        Pixel count in the cosmic rays.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    dark_im: numpy array</span>
+<span class="sd">        The dark frame, without read noise and bias</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    
-    <span class="c1"># dark current for every pixel; we&#39;ll modify the current for some pixels if </span>
-    <span class="c1"># the user wants hot pixels.</span>
+    <span class="c1"># dark current for every pixel. Real dark counts follow </span>
+    <span class="c1"># a Poisson distribution with lambda = base_current.</span>
     <span class="n">base_current</span> <span class="o">=</span> <span class="n">current</span> <span class="o">*</span> <span class="n">exposure_time</span> <span class="o">/</span> <span class="n">gain</span>
+    <span class="n">dark_im</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">poisson</span><span class="p">(</span><span class="n">base_current</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
     
-    <span class="c1"># This random number generation should change on each call.</span>
-    <span class="n">dark_im</span> <span class="o">=</span> <span class="n">noise_rng</span><span class="o">.</span><span class="n">poisson</span><span class="p">(</span><span class="n">base_current</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-        
     <span class="k">if</span> <span class="n">hot_pixels</span><span class="p">:</span>
-        <span class="c1"># We&#39;ll set 0.01% of the pixels to be hot; that is probably too high but should </span>
-        <span class="c1"># ensure they are visible.</span>
+        <span class="n">n_hot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span> <span class="c1"># number of hot pixels</span>
         <span class="n">y_max</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">=</span> <span class="n">dark_im</span><span class="o">.</span><span class="n">shape</span>
         
-        <span class="n">n_hot</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">0.0001</span> <span class="o">*</span> <span class="n">x_max</span> <span class="o">*</span> <span class="n">y_max</span><span class="p">)</span>
-        
-        <span class="c1"># Like with the bias image, we want the hot pixels to always be in the same places</span>
-        <span class="c1"># (at least for the same image size) but also want them to appear to be randomly</span>
-        <span class="c1"># distributed. So we set a random number seed to ensure we always get the same thing.</span>
-        <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">16201649</span><span class="p">)</span>
+        <span class="c1"># For a given CCD, the positions of hot pixels are not changing. </span>
+        <span class="c1"># So we set a random number seed to ensure we get the same hot pixels every time. </span>
+        <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
         <span class="n">hot_x</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">x_max</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n_hot</span><span class="p">)</span>
         <span class="n">hot_y</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">y_max</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n_hot</span><span class="p">)</span>
         
-        <span class="n">hot_current</span> <span class="o">=</span> <span class="mi">10000</span> <span class="o">*</span> <span class="n">current</span>
-        
-        <span class="n">dark_im</span><span class="p">[(</span><span class="n">hot_y</span><span class="p">,</span> <span class="n">hot_x</span><span class="p">)]</span> <span class="o">=</span> <span class="n">hot_current</span> <span class="o">*</span> <span class="n">exposure_time</span> <span class="o">/</span> <span class="n">gain</span>
+        <span class="n">hot_current</span> <span class="o">=</span> <span class="n">base_current</span> <span class="o">*</span> <span class="mi">100</span> <span class="c1"># 100 times hotter than the base dark current</span>
+        <span class="n">dark_im</span><span class="p">[(</span><span class="n">hot_y</span><span class="p">,</span> <span class="n">hot_x</span><span class="p">)]</span> <span class="o">=</span> <span class="n">hot_current</span>
+    
     <span class="k">return</span> <span class="n">dark_im</span>
 </pre></div>
 </div>
@@ -700,26 +636,29 @@ distribution.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dark_exposure</span> <span class="o">=</span> <span class="mi">100</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dark_exposure</span> <span class="o">=</span> <span class="mi">900</span>
 <span class="n">dark_cur</span> <span class="o">=</span> <span class="mf">0.1</span>
 <span class="n">dark_only</span> <span class="o">=</span> <span class="n">dark_current</span><span class="p">(</span><span class="n">synthetic_image</span><span class="p">,</span> <span class="n">dark_cur</span><span class="p">,</span> <span class="n">dark_exposure</span><span class="p">,</span> <span class="n">hot_pixels</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">show_image</span><span class="p">(</span><span class="n">dark_only</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
-<span class="n">title_string</span> <span class="o">=</span> <span class="s1">&#39;Dark current only, </span><span class="si">{dark_cur}</span><span class="s1"> $e^-$/sec/pix</span><span class="se">\n</span><span class="si">{dark_exposure}</span><span class="s1"> sec exposure&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dark_cur</span><span class="o">=</span><span class="n">dark_cur</span><span class="p">,</span> <span class="n">dark_exposure</span><span class="o">=</span><span class="n">dark_exposure</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title_string</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;20&#39;</span><span class="p">);</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">show_image</span><span class="p">(</span><span class="n">dark_only</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">title_string</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Dark current only, </span><span class="si">{</span><span class="n">dark_cur</span><span class="si">}</span><span class="s1"> $e^-$/sec/pix</span><span class="se">\n</span><span class="si">{</span><span class="n">dark_exposure</span><span class="si">}</span><span class="s1"> sec exposure&#39;</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title_string</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/334e5e99ac69643ca294130be9a649cc091f40464c1ab3c02c7c344d19392c91.png" src="../_images/334e5e99ac69643ca294130be9a649cc091f40464c1ab3c02c7c344d19392c91.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Dark current only, 0.1 $e^-$/sec/pix\n900 sec exposure&#39;)
+</pre></div>
+</div>
+<img alt="../_images/5cd3cb9a73c9d2c93ec2ab5c112d865428d151bd5b8f1c7ab98149f51440ac75.png" src="../_images/5cd3cb9a73c9d2c93ec2ab5c112d865428d151bd5b8f1c7ab98149f51440ac75.png" />
 </div>
 </div>
-<p>Note that the central value of the image colorbar is 10, the product of the dark
-current and the exposure time.</p>
+<p>Realistic dark frame is a combination of all of them: bias-only, read-out noise, and dark-only</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dark_bias_noise_im</span> <span class="o">=</span> <span class="n">bias_noise_im</span> <span class="o">+</span> <span class="n">dark_only</span>
-<span class="n">show_image</span><span class="p">(</span><span class="n">dark_bias_noise_im</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Realistic dark frame </span><span class="se">\n</span><span class="s1">(with bias, read noise)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;20&#39;</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">show_image</span><span class="p">(</span><span class="n">dark_bias_noise_im</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Realistic dark frame </span><span class="se">\n</span><span class="s1">(with bias, read noise)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -727,9 +666,10 @@ current and the exposure time.</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Realistic dark frame \n(with bias, read noise)&#39;)
 </pre></div>
 </div>
-<img alt="../_images/213a8f29e99e89cb1375950b8008e46c956074ddcdd21aee0ffc9e3b6849a719.png" src="../_images/213a8f29e99e89cb1375950b8008e46c956074ddcdd21aee0ffc9e3b6849a719.png" />
+<img alt="../_images/fa3311d745ab2d8514fc6fba369e9d62d59b584b4a13ec27012af1e29ff12dc1.png" src="../_images/fa3311d745ab2d8514fc6fba369e9d62d59b584b4a13ec27012af1e29ff12dc1.png" />
 </div>
 </div>
+<p>It looks quite real! However, we did not include any cosmic rays.</p>
 </section>
 <section id="sky-background">
 <h2>Sky background<a class="headerlink" href="#sky-background" title="Permalink to this heading">#</a></h2>
@@ -780,10 +720,28 @@ effect is not simulated here.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Sky background only, 20 counts input&#39;)
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">12</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">sky_level</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">sky_only</span> <span class="o">=</span> <span class="n">sky_background</span><span class="p">(</span><span class="n">synthetic_image</span><span class="p">,</span> <span class="n">sky_level</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">show_image</span><span class="p">(</span><span class="n">sky_only</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Sky background only, </span><span class="si">{}</span><span class="s1"> counts input&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sky_level</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="nn">Cell In[11], line 17,</span> in <span class="ni">sky_background</span><span class="nt">(image, sky_counts, gain)</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">def</span> <span class="nf">sky_background</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">sky_counts</span><span class="p">,</span> <span class="n">gain</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span><span class="sd">     Generate sky background, optionally including a gradient across the image (because</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span><span class="sd">     some times Moons happen).</span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span><span class="sd">         Gain of the camera, in units of electrons/ADU.</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">---&gt; </span><span class="mi">17</span>     <span class="n">sky_im</span> <span class="o">=</span> <span class="n">noise_rng</span><span class="o">.</span><span class="n">poisson</span><span class="p">(</span><span class="n">sky_counts</span> <span class="o">*</span> <span class="n">gain</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">/</span> <span class="n">gain</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span>     <span class="k">return</span> <span class="n">sky_im</span>
+
+<span class="ne">NameError</span>: name &#39;noise_rng&#39; is not defined
 </pre></div>
 </div>
-<img alt="../_images/cd0815b53bdacc69cf0b563bf1342490d64cd71a360d77eac07d007702d2abf4.png" src="../_images/cd0815b53bdacc69cf0b563bf1342490d64cd71a360d77eac07d007702d2abf4.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -795,7 +753,7 @@ effect is not simulated here.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e050dd5a40b693dad7d047e7ee7cfa09aaec142d901e9db7fe68f23c05bf9b16.png" src="../_images/e050dd5a40b693dad7d047e7ee7cfa09aaec142d901e9db7fe68f23c05bf9b16.png" />
+<img alt="../_images/a47ebc66ddc7587a9b5e4c49f190b49695a190cc659f5d6c004766a4071224ad.png" src="../_images/a47ebc66ddc7587a9b5e4c49f190b49695a190cc659f5d6c004766a4071224ad.png" />
 </div>
 </div>
 <section id="summary-of-the-backgrounds-in-an-astronomical-image">
@@ -846,21 +804,6 @@ resulting image.</p>
     <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
         <span class="k">pass</span>
 <span class="c1">#i</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">17</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interactive</span><span class="p">,</span> <span class="n">interact</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># @interact(bias_level=(1000,1200,10), dark=(0.01,1,0.01), sky_counts=(0, 300, 10),</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1">#           gain=(0.5, 3.0, 0.1), read=(0, 50, 2.0),</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1">#           exposure=(0, 300, 10))</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="k">def</span> <span class="nf">complete_image</span><span class="p">(</span><span class="n">bias_level</span><span class="o">=</span><span class="mi">1100</span><span class="p">,</span> <span class="n">read</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">gain</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dark</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> 
-<span class="g g-Whitespace">      </span><span class="mi">7</span>                    <span class="n">exposure</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">hot_pixels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sky_counts</span><span class="o">=</span><span class="mi">200</span><span class="p">):</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;ipywidgets&#39;
 </pre></div>
 </div>
 </div>
@@ -1039,11 +982,13 @@ minimized by combining several calibration images.</p></li>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#imports">Imports</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-a-blank-image">Start: a blank image</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-some-read-noise">Add some read noise</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bias">Bias</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dark-current">Dark current</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-out-noise">Read-out noise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bias">Bias</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#now-create-realistic-bias-frame-by-adding-bias-and-read-noise-together">Now create realistic bias frame by adding bias and read noise together.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dark-frame">Dark frame</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sky-background">Sky background</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-the-backgrounds-in-an-astronomical-image">Summary of the backgrounds in an astronomical image</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-demo">Interactive demo</a></li>
