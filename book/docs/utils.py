@@ -55,7 +55,7 @@ def display_single(img,
     """
 
     if ax is None:
-        fig = plt.figure(figsize=(xsize, ysize), dpi=100)
+        fig = plt.figure(figsize=(xsize, ysize), dpi=80)
         ax1 = fig.add_subplot(111)
     else:
         ax1 = ax
