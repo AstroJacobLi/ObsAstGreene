@@ -392,6 +392,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="simulate-an-artificial-image">
 <h1>Simulate an artificial image<a class="headerlink" href="#simulate-an-artificial-image" title="Permalink to this heading">#</a></h1>
+<p>The goal of this notebook is to simulate an artificial image of a star field at RA=280 deg, Dec=0 deg. This will familiarize you with the data generating process of an astronomical image, especially help you understand how do bias, dark, read-out noise, and sky background affect the final image. At the end of this notebook, you will play with an interactive tool to simulate a realistic image of any given exposure time, sky background, read-out noise, bias value, dark current, and seeing condition. Have fun!</p>
 <p><strong>Prerequisites</strong></p>
 <ul class="simple">
 <li><p>Basic statistics (covered in <a class="reference internal" href="basic_stat.html"><span class="doc std std-doc">this notebook</span></a>)</p></li>
@@ -423,7 +424,12 @@ document.write(`
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">google.colab</span>
@@ -444,6 +450,7 @@ document.write(`
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data is already there
 </pre></div>
@@ -783,7 +790,7 @@ read noise that is a part of any actual dark frame from a CCD.</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><div><i>Table length=5</i>
-<table id="table139876692537056" class="table-striped table-bordered table-condensed">
+<table id="table140114261309136" class="table-striped table-bordered table-condensed">
 <thead><tr><th>ra</th><th>dec</th><th>g_flux</th></tr></thead>
 <thead><tr><th>deg</th><th>deg</th><th></th></tr></thead>
 <thead><tr><th>float64</th><th>float64</th><th>float32</th></tr></thead>
@@ -854,7 +861,7 @@ NAXIS : 0  0
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7f37947eb7f0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7f6ee49e99d0&gt;
 </pre></div>
 </div>
 <img alt="../_images/28001116f53608650fcf4183a70e18e1dbc16fb447d4b22c10b983546e62041c.png" src="../_images/28001116f53608650fcf4183a70e18e1dbc16fb447d4b22c10b983546e62041c.png" />
@@ -903,7 +910,7 @@ NAXIS : 0  0
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.000000000000049
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f378d784850&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f6edd952b20&gt;
 </pre></div>
 </div>
 <img alt="../_images/b7c1717d62d40cad86c55617fbe48be99794d1e6ffbb749cab6cd1e11d032d34.png" src="../_images/b7c1717d62d40cad86c55617fbe48be99794d1e6ffbb749cab6cd1e11d032d34.png" />
