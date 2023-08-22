@@ -436,31 +436,16 @@ document.write(`
         <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">&quot;../_static/ObsAstroData/&quot;</span><span class="p">)</span>
     <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;../_static/ObsAstroData/&#39;</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="s1">&#39;b0860c1.fits&#39;</span><span class="p">):</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="s1">&#39;simulate_star_cat.fits&#39;</span><span class="p">):</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Data is already there&#39;</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Download data&#39;</span><span class="p">)</span>
-    <span class="o">!</span>wget<span class="w"> </span>https://tigress-web.princeton.edu/~jiaxuanl/simulate_star_cat.fits
+    <span class="o">!</span>wget<span class="w"> </span>https://github.com/AstroJacobLi/ObsAstGreene/raw/main/book/_static/ObsAstroData/simulate_star_cat.fits
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Download data
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--2023-08-22 04:16:09--  https://tigress-web.princeton.edu/~jiaxuanl/simulate_star_cat.fits
-Resolving tigress-web.princeton.edu (tigress-web.princeton.edu)... 128.112.173.29
-Connecting to tigress-web.princeton.edu (tigress-web.princeton.edu)|128.112.173.29|:443... 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>connected.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>HTTP request sent, awaiting response... 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>404 Not Found
-2023-08-22 04:16:10 ERROR 404: Not Found.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data is already there
 </pre></div>
 </div>
 </div>
@@ -791,62 +776,23 @@ read noise that is a part of any actual dark frame from a CCD.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.table</span> <span class="kn">import</span> <span class="n">Table</span>
-<span class="n">cat</span> <span class="o">=</span> <span class="n">Table</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;../_static/ObsAstroData/simulate_star_cat.fits&#39;</span><span class="p">)</span>
+<span class="n">cat</span> <span class="o">=</span> <span class="n">Table</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;./simulate_star_cat.fits&#39;</span><span class="p">)</span>
 <span class="n">cat</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">15</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">astropy.table</span> <span class="kn">import</span> <span class="n">Table</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">cat</span> <span class="o">=</span> <span class="n">Table</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;../_static/ObsAstroData/simulate_star_cat.fits&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">cat</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
-
-<span class="nn">File /usr/share/miniconda3/envs/obsastro/lib/python3.8/site-packages/astropy/table/connect.py:62,</span> in <span class="ni">TableRead.__call__</span><span class="nt">(self, *args, **kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">59</span> <span class="n">units</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;units&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">60</span> <span class="n">descriptions</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;descriptions&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">62</span> <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">registry</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">64</span> <span class="c1"># For some readers (e.g., ascii.ecsv), the returned `out` class is not</span>
-<span class="g g-Whitespace">     </span><span class="mi">65</span> <span class="c1"># guaranteed to be the same as the desired output `cls`.  If so,</span>
-<span class="g g-Whitespace">     </span><span class="mi">66</span> <span class="c1"># try coercing to desired class without copying (io.registry.read</span>
-<span class="g g-Whitespace">     </span><span class="mi">67</span> <span class="c1"># would normally do a copy).  The normal case here is swapping</span>
-<span class="g g-Whitespace">     </span><span class="mi">68</span> <span class="c1"># Table &lt;=&gt; QTable.</span>
-<span class="g g-Whitespace">     </span><span class="mi">69</span> <span class="k">if</span> <span class="bp">cls</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">out</span><span class="o">.</span><span class="vm">__class__</span><span class="p">:</span>
-
-<span class="nn">File /usr/share/miniconda3/envs/obsastro/lib/python3.8/site-packages/astropy/io/registry/core.py:203,</span> in <span class="ni">UnifiedInputRegistry.read</span><span class="nt">(self, cls, format, cache, *args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">199</span> <span class="k">try</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">200</span>     <span class="n">ctx</span> <span class="o">=</span> <span class="n">get_readable_fileobj</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">201</span>         <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;binary&quot;</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="n">cache</span>
-<span class="g g-Whitespace">    </span><span class="mi">202</span>     <span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">203</span>     <span class="n">fileobj</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="fm">__enter__</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">204</span> <span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">205</span>     <span class="k">raise</span>
-
-<span class="nn">File /usr/share/miniconda3/envs/obsastro/lib/python3.8/contextlib.py:113,</span> in <span class="ni">_GeneratorContextManager.__enter__</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">111</span> <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">kwds</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span>
-<span class="g g-Whitespace">    </span><span class="mi">112</span> <span class="k">try</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">113</span>     <span class="k">return</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gen</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">114</span> <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">115</span>     <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;generator didn&#39;t yield&quot;</span><span class="p">)</span> <span class="kn">from</span> <span class="kc">None</span>
-
-<span class="nn">File /usr/share/miniconda3/envs/obsastro/lib/python3.8/site-packages/astropy/utils/data.py:353,</span> in <span class="ni">get_readable_fileobj</span><span class="nt">(name_or_obj, encoding, cache, show_progress, remote_timeout, sources, http_headers, use_fsspec, fsspec_kwargs, close_files)</span>
-<span class="g g-Whitespace">    </span><span class="mi">344</span> <span class="k">if</span> <span class="n">is_url</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">345</span>     <span class="n">name_or_obj</span> <span class="o">=</span> <span class="n">download_file</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">346</span>         <span class="n">name_or_obj</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">347</span>         <span class="n">cache</span><span class="o">=</span><span class="n">cache</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">351</span>         <span class="n">http_headers</span><span class="o">=</span><span class="n">http_headers</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">352</span>     <span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">353</span> <span class="n">fileobj</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">FileIO</span><span class="p">(</span><span class="n">name_or_obj</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">354</span> <span class="k">if</span> <span class="n">is_url</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">cache</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">355</span>     <span class="n">delete_fds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fileobj</span><span class="p">)</span>
-
-<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;../_static/ObsAstroData/simulate_star_cat.fits&#39;
-</pre></div>
-</div>
-</div>
+<div class="output text_html"><div><i>Table length=5</i>
+<table id="table139876692537056" class="table-striped table-bordered table-condensed">
+<thead><tr><th>ra</th><th>dec</th><th>g_flux</th></tr></thead>
+<thead><tr><th>deg</th><th>deg</th><th></th></tr></thead>
+<thead><tr><th>float64</th><th>float64</th><th>float32</th></tr></thead>
+<tr><td>280.00182067676167</td><td>-0.0006054995504625365</td><td>1.5633024</td></tr>
+<tr><td>280.00291787552493</td><td>0.001124410381860149</td><td>0.5670684</td></tr>
+<tr><td>280.0004310363741</td><td>-0.003360890132438791</td><td>0.2738112</td></tr>
+<tr><td>280.00533847454955</td><td>0.0009738996826714352</td><td>0.5869863</td></tr>
+<tr><td>279.99457484780316</td><td>-0.0020924098806938255</td><td>0.2795567</td></tr>
+</table></div></div></div>
 </div>
 <section id="wcs-and-image-coordinates">
 <h3>WCS and image coordinates<a class="headerlink" href="#wcs-and-image-coordinates" title="Permalink to this heading">#</a></h3>
@@ -908,10 +854,10 @@ NAXIS : 0  0
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7ff13126b520&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7f37947eb7f0&gt;
 </pre></div>
 </div>
-<img alt="../_images/1bc685b63f8664a668dfc2c2feb869ec9cd9fef1df6da9b7ff077685a250f998.png" src="../_images/1bc685b63f8664a668dfc2c2feb869ec9cd9fef1df6da9b7ff077685a250f998.png" />
+<img alt="../_images/28001116f53608650fcf4183a70e18e1dbc16fb447d4b22c10b983546e62041c.png" src="../_images/28001116f53608650fcf4183a70e18e1dbc16fb447d4b22c10b983546e62041c.png" />
 </div>
 </div>
 </section>
@@ -954,13 +900,13 @@ NAXIS : 0  0
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0000000000000488
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.000000000000049
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7ff133a5c280&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f378d784850&gt;
 </pre></div>
 </div>
-<img alt="../_images/95666879b33c1be267010db17158c2d149c404fc375ce200d2b936d8bc1559bd.png" src="../_images/95666879b33c1be267010db17158c2d149c404fc375ce200d2b936d8bc1559bd.png" />
+<img alt="../_images/b7c1717d62d40cad86c55617fbe48be99794d1e6ffbb749cab6cd1e11d032d34.png" src="../_images/b7c1717d62d40cad86c55617fbe48be99794d1e6ffbb749cab6cd1e11d032d34.png" />
 </div>
 </div>
 </section>
@@ -1042,7 +988,7 @@ NAXIS : 0  0
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Stars only&#39;)
 </pre></div>
 </div>
-<img alt="../_images/d1b466fdc33450f8bba0d08181f04a78dd58aeed92944f1b252e46e0d6439289.png" src="../_images/d1b466fdc33450f8bba0d08181f04a78dd58aeed92944f1b252e46e0d6439289.png" />
+<img alt="../_images/d48a085b92e4f06af32507d35503802ef7ddf29a627db912e233a3e71647f85a.png" src="../_images/d48a085b92e4f06af32507d35503802ef7ddf29a627db912e233a3e71647f85a.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1059,7 +1005,7 @@ NAXIS : 0  0
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Realistic image at RA = 280 deg, Dec = 0 deg \n exptime = 900 s&#39;)
 </pre></div>
 </div>
-<img alt="../_images/3164e7c134e8cc7ac28fc98cbf555b1050bbf36cbff54f2aa2fb2e4cac1420d8.png" src="../_images/3164e7c134e8cc7ac28fc98cbf555b1050bbf36cbff54f2aa2fb2e4cac1420d8.png" />
+<img alt="../_images/f451eb4163ed501e8894275868274367adf8ec71db44b629b69a36b49b544325.png" src="../_images/f451eb4163ed501e8894275868274367adf8ec71db44b629b69a36b49b544325.png" />
 </div>
 </div>
 </section>
@@ -1118,7 +1064,23 @@ NAXIS : 0  0
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "0f1fbe2e34e34bc0b044954a4f21af9f", "version_major": 2, "version_minor": 0}</script></div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">24</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">run_line_magic</span><span class="p">(</span><span class="s1">&#39;matplotlib&#39;</span><span class="p">,</span> <span class="s1">&#39;inline&#39;</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interactive</span><span class="p">,</span> <span class="n">interact</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="nd">@interact</span><span class="p">(</span><span class="n">bias_level</span><span class="o">=</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1200</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> 
+<span class="g g-Whitespace">      </span><span class="mi">6</span>           <span class="n">dark</span><span class="o">=</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">),</span> 
+<span class="g g-Whitespace">      </span><span class="mi">7</span>           <span class="n">sky_counts_per_sec</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span>                    <span class="n">exposure</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">sky_counts_per_sec</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> 
+<span class="g g-Whitespace">     </span><span class="mi">17</span>                    <span class="n">seeing</span><span class="o">=</span><span class="mf">1.5</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span>     <span class="n">synthetic_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">500</span><span class="p">,</span> <span class="mi">500</span><span class="p">])</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;ipywidgets&#39;
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 </section>
