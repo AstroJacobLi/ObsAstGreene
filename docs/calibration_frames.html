@@ -464,7 +464,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;astropy.io.fits.hdu.image.PrimaryHDU object at 0x7f643280d910&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;astropy.io.fits.hdu.image.PrimaryHDU object at 0x7f88f80e1fd0&gt;]
 </pre></div>
 </div>
 </div>
@@ -707,7 +707,7 @@ COMMENT
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/029dfb4984cd1cc6849a142389811c96220b6f03f8457a252f9bb38ecd893e09.png" src="../_images/029dfb4984cd1cc6849a142389811c96220b6f03f8457a252f9bb38ecd893e09.png" />
+<img alt="../_images/52c3a9c4109d2e47d860243deb665d8e846d494e23edc0ecf099218d8660b79d.png" src="../_images/52c3a9c4109d2e47d860243deb665d8e846d494e23edc0ecf099218d8660b79d.png" />
 </div>
 </div>
 <p>The bias frame shows some spatial patterns: some rows have a lower bias value than others. We also see some distinct “bright” pixels. They could be either bad pixels, or caused by Cosmic Rays (CR). As a consequence, when we plot the histogram of pixel values, we will see some outliers from the bulk of pixels.</p>
@@ -732,7 +732,7 @@ COMMENT
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8358ba781b9d66ce3d13ac44f8647471c87a149a0747764af63ef2d96656095a.png" src="../_images/8358ba781b9d66ce3d13ac44f8647471c87a149a0747764af63ef2d96656095a.png" />
+<img alt="../_images/35658b59f464638e66c1425b9cbe2403830e1086857da806424a22d570d7153e.png" src="../_images/35658b59f464638e66c1425b9cbe2403830e1086857da806424a22d570d7153e.png" />
 </div>
 </div>
 <p>During the Magellan observation, we took many bias frames (why??). So let’s load another bias frame. What do you expect? Will it be very different from the one above?</p>
@@ -743,7 +743,7 @@ COMMENT
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/98a7d00edb7731a39ab83cd6a2416cd007848a741c63dd5ed7cfa2a7b6624a81.png" src="../_images/98a7d00edb7731a39ab83cd6a2416cd007848a741c63dd5ed7cfa2a7b6624a81.png" />
+<img alt="../_images/5b09e2b0367ffb8d249801729f8aa3199c86bfba1cf5bb54b0c83fa7c4032785.png" src="../_images/5b09e2b0367ffb8d249801729f8aa3199c86bfba1cf5bb54b0c83fa7c4032785.png" />
 </div>
 </div>
 <p>Yeah, the bright spots changed their positions in the image. So it does seem like they are caused by cosmic rays.</p>
@@ -812,7 +812,7 @@ COMMENT
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/3844c6daf7c4febc014aec67946b14dc7a93eb8ae2c7dc13d9838d500aeed86a.png" src="../_images/3844c6daf7c4febc014aec67946b14dc7a93eb8ae2c7dc13d9838d500aeed86a.png" />
+<img alt="../_images/5f6ba1b2f375ae13815286c1d2d2526fea3f61f5f944bc1e15e36e135d2bb633.png" src="../_images/5f6ba1b2f375ae13815286c1d2d2526fea3f61f5f944bc1e15e36e135d2bb633.png" />
 </div>
 </div>
 <p>Wow! The cosmic rays are everywhere in the mean-combined image! The vast difference between the median-combined and mean-combined images highlights that the mean is far less immune to outliers (i.e., cosmic rays) than the median. Because of this, we often use median to combine images.</p>
@@ -835,7 +835,7 @@ COMMENT
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ff68cf52d5f0fa50c6b18ae039260a480d3d7d411e99bccfc79d25a38dc34182.png" src="../_images/ff68cf52d5f0fa50c6b18ae039260a480d3d7d411e99bccfc79d25a38dc34182.png" />
+<img alt="../_images/8f4f9b602bca61cb37e24c3e42761d81f9d92f4298483d98566e933fc2badbf8.png" src="../_images/8f4f9b602bca61cb37e24c3e42761d81f9d92f4298483d98566e933fc2badbf8.png" />
 </div>
 </div>
 </section>
@@ -861,7 +861,7 @@ COMMENT
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/86d1e10a53f597f4bef314a8d605c73a5255cd075c8d626e64b1be352726470e.png" src="../_images/86d1e10a53f597f4bef314a8d605c73a5255cd075c8d626e64b1be352726470e.png" />
+<img alt="../_images/8a36a4056eedf443c120f70f05fc5cf32c45c14e16df89313a040f7ee4b98291.png" src="../_images/8a36a4056eedf443c120f70f05fc5cf32c45c14e16df89313a040f7ee4b98291.png" />
 </div>
 </div>
 <p>We can replace these outlier pixels with <code class="docutils literal notranslate"><span class="pre">np.nan</span></code> (not a number, typically used to indicate a bad value). Then we repeat this for all 40 bias frames and combine them.</p>
@@ -906,7 +906,7 @@ COMMENT
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1528018b890737e36a1f09838528b54a21f3d3af67567c2d11bc9146103ee152.png" src="../_images/1528018b890737e36a1f09838528b54a21f3d3af67567c2d11bc9146103ee152.png" />
+<img alt="../_images/9c760f117c005a05527d4309db87062e0fa5b0df4d750133601deb4b939327a0.png" src="../_images/9c760f117c005a05527d4309db87062e0fa5b0df4d750133601deb4b939327a0.png" />
 </div>
 </div>
 <p>Yeah! After sigma-clipping, the mean-combined image looks much better and very similar to the median-combined one. This sigma-clipping trick is quite common in astronomy. We used a threshold of 3-sigma and only clipped once. You can repeat the procedure for several times to make sure all outliers are flagged. Actually, <code class="docutils literal notranslate"><span class="pre">astropy</span></code> already provides us a function <code class="docutils literal notranslate"><span class="pre">sigma_clip</span></code> to do these jobs. Let’s check it out.</p>
@@ -956,7 +956,7 @@ COMMENT
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8c62e1a4505d5142aef645832ab08952864db97d6978faa3e46feadd12bec145.png" src="../_images/8c62e1a4505d5142aef645832ab08952864db97d6978faa3e46feadd12bec145.png" />
+<img alt="../_images/ac3b7fe0ef188c7d25c69b60ad9087774cd25a0d0fd11cdd9e55d3579faf9cc2.png" src="../_images/ac3b7fe0ef188c7d25c69b60ad9087774cd25a0d0fd11cdd9e55d3579faf9cc2.png" />
 </div>
 </div>
 <p>We can write the median-combined image to a FITS file for future usage.</p>
@@ -1000,7 +1000,7 @@ COMMENT
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/acc158f8e49428bd6cf1e7ea4be42394302bc659cd0b1285c3ab0a9a2987c92b.png" src="../_images/acc158f8e49428bd6cf1e7ea4be42394302bc659cd0b1285c3ab0a9a2987c92b.png" />
+<img alt="../_images/b06c90a7b6c43cd64ef703e9005f037ef8530443af282ca5dfc65e268e00f146.png" src="../_images/b06c90a7b6c43cd64ef703e9005f037ef8530443af282ca5dfc65e268e00f146.png" />
 </div>
 </div>
 <p>The light area in the lower left corner is due to sensor glow, which is light emitted by the electronics of the CCD. The counts in a dark frame scales linearly with time. The exposure time for a dark frame is typically similar to (or longer than) the exposure time of your science frames.</p>
