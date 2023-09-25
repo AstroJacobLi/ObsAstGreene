@@ -431,7 +431,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
 </pre></div>
 </div>
 </div>
@@ -455,9 +455,9 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[3 1 6 3 3 3 6 1 6 2 6 5 6 3 1 5 5 2 1 4 3 1 6 3 4 3 4 6 1 5 6 2 5 3 5 6 5
- 1 2 5 1 6 3 3 1 3 1 4 4 3 5 1 6 6 1 4 5 6 6 1 3 3 4 3 1 6 4 4 6 6 2 3 3 2
- 2 1 4 5 6 3 1 6 2 4 1 6 5 2 6 2 1 4 5 3 1 1 2 3 1 3]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[5 2 4 6 4 1 5 1 2 4 4 2 1 1 5 2 3 2 1 1 6 2 1 2 3 5 2 4 2 4 1 6 4 2 5 3 3
+ 5 5 2 1 4 4 1 4 1 6 2 1 3 3 2 2 2 2 6 3 6 5 4 4 6 2 5 2 3 3 1 2 4 5 5 2 4
+ 2 1 6 1 1 6 3 1 2 6 3 1 1 5 6 1 3 1 2 6 5 2 6 3 6 6]
 </pre></div>
 </div>
 </div>
@@ -483,7 +483,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14
 </pre></div>
 </div>
 </div>
@@ -498,11 +498,11 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The frequency of 1 is 21
-The frequency of 2 is 11
-The frequency of 3 is 22
-The frequency of 4 is 12
+The frequency of 2 is 24
+The frequency of 3 is 13
+The frequency of 4 is 14
 The frequency of 5 is 13
-The frequency of 6 is 21
+The frequency of 6 is 15
 </pre></div>
 </div>
 </div>
@@ -517,8 +517,8 @@ The frequency of 6 is 21
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1 2 3 4 5 6] [21 11 22 12 13 21]
-[(1, 21), (2, 11), (3, 22), (4, 12), (5, 13), (6, 21)]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1 2 3 4 5 6] [21 24 13 14 13 15]
+[(1, 21), (2, 24), (3, 13), (4, 14), (5, 13), (6, 15)]
 </pre></div>
 </div>
 </div>
@@ -534,7 +534,7 @@ The frequency of 6 is 21
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2909c0a9389dae703830dc6336dac3dbfbda012c494d2335df1a8bbe41d1486d.png" src="../_images/2909c0a9389dae703830dc6336dac3dbfbda012c494d2335df1a8bbe41d1486d.png" />
+<img alt="../_images/b9d15d7649fca3ef19a97e8678a405bcdbdf0b5ca54a8ec3fb743286c65a8f0d.png" src="../_images/b9d15d7649fca3ef19a97e8678a405bcdbdf0b5ca54a8ec3fb743286c65a8f0d.png" />
 </div>
 </div>
 <p>Is the die fair? Seems no from the figure above, because the frequencies of all numbers are not the same. This contradicts our assumption of using <code class="docutils literal notranslate"><span class="pre">np.random.randint</span></code> where the random variable should be random. What’s happening here?</p>
@@ -559,10 +559,10 @@ The frequency of 6 is 21
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1 2 3 4 5 6] [1656 1621 1658 1706 1695 1664]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1 2 3 4 5 6] [1675 1684 1672 1609 1676 1684]
 </pre></div>
 </div>
-<img alt="../_images/301dd71950c8c4808e86e73dad8fe0148bc8503ab05d951b0ff0bbdf35369221.png" src="../_images/301dd71950c8c4808e86e73dad8fe0148bc8503ab05d951b0ff0bbdf35369221.png" />
+<img alt="../_images/30b3042bf097c0cd550042b84bd31b8e203c3f7ade645625b6708fe9fa0dfede.png" src="../_images/30b3042bf097c0cd550042b84bd31b8e203c3f7ade645625b6708fe9fa0dfede.png" />
 </div>
 </div>
 <p>Okay! Now the histogram looks much fairer! This exercise shows us an important thing: the conclusion is often subject to statistical uncertainty when the sample size is too small.</p>
@@ -575,7 +575,7 @@ The frequency of 6 is 21
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.1656 0.1621 0.1658 0.1706 0.1695 0.1664]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.1675 0.1684 0.1672 0.1609 0.1676 0.1684]
 </pre></div>
 </div>
 </div>
@@ -592,7 +592,7 @@ The frequency of 6 is 21
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/842242fa18d792d7c430c67376d3ef2691eb059d2fdacbe3513b24c71b9bd867.png" src="../_images/842242fa18d792d7c430c67376d3ef2691eb059d2fdacbe3513b24c71b9bd867.png" />
+<img alt="../_images/4befe2e102cafc4f38cfd17d5744f6b10290674cf736326951a447a988429934.png" src="../_images/4befe2e102cafc4f38cfd17d5744f6b10290674cf736326951a447a988429934.png" />
 </div>
 </div>
 </section>
@@ -625,8 +625,8 @@ The frequency of 6 is 21
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.11508447 0.47139989 0.07831785 0.72225211 0.68791927 0.05323762
- 0.18782041 0.88630663 0.16638236 0.06155414]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.95212504 0.95550616 0.00225588 0.24549593 0.74714689 0.1820848
+ 0.94642789 0.06477418 0.2707661  0.8255376 ]
 </pre></div>
 </div>
 </div>
@@ -643,7 +643,7 @@ The frequency of 6 is 21
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/eaa308543e6721d04e837a2d964a8d1d6e12d228bd9248f3de45b0f01324d9ac.png" src="../_images/eaa308543e6721d04e837a2d964a8d1d6e12d228bd9248f3de45b0f01324d9ac.png" />
+<img alt="../_images/c3a1229d1498bdb7aed094a22717b4254b2a68368231c5c601768c0e0833ba83.png" src="../_images/c3a1229d1498bdb7aed094a22717b4254b2a68368231c5c601768c0e0833ba83.png" />
 </div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">numpy</span></code> provides some handy functions to do basic statistics.</p>
@@ -658,7 +658,7 @@ The frequency of 6 is 21
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.43996030926109575, 0.4101851920920661, 0.2968000581357635)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.4846157083799951, 0.4740176377857372, 0.2998170739401157)
 </pre></div>
 </div>
 </div>
@@ -672,7 +672,7 @@ The frequency of 6 is 21
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.29680005813576343
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.2998170739401157
 </pre></div>
 </div>
 </div>
@@ -696,7 +696,7 @@ The frequency of 6 is 21
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.9352838898120355, 0.4113995130611596, 7.011186911243907)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.9797171227661643, 0.4741075857838859, 7.00817559482855)
 </pre></div>
 </div>
 </div>
@@ -741,7 +741,7 @@ where <span class="math notranslate nohighlight">\(e=2.71828..\)</span> is the b
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-0.01669125552770448, -0.01964865123815954, 1.0071927595222205)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-0.009632401950549374, -0.012037705184590408, 1.0020160603082229)
 </pre></div>
 </div>
 </div>
@@ -754,7 +754,7 @@ where <span class="math notranslate nohighlight">\(e=2.71828..\)</span> is the b
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/bb5a55e207832dabcc163941753910690298ebcf4a28cbea3c9753c5cb7948ea.png" src="../_images/bb5a55e207832dabcc163941753910690298ebcf4a28cbea3c9753c5cb7948ea.png" />
+<img alt="../_images/79131b6df94b4bc122e69bdf8990e7f4c698e56ffdee1d6afd5c1967bbdfdef0.png" src="../_images/79131b6df94b4bc122e69bdf8990e7f4c698e56ffdee1d6afd5c1967bbdfdef0.png" />
 </div>
 </div>
 <p>From this histogram, we indeed see that the distribution is centered at 0 and has a bell-like shape. More importantly, we see that most data points fall within <span class="math notranslate nohighlight">\([-3, 3]\)</span>. Let’s try to count how many data points are outside of <span class="math notranslate nohighlight">\([-3, 3]\)</span>. This is equivalent to asking how many data points are <span class="math notranslate nohighlight">\(&gt;3\)</span> away from the mean <span class="math notranslate nohighlight">\(\mu=0\)</span>.</p>
@@ -765,7 +765,7 @@ where <span class="math notranslate nohighlight">\(e=2.71828..\)</span> is the b
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>22
 </pre></div>
 </div>
 </div>
@@ -782,7 +782,7 @@ where <span class="math notranslate nohighlight">\(e=2.71828..\)</span> is the b
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Only 0.3% of the data points are outside of [-3, 3].
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Only 0.22% of the data points are outside of [-3, 3].
 </pre></div>
 </div>
 </div>
@@ -825,8 +825,8 @@ where <span class="math notranslate nohighlight">\(\lambda\)</span> is the mean 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([9, 5, 2, 6, 6, 9, 4, 5, 5, 2, 4, 3, 1, 2, 7, 2, 1, 5, 2, 7, 2, 5,
-       4, 2, 2, 3, 1, 5, 9, 6])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([4, 1, 3, 1, 3, 4, 2, 4, 6, 3, 3, 6, 6, 5, 4, 3, 3, 1, 3, 5, 5, 4,
+       7, 6, 4, 3, 6, 3, 5, 6])
 </pre></div>
 </div>
 </div>
@@ -839,7 +839,7 @@ where <span class="math notranslate nohighlight">\(\lambda\)</span> is the mean 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/08922178bd1b4c5d87a57934ab5542b066f43c6d6411f82cab980373b02f96fb.png" src="../_images/08922178bd1b4c5d87a57934ab5542b066f43c6d6411f82cab980373b02f96fb.png" />
+<img alt="../_images/00e5c312f358cb09a95b24991da75af584fb98091475321b85f1e798e9043204.png" src="../_images/00e5c312f358cb09a95b24991da75af584fb98091475321b85f1e798e9043204.png" />
 </div>
 </div>
 <p>We have several observations from the above figure:</p>
@@ -855,7 +855,7 @@ where <span class="math notranslate nohighlight">\(\lambda\)</span> is the mean 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(4.039, 4.0, 3.735479)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(3.974, 4.0, 3.6333239999999996)
 </pre></div>
 </div>
 </div>
@@ -878,7 +878,7 @@ where <span class="math notranslate nohighlight">\(\lambda\)</span> is the mean 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/19703c4d60ad8a05149374a212bdf9362d6006acb8743e374d138e421f81a21e.png" src="../_images/19703c4d60ad8a05149374a212bdf9362d6006acb8743e374d138e421f81a21e.png" />
+<img alt="../_images/461d346c386754803ae178187e2a7a6d27780c3940ecafddc70a8aa2151b4201.png" src="../_images/461d346c386754803ae178187e2a7a6d27780c3940ecafddc70a8aa2151b4201.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -888,7 +888,7 @@ where <span class="math notranslate nohighlight">\(\lambda\)</span> is the mean 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1999.4981, 1999.0, 1933.0365963899999)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1999.8562, 2000.0, 2037.4309215600003)
 </pre></div>
 </div>
 </div>
@@ -904,7 +904,7 @@ where <span class="math notranslate nohighlight">\(\lambda\)</span> is the mean 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/3da4dd2ba1b25f3d8b0661d09315759da871dd36af5fb6371e7c89f7e954b67f.png" src="../_images/3da4dd2ba1b25f3d8b0661d09315759da871dd36af5fb6371e7c89f7e954b67f.png" />
+<img alt="../_images/a7f6bbc8b7c116b05f2e5a5abc1393be7c8bd4914cd64dc7c9bf56ee815c7f31.png" src="../_images/a7f6bbc8b7c116b05f2e5a5abc1393be7c8bd4914cd64dc7c9bf56ee815c7f31.png" />
 </div>
 </div>
 <p>Yes! They do look very very similar now. <strong>For large <span class="math notranslate nohighlight">\(\lambda\)</span>, a normal distribution is an excellent approximation to a Poisson distribution.</strong></p>
@@ -938,7 +938,7 @@ where <span class="math notranslate nohighlight">\(\lambda\)</span> is the mean 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1a1b10c07c9dfc0c43e20d0b812cd057ccca4abef0f63a10298fda3f7416a55f.png" src="../_images/1a1b10c07c9dfc0c43e20d0b812cd057ccca4abef0f63a10298fda3f7416a55f.png" />
+<img alt="../_images/dc85d004a87d0db10736e132f9395482b79ccf3d3b9d9c4847a37a9972661b48.png" src="../_images/dc85d004a87d0db10736e132f9395482b79ccf3d3b9d9c4847a37a9972661b48.png" />
 </div>
 </div>
 <p>This looks like the <strong>“snow screen”</strong> when an old TV has no connection! It is indeed what a noisy image look like!</p>
@@ -950,7 +950,7 @@ where <span class="math notranslate nohighlight">\(\lambda\)</span> is the mean 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(4.0048, 3.96627696)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(4.009, 4.0120190000000004)
 </pre></div>
 </div>
 </div>
@@ -963,29 +963,29 @@ where <span class="math notranslate nohighlight">\(\lambda\)</span> is the mean 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([4.15 , 4.03 , 4.1  , 4.195, 4.03 , 3.85 , 4.2  , 3.975, 3.84 ,
-       3.85 , 4.155, 3.855, 3.99 , 4.02 , 4.125, 3.81 , 4.03 , 3.995,
-       3.99 , 4.055, 3.94 , 4.105, 4.3  , 3.835, 3.8  , 3.87 , 3.825,
-       4.245, 3.96 , 4.145, 3.885, 4.08 , 3.92 , 4.01 , 4.355, 3.89 ,
-       4.085, 3.965, 4.04 , 4.055, 4.015, 3.825, 3.925, 4.09 , 3.96 ,
-       3.95 , 3.975, 4.   , 4.135, 4.015, 4.035, 3.905, 3.905, 3.88 ,
-       4.07 , 4.075, 4.06 , 3.81 , 4.025, 4.255, 4.01 , 4.095, 3.81 ,
-       3.995, 3.95 , 4.04 , 4.015, 4.   , 4.035, 3.965, 3.845, 3.755,
-       4.035, 3.87 , 3.725, 4.17 , 3.785, 3.945, 3.765, 3.925, 4.03 ,
-       3.88 , 4.1  , 4.03 , 4.045, 3.98 , 4.08 , 3.91 , 4.025, 3.975,
-       4.055, 3.965, 4.04 , 4.115, 4.005, 4.15 , 4.335, 4.15 , 4.105,
-       3.885, 3.86 , 3.89 , 3.83 , 4.13 , 4.11 , 4.11 , 4.135, 4.15 ,
-       4.005, 3.905, 4.01 , 4.115, 3.845, 4.09 , 4.21 , 3.93 , 4.01 ,
-       4.305, 3.815, 3.94 , 4.015, 3.975, 4.08 , 4.115, 4.24 , 3.8  ,
-       3.91 , 4.035, 4.045, 3.93 , 3.835, 3.94 , 4.235, 3.98 , 4.02 ,
-       3.97 , 4.11 , 4.28 , 3.9  , 4.05 , 4.055, 4.025, 4.055, 3.99 ,
-       4.23 , 3.905, 4.075, 4.05 , 3.98 , 4.14 , 4.16 , 3.86 , 4.085,
-       4.08 , 3.895, 4.01 , 3.73 , 4.025, 4.25 , 3.945, 4.085, 4.06 ,
-       3.79 , 3.72 , 4.015, 3.985, 4.01 , 3.75 , 3.985, 4.175, 4.2  ,
-       4.12 , 3.935, 3.87 , 4.035, 3.775, 3.905, 4.05 , 4.075, 4.09 ,
-       4.135, 3.915, 3.925, 3.97 , 3.97 , 3.795, 4.11 , 4.03 , 3.85 ,
-       4.235, 3.985, 3.755, 4.15 , 3.98 , 4.02 , 4.04 , 4.275, 4.12 ,
-       3.75 , 3.855])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([3.97 , 4.18 , 4.095, 4.01 , 3.815, 3.78 , 3.85 , 4.085, 4.22 ,
+       4.135, 4.07 , 3.885, 3.975, 4.01 , 3.72 , 4.   , 4.115, 4.085,
+       3.985, 4.205, 4.01 , 4.085, 4.09 , 3.935, 4.05 , 3.925, 4.12 ,
+       3.985, 4.03 , 3.955, 3.825, 3.77 , 3.825, 4.05 , 3.955, 4.005,
+       4.025, 4.37 , 3.77 , 3.95 , 3.94 , 3.76 , 4.135, 4.035, 4.07 ,
+       3.94 , 3.73 , 3.81 , 3.89 , 3.735, 4.14 , 4.195, 4.005, 3.805,
+       3.675, 3.97 , 3.765, 4.05 , 4.095, 3.88 , 3.72 , 3.77 , 4.215,
+       3.805, 4.045, 4.13 , 4.105, 4.12 , 3.96 , 4.08 , 4.325, 4.1  ,
+       3.925, 4.195, 4.155, 3.845, 3.93 , 3.89 , 3.835, 3.95 , 4.24 ,
+       4.3  , 4.08 , 4.275, 3.735, 4.04 , 3.925, 4.06 , 3.905, 3.965,
+       4.01 , 4.015, 4.11 , 3.79 , 4.015, 3.8  , 3.69 , 3.785, 3.95 ,
+       3.725, 4.045, 4.175, 4.115, 3.925, 4.1  , 4.23 , 4.09 , 4.075,
+       4.05 , 3.875, 4.065, 3.975, 3.78 , 4.07 , 4.01 , 3.875, 3.91 ,
+       3.97 , 3.905, 4.23 , 4.21 , 4.03 , 4.09 , 4.17 , 4.01 , 3.93 ,
+       3.785, 4.08 , 4.01 , 4.21 , 4.105, 4.1  , 3.98 , 4.   , 3.91 ,
+       3.81 , 4.035, 3.755, 4.06 , 3.97 , 4.01 , 3.915, 3.815, 3.985,
+       4.195, 3.94 , 4.025, 4.135, 4.2  , 4.255, 4.285, 4.095, 3.825,
+       3.98 , 4.03 , 4.42 , 4.145, 3.92 , 3.93 , 3.805, 4.16 , 4.035,
+       4.135, 3.97 , 4.045, 4.035, 4.12 , 4.14 , 4.025, 4.235, 4.01 ,
+       4.02 , 4.305, 3.89 , 3.905, 4.055, 4.15 , 4.065, 4.18 , 4.02 ,
+       4.06 , 4.   , 4.2  , 4.135, 4.21 , 3.975, 4.03 , 4.095, 4.02 ,
+       3.81 , 4.385, 3.87 , 3.825, 3.95 , 4.005, 3.99 , 4.065, 4.015,
+       3.95 , 4.02 ])
 </pre></div>
 </div>
 </div>
@@ -999,7 +999,7 @@ where <span class="math notranslate nohighlight">\(\lambda\)</span> is the mean 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d600df58fd14a70a19e8f9f79fadfbb4698a821fc4ae18202d000bd219a1a7d2.png" src="../_images/d600df58fd14a70a19e8f9f79fadfbb4698a821fc4ae18202d000bd219a1a7d2.png" />
+<img alt="../_images/73cb9c198cc6db8e28eab583dde36e9cef49d4f12391029eb31b744a72361d64.png" src="../_images/73cb9c198cc6db8e28eab583dde36e9cef49d4f12391029eb31b744a72361d64.png" />
 </div>
 </div>
 <p>We discuss the concept “signal-to-noise ratio” (S/N, or SNR) here. The signal we want to receive from this image is <span class="math notranslate nohighlight">\(\lambda=4\)</span>, which is the average photon rate from the object. However, the image is quite noisy. The standard deviation of pixel values is a proxy for how noisy the image is. Therefore, the SNR of this image is:</p>
@@ -1011,7 +1011,7 @@ where <span class="math notranslate nohighlight">\(\lambda\)</span> is the mean 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.0108946269287764
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.001495258991179
 </pre></div>
 </div>
 </div>
@@ -1054,7 +1054,7 @@ where <span class="math notranslate nohighlight">\(\lambda\)</span> is the mean 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/76d657e154965283da67f2ad957c1f4af1b8883b47c18995fa2eedec61321250.png" src="../_images/76d657e154965283da67f2ad957c1f4af1b8883b47c18995fa2eedec61321250.png" />
+<img alt="../_images/4846406c9515ce74cdb717b091c1ae871912f31639aed610845694c25e3350a0.png" src="../_images/4846406c9515ce74cdb717b091c1ae871912f31639aed610845694c25e3350a0.png" />
 </div>
 </div>
 <p>The combined image is much smoother than a single exposure image! If you increase the number of exposures, the combined image will even smoother. Another way to look at this is to plot the histogram of pixel values:</p>
@@ -1067,7 +1067,7 @@ where <span class="math notranslate nohighlight">\(\lambda\)</span> is the mean 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/89529bcc4717c2975769fe28709fd6c079e05a92ddfe9aa26e3f815d1a183a78.png" src="../_images/89529bcc4717c2975769fe28709fd6c079e05a92ddfe9aa26e3f815d1a183a78.png" />
+<img alt="../_images/06d0393d88cdb7e72cbfc3c212f355492de5da8eeaec68de0f446a4005e8a8ed.png" src="../_images/06d0393d88cdb7e72cbfc3c212f355492de5da8eeaec68de0f446a4005e8a8ed.png" />
 </div>
 </div>
 <p>After combining 16 exposures, the pixel values are much more concentrated around <span class="math notranslate nohighlight">\(\lambda=4\)</span> compared with the pixel values of a single exposure. What’s the SNR for this combined image?</p>
@@ -1079,7 +1079,7 @@ where <span class="math notranslate nohighlight">\(\lambda\)</span> is the mean 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.014193005749762
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.975585612723702
 </pre></div>
 </div>
 </div>
