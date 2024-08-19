@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
@@ -19,12 +19,12 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
@@ -38,9 +38,9 @@
     <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6" />
-  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=365ca57ee442770a23c6"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -142,6 +142,7 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="index.html">
@@ -171,7 +172,11 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistics and detector</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="basic_stat.html">Basic Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic_stats.html">Basic Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_stats.html">Prerequisite</a></li>
+
+
+
 <li class="toctree-l1"><a class="reference internal" href="calibration_frames.html">Calibration frames</a></li>
 
 
@@ -336,6 +341,7 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -345,6 +351,7 @@ document.write(`
   </button>
 `);
 </script>
+
 
 <script>
 document.write(`
@@ -476,7 +483,7 @@ in the notebook if you run it on your own machine.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/aea7aa3fbc5b272fbcb61d9f94fceb23e115e0bf97acc0154bba081a9fceba44.png" src="../_images/aea7aa3fbc5b272fbcb61d9f94fceb23e115e0bf97acc0154bba081a9fceba44.png" />
+<img alt="../_images/c753a95d3ff0cc7cb03a76832f14a1e73e30b927d329f0c95710ee518c93d981.png" src="../_images/c753a95d3ff0cc7cb03a76832f14a1e73e30b927d329f0c95710ee518c93d981.png" />
 </div>
 </div>
 <p>Let’s break this program down and see how it works.</p>
@@ -624,7 +631,7 @@ lines after the import statements are</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/16258bdbf0bf858cfe20fa6885c33c17bb7c3268d5461d5159addc1afa91dea0.png" src="../_images/16258bdbf0bf858cfe20fa6885c33c17bb7c3268d5461d5159addc1afa91dea0.png" />
+<img alt="../_images/a93bd30aa10c9d3e5f67efe53dc7bb91b69f64f8ddfbbee33f0fab2cc10e5b83.png" src="../_images/a93bd30aa10c9d3e5f67efe53dc7bb91b69f64f8ddfbbee33f0fab2cc10e5b83.png" />
 </div>
 </div>
 <p>The first line generates 100 (quasi) independent standard normals and
@@ -661,7 +668,7 @@ semantics in a familiar setting.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1cfaf6812dbb528b56af54ab0b37a24fbef2fe567130013d234d52bcc7c3fa57.png" src="../_images/1cfaf6812dbb528b56af54ab0b37a24fbef2fe567130013d234d52bcc7c3fa57.png" />
+<img alt="../_images/c2468dcd452f39955a328561cb9810ce97798879d8e3a9908e32b365711da03b.png" src="../_images/c2468dcd452f39955a328561cb9810ce97798879d8e3a9908e32b365711da03b.png" />
 </div>
 </div>
 <p>In brief,</p>
@@ -908,7 +915,7 @@ a <code class="docutils literal notranslate"><span class="pre">while</span></cod
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2c757f9fe4df531a8569b7d46598594cd5dc70785b58931adb823d0ed309e8dc.png" src="../_images/2c757f9fe4df531a8569b7d46598594cd5dc70785b58931adb823d0ed309e8dc.png" />
+<img alt="../_images/c0d58657afbc12248c1be6527c69aa71bbf34a8a66adb9174ff75c2dd2db606e.png" src="../_images/c0d58657afbc12248c1be6527c69aa71bbf34a8a66adb9174ff75c2dd2db606e.png" />
 </div>
 </div>
 <p>Note that</p>
@@ -1101,7 +1108,7 @@ landing in <span class="math notranslate nohighlight">\(B\)</span>.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2fb549bb647764b1539b3edc0959418b8c5a4153fc26bdd9ad97029ef7a9efe1.png" src="../_images/2fb549bb647764b1539b3edc0959418b8c5a4153fc26bdd9ad97029ef7a9efe1.png" />
+<img alt="../_images/7e7b903f9b19b459fdbf3764126eeaa50ac1c7de143eda309b725becb0c2a2d6.png" src="../_images/7e7b903f9b19b459fdbf3764126eeaa50ac1c7de143eda309b725becb0c2a2d6.png" />
 </div>
 </div>
 </section>
@@ -1125,7 +1132,7 @@ landing in <span class="math notranslate nohighlight">\(B\)</span>.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/dba15d7dc716a0c9275020cc4ebc897b16a7eb365c7b464b0c800f1a1215463c.png" src="../_images/dba15d7dc716a0c9275020cc4ebc897b16a7eb365c7b464b0c800f1a1215463c.png" />
+<img alt="../_images/1a51c93f326bf18e6eebd7a77d77f431c1888f18669be11216bdea0ce5ab91a6.png" src="../_images/1a51c93f326bf18e6eebd7a77d77f431c1888f18669be11216bdea0ce5ab91a6.png" />
 </div>
 </div>
 </section>
@@ -1148,7 +1155,7 @@ landing in <span class="math notranslate nohighlight">\(B\)</span>.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/222e721e522be95b95fb4c634b72342dce54dd2efc81b1c46bb100425ad759fd.png" src="../_images/222e721e522be95b95fb4c634b72342dce54dd2efc81b1c46bb100425ad759fd.png" />
+<img alt="../_images/5617faa9a10c9820d2d97e29b72b6e2ec9ecea2d37384485b305e972aa4bebde.png" src="../_images/5617faa9a10c9820d2d97e29b72b6e2ec9ecea2d37384485b305e972aa4bebde.png" />
 </div>
 </div>
 </section>
@@ -1175,7 +1182,7 @@ landing in <span class="math notranslate nohighlight">\(B\)</span>.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/01e7b7c810c93e56374abe67803f815ae1335e52dc2404243c57cf6329465124.png" src="../_images/01e7b7c810c93e56374abe67803f815ae1335e52dc2404243c57cf6329465124.png" />
+<img alt="../_images/0bbd6af68127814f5d3a9a6d2778214e074c0f40fe278aa348f5f194dffed1b6.png" src="../_images/0bbd6af68127814f5d3a9a6d2778214e074c0f40fe278aa348f5f194dffed1b6.png" />
 </div>
 </div>
 <p>Here’s a shorter way to write the same thing:</p>
@@ -1196,7 +1203,7 @@ landing in <span class="math notranslate nohighlight">\(B\)</span>.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d81d2ae0543fc7957f6bd47077a44a81e8d6464e3302db171d6d3057e90fff1d.png" src="../_images/d81d2ae0543fc7957f6bd47077a44a81e8d6464e3302db171d6d3057e90fff1d.png" />
+<img alt="../_images/b69774612542be4b690630756965914bf9367348f19543939fdfb76da88727a0.png" src="../_images/b69774612542be4b690630756965914bf9367348f19543939fdfb76da88727a0.png" />
 </div>
 </div>
 </section>
@@ -1229,7 +1236,7 @@ fraction that falls into the circle.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.15284
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.14044
 </pre></div>
 </div>
 </div>
@@ -1266,7 +1273,7 @@ fraction that falls into the circle.</p>
               
               
                 <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
+                  
 <div class="prev-next-area">
     <a class="left-prev"
        href="getting_started.html"
@@ -1360,6 +1367,7 @@ By Jenny Greene, Jared Siegel, Jiaxuan Li
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
       © Copyright 2023.
@@ -1386,8 +1394,8 @@ By Jenny Greene, Jared Siegel, Jiaxuan Li
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
 
   <footer class="bd-footer">
   </footer>

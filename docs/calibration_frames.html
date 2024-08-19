@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
@@ -19,12 +19,12 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
@@ -38,9 +38,9 @@
     <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6" />
-  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=365ca57ee442770a23c6"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -69,7 +69,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Simulate an artificial image" href="img_simulation.html" />
-    <link rel="prev" title="Basic Statistics" href="basic_stat.html" />
+    <link rel="prev" title="Prerequisite" href="more_stats.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -142,6 +142,7 @@ const thebe_selector_output = ".output, .cell_output"
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
         <div class="sidebar-primary-item">
+
   
 
 <a class="navbar-brand logo" href="index.html">
@@ -171,7 +172,11 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistics and detector</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="basic_stat.html">Basic Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic_stats.html">Basic Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_stats.html">Prerequisite</a></li>
+
+
+
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Calibration frames</a></li>
 
 
@@ -319,6 +324,7 @@ const thebe_selector_output = ".output, .cell_output"
 </button>
 
 
+
 <script>
 document.write(`
   <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
@@ -328,6 +334,7 @@ document.write(`
   </button>
 `);
 </script>
+
 
 <script>
 document.write(`
@@ -384,7 +391,7 @@ document.write(`
 <h1>Calibration frames<a class="headerlink" href="#calibration-frames" title="Permalink to this heading">#</a></h1>
 <p><strong>Prerequisites</strong></p>
 <ul class="simple">
-<li><p>Basic statistics (covered in <a class="reference internal" href="basic_stat.html"><span class="doc std std-doc">this notebook</span></a>)</p></li>
+<li><p>Basic statistics (covered in <span class="xref myst">this notebook</span>)</p></li>
 <li><p>Knowledge about CCD, bias, dark, and flat frames.</p></li>
 </ul>
 <p><strong>We will learn</strong></p>
@@ -475,7 +482,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;astropy.io.fits.hdu.image.PrimaryHDU object at 0x7f21920b8e50&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;astropy.io.fits.hdu.image.PrimaryHDU object at 0x7f8df0f54af0&gt;]
 </pre></div>
 </div>
 </div>
@@ -710,6 +717,16 @@ COMMENT
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">show_image</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;utils&#39;
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -718,7 +735,7 @@ COMMENT
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/52c3a9c4109d2e47d860243deb665d8e846d494e23edc0ecf099218d8660b79d.png" src="../_images/52c3a9c4109d2e47d860243deb665d8e846d494e23edc0ecf099218d8660b79d.png" />
+<img alt="../_images/aaf7affcc50bf8b20e919ba745eb8210aa009478c65ab7c2245e61ccdcedf072.png" src="../_images/aaf7affcc50bf8b20e919ba745eb8210aa009478c65ab7c2245e61ccdcedf072.png" />
 </div>
 </div>
 <p>The bias frame shows some spatial patterns: some rows have a lower bias value than others. We also see some distinct “bright” pixels. They could be either bad pixels, or caused by Cosmic Rays (CR). As a consequence, when we plot the histogram of pixel values, we will see some outliers from the bulk of pixels.</p>
@@ -743,7 +760,7 @@ COMMENT
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/35658b59f464638e66c1425b9cbe2403830e1086857da806424a22d570d7153e.png" src="../_images/35658b59f464638e66c1425b9cbe2403830e1086857da806424a22d570d7153e.png" />
+<img alt="../_images/1898ef9d38c48691a8fc0a2afc6d4308d2e7766ab0b5eacc7f31a34d8317adc9.png" src="../_images/1898ef9d38c48691a8fc0a2afc6d4308d2e7766ab0b5eacc7f31a34d8317adc9.png" />
 </div>
 </div>
 <p>During the Magellan observation, we took many bias frames (why??). So let’s load another bias frame. What do you expect? Will it be very different from the one above?</p>
@@ -754,14 +771,14 @@ COMMENT
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/5b09e2b0367ffb8d249801729f8aa3199c86bfba1cf5bb54b0c83fa7c4032785.png" src="../_images/5b09e2b0367ffb8d249801729f8aa3199c86bfba1cf5bb54b0c83fa7c4032785.png" />
+<img alt="../_images/778c5726d3865aae1f95df07d36906ad09f022b5cdd0eea78b2e5ff3cc5e423e.png" src="../_images/778c5726d3865aae1f95df07d36906ad09f022b5cdd0eea78b2e5ff3cc5e423e.png" />
 </div>
 </div>
 <p>Yeah, the bright spots changed their positions in the image. So it does seem like they are caused by cosmic rays.</p>
 </section>
 <section id="combine-bias-frames-to-make-master-bias">
 <h2>Combine bias frames to make “master” bias<a class="headerlink" href="#combine-bias-frames-to-make-master-bias" title="Permalink to this heading">#</a></h2>
-<p>We have already learned from <a class="reference internal" href="basic_stat.html"><span class="doc std std-doc">this notebook</span></a> that combining images will reduce the noise level. Belowe we try to combine 40 bias frames.</p>
+<p>We have already learned from <span class="xref myst">this notebook</span> that combining images will reduce the noise level. Belowe we try to combine 40 bias frames.</p>
 <aside class="margin sidebar">
 <p class="sidebar-title"></p>
 <p>Here I use <a class="reference external" href="https://docs.python.org/3/tutorial/datastructures.html">“Nested List Comprehensions”</a> to construct a list. This is equivalent to the following snippet, but is much shorter.</p>
@@ -823,7 +840,7 @@ COMMENT
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/5f6ba1b2f375ae13815286c1d2d2526fea3f61f5f944bc1e15e36e135d2bb633.png" src="../_images/5f6ba1b2f375ae13815286c1d2d2526fea3f61f5f944bc1e15e36e135d2bb633.png" />
+<img alt="../_images/aa4622cb9879b6906beb7aa6be3755951e94c6f8f2b26536aaaf4fb4476bb443.png" src="../_images/aa4622cb9879b6906beb7aa6be3755951e94c6f8f2b26536aaaf4fb4476bb443.png" />
 </div>
 </div>
 <p>Wow! The cosmic rays are everywhere in the mean-combined image! The vast difference between the median-combined and mean-combined images highlights that the mean is far less immune to outliers (i.e., cosmic rays) than the median. Because of this, we often use median to combine images.</p>
@@ -846,7 +863,7 @@ COMMENT
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8f4f9b602bca61cb37e24c3e42761d81f9d92f4298483d98566e933fc2badbf8.png" src="../_images/8f4f9b602bca61cb37e24c3e42761d81f9d92f4298483d98566e933fc2badbf8.png" />
+<img alt="../_images/a96eecec48970e82f97a09b9777a1986e0bc25e8017b9c5ad7b2882cc73176b7.png" src="../_images/a96eecec48970e82f97a09b9777a1986e0bc25e8017b9c5ad7b2882cc73176b7.png" />
 </div>
 </div>
 </section>
@@ -872,7 +889,7 @@ COMMENT
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8a36a4056eedf443c120f70f05fc5cf32c45c14e16df89313a040f7ee4b98291.png" src="../_images/8a36a4056eedf443c120f70f05fc5cf32c45c14e16df89313a040f7ee4b98291.png" />
+<img alt="../_images/ca54ac5d03a9f09e1ec13c01cc68153e38b204feb2aee44e1bfadd7f155420e9.png" src="../_images/ca54ac5d03a9f09e1ec13c01cc68153e38b204feb2aee44e1bfadd7f155420e9.png" />
 </div>
 </div>
 <p>We can replace these outlier pixels with <code class="docutils literal notranslate"><span class="pre">np.nan</span></code> (not a number, typically used to indicate a bad value). Then we repeat this for all 40 bias frames and combine them.</p>
@@ -917,7 +934,7 @@ COMMENT
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/9c760f117c005a05527d4309db87062e0fa5b0df4d750133601deb4b939327a0.png" src="../_images/9c760f117c005a05527d4309db87062e0fa5b0df4d750133601deb4b939327a0.png" />
+<img alt="../_images/ccc4e90a1eb4d62578a53208f5ccf203e55bee9f710bec03aaffd130b92f9f06.png" src="../_images/ccc4e90a1eb4d62578a53208f5ccf203e55bee9f710bec03aaffd130b92f9f06.png" />
 </div>
 </div>
 <p>Yeah! After sigma-clipping, the mean-combined image looks much better and very similar to the median-combined one. This sigma-clipping trick is quite common in astronomy. We used a threshold of 3-sigma and only clipped once. You can repeat the procedure for several times to make sure all outliers are flagged. Actually, <code class="docutils literal notranslate"><span class="pre">astropy</span></code> already provides us a function <code class="docutils literal notranslate"><span class="pre">sigma_clip</span></code> to do these jobs. Let’s check it out.</p>
@@ -967,7 +984,7 @@ COMMENT
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ac3b7fe0ef188c7d25c69b60ad9087774cd25a0d0fd11cdd9e55d3579faf9cc2.png" src="../_images/ac3b7fe0ef188c7d25c69b60ad9087774cd25a0d0fd11cdd9e55d3579faf9cc2.png" />
+<img alt="../_images/f124d5a8c9eb4cf2b4105cff4ef101d65ee5cece181c83c5e14390a5e8c0df28.png" src="../_images/f124d5a8c9eb4cf2b4105cff4ef101d65ee5cece181c83c5e14390a5e8c0df28.png" />
 </div>
 </div>
 <p>We can write the median-combined image to a FITS file for future usage.</p>
@@ -1011,7 +1028,7 @@ COMMENT
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/b06c90a7b6c43cd64ef703e9005f037ef8530443af282ca5dfc65e268e00f146.png" src="../_images/b06c90a7b6c43cd64ef703e9005f037ef8530443af282ca5dfc65e268e00f146.png" />
+<img alt="../_images/f9038608f0d5c6c14c3dfd91349079e52b0d75287fcc7db7891069f95ebf4377.png" src="../_images/f9038608f0d5c6c14c3dfd91349079e52b0d75287fcc7db7891069f95ebf4377.png" />
 </div>
 </div>
 <p>The light area in the lower left corner is due to sensor glow, which is light emitted by the electronics of the CCD. The counts in a dark frame scales linearly with time. The exposure time for a dark frame is typically similar to (or longer than) the exposure time of your science frames.</p>
@@ -1048,15 +1065,15 @@ COMMENT
               
               
                 <footer class="prev-next-footer">
-                  <!-- Previous / next buttons -->
+                  
 <div class="prev-next-area">
     <a class="left-prev"
-       href="basic_stat.html"
+       href="more_stats.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Basic Statistics</p>
+        <p class="prev-next-title">Prerequisite</p>
       </div>
     </a>
     <a class="right-next"
@@ -1114,6 +1131,7 @@ By Jenny Greene, Jared Siegel, Jiaxuan Li
   
   <div class="footer-item">
     
+
   <p class="copyright">
     
       © Copyright 2023.
@@ -1140,8 +1158,8 @@ By Jenny Greene, Jared Siegel, Jiaxuan Li
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
 
   <footer class="bd-footer">
   </footer>
