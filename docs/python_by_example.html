@@ -170,21 +170,24 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">An Introductory Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks.html">Test notebook</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistics and detector</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistics</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="stats/basic_stats.html">Basic Statistics (Part 1)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stats/more_stats.html">Basic Statistics (Part 2)</a></li>
 
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Detector and Imaging</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="imaging/calibration_frames.html">Calibration frames</a></li>
 
 
 
 <li class="toctree-l1"><a class="reference internal" href="imaging/img_simulation.html">Simulate an artificial image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="imaging/plotting_jwst.html">Plotting JWST images</a></li>
 <li class="toctree-l1"><a class="reference internal" href="intro_gaia_star.html">Introduction to Gaia data</a></li>
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="imaging/plotting_jwst.html">Plotting JWST images</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Final Projects</span></p>
 <ul class="nav bd-sidenav">
@@ -471,7 +474,7 @@ more about Python.</p>
 in the notebook if you run it on your own machine.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
 </pre></div>
 </div>
 </div>
@@ -482,7 +485,7 @@ in the notebook if you run it on your own machine.</p>
 <p id="ourfirstprog">Here are a few lines of code that perform the task we set</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="n">ϵ_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
@@ -490,9 +493,6 @@ in the notebook if you run it on your own machine.</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/132baf4186f9469c04b8e2c7be4c0b4b06237a343dbfb66364741acab18f91c1.png" src="../_images/132baf4186f9469c04b8e2c7be4c0b4b06237a343dbfb66364741acab18f91c1.png" />
 </div>
 </div>
 <p>Let’s break this program down and see how it works.</p>
@@ -513,24 +513,14 @@ syntax <code class="docutils literal notranslate"><span class="pre">np.attribute
 <p>Here’s two more examples</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.0
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.3862943611198906
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -538,14 +528,9 @@ syntax <code class="docutils literal notranslate"><span class="pre">np.attribute
 <p>We could also use the following syntax:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span>
 
 <span class="n">numpy</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.0
 </pre></div>
 </div>
 </div>
@@ -593,14 +578,9 @@ package.</p>
 <p>Recall this code that we saw above</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.0
 </pre></div>
 </div>
 </div>
@@ -608,14 +588,9 @@ package.</p>
 <p>Here’s another way to access NumPy’s square root function</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">sqrt</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">sqrt</span>
 
 <span class="n">sqrt</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.0
 </pre></div>
 </div>
 </div>
@@ -633,14 +608,11 @@ they wish to.</p>
 lines after the import statements are</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ϵ_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ϵ_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ϵ_values</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/ca5af38e36136ccbeae10c375c07cf7689842c564e62cbf09e06c109b9b97ac1.png" src="../_images/ca5af38e36136ccbeae10c375c07cf7689842c564e62cbf09e06c109b9b97ac1.png" />
 </div>
 </div>
 <p>The first line generates 100 (quasi) independent standard normals and
@@ -664,7 +636,7 @@ semantics in a familiar setting.</p>
 <p>Here’s a version that illustrates <code class="docutils literal notranslate"><span class="pre">for</span></code> loops and Python lists.</p>
 <div class="cell docutils container" id="firstloopprog">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts_length</span> <span class="o">=</span> <span class="mi">100</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ts_length</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="n">ϵ_values</span> <span class="o">=</span> <span class="p">[]</span>   <span class="c1"># empty list</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ts_length</span><span class="p">):</span>
@@ -675,9 +647,6 @@ semantics in a familiar setting.</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/c8c69ffd04516235b699169b064ce9ece1b0fa3d7c3f6dce09ecbb45bbd5bff5.png" src="../_images/c8c69ffd04516235b699169b064ce9ece1b0fa3d7c3f6dce09ecbb45bbd5bff5.png" />
 </div>
 </div>
 <p>In brief,</p>
@@ -702,13 +671,8 @@ objects.</p>
 <p>For example, try</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">]</span>
 <span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>list
 </pre></div>
 </div>
 </div>
@@ -722,25 +686,15 @@ and the third is a <a class="reference external" href="https://en.wikipedia.org/
 <code class="docutils literal notranslate"><span class="pre">list_name.append(some_value)</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[10, &#39;foo&#39;, False]
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">2.5</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">2.5</span><span class="p">)</span>
 <span class="n">x</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[10, &#39;foo&#39;, False, 2.5]
 </pre></div>
 </div>
 </div>
@@ -758,36 +712,21 @@ etc.</p></li>
 <p>Another useful list method is <code class="docutils literal notranslate"><span class="pre">pop()</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[10, &#39;foo&#39;, False, 2.5]
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.5
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[10, &#39;foo&#39;, False]
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span>
 </pre></div>
 </div>
 </div>
@@ -796,24 +735,14 @@ etc.</p></li>
 element is referenced by <code class="docutils literal notranslate"><span class="pre">x[0]</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>   <span class="c1"># first element of x</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>   <span class="c1"># first element of x</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>   <span class="c1"># second element of x</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;foo&#39;
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>   <span class="c1"># second element of x</span>
 </pre></div>
 </div>
 </div>
@@ -826,7 +755,7 @@ element is referenced by <code class="docutils literal notranslate"><span class=
 was</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ts_length</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ts_length</span><span class="p">):</span>
     <span class="n">e</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">()</span>
     <span class="n">ϵ_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 </pre></div>
@@ -845,16 +774,9 @@ telling Python that this line marks the lower limit of the code block.</p>
 a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">animals</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;dog&#39;</span><span class="p">,</span> <span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;bird&#39;</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">animals</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;dog&#39;</span><span class="p">,</span> <span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;bird&#39;</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">animal</span> <span class="ow">in</span> <span class="n">animals</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The plural of &quot;</span> <span class="o">+</span> <span class="n">animal</span> <span class="o">+</span> <span class="s2">&quot; is &quot;</span> <span class="o">+</span> <span class="n">animal</span> <span class="o">+</span> <span class="s2">&quot;s&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The plural of dog is dogs
-The plural of cat is cats
-The plural of bird is birds
 </pre></div>
 </div>
 </div>
@@ -911,7 +833,7 @@ remember:</p>
 a <code class="docutils literal notranslate"><span class="pre">while</span></code> loop instead.</p>
 <div class="cell docutils container" id="whileloopprog">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts_length</span> <span class="o">=</span> <span class="mi">100</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ts_length</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="n">ϵ_values</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">ts_length</span><span class="p">:</span>
@@ -922,9 +844,6 @@ a <code class="docutils literal notranslate"><span class="pre">while</span></cod
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/87c46d2b9610331b4eb74f8754811652a7cf64e12f86ebad8a812981cd31ebd5.png" src="../_images/87c46d2b9610331b4eb74f8754811652a7cf64e12f86ebad8a812981cd31ebd5.png" />
 </div>
 </div>
 <p>Note that</p>
@@ -950,7 +869,7 @@ generated by <a class="reference internal" href="#equation-ilom">(1)</a>.</p>
 NumPy array.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="mf">0.025</span>         <span class="c1"># interest rate</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="mf">0.025</span>         <span class="c1"># interest rate</span>
 <span class="n">T</span> <span class="o">=</span> <span class="mi">50</span>            <span class="c1"># end date</span>
 <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># an empty NumPy array, to store all b_t</span>
 <span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>         <span class="c1"># initial balance</span>
@@ -963,9 +882,6 @@ NumPy array.</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/7e1ea0e9ee22f6af6e5fb5930563ce0136b9be126a010f43e098ffcce15f01f2.png" src="../_images/7e1ea0e9ee22f6af6e5fb5930563ce0136b9be126a010f43e098ffcce15f01f2.png" />
 </div>
 </div>
 <p>The statement <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">=</span> <span class="pre">np.empty(T+1)</span></code> allocates storage in memory for <code class="docutils literal notranslate"><span class="pre">T+1</span></code>
@@ -996,7 +912,7 @@ standard normal.</p>
 <p>In your solution, restrict your import statements to</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 </pre></div>
 </div>
@@ -1044,26 +960,18 @@ branching and conditions.</p>
 and 1 for each nonnegative number</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">9</span><span class="p">,</span> <span class="mf">2.3</span><span class="p">,</span> <span class="o">-</span><span class="mi">11</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">9</span><span class="p">,</span> <span class="mf">2.3</span><span class="p">,</span> <span class="o">-</span><span class="mi">11</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-1
-1
--1
-1
 </pre></div>
 </div>
 </div>
@@ -1079,7 +987,7 @@ function to compute the absolute value.</p>
 <p>Use no imports besides</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 </pre></div>
 </div>
 </div>
@@ -1103,7 +1011,7 @@ landing in <span class="math notranslate nohighlight">\(B\)</span>.</p></li>
 <p>Here’s one solution.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">α</span> <span class="o">=</span> <span class="mf">0.9</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">α</span> <span class="o">=</span> <span class="mf">0.9</span>
 <span class="n">T</span> <span class="o">=</span> <span class="mi">200</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
@@ -1116,16 +1024,13 @@ landing in <span class="math notranslate nohighlight">\(B\)</span>.</p></li>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/4642111f7ba152e0fed851faf4f723848784a5eb0a1b63f8eb838686cf989283.png" src="../_images/4642111f7ba152e0fed851faf4f723848784a5eb0a1b63f8eb838686cf989283.png" />
-</div>
 </div>
 </section>
 <section id="id2">
 <h3>Exercise 2<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">α_values</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.98</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">α_values</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.98</span><span class="p">]</span>
 <span class="n">T</span> <span class="o">=</span> <span class="mi">200</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
 
@@ -1140,9 +1045,6 @@ landing in <span class="math notranslate nohighlight">\(B\)</span>.</p></li>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/9f984665de2e80dff300daf6878ec075855b7ef24912bcb59effc749d65f40c0.png" src="../_images/9f984665de2e80dff300daf6878ec075855b7ef24912bcb59effc749d65f40c0.png" />
-</div>
 </div>
 </section>
 <section id="id3">
@@ -1150,7 +1052,7 @@ landing in <span class="math notranslate nohighlight">\(B\)</span>.</p></li>
 <p>Here’s one solution:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">α</span> <span class="o">=</span> <span class="mf">0.9</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">α</span> <span class="o">=</span> <span class="mf">0.9</span>
 <span class="n">T</span> <span class="o">=</span> <span class="mi">200</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
@@ -1163,9 +1065,6 @@ landing in <span class="math notranslate nohighlight">\(B\)</span>.</p></li>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/5344baf289859446eea9d5ee202fd94163d26b371d1ad51523d66d0d16c21469.png" src="../_images/5344baf289859446eea9d5ee202fd94163d26b371d1ad51523d66d0d16c21469.png" />
-</div>
 </div>
 </section>
 <section id="id4">
@@ -1173,7 +1072,7 @@ landing in <span class="math notranslate nohighlight">\(B\)</span>.</p></li>
 <p>Here’s one way:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">α</span> <span class="o">=</span> <span class="mf">0.9</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">α</span> <span class="o">=</span> <span class="mf">0.9</span>
 <span class="n">T</span> <span class="o">=</span> <span class="mi">200</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
@@ -1190,14 +1089,11 @@ landing in <span class="math notranslate nohighlight">\(B\)</span>.</p></li>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/882fe79fd722b19a0fef590c419c74c7ae75e7ae1fc1e87928f5962c5fa889d1.png" src="../_images/882fe79fd722b19a0fef590c419c74c7ae75e7ae1fc1e87928f5962c5fa889d1.png" />
-</div>
 </div>
 <p>Here’s a shorter way to write the same thing:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">α</span> <span class="o">=</span> <span class="mf">0.9</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">α</span> <span class="o">=</span> <span class="mf">0.9</span>
 <span class="n">T</span> <span class="o">=</span> <span class="mi">200</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
@@ -1210,9 +1106,6 @@ landing in <span class="math notranslate nohighlight">\(B\)</span>.</p></li>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/37af0c6f942a375c1d28f4e17498ab8a060dfb2008d558372db7ab6691d82df5.png" src="../_images/37af0c6f942a375c1d28f4e17498ab8a060dfb2008d558372db7ab6691d82df5.png" />
 </div>
 </div>
 </section>
@@ -1229,7 +1122,7 @@ dividing by <span class="math notranslate nohighlight">\(r^2 = (1/2)^2 = 1/4\)</
 fraction that falls into the circle.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">100000</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">100000</span>
 
 <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
@@ -1241,11 +1134,6 @@ fraction that falls into the circle.</p>
 <span class="n">area_estimate</span> <span class="o">=</span> <span class="n">count</span> <span class="o">/</span> <span class="n">n</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">area_estimate</span> <span class="o">*</span> <span class="mi">4</span><span class="p">)</span>  <span class="c1"># dividing by radius**2</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.14588
 </pre></div>
 </div>
 </div>
@@ -1369,7 +1257,7 @@ fraction that falls into the circle.</p>
   <div class="footer-item">
     
 <p class="component-author">
-By Jenny Greene, Jared Siegel, Jiaxuan Li
+By Jenny Greene, Jared Siegel, Erin Flowers, Jiaxuan Li
 </p>
 
   </div>

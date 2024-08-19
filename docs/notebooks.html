@@ -168,21 +168,24 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="python_by_example.html">An Introductory Example</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Test notebook</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistics and detector</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistics</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="stats/basic_stats.html">Basic Statistics (Part 1)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stats/more_stats.html">Basic Statistics (Part 2)</a></li>
 
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Detector and Imaging</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="imaging/calibration_frames.html">Calibration frames</a></li>
 
 
 
 <li class="toctree-l1"><a class="reference internal" href="imaging/img_simulation.html">Simulate an artificial image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="imaging/plotting_jwst.html">Plotting JWST images</a></li>
 <li class="toctree-l1"><a class="reference internal" href="intro_gaia_star.html">Introduction to Gaia data</a></li>
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="imaging/plotting_jwst.html">Plotting JWST images</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Final Projects</span></p>
 <ul class="nav bd-sidenav">
@@ -415,11 +418,6 @@ For example, here’s some sample Matplotlib code:</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;contextlib.ExitStack at 0x7f0f541ddbb0&gt;
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell tag_remove-stdout docutils container">
 <div class="cell_input docutils container">
@@ -444,18 +442,9 @@ For example, here’s some sample Matplotlib code:</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/137405a2a8521f521f06724f6d604e5a5544cce7bd94d903975cee58b0605ccb.png" src="../_images/137405a2a8521f521f06724f6d604e5a5544cce7bd94d903975cee58b0605ccb.png" />
-</div>
 </div>
 <p>Note that the image above is captured and displayed in your site.</p>
 <div class="cell tag_popout tag_remove-input tag_remove-stdout docutils container">
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Text(0.5, 1.0, &#39;Smoother linez&#39;)]
-</pre></div>
-</div>
-<img alt="../_images/bd9b6428c4518a4ae93090465c61d892dfd0840419246cc8276893f0ec354049.png" src="../_images/bd9b6428c4518a4ae93090465c61d892dfd0840419246cc8276893f0ec354049.png" />
-</div>
 </div>
 <aside class="margin sidebar">
 <p class="sidebar-title"><strong>You can also pop out content to the side!</strong></p>
@@ -487,9 +476,6 @@ For reference, <a class="reference download internal" download="" href="../_down
 </div>
 </div>
 </details>
-<div class="cell_output docutils container">
-<img alt="../_images/f9f30ecfcd40590e89f575617f4a21ebc4e47163497bbfeaf53279e9310c826c.png" src="../_images/f9f30ecfcd40590e89f575617f4a21ebc4e47163497bbfeaf53279e9310c826c.png" />
-</div>
 </div>
 <p>Which works well if you’d like to quickly display cell output without cluttering your content with code.
 This works for any cell output, like a Pandas DataFrame.</p>
@@ -506,48 +492,6 @@ This works for any cell output, like a Pandas DataFrame.</p>
 </div>
 </div>
 </details>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Word A</th>
-      <th>Word B</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>hi</td>
-      <td>there</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>this</td>
-      <td>is</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>a</td>
-      <td>DataFrame</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <p>See <span class="xref std std-ref">hiding/remove-content</span> for more information about hiding and removing content.</p>
 </section>
@@ -590,26 +534,6 @@ depend on an underlying Python kernel to work.</p>
 <span class="p">)</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
 
 <span class="n">m</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">folium</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">m</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="n">location</span><span class="o">=</span><span class="p">[</span><span class="mf">45.372</span><span class="p">,</span> <span class="o">-</span><span class="mf">121.6972</span><span class="p">],</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="n">zoom_start</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">tiles</span><span class="o">=</span><span class="s1">&#39;Stamen Terrain&#39;</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">folium</span><span class="o">.</span><span class="n">Marker</span><span class="p">(</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="n">location</span><span class="o">=</span><span class="p">[</span><span class="mf">45.3288</span><span class="p">,</span> <span class="o">-</span><span class="mf">121.6625</span><span class="p">],</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="n">popup</span><span class="o">=</span><span class="s1">&#39;Mt. Hood Meadows&#39;</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span>     <span class="n">icon</span><span class="o">=</span><span class="n">folium</span><span class="o">.</span><span class="n">Icon</span><span class="p">(</span><span class="n">icon</span><span class="o">=</span><span class="s1">&#39;cloud&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="p">)</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;folium&#39;
 </pre></div>
 </div>
 </div>
@@ -727,7 +651,7 @@ For more information browse the pages in this site, and <span class="xref myst">
   <div class="footer-item">
     
 <p class="component-author">
-By Jenny Greene, Jared Siegel, Jiaxuan Li
+By Jenny Greene, Jared Siegel, Erin Flowers, Jiaxuan Li
 </p>
 
   </div>

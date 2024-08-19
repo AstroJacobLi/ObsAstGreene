@@ -69,7 +69,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Convolutional Neural Net and Galaxy Zoo" href="CNN.html" />
-    <link rel="prev" title="Plotting JWST images" href="../imaging/plotting_jwst.html" />
+    <link rel="prev" title="Introduction to Gaia data" href="../intro_gaia_star.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -170,21 +170,24 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../python_by_example.html">An Introductory Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notebooks.html">Test notebook</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistics and detector</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistics</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../stats/basic_stats.html">Basic Statistics (Part 1)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stats/more_stats.html">Basic Statistics (Part 2)</a></li>
 
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Detector and Imaging</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../imaging/calibration_frames.html">Calibration frames</a></li>
 
 
 
 <li class="toctree-l1"><a class="reference internal" href="../imaging/img_simulation.html">Simulate an artificial image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../imaging/plotting_jwst.html">Plotting JWST images</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro_gaia_star.html">Introduction to Gaia data</a></li>
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="../imaging/plotting_jwst.html">Plotting JWST images</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Final Projects</span></p>
 <ul class="current nav bd-sidenav">
@@ -431,20 +434,6 @@ document.write(`
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">18</span>
 <span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.linewidth&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;serif&quot;</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">10</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="c1"># this package will allow us to make progress bars</span>
-<span class="ne">---&gt; </span><span class="mi">10</span> <span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="c1"># We can beautify our plots by changing the matpltlib setting a little</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">18</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;tqdm&#39;
 </pre></div>
 </div>
 </div>
@@ -1448,12 +1437,12 @@ Published radius: 1.29 R_jupiter
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../imaging/plotting_jwst.html"
+       href="../intro_gaia_star.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Plotting JWST images</p>
+        <p class="prev-next-title">Introduction to Gaia data</p>
       </div>
     </a>
     <a class="right-next"
@@ -1511,7 +1500,7 @@ Published radius: 1.29 R_jupiter
   <div class="footer-item">
     
 <p class="component-author">
-By Jenny Greene, Jared Siegel, Jiaxuan Li
+By Jenny Greene, Jared Siegel, Erin Flowers, Jiaxuan Li
 </p>
 
   </div>

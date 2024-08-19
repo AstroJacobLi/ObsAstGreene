@@ -68,7 +68,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Introduction to Gaia data" href="../intro_gaia_star.html" />
+    <link rel="next" title="Plotting JWST images" href="plotting_jwst.html" />
     <link rel="prev" title="Calibration frames" href="calibration_frames.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -170,21 +170,24 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../python_by_example.html">An Introductory Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notebooks.html">Test notebook</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistics and detector</span></p>
-<ul class="current nav bd-sidenav">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistics</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../stats/basic_stats.html">Basic Statistics (Part 1)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stats/more_stats.html">Basic Statistics (Part 2)</a></li>
 
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Detector and Imaging</span></p>
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="calibration_frames.html">Calibration frames</a></li>
 
 
 
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Simulate an artificial image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting_jwst.html">Plotting JWST images</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro_gaia_star.html">Introduction to Gaia data</a></li>
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="plotting_jwst.html">Plotting JWST images</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Final Projects</span></p>
 <ul class="nav bd-sidenav">
@@ -429,20 +432,6 @@ document.write(`
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">80</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.linewidth&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="ne">----&gt; </span><span class="mi">5</span> <span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">show_image</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="c1"># fix a random number generator</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span> <span class="c1"># 42 is the answer to the Universe. </span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;utils&#39;
 </pre></div>
 </div>
 </div>
@@ -1168,11 +1157,11 @@ Flat fielding is a multiplicative effect.</p>
       </div>
     </a>
     <a class="right-next"
-       href="../intro_gaia_star.html"
+       href="plotting_jwst.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Introduction to Gaia data</p>
+        <p class="prev-next-title">Plotting JWST images</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1218,7 +1207,7 @@ Flat fielding is a multiplicative effect.</p>
   <div class="footer-item">
     
 <p class="component-author">
-By Jenny Greene, Jared Siegel, Jiaxuan Li
+By Jenny Greene, Jared Siegel, Erin Flowers, Jiaxuan Li
 </p>
 
   </div>

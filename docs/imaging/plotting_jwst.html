@@ -66,8 +66,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Lightcurves, transits, and TESS! Oh My!" href="../final_project/variable_stars_and_planets.html" />
-    <link rel="prev" title="Introduction to Gaia data" href="../intro_gaia_star.html" />
+    <link rel="next" title="Introduction to Gaia data" href="../intro_gaia_star.html" />
+    <link rel="prev" title="Simulate an artificial image" href="img_simulation.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -168,21 +168,24 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../python_by_example.html">An Introductory Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notebooks.html">Test notebook</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistics and detector</span></p>
-<ul class="current nav bd-sidenav">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistics</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../stats/basic_stats.html">Basic Statistics (Part 1)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stats/more_stats.html">Basic Statistics (Part 2)</a></li>
 
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Detector and Imaging</span></p>
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="calibration_frames.html">Calibration frames</a></li>
 
 
 
 <li class="toctree-l1"><a class="reference internal" href="img_simulation.html">Simulate an artificial image</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Plotting JWST images</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro_gaia_star.html">Introduction to Gaia data</a></li>
 
 
 
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Plotting JWST images</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Final Projects</span></p>
 <ul class="nav bd-sidenav">
@@ -418,38 +421,6 @@ document.write(`
 </div>
 </div>
 </details>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Download data
---2024-08-19 17:20:41--  https://github.com/AstroJacobLi/ObsAstGreene/raw/main/book/_static/ObsAstroData/cutoutRGB_NIRCAM.pkl
-Resolving github.com (github.com)... 140.82.114.3
-Connecting to github.com (github.com)|140.82.114.3|:443... connected.
-HTTP request sent, awaiting response... 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>302 Found
-Location: https://raw.githubusercontent.com/AstroJacobLi/ObsAstGreene/main/book/_static/ObsAstroData/cutoutRGB_NIRCAM.pkl [following]
---2024-08-19 17:20:41--  https://raw.githubusercontent.com/AstroJacobLi/ObsAstGreene/main/book/_static/ObsAstroData/cutoutRGB_NIRCAM.pkl
-Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 185.199.109.133, 185.199.110.133, 185.199.111.133, ...
-Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|185.199.109.133|:443... connected.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>HTTP request sent, awaiting response... 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>200 OK
-Length: 15542813 (15M) [application/octet-stream]
-Saving to: ‘cutoutRGB_NIRCAM.pkl’
-
-
-cutoutRGB_NIRCAM.pk   0%[                    ]       0  --.-KB/s               
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cutoutRGB_NIRCAM.pk 100%[===================&gt;]  14.82M  --.-KB/s    in 0.07s   
-
-2024-08-19 17:20:42 (211 MB/s) - ‘cutoutRGB_NIRCAM.pkl’ saved [15542813/15542813]
-</pre></div>
-</div>
-</div>
 </div>
 <p>The data has been downloaded to <code class="docutils literal notranslate"><span class="pre">~/ObsAstroData/</span></code> folder if you are using your own computer. If you are using <code class="docutils literal notranslate"><span class="pre">colab</span></code>, the data is downloaded to the <code class="docutils literal notranslate"><span class="pre">file</span></code> folder.</p>
 <p>Now we open the data using <code class="docutils literal notranslate"><span class="pre">pickle</span></code> and plot the images.</p>
@@ -480,10 +451,10 @@ cutoutRGB_NIRCAM.pk   0%[                    ]       0  --.-KB/s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f44b00b9760&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7fdd50c047c0&gt;
 </pre></div>
 </div>
-<img alt="../../_images/2bade8542bacacbad5952ba7c0d543370efe91beaa58262021efe44f1183ed9c.png" src="../../_images/2bade8542bacacbad5952ba7c0d543370efe91beaa58262021efe44f1183ed9c.png" />
+<img alt="../../_images/a8bf26d6161cdc10a125f5419ac5b8f9dee993a6af05b10805d1544310b84d14.png" src="../../_images/a8bf26d6161cdc10a125f5419ac5b8f9dee993a6af05b10805d1544310b84d14.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -493,14 +464,14 @@ cutoutRGB_NIRCAM.pk   0%[                    ]       0  --.-KB/s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2173/3008184174.py:1: RuntimeWarning: invalid value encountered in log10
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/l4/x41n5z4j4q9gypsb58tdh24c0000gn/T/ipykernel_51802/3008184174.py:1: RuntimeWarning: invalid value encountered in log10
   plt.imshow(np.log10(data[&#39;bIMG&#39;] + 1))
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f44afa20ac0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7fdd720871f0&gt;
 </pre></div>
 </div>
-<img alt="../../_images/1ccd7495302811dbbda036207b73f8e90c3f79624787d837eaab5357b267b0f1.png" src="../../_images/1ccd7495302811dbbda036207b73f8e90c3f79624787d837eaab5357b267b0f1.png" />
+<img alt="../../_images/5b43473190c4ceb903857ce1c1540c4d435a453e21c725ae75d732abe317de15.png" src="../../_images/5b43473190c4ceb903857ce1c1540c4d435a453e21c725ae75d732abe317de15.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -518,10 +489,10 @@ cutoutRGB_NIRCAM.pk   0%[                    ]       0  --.-KB/s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f44aeac5910&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7fdd00282a90&gt;
 </pre></div>
 </div>
-<img alt="../../_images/e83333487d6264059e8f2715043b0c3b809f659003a1e746715585af419c1bfa.png" src="../../_images/e83333487d6264059e8f2715043b0c3b809f659003a1e746715585af419c1bfa.png" />
+<img alt="../../_images/7885a8e268f26a51b5cf1bf36eaf8820001a685299b3f7bfd6074c7096cc836d.png" src="../../_images/7885a8e268f26a51b5cf1bf36eaf8820001a685299b3f7bfd6074c7096cc836d.png" />
 </div>
 </div>
 </section>
@@ -557,20 +528,20 @@ cutoutRGB_NIRCAM.pk   0%[                    ]       0  --.-KB/s
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../intro_gaia_star.html"
+       href="img_simulation.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Introduction to Gaia data</p>
+        <p class="prev-next-title">Simulate an artificial image</p>
       </div>
     </a>
     <a class="right-next"
-       href="../final_project/variable_stars_and_planets.html"
+       href="../intro_gaia_star.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Lightcurves, transits, and TESS! Oh My!</p>
+        <p class="prev-next-title">Introduction to Gaia data</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -590,7 +561,7 @@ cutoutRGB_NIRCAM.pk   0%[                    ]       0  --.-KB/s
   <div class="footer-item">
     
 <p class="component-author">
-By Jenny Greene, Jared Siegel, Jiaxuan Li
+By Jenny Greene, Jared Siegel, Erin Flowers, Jiaxuan Li
 </p>
 
   </div>

@@ -170,21 +170,24 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../python_by_example.html">An Introductory Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notebooks.html">Test notebook</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistics and detector</span></p>
-<ul class="current nav bd-sidenav">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistics</span></p>
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../stats/basic_stats.html">Basic Statistics (Part 1)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stats/more_stats.html">Basic Statistics (Part 2)</a></li>
 
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Detector and Imaging</span></p>
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Calibration frames</a></li>
 
 
 
 <li class="toctree-l1"><a class="reference internal" href="img_simulation.html">Simulate an artificial image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting_jwst.html">Plotting JWST images</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../intro_gaia_star.html">Introduction to Gaia data</a></li>
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="plotting_jwst.html">Plotting JWST images</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Final Projects</span></p>
 <ul class="nav bd-sidenav">
@@ -491,84 +494,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./bias/b0860c1.fits&#39;</span><span class="p">)</span>
-
-<span class="nn">File /usr/share/miniconda3/envs/obsastro/lib/python3.8/site-packages/astropy/io/fits/hdu/hdulist.py:214,</span> in <span class="ni">fitsopen</span><span class="nt">(name, mode, memmap, save_backup, cache, lazy_load_hdus, ignore_missing_simple, use_fsspec, fsspec_kwargs, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">211</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">212</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Empty filename: </span><span class="si">{</span><span class="n">name</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">214</span> <span class="k">return</span> <span class="n">HDUList</span><span class="o">.</span><span class="n">fromfile</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">215</span>     <span class="n">name</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">216</span>     <span class="n">mode</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">217</span>     <span class="n">memmap</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">218</span>     <span class="n">save_backup</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">219</span>     <span class="n">cache</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">220</span>     <span class="n">lazy_load_hdus</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">221</span>     <span class="n">ignore_missing_simple</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">222</span>     <span class="n">use_fsspec</span><span class="o">=</span><span class="n">use_fsspec</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">223</span>     <span class="n">fsspec_kwargs</span><span class="o">=</span><span class="n">fsspec_kwargs</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">224</span>     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">225</span> <span class="p">)</span>
-
-<span class="nn">File /usr/share/miniconda3/envs/obsastro/lib/python3.8/site-packages/astropy/io/fits/hdu/hdulist.py:482,</span> in <span class="ni">HDUList.fromfile</span><span class="nt">(cls, fileobj, mode, memmap, save_backup, cache, lazy_load_hdus, ignore_missing_simple, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">462</span> <span class="nd">@classmethod</span>
-<span class="g g-Whitespace">    </span><span class="mi">463</span> <span class="k">def</span> <span class="nf">fromfile</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">464</span>     <span class="bp">cls</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">472</span>     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">473</span> <span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">474</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">475</span><span class="sd">     Creates an `HDUList` instance from a file-like object.</span>
-<span class="g g-Whitespace">    </span><span class="mi">476</span><span class="sd"> </span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">    </span><span class="mi">479</span><span class="sd">     documentation for details of the parameters accepted by this method).</span>
-<span class="g g-Whitespace">    </span><span class="mi">480</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">482</span>     <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_readfrom</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">483</span>         <span class="n">fileobj</span><span class="o">=</span><span class="n">fileobj</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">484</span>         <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">485</span>         <span class="n">memmap</span><span class="o">=</span><span class="n">memmap</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">486</span>         <span class="n">save_backup</span><span class="o">=</span><span class="n">save_backup</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">487</span>         <span class="n">cache</span><span class="o">=</span><span class="n">cache</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">488</span>         <span class="n">ignore_missing_simple</span><span class="o">=</span><span class="n">ignore_missing_simple</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">489</span>         <span class="n">lazy_load_hdus</span><span class="o">=</span><span class="n">lazy_load_hdus</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">490</span>         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">491</span>     <span class="p">)</span>
-
-<span class="nn">File /usr/share/miniconda3/envs/obsastro/lib/python3.8/site-packages/astropy/io/fits/hdu/hdulist.py:1170,</span> in <span class="ni">HDUList._readfrom</span><span class="nt">(cls, fileobj, data, mode, memmap, cache, lazy_load_hdus, ignore_missing_simple, use_fsspec, fsspec_kwargs, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1167</span> <span class="k">if</span> <span class="n">fileobj</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1168</span>     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fileobj</span><span class="p">,</span> <span class="n">_File</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">1169</span>         <span class="c1"># instantiate a FITS file object (ffo)</span>
-<span class="ne">-&gt; </span><span class="mi">1170</span>         <span class="n">fileobj</span> <span class="o">=</span> <span class="n">_File</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1171</span>             <span class="n">fileobj</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1172</span>             <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1173</span>             <span class="n">memmap</span><span class="o">=</span><span class="n">memmap</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1174</span>             <span class="n">cache</span><span class="o">=</span><span class="n">cache</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1175</span>             <span class="n">use_fsspec</span><span class="o">=</span><span class="n">use_fsspec</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1176</span>             <span class="n">fsspec_kwargs</span><span class="o">=</span><span class="n">fsspec_kwargs</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1177</span>         <span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1178</span>     <span class="c1"># The Astropy mode is determined by the _File initializer if the</span>
-<span class="g g-Whitespace">   </span><span class="mi">1179</span>     <span class="c1"># supplied mode was None</span>
-<span class="g g-Whitespace">   </span><span class="mi">1180</span>     <span class="n">mode</span> <span class="o">=</span> <span class="n">fileobj</span><span class="o">.</span><span class="n">mode</span>
-
-<span class="nn">File /usr/share/miniconda3/envs/obsastro/lib/python3.8/site-packages/astropy/io/fits/file.py:218,</span> in <span class="ni">_File.__init__</span><span class="nt">(self, fileobj, mode, memmap, overwrite, cache, use_fsspec, fsspec_kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">216</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_open_fileobj</span><span class="p">(</span><span class="n">fileobj</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">overwrite</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">217</span> <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fileobj</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">)):</span>
-<span class="ne">--&gt; </span><span class="mi">218</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_open_filename</span><span class="p">(</span><span class="n">fileobj</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">overwrite</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">219</span> <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">220</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_open_filelike</span><span class="p">(</span><span class="n">fileobj</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">overwrite</span><span class="p">)</span>
-
-<span class="nn">File /usr/share/miniconda3/envs/obsastro/lib/python3.8/site-packages/astropy/io/fits/file.py:636,</span> in <span class="ni">_File._open_filename</span><span class="nt">(self, filename, mode, overwrite)</span>
-<span class="g g-Whitespace">    </span><span class="mi">633</span> <span class="n">ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
-<span class="g g-Whitespace">    </span><span class="mi">635</span> <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_try_read_compressed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">magic</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="n">ext</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">636</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">IO_FITS_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
-<span class="g g-Whitespace">    </span><span class="mi">637</span>     <span class="bp">self</span><span class="o">.</span><span class="n">close_on_error</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="g g-Whitespace">    </span><span class="mi">639</span> <span class="c1"># Make certain we&#39;re back at the beginning of the file</span>
-<span class="g g-Whitespace">    </span><span class="mi">640</span> <span class="c1"># BZ2File does not support seek when the file is open for writing, but</span>
-<span class="g g-Whitespace">    </span><span class="mi">641</span> <span class="c1"># when opening a file for write, bz2.BZ2File always truncates anyway.</span>
-
-<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;./bias/b0860c1.fits&#39;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;astropy.io.fits.hdu.image.PrimaryHDU object at 0x7f91c2a327c0&gt;]
 </pre></div>
 </div>
 </div>
@@ -1200,7 +1126,7 @@ COMMENT
   <div class="footer-item">
     
 <p class="component-author">
-By Jenny Greene, Jared Siegel, Jiaxuan Li
+By Jenny Greene, Jared Siegel, Erin Flowers, Jiaxuan Li
 </p>
 
   </div>
