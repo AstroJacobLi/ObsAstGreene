@@ -5,10 +5,10 @@
 
 A course designed for Princeton majors and non-majors interested in understanding astronomical data. 
 
-Maintained by Jenny Greene, Jared Siegel, Jiaxuan Li. 
+Maintained by Jenny Greene, Jared Siegel, Erin Flowers, and Jiaxuan Li. 
 
 ## How to build the book?
-### Creating an Conda Environment
+### Creating a Conda Environment
 In order to compile this book, you will need to create a conda environment with the necessary dependencies.
 The conda environment is provided as `environment.yml`. This environment is used for all testing by Github Actions and can be setup by:
 1. `conda env create -f environment.yml`
