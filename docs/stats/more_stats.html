@@ -1,0 +1,1003 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Basic Statistics (Part 2) &#8212; Observational Astronomy</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/stats/more_stats';</script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Calibration frames" href="../imaging/calibration_frames.html" />
+    <link rel="prev" title="Basic Statistics (Part 1)" href="basic_stats.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/jwst-min.png" class="logo__image only-light" alt="Observational Astronomy - Home"/>
+    <script>document.write(`<img src="../../_static/jwst-min.png" class="logo__image only-dark" alt="Observational Astronomy - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../about_py.html">About Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Setting up Your Python Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python_by_example.html">An Introductory Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks.html">Test notebook</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistics and detector</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="basic_stats.html">Basic Statistics (Part 1)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Basic Statistics (Part 2)</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../imaging/calibration_frames.html">Calibration frames</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../imaging/img_simulation.html">Simulate an artificial image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro_gaia_star.html">Introduction to Gaia data</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../imaging/plotting_jwst.html">Plotting JWST images</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Final Projects</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../final_project/variable_stars_and_planets.html">Lightcurves, transits, and TESS! Oh My!</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../final_project/CNN.html">Convolutional Neural Net and Galaxy Zoo</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/AstroJacobLi/ObsAstGreene/blob/main//book/docs/stats/more_stats.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/stats/more_stats.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Basic Statistics (Part 2)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Basic Statistics (Part 2)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisite">Prerequisite</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#new-skills">New skills</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-probability-functions">Part 1: probability functions</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-fitting-models-to-data">Part 2: fitting models to data</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-1-why-fit-a-model">Part 2.1: why fit a model?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-2-how-to-fit-a-model">Part 2.2: how to fit a model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-3-fitting-a-model-with-python">Part 2.3: fitting a model with python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-4-comparing-model-fits">Part 2.4: comparing model fits</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resources">Resources</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#textbooks-available-online">Textbooks (available online)</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="basic-statistics-part-2">
+<h1>Basic Statistics (Part 2)<a class="headerlink" href="#basic-statistics-part-2" title="Permalink to this heading">#</a></h1>
+<section id="prerequisite">
+<h2>Prerequisite<a class="headerlink" href="#prerequisite" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\texttt{numpy}\)</span> and <span class="math notranslate nohighlight">\(\texttt{matplotlib}\)</span>.</p></li>
+</ul>
+</section>
+<section id="new-skills">
+<h2>New skills<a class="headerlink" href="#new-skills" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Probability notation and basic rules</p></li>
+<li><p>Likelihood functions</p></li>
+<li><p>Fitting a model</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s start with importing our packages</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># We can beautify our plots by changing the matplotlib settings a little</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">18</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.linewidth&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;serif&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="part-1-probability-functions">
+<h2>Part 1: probability functions<a class="headerlink" href="#part-1-probability-functions" title="Permalink to this heading">#</a></h2>
+<p>We are now comfortable drawing random numbers using <span class="math notranslate nohighlight">\(\texttt{python}\)</span> and have experimented with Gaussian and Poisson distributions. Before we fully apply these skills to astronomy, let’s review one additional tool: probability density functions (pdf).</p>
+<p>PDFs tell us what values a random variable can take and how likely a certain values are. If we make a large number of draws from a random variable, the resulting histogram will closely match the PDF.</p>
+<p>There are two rules PDFs follow. Let’s call our random variable <span class="math notranslate nohighlight">\(X\)</span> and its PDF <span class="math notranslate nohighlight">\(p(X)\)</span>.</p>
+<ol class="arabic simple">
+<li><p>The probability that a realization of <span class="math notranslate nohighlight">\(X\)</span> falls in the range <span class="math notranslate nohighlight">\(x_1\)</span> to <span class="math notranslate nohighlight">\(x_2\)</span> is:
+$<span class="math notranslate nohighlight">\(p(x_1\leq X \leq x_2) = \int_{x_1}^{x_2} dX \cdot p(X)\)</span>$</p></li>
+<li><p>All PDFs must integrate to 1:
+$<span class="math notranslate nohighlight">\(\int dX \cdot p(X)=1\)</span>$</p></li>
+</ol>
+<p>In the last notebook, we saw examples of PDFs, such as:</p>
+<p><strong>Gaussian</strong>: <span class="math notranslate nohighlight">\(p(x) = \frac{1}{\sqrt{2\pi} \sigma} e^{-\frac{(x-\mu)^2}{2\sigma^2}}\)</span></p>
+<p><strong>Poisson</strong>: <span class="math notranslate nohighlight">\(P(X=k) = \dfrac{\lambda^k e^{-\lambda}}{k!}\)</span></p>
+<p>Let’s now revisit Gaussian distributions using this new knowledge. First, we’ll write a function for a gaussian PDF.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gaussian_pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">mu</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">sigma</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Great! Now we can compare our function with a histogram of random draws.</p>
+<p>What happens when we set <span class="math notranslate nohighlight">\(\texttt{density=True}\)</span> vs. <span class="math notranslate nohighlight">\(\texttt{density=False}\)</span> for <span class="math notranslate nohighlight">\(\texttt{plt.hist}\)</span>?</p>
+<p>What happens as the number of draws increases (try 10, 100, 1000, 10000)?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># parameters of our Gaussian distribution</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">sigma</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># evaluate the PDF on a x-grid</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">gaussian_pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
+
+<span class="c1"># plot the PDF</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span> 
+
+<span class="c1"># draw random values using numpy</span>
+<span class="n">rand</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="n">mu</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">)</span>
+
+<span class="c1"># plot the histogram</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">rand</span><span class="p">,</span><span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span><span class="n">bins</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+
+<span class="c1"># it&#39;s always good practice to label the axes (even if it&#39;s a bit arbitrary in our case)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;PDF&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/75e8fe84f0be1b9194a02a048f16377fa6d6cd93177cdb1c833a69d065d6c704.png" src="../../_images/75e8fe84f0be1b9194a02a048f16377fa6d6cd93177cdb1c833a69d065d6c704.png" />
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="part-2-fitting-models-to-data">
+<h1>Part 2: fitting models to data<a class="headerlink" href="#part-2-fitting-models-to-data" title="Permalink to this heading">#</a></h1>
+<section id="part-2-1-why-fit-a-model">
+<h2>Part 2.1: why fit a model?<a class="headerlink" href="#part-2-1-why-fit-a-model" title="Permalink to this heading">#</a></h2>
+<p>You may rightly be asking, what does any of this have to do with astronomy? Everything (or at least a lot of things)! For us, there are two broad applications of PDFs.</p>
+<ol class="arabic simple">
+<li><p>Understanding the signal-to-noise properties of astronomical images.</p></li>
+<li><p>Learning from observations by fitting models to data.</p></li>
+</ol>
+<p>In the last notebook, we focused on the first application, here we’ll focus on the second.</p>
+<p>Let’s revist the Gaia data as an example dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># path to the table</span>
+<span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;data/gaia_100pc.csv&#39;</span>
+
+<span class="c1"># loading the table; this function assumes a &#39;comma separated file (aka csv)&#39;</span>
+<span class="n">gaia</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+<span class="c1"># behind the scenes cleaning (likely want to distribute this shortened version)</span>
+<span class="n">gaia</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;radius&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gaia</span><span class="o">.</span><span class="n">radius_gspphot</span>
+<span class="n">gaia</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;teff&#39;</span><span class="p">]</span>   <span class="o">=</span> <span class="n">gaia</span><span class="o">.</span><span class="n">teff_gspphot</span>
+<span class="n">gaia</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;gmag&#39;</span><span class="p">]</span>   <span class="o">=</span> <span class="n">gaia</span><span class="o">.</span><span class="n">phot_g_mean_mag</span>
+<span class="n">gaia</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;rmag&#39;</span><span class="p">]</span>   <span class="o">=</span> <span class="n">gaia</span><span class="o">.</span><span class="n">phot_rp_mean_mag</span>
+<span class="n">gaia</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;bmag&#39;</span><span class="p">]</span>   <span class="o">=</span> <span class="n">gaia</span><span class="o">.</span><span class="n">phot_bp_mean_mag</span>
+<span class="n">gaia</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;distance&#39;</span><span class="p">]</span>   <span class="o">=</span> <span class="n">gaia</span><span class="o">.</span><span class="n">distance_gspphot</span>
+
+<span class="c1"># gaia = gaia[[&#39;radius&#39;,&#39;teff&#39;,&#39;distance&#39;,&#39;gmag&#39;,&#39;rmag&#39;,&#39;bmag&#39;,&#39;ecl_lon&#39;,&#39;ecl_lat&#39;]]</span>
+
+<span class="c1"># simple errors</span>
+<span class="n">gaia</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;color&#39;</span><span class="p">]</span>     <span class="o">=</span> <span class="n">gaia</span><span class="o">.</span><span class="n">gmag</span> <span class="o">-</span> <span class="n">gaia</span><span class="o">.</span><span class="n">rmag</span>
+<span class="n">gaia</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;color_err&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.04</span>
+<span class="n">gaia</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;teff_err&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="mf">10.</span> <span class="c1"># K</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;data/gaia_100pc.csv&#39;</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># loading the table; this function assumes a &#39;comma separated file (aka csv)&#39;</span>
+<span class="ne">----&gt; </span><span class="mi">5</span> <span class="n">gaia</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="c1"># behind the scenes cleaning (likely want to distribute this shortened version)</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">gaia</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;radius&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gaia</span><span class="o">.</span><span class="n">radius_gspphot</span>
+
+<span class="nn">File /usr/share/miniconda3/envs/obsastro/lib/python3.8/site-packages/pandas/io/parsers/readers.py:912,</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options, dtype_backend)</span>
+<span class="g g-Whitespace">    </span><span class="mi">899</span> <span class="n">kwds_defaults</span> <span class="o">=</span> <span class="n">_refine_defaults_read</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">900</span>     <span class="n">dialect</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">901</span>     <span class="n">delimiter</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">908</span>     <span class="n">dtype_backend</span><span class="o">=</span><span class="n">dtype_backend</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">909</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">910</span> <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">912</span> <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+
+<span class="nn">File /usr/share/miniconda3/envs/obsastro/lib/python3.8/site-packages/pandas/io/parsers/readers.py:577,</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">574</span> <span class="n">_validate_names</span><span class="p">(</span><span class="n">kwds</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;names&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">576</span> <span class="c1"># Create the parser.</span>
+<span class="ne">--&gt; </span><span class="mi">577</span> <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">579</span> <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">580</span>     <span class="k">return</span> <span class="n">parser</span>
+
+<span class="nn">File /usr/share/miniconda3/envs/obsastro/lib/python3.8/site-packages/pandas/io/parsers/readers.py:1407,</span> in <span class="ni">TextFileReader.__init__</span><span class="nt">(self, f, engine, **kwds)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1404</span>     <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1406</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">:</span> <span class="n">IOHandles</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="ne">-&gt; </span><span class="mi">1407</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
+
+<span class="nn">File /usr/share/miniconda3/envs/obsastro/lib/python3.8/site-packages/pandas/io/parsers/readers.py:1661,</span> in <span class="ni">TextFileReader._make_engine</span><span class="nt">(self, f, engine)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1659</span>     <span class="k">if</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">mode</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1660</span>         <span class="n">mode</span> <span class="o">+=</span> <span class="s2">&quot;b&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1661</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="o">=</span> <span class="n">get_handle</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1662</span>     <span class="n">f</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1663</span>     <span class="n">mode</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1664</span>     <span class="n">encoding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1665</span>     <span class="n">compression</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;compression&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1666</span>     <span class="n">memory_map</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;memory_map&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1667</span>     <span class="n">is_text</span><span class="o">=</span><span class="n">is_text</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1668</span>     <span class="n">errors</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding_errors&quot;</span><span class="p">,</span> <span class="s2">&quot;strict&quot;</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1669</span>     <span class="n">storage_options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;storage_options&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1670</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1671</span> <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+<span class="g g-Whitespace">   </span><span class="mi">1672</span> <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="o">.</span><span class="n">handle</span>
+
+<span class="nn">File /usr/share/miniconda3/envs/obsastro/lib/python3.8/site-packages/pandas/io/common.py:859,</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">854</span> <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">855</span>     <span class="c1"># Check whether the filename is to be opened in binary mode.</span>
+<span class="g g-Whitespace">    </span><span class="mi">856</span>     <span class="c1"># Binary mode does not support &#39;encoding&#39; and &#39;newline&#39;.</span>
+<span class="g g-Whitespace">    </span><span class="mi">857</span>     <span class="k">if</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span> <span class="ow">and</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">858</span>         <span class="c1"># Encoding</span>
+<span class="ne">--&gt; </span><span class="mi">859</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">860</span>             <span class="n">handle</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">861</span>             <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">862</span>             <span class="n">encoding</span><span class="o">=</span><span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">863</span>             <span class="n">errors</span><span class="o">=</span><span class="n">errors</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">864</span>             <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">865</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">866</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">867</span>         <span class="c1"># Binary mode</span>
+<span class="g g-Whitespace">    </span><span class="mi">868</span>         <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;data/gaia_100pc.csv&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gaia</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;source_id&#39;, &#39;radius_gspphot&#39;, &#39;radius_gspphot_lower&#39;,
+       &#39;radius_gspphot_upper&#39;, &#39;teff_gspphot&#39;, &#39;teff_gspphot_lower&#39;,
+       &#39;teff_gspphot_upper&#39;, &#39;logg_gspphot&#39;, &#39;logg_gspphot_lower&#39;,
+       &#39;logg_gspphot_upper&#39;, &#39;fem_gspspec&#39;, &#39;fem_gspspec_lower&#39;,
+       &#39;fem_gspspec_upper&#39;, &#39;ra&#39;, &#39;dec&#39;, &#39;phot_g_mean_mag&#39;, &#39;phot_bp_mean_mag&#39;,
+       &#39;phot_rp_mean_mag&#39;, &#39;distance_gspphot&#39;, &#39;distance_gspphot_lower&#39;,
+       &#39;distance_gspphot_upper&#39;, &#39;ecl_lon&#39;, &#39;ecl_lat&#39;, &#39;radius&#39;, &#39;teff&#39;,
+       &#39;gmag&#39;, &#39;rmag&#39;, &#39;bmag&#39;, &#39;distance&#39;, &#39;color&#39;, &#39;color_err&#39;, &#39;teff_err&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Earlier we saw a strong correlation between the color and temperature of a star. Let’s take another look.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">gaia</span><span class="o">.</span><span class="n">teff</span><span class="p">,</span><span class="n">gaia</span><span class="o">.</span><span class="n">color</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature [K]&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$g-r$&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/5e6c1485ea2e042b2b4459d7e52e6b125abaca6276bb2cdd4e4b90380bf12038.png" src="../../_images/5e6c1485ea2e042b2b4459d7e52e6b125abaca6276bb2cdd4e4b90380bf12038.png" />
+</div>
+</div>
+<p>We have a clear observational result: color and temperature of a star are strongly correlated.</p>
+<p>However, we still don’t know <em>how</em> color and temperature are related. Is the relation linear, quadratic, or perhaps much more complex? Answering this question will greatly increase our understanding of the stars in our catalog (it will also help our theorist friends try to <em>explain</em> what’s happening here).</p>
+</section>
+<section id="part-2-2-how-to-fit-a-model">
+<h2>Part 2.2: how to fit a model<a class="headerlink" href="#part-2-2-how-to-fit-a-model" title="Permalink to this heading">#</a></h2>
+<p>From the plot above, it’s reasonible to <em>first</em> assume the relation between color and temperature is linear:
+$<span class="math notranslate nohighlight">\( g-r = m \times T + b,\)</span><span class="math notranslate nohighlight">\(
+where \)</span>m<span class="math notranslate nohighlight">\( and \)</span>b$ are coefficients we want to learn.</p>
+<p>First, let’s trying finding the coefficients <span class="math notranslate nohighlight">\(m\)</span> and <span class="math notranslate nohighlight">\(b\)</span> by hand.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">gaia</span><span class="o">.</span><span class="n">teff</span><span class="p">,</span><span class="n">gaia</span><span class="o">.</span><span class="n">color</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+
+<span class="c1"># by hand linear fit</span>
+<span class="n">m</span> <span class="o">=</span> <span class="o">-</span><span class="mf">3e-4</span><span class="p">;</span> <span class="n">b</span> <span class="o">=</span> <span class="mf">2.1</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span><span class="mi">6500</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">m</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">b</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature [K]&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$g-r$&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/a4a8b5acba25ec4a1b2c31a7f5e4b498ba84c1e4e04189d8ef47f6b060da77e7.png" src="../../_images/a4a8b5acba25ec4a1b2c31a7f5e4b498ba84c1e4e04189d8ef47f6b060da77e7.png" />
+</div>
+</div>
+<p>What if we want a more robust approach?</p>
+<p>For simplicity, let’s imagine we have only one data point, a single star of temperature <span class="math notranslate nohighlight">\(5000 \pm 10 K\)</span> and color <span class="math notranslate nohighlight">\(g-r=0.6 \pm 0.2\)</span>.</p>
+<p>We can now ask, for a given set of values of <span class="math notranslate nohighlight">\(m,b\)</span> how <em>likely</em> were we to have observed <span class="math notranslate nohighlight">\(g-r=0.6\)</span> given that the star’s temperature is <span class="math notranslate nohighlight">\(5000\)</span> K? Thankfully, we just learned about PDFs! Assuming the uncertainties are well described by a Gaussian function (this is typically true, except for a few special cases we will discuss) the likelihood of measuring <span class="math notranslate nohighlight">\(g-r=0.6\)</span> is:
+$<span class="math notranslate nohighlight">\( \ln p(g-r=0.6 \mid b, m, T = 5000) = - \frac{1}{2} \Big ( \frac{ [0.6 - (m\times5000K+b)]^2 }{0.2^2+(m\times10K)^2} + \ln (2 \pi [0.2^2+(m\times10K)^2]) \Big ) \)</span>$
+notice we took the natural log to undo the exponential. This is an example of a likelihood function.</p>
+<p>Of course, one data point is certainly not enough to fit our model with. How does the likelihood function work with multiple datapoints? Assuming each datapoint is independent we simply consider the product of each datapoint’s likelihood function. In our case, ‘independent’ means that the measurements for one star do not dependent on the measurements for the others, which is usually a safe assumption. If we consider a second star with <span class="math notranslate nohighlight">\(g-r=1.25 \pm 0.3\)</span> given that the star’s temperature is <span class="math notranslate nohighlight">\(3000 \pm 50\)</span> K, the likelihood of observing both stars is then:
+$<span class="math notranslate nohighlight">\( \ln p(g-r= \{0.6, 1.125 \} \mid b, m, T = \{ 5000, 3000 \}) \propto - \frac{1}{2} \Big ( \frac{ [0.6 - (m\times5000k+b)]^2 }{ 0.2^2+(m\times10K)^2 } + \ln (2 \pi [0.2^2+(m\times10K)^2]) \Big ) - \frac{1}{2} \Big ( \frac{ [1.25 - (m\times3000k+b)]^2 }{0.3^2+(m\times30K)^2}  + \ln (2 \pi [0.3^2+(m\times30K)^2]) \Big ). \)</span>$</p>
+<p>We are now ready to write our generalized likelihood function for a sample of <span class="math notranslate nohighlight">\(N\)</span> measurements (indexed by <span class="math notranslate nohighlight">\(i=1,\dots,N\)</span>):
+$<span class="math notranslate nohighlight">\( \ln p( g-r \mid b, m, T) \propto - \frac{1}{2} \sum \Big ( \frac{ [ (g-r)_i - (m\times T_i +b)]^2 }{ \sigma_{(g-r)_i} ^2 +(m\times \sigma_T~K)^2 } + \ln (2 \pi [\sigma_{(g-r)_i}^2+(m\times \sigma_T~K)^2])  \Big ). \)</span>$</p>
+<p>It’s important to remember our three key assumptions (all of which are reasonable in this case):</p>
+<ol class="arabic simple">
+<li><p>Measurement uncertainties are Gaussian</p></li>
+<li><p>Measurements are independent of each other</p></li>
+</ol>
+<p>[Note, this is my hand-wavy explanation of the likelihood function, while trying to side step Bayes. Definetely feel free to interate on this or we can simply introduce the likelihood funciton as a black box]</p>
+</section>
+<section id="part-2-3-fitting-a-model-with-python">
+<h2>Part 2.3: fitting a model with python<a class="headerlink" href="#part-2-3-fitting-a-model-with-python" title="Permalink to this heading">#</a></h2>
+<p>Let’s now write the likelihood function in python.</p>
+<p>We want to find the set of coefficients that <em>maximimize</em> the likelihood function for our Gaia dataset. To do so, we will use the <span class="math notranslate nohighlight">\(\texttt{scipy.optimize.differential_evolution}\)</span> function. This tool finds the combination of parameters that <em>minimizes</em> the input function.</p>
+<p>Since we want to maximimize and the tool we have minimizes, we first have to make sure our function is equal to negative the likelihood function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">linear</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">T_error</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+    <span class="n">m</span><span class="p">,</span><span class="n">b</span> <span class="o">=</span> <span class="n">theta</span>
+    
+    <span class="n">model</span> <span class="o">=</span> <span class="n">T</span> <span class="o">*</span> <span class="n">m</span> <span class="o">+</span> <span class="n">b</span>
+    <span class="n">model_error</span> <span class="o">=</span> <span class="n">T_error</span> <span class="o">*</span> <span class="n">m</span>
+    
+    <span class="k">return</span> <span class="n">model</span><span class="p">,</span> <span class="n">model_error</span>
+
+<span class="k">def</span> <span class="nf">minus_log_likelihood_function</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">g_r</span><span class="p">,</span> <span class="n">g_r_error</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">T_error</span><span class="p">):</span>
+    <span class="n">model</span><span class="p">,</span> <span class="n">model_error</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">T_error</span><span class="p">)</span>
+    
+    <span class="n">error2</span> <span class="o">=</span> <span class="n">g_r_error</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">model_error</span><span class="o">**</span><span class="mi">2</span>
+    
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">g_r</span><span class="o">-</span><span class="n">model</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">error2</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">error2</span><span class="p">)</span> <span class="p">)</span>
+<span class="c1">#     return np.sum( (np.power(g_r-model,2) / error2) )</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scipy</span>
+
+<span class="n">out</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">optimize</span><span class="o">.</span><span class="n">differential_evolution</span><span class="p">(</span><span class="n">minus_log_likelihood_function</span><span class="p">,</span> <span class="p">[(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">)],</span>
+                        <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">linear</span><span class="p">,</span> <span class="n">gaia</span><span class="o">.</span><span class="n">color</span><span class="p">,</span> <span class="n">gaia</span><span class="o">.</span><span class="n">color_err</span><span class="p">,</span> 
+                                             <span class="n">gaia</span><span class="o">.</span><span class="n">teff</span><span class="p">,</span>  <span class="n">gaia</span><span class="o">.</span><span class="n">teff_err</span><span class="p">)</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">out</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> message: Optimization terminated successfully.
+ success: True
+     fun: -980.3110794998786
+       x: [-2.803e-04  2.067e+00]
+     nit: 38
+    nfev: 1227
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">gaia</span><span class="o">.</span><span class="n">teff</span><span class="p">,</span><span class="n">gaia</span><span class="o">.</span><span class="n">color</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+
+<span class="c1"># by hand linear fit</span>
+<span class="n">m</span><span class="p">,</span><span class="n">b</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">x</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">6500</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">m</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">b</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature [K]&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$g-r$&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/59088ea3a56fdc695109f92fb98a9f93bea3c60225339ee7b5cc9ebdb741df73.png" src="../../_images/59088ea3a56fdc695109f92fb98a9f93bea3c60225339ee7b5cc9ebdb741df73.png" />
+</div>
+</div>
+<p>The linear model works okay but not great. Let’s also try a model where color is <em>inversely</em> proportional to temperature:
+$<span class="math notranslate nohighlight">\( g-r = b / T + c \)</span>$</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">T_error</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+    <span class="n">m</span><span class="p">,</span><span class="n">b</span> <span class="o">=</span> <span class="n">theta</span>
+    
+    <span class="n">model</span> <span class="o">=</span> <span class="p">(</span><span class="n">m</span> <span class="o">/</span> <span class="n">T</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span>
+    <span class="n">model_error</span> <span class="o">=</span> <span class="p">(</span><span class="n">T_error</span><span class="o">/</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="n">m</span> <span class="o">/</span> <span class="n">T</span>
+    
+    <span class="k">return</span> <span class="n">model</span><span class="p">,</span> <span class="n">model_error</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">out_inverse</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">optimize</span><span class="o">.</span><span class="n">differential_evolution</span><span class="p">(</span><span class="n">minus_log_likelihood_function</span><span class="p">,</span> <span class="p">[(</span><span class="mf">1e3</span><span class="p">,</span><span class="mf">1e4</span><span class="p">),(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">)],</span>
+                        <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">inverse</span><span class="p">,</span> <span class="n">gaia</span><span class="o">.</span><span class="n">color</span><span class="p">,</span> <span class="n">gaia</span><span class="o">.</span><span class="n">color_err</span><span class="p">,</span> 
+                                             <span class="n">gaia</span><span class="o">.</span><span class="n">teff</span><span class="p">,</span>  <span class="n">gaia</span><span class="o">.</span><span class="n">teff_err</span><span class="p">)</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">out_inverse</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> message: Optimization terminated successfully.
+ success: True
+     fun: -1822.9761214744683
+       x: [ 4.932e+03 -3.696e-01]
+     nit: 20
+    nfev: 699
+     jac: [-1.592e-04 -3.321e-01]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">gaia</span><span class="o">.</span><span class="n">teff</span><span class="p">,</span><span class="n">gaia</span><span class="o">.</span><span class="n">color</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+
+<span class="c1"># by hand linear fit</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">6500</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># linear fit</span>
+<span class="n">m</span><span class="p">,</span><span class="n">b</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">x</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">m</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="n">b</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="n">m</span><span class="p">,</span><span class="n">b</span> <span class="o">=</span> <span class="n">out_inverse</span><span class="o">.</span><span class="n">x</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">m</span><span class="o">/</span><span class="n">x</span><span class="o">+</span><span class="n">b</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature [K]&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$g-r$&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/995fea28730473585abb8de3ede0afa4d3beb16683c9d53966325c4460190d77.png" src="../../_images/995fea28730473585abb8de3ede0afa4d3beb16683c9d53966325c4460190d77.png" />
+</div>
+</div>
+</section>
+<section id="part-2-4-comparing-model-fits">
+<h2>Part 2.4: comparing model fits<a class="headerlink" href="#part-2-4-comparing-model-fits" title="Permalink to this heading">#</a></h2>
+<p>The inverse model certainly <em>looks</em> better than the linear model. How can we ask that question quantitatively?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">chi2</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">g_r</span><span class="p">,</span> <span class="n">g_r_error</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">T_error</span><span class="p">):</span>
+    <span class="n">model</span><span class="p">,</span> <span class="n">model_error</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">T_error</span><span class="p">)</span>
+    
+    <span class="n">error2</span> <span class="o">=</span> <span class="n">g_r_error</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">model_error</span><span class="o">**</span><span class="mi">2</span>
+    
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">g_r</span><span class="o">-</span><span class="n">model</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">error2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chi2_lin</span> <span class="o">=</span> <span class="n">chi2</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">linear</span><span class="p">,</span> <span class="n">gaia</span><span class="o">.</span><span class="n">color</span><span class="p">,</span> <span class="n">gaia</span><span class="o">.</span><span class="n">color_err</span><span class="p">,</span> <span class="n">gaia</span><span class="o">.</span><span class="n">teff</span><span class="p">,</span>  <span class="n">gaia</span><span class="o">.</span><span class="n">teff_err</span><span class="p">)</span>
+<span class="n">chi2_inv</span> <span class="o">=</span> <span class="n">chi2</span><span class="p">(</span><span class="n">out_inverse</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">inverse</span><span class="p">,</span> <span class="n">gaia</span><span class="o">.</span><span class="n">color</span><span class="p">,</span> <span class="n">gaia</span><span class="o">.</span><span class="n">color_err</span><span class="p">,</span> <span class="n">gaia</span><span class="o">.</span><span class="n">teff</span><span class="p">,</span>  <span class="n">gaia</span><span class="o">.</span><span class="n">teff_err</span><span class="p">)</span>
+
+<span class="n">r_chi2_lin</span> <span class="o">=</span> <span class="n">chi2_lin</span> <span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">gaia</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">r_chi2_inv</span> <span class="o">=</span> <span class="n">chi2_inv</span> <span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">gaia</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Linear model reduced chi^2: </span><span class="si">{:.2}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">r_chi2_lin</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Inverse model reduced chi^2: </span><span class="si">{:.2}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">r_chi2_inv</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Linear model reduced chi^2: 2.7
+Inverse model reduced chi^2: 0.99
+</pre></div>
+</div>
+</div>
+</div>
+<p>In terms of reduced <span class="math notranslate nohighlight">\(\chi^2\)</span>, the <span class="math notranslate nohighlight">\(g-r \propto T^{-1}\)</span> model is favored over <span class="math notranslate nohighlight">\(g-r \propto T\)</span>. So what? Well, we’ve just rediscovered Wein’s law. (insert blurb on Wein’s law here and how color is a proxy for <span class="math notranslate nohighlight">\(\lambda_\mathrm{max}\)</span>)</p>
+<div class="math notranslate nohighlight">
+\[ \lambda_\mathrm{max} \propto 1 / T \]</div>
+</section>
+<section id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://machinelearningmastery.com/bayes-theorem-for-machine-learning/">General overview of statistics rules</a></p></li>
+<li><p><a class="reference external" href="https://towardsdatascience.com/intro-to-bayesian-statistics-5056b43d248d">Qualitative introduction to Bayes’ Theorem</a></p></li>
+<li><p><a class="reference external" href="https://online.stat.psu.edu/stat414/book">Penn State STAT 414</a>, wonderful mid-high level introduction to statstics</p></li>
+</ul>
+</section>
+<section id="textbooks-available-online">
+<h2>Textbooks (available online)<a class="headerlink" href="#textbooks-available-online" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Higher level textbook (Modern Mathematical Statistics with Applications, 2nd ed)</p></li>
+<li><p>Introductory level textbook (OpenIntro Statistics 4th edition)</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/stats"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="basic_stats.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Basic Statistics (Part 1)</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../imaging/calibration_frames.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Calibration frames</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Basic Statistics (Part 2)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisite">Prerequisite</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#new-skills">New skills</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-probability-functions">Part 1: probability functions</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-fitting-models-to-data">Part 2: fitting models to data</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-1-why-fit-a-model">Part 2.1: why fit a model?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-2-how-to-fit-a-model">Part 2.2: how to fit a model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-3-fitting-a-model-with-python">Part 2.3: fitting a model with python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-4-comparing-model-fits">Part 2.4: comparing model fits</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resources">Resources</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#textbooks-available-online">Textbooks (available online)</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jenny Greene, Jared Siegel, Jiaxuan Li
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

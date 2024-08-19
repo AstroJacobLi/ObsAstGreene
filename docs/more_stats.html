@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Prerequisite &#8212; Observational Astronomy</title>
+    <title>Basic Statistics (Part 2) &#8212; Observational Astronomy</title>
   
   
   
@@ -68,8 +68,6 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Calibration frames" href="calibration_frames.html" />
-    <link rel="prev" title="Basic Statistics" href="basic_stats.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -171,22 +169,31 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="notebooks.html">Test notebook</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistics and detector</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="basic_stats.html">Basic Statistics</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Prerequisite</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="stats/basic_stats.html">Basic Statistics (Part 1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stats/more_stats.html">Basic Statistics (Part 2)</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="imaging/calibration_frames.html">Calibration frames</a></li>
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="calibration_frames.html">Calibration frames</a></li>
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="img_simulation.html">Simulate an artificial image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="imaging/img_simulation.html">Simulate an artificial image</a></li>
 <li class="toctree-l1"><a class="reference internal" href="intro_gaia_star.html">Introduction to Gaia data</a></li>
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="plotting_jwst.html">Plotting JWST images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="imaging/plotting_jwst.html">Plotting JWST images</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Final Projects</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="final_project/variable_stars_and_planets.html">Lightcurves, transits, and TESS! Oh My!</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="final_project/CNN.html">Convolutional Neural Net and Galaxy Zoo</a></li>
 </ul>
 
     </div>
@@ -356,7 +363,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Prerequisite</h1>
+    <h1>Basic Statistics (Part 2)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -366,9 +373,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Prerequisite</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#new-skills">New skills</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-probability-functions">Part 1: probability functions</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Basic Statistics (Part 2)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisite">Prerequisite</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#new-skills">New skills</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-probability-functions">Part 1: probability functions</a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-fitting-models-to-data">Part 2: fitting models to data</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-1-why-fit-a-model">Part 2.1: why fit a model?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-2-how-to-fit-a-model">Part 2.2: how to fit a model</a></li>
@@ -390,14 +400,16 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="prerequisite">
-<h1>Prerequisite<a class="headerlink" href="#prerequisite" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="basic-statistics-part-2">
+<h1>Basic Statistics (Part 2)<a class="headerlink" href="#basic-statistics-part-2" title="Permalink to this heading">#</a></h1>
+<section id="prerequisite">
+<h2>Prerequisite<a class="headerlink" href="#prerequisite" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\texttt{numpy}\)</span> and <span class="math notranslate nohighlight">\(\texttt{matplotlib}\)</span>.</p></li>
 </ul>
 </section>
 <section id="new-skills">
-<h1>New skills<a class="headerlink" href="#new-skills" title="Permalink to this heading">#</a></h1>
+<h2>New skills<a class="headerlink" href="#new-skills" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Probability notation and basic rules</p></li>
 <li><p>Likelihood functions</p></li>
@@ -421,7 +433,7 @@ document.write(`
 </div>
 </section>
 <section id="part-1-probability-functions">
-<h1>Part 1: probability functions<a class="headerlink" href="#part-1-probability-functions" title="Permalink to this heading">#</a></h1>
+<h2>Part 1: probability functions<a class="headerlink" href="#part-1-probability-functions" title="Permalink to this heading">#</a></h2>
 <p>We are now comfortable drawing random numbers using <span class="math notranslate nohighlight">\(\texttt{python}\)</span> and have experimented with Gaussian and Poisson distributions. Before we fully apply these skills to astronomy, let’s review one additional tool: probability density functions (pdf).</p>
 <p>PDFs tell us what values a random variable can take and how likely a certain values are. If we make a large number of draws from a random variable, the resulting histogram will closely match the PDF.</p>
 <p>There are two rules PDFs follow. Let’s call our random variable <span class="math notranslate nohighlight">\(X\)</span> and its PDF <span class="math notranslate nohighlight">\(p(X)\)</span>.</p>
@@ -471,9 +483,10 @@ $<span class="math notranslate nohighlight">\(\int dX \cdot p(X)=1\)</span>$</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/cfb58777e605ecb776e01ace717a2c3d016e7005c04d0bbe836670f36c6dcd0d.png" src="../_images/cfb58777e605ecb776e01ace717a2c3d016e7005c04d0bbe836670f36c6dcd0d.png" />
+<img alt="../_images/e7c71f8741212fdf0ca4e87d9635b616afbd7595b22f39b01dd37ab648f82c46.png" src="../_images/e7c71f8741212fdf0ca4e87d9635b616afbd7595b22f39b01dd37ab648f82c46.png" />
 </div>
 </div>
+</section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="part-2-fitting-models-to-data">
 <h1>Part 2: fitting models to data<a class="headerlink" href="#part-2-fitting-models-to-data" title="Permalink to this heading">#</a></h1>
@@ -882,24 +895,6 @@ Inverse model reduced chi^2: 0.99
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="basic_stats.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Basic Statistics</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="calibration_frames.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Calibration frames</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
@@ -915,9 +910,12 @@ Inverse model reduced chi^2: 0.99
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Prerequisite</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#new-skills">New skills</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-probability-functions">Part 1: probability functions</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Basic Statistics (Part 2)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisite">Prerequisite</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#new-skills">New skills</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-probability-functions">Part 1: probability functions</a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-fitting-models-to-data">Part 2: fitting models to data</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-1-why-fit-a-model">Part 2.1: why fit a model?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-2-how-to-fit-a-model">Part 2.2: how to fit a model</a></li>
