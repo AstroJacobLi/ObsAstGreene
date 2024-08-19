@@ -11,7 +11,8 @@ parts:
   - file: docs/notebooks
 - caption: Statistics and detector
   chapters:
-  - file: docs/basic_stat
+  - file: docs/basic_stats
+  - file: docs/more_stats
   - file: docs/calibration_frames
   - file: docs/img_simulation
   - file: docs/intro_gaia_star
