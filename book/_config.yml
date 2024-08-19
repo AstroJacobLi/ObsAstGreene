@@ -1,5 +1,5 @@
 title : Observational Astronomy
-author: Jenny Greene, Jared Siegel, Jiaxuan Li
+author: Jenny Greene, Jared Siegel, Erin Flowers, Jiaxuan Li
 copyright: "2023"
 logo: 'jwst-min.png'
 
@@ -8,7 +8,7 @@ description: >-
   A Gateway to Science: Observational Astronomy in the James Webb Era
 
 execute:
-  execute_notebooks           : cache
+  execute_notebooks           : 'off' # cache
 
 # HTML-specific settings
 html:

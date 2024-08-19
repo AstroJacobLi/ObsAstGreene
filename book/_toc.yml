@@ -9,15 +9,16 @@ parts:
   - file: docs/python_by_example
   - file: docs/functions
   - file: docs/notebooks
-- caption: Statistics and detector
+- caption: Statistics
   chapters:
   - file: docs/stats/basic_stats
   - file: docs/stats/more_stats
+- caption: Detector and Imaging
+  chapters:
   - file: docs/imaging/calibration_frames
   - file: docs/imaging/img_simulation
-  - file: docs/intro_gaia_star
   - file: docs/imaging/plotting_jwst
-
+  - file: docs/intro_gaia_star
 - caption: Final Projects
   chapters:
   - file: docs/final_project/variable_stars_and_planets
