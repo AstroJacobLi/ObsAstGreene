@@ -11,9 +11,14 @@ parts:
   - file: docs/notebooks
 - caption: Statistics and detector
   chapters:
-  - file: docs/basic_stats
-  - file: docs/more_stats
-  - file: docs/calibration_frames
-  - file: docs/img_simulation
+  - file: docs/stats/basic_stats
+  - file: docs/stats/more_stats
+  - file: docs/imaging/calibration_frames
+  - file: docs/imaging/img_simulation
   - file: docs/intro_gaia_star
-  - file: docs/plotting_jwst
+  - file: docs/imaging/plotting_jwst
+
+- caption: Final Projects
+  chapters:
+  - file: docs/final_project/variable_stars_and_planets
+  - file: docs/final_project/CNN
