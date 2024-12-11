@@ -132,10 +132,10 @@ def display_single(img,
 
 def show_image(image,
                percl=99, percu=None, vmin=None, vmax=None, norm=None,
-               is_mask=False, figsize=(10, 10),
+               is_mask=False, figsize=(7, 7),
                cmap='viridis', log=False, clip=True,
                show_colorbar=False, show_ticks=False,
-               fig=None, ax=None, input_ratio=None):
+               fig=None, ax=None, input_ratio=None, title=None):
     """
     Show an image in matplotlib with some basic astronomically-appropriate stretching.
     From https://github.com/astropy/ccd-reduction-and-photometry-guide/blob/main/notebooks/convenience_functions.py
@@ -244,6 +244,8 @@ def show_image(image,
             axis=u'both',
             which=u'both',
             length=0)
+    if title is not None:
+        ax.set_title(title, fontsize=14)
 
     if ax is None:
         return fig

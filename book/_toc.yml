@@ -19,10 +19,12 @@ parts:
   - file: docs/imaging/img_simulation
   - file: docs/imaging/plotting_jwst
   - file: docs/intro_gaia_star
+
 - caption: Final Projects
   chapters:
   - file: docs/final_project/variable_stars_and_planets
   - file: docs/final_project/CNN
+  - file: docs/final_project/lrd/are_LRD_resolved
 
 - caption: Merian Project
   chapters:
