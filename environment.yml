@@ -14,3 +14,6 @@ dependencies:
     - jupyterlab
     - astropy
     - ipywidgets
+    - reproject
+    - photutils
+    - cmasher

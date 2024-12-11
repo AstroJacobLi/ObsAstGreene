@@ -4,5 +4,5 @@
     },
     "python.formatting.provider": "autopep8",
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "GitHub.copilot"
+    "editor.defaultFormatter": "ms-python.black-formatter"
 }

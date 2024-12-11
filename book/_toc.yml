@@ -23,3 +23,8 @@ parts:
   chapters:
   - file: docs/final_project/variable_stars_and_planets
   - file: docs/final_project/CNN
+
+- caption: Merian Project
+  chapters:
+  - file: docs/final_project/merian/01_merian_intro.ipynb
+  - file: docs/final_project/merian/02_Halpha_map.ipynb
