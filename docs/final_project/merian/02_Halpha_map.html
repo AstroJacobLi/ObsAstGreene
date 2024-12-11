@@ -198,12 +198,22 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 <li class="toctree-l1"><a class="reference internal" href="../CNN.html">Convolutional Neural Net and Galaxy Zoo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lrd/are_LRD_resolved.html">LRD project</a></li>
+
+
+
+
+
+
+
+
+
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Merian Project</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="01_merian_intro.html">Merian project Part 1</a></li>
-
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Merian project Part 2</a></li>
+
 </ul>
 
     </div>
@@ -383,12 +393,19 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-the-morphology-of-dwarf-galaxies-in-h-alpha-using-the-merian-survey-data"><em>Explore the morphology of dwarf galaxies in H<span class="math notranslate nohighlight">\(\alpha\)</span> using the Merian Survey data</em></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-make-your-own-h-alpha-map-from-hsc-and-merian-data">Part 3: Make your own H<span class="math notranslate nohighlight">\(\alpha\)</span> map from HSC and Merian data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-a-brief-exercise-for-them-to-determine-the-psf-fwhm">Add a brief exercise for them to determine the PSF FWHM</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vanilla-image-subtraction-n708-z">(Vanilla) Image subtraction: <span class="math notranslate nohighlight">\(N708 - z\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#better-image-subtraction-match-psfs">Better Image subtraction: match PSFs!</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Merian project Part 2</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-make-your-own-h-alpha-map-from-hsc-and-merian-data">Part 3: Make your own H<span class="math notranslate nohighlight">\(\alpha\)</span> map from HSC and Merian data</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-1-measure-psf-fwhm">Part 3.1: measure PSF FWHM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-2-make-h-alpha-map-for-merian-dwarfs">Part 3.2: make H<span class="math notranslate nohighlight">\(\alpha\)</span> map for Merian dwarfs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vanilla-image-subtraction-n708-z">(Vanilla) Image subtraction: <span class="math notranslate nohighlight">\(N708 - z\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#better-image-subtraction-match-psfs">Better Image subtraction: match PSFs!</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#make-pretty-image-with-h-alpha-map-highlighted">Make pretty image with H<span class="math notranslate nohighlight">\(\alpha\)</span> map highlighted</a></li>
 </ul>
+</li>
+</ul>
+</li>
+</ul>
+
             </nav>
         </div>
     </div>
@@ -401,8 +418,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="merian-project-part-2">
 <h1>Merian project Part 2<a class="headerlink" href="#merian-project-part-2" title="Permalink to this heading">#</a></h1>
-<section id="explore-the-morphology-of-dwarf-galaxies-in-h-alpha-using-the-merian-survey-data">
-<h2><em>Explore the morphology of dwarf galaxies in H<span class="math notranslate nohighlight">\(\alpha\)</span> using the Merian Survey data</em><a class="headerlink" href="#explore-the-morphology-of-dwarf-galaxies-in-h-alpha-using-the-merian-survey-data" title="Permalink to this heading">#</a></h2>
+<p><strong>Explore the morphology of dwarf galaxies in H<span class="math notranslate nohighlight">\(\alpha\)</span> using the Merian Survey data</strong></p>
 <p><strong>Prerequisites</strong></p>
 <ul class="simple">
 <li><p>Need to install <code class="docutils literal notranslate"><span class="pre">reproject</span></code> and <code class="docutils literal notranslate"><span class="pre">photutils</span></code> and <code class="docutils literal notranslate"><span class="pre">cmasher</span></code></p></li>
@@ -422,9 +438,16 @@ document.write(`
 
 <span class="c1"># We can beautify our plots by changing the matpltlib setting a little</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">18</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;image.origin&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;lower&#39;</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">90</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.linewidth&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The autoreload extension is already loaded. To reload it, use:
+  %reload_ext autoreload
 </pre></div>
 </div>
 </div>
@@ -453,8 +476,8 @@ document.write(`
 </details>
 </div>
 </section>
-<section id="part-3-make-your-own-h-alpha-map-from-hsc-and-merian-data">
-<h2>Part 3: Make your own H<span class="math notranslate nohighlight">\(\alpha\)</span> map from HSC and Merian data<a class="headerlink" href="#part-3-make-your-own-h-alpha-map-from-hsc-and-merian-data" title="Permalink to this heading">#</a></h2>
+<section class="tex2jax_ignore mathjax_ignore" id="part-3-make-your-own-h-alpha-map-from-hsc-and-merian-data">
+<h1>Part 3: Make your own H<span class="math notranslate nohighlight">\(\alpha\)</span> map from HSC and Merian data<a class="headerlink" href="#part-3-make-your-own-h-alpha-map-from-hsc-and-merian-data" title="Permalink to this heading">#</a></h1>
 <p>Again, some background knowledge goes here. What is HSC, what is image subtraction. What is tricky about it (e.g., PSF matching).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -465,11 +488,6 @@ document.write(`
 <span class="n">obj</span> <span class="o">=</span> <span class="n">merian</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
 <span class="n">coord</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="p">(</span><span class="n">obj</span><span class="p">[</span><span class="s1">&#39;coord_ra_Merian&#39;</span><span class="p">],</span> <span class="n">obj</span><span class="p">[</span><span class="s1">&#39;coord_dec_Merian&#39;</span><span class="p">],</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;deg&#39;</span><span class="p">)</span>
 <span class="n">cname</span> <span class="o">=</span> <span class="n">obj</span><span class="p">[</span><span class="s1">&#39;cname&#39;</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: OverflowError converting to IntType in column specobjid_S, reverting to String. [astropy.io.ascii.fastbasic]
 </pre></div>
 </div>
 </div>
@@ -523,9 +541,93 @@ document.write(`
 </div>
 </div>
 </div>
+<section id="part-3-1-measure-psf-fwhm">
+<h2>Part 3.1: measure PSF FWHM<a class="headerlink" href="#part-3-1-measure-psf-fwhm" title="Permalink to this heading">#</a></h2>
+<p>Let’s take a better look at the PSF of N708 band. Then we try to fit a Moffat model to the PSF, and calculate the FWHM of the PSF.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">band</span> <span class="o">=</span> <span class="s1">&#39;i&#39;</span>
+<span class="n">psf</span> <span class="o">=</span> <span class="n">psfs</span><span class="p">[</span><span class="n">band</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">psf</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x14d06e850&gt;
+</pre></div>
+</div>
+<img alt="../../../_images/e3a20944e89926b27806d9e762a8bc043259c5f1515591fa9016f8d5f869e550.png" src="../../../_images/e3a20944e89926b27806d9e762a8bc043259c5f1515591fa9016f8d5f869e550.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.modeling</span> <span class="kn">import</span> <span class="n">models</span><span class="p">,</span> <span class="n">fitting</span>
+<span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mgrid</span><span class="p">[:</span><span class="n">psf</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">:</span><span class="n">psf</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Moffat2D</span><span class="p">(</span><span class="n">x_0</span><span class="o">=</span><span class="n">psf</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">y_0</span><span class="o">=</span><span class="n">psf</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">amplitude</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">psf</span><span class="p">))</span>
+<span class="n">fitter</span> <span class="o">=</span> <span class="n">fitting</span><span class="o">.</span><span class="n">LevMarLSQFitter</span><span class="p">()</span>
+<span class="n">best_fit</span> <span class="o">=</span> <span class="n">fitter</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">psf</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;FWHM = </span><span class="si">{</span><span class="n">best_fit</span><span class="o">.</span><span class="n">fwhm</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1"> pix&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FWHM = 3.630 pix
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+<span class="n">show_image</span><span class="p">(</span><span class="n">psf</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">fig</span><span class="o">=</span><span class="n">fig</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">psf</span><span class="p">,</span> <span class="mi">92</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">band</span><span class="si">}</span><span class="s1"> PSF&#39;</span><span class="p">)</span>
+<span class="n">show_image</span><span class="p">(</span><span class="n">best_fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">fig</span><span class="o">=</span><span class="n">fig</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">psf</span><span class="p">,</span> <span class="mi">92</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;best-fit Moffat&#39;</span><span class="p">)</span>
+<span class="n">show_image</span><span class="p">(</span><span class="n">psf</span> <span class="o">-</span> <span class="n">best_fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">fig</span><span class="o">=</span><span class="n">fig</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">psf</span><span class="p">,</span> <span class="mi">92</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;residual&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: title={&#39;center&#39;: &#39;residual&#39;}&gt;
+</pre></div>
+</div>
+<img alt="../../../_images/79526fcb0a666ab4f87b2fae413d7aea7e4558cedd6a7b8f5c0d8a434601c856.png" src="../../../_images/79526fcb0a666ab4f87b2fae413d7aea7e4558cedd6a7b8f5c0d8a434601c856.png" />
+</div>
+</div>
+<p>Then we can summarize the above procedure as the <code class="docutils literal notranslate"><span class="pre">calc_PSF_FWHM</span></code> function:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calc_PSF_FWHM</span><span class="p">(</span><span class="n">psfs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Measure the FWHM of the PSF by fitting a 2D Moffat profile to each PSF cutout.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    psfs: dict</span>
+<span class="sd">        A dictionary containing the PSF images for each band.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    fwhm: dict</span>
+<span class="sd">        A dictionary containing the FWHM of the PSF for each band (in pixels).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">astropy.modeling</span> <span class="kn">import</span> <span class="n">models</span><span class="p">,</span> <span class="n">fitting</span>
+    <span class="n">bands</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">psfs</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+    <span class="n">fit_p</span> <span class="o">=</span> <span class="n">fitting</span><span class="o">.</span><span class="n">LevMarLSQFitter</span><span class="p">()</span>
+    <span class="n">fwhms</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">ix</span><span class="p">,</span> <span class="n">band</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">bands</span><span class="p">):</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">psfs</span><span class="p">[</span><span class="n">band</span><span class="p">]</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">z</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mgrid</span><span class="p">[:</span> <span class="n">z</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">:</span> <span class="n">z</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+        <span class="n">p_init</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Moffat2D</span><span class="p">(</span><span class="n">x_0</span><span class="o">=</span><span class="n">mid</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y_0</span><span class="o">=</span><span class="n">mid</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">amplitude</span><span class="o">=</span><span class="n">z</span><span class="p">[</span><span class="n">mid</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">mid</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">fit_p</span><span class="p">(</span><span class="n">p_init</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+        <span class="n">fwhms</span><span class="p">[</span><span class="n">band</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">fwhm</span>
+
+    <span class="k">return</span> <span class="n">fwhms</span>
+
+</pre></div>
+</div>
 </section>
-<section id="add-a-brief-exercise-for-them-to-determine-the-psf-fwhm">
-<h2>Add a brief exercise for them to determine the PSF FWHM<a class="headerlink" href="#add-a-brief-exercise-for-them-to-determine-the-psf-fwhm" title="Permalink to this heading">#</a></h2>
+<section id="part-3-2-make-h-alpha-map-for-merian-dwarfs">
+<h2>Part 3.2: make H<span class="math notranslate nohighlight">\(\alpha\)</span> map for Merian dwarfs<a class="headerlink" href="#part-3-2-make-h-alpha-map-for-merian-dwarfs" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">calc_PSF_FWHM</span>
@@ -556,9 +658,8 @@ Worst psf is in band N708
 <img alt="../../../_images/7836427af0ede7fec8b423cf45785a308ca25a679bbf8723865bb94efb48174a.png" src="../../../_images/7836427af0ede7fec8b423cf45785a308ca25a679bbf8723865bb94efb48174a.png" />
 </div>
 </div>
-</section>
 <section id="vanilla-image-subtraction-n708-z">
-<h2>(Vanilla) Image subtraction: <span class="math notranslate nohighlight">\(N708 - z\)</span><a class="headerlink" href="#vanilla-image-subtraction-n708-z" title="Permalink to this heading">#</a></h2>
+<h3>(Vanilla) Image subtraction: <span class="math notranslate nohighlight">\(N708 - z\)</span><a class="headerlink" href="#vanilla-image-subtraction-n708-z" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.wcs</span> <span class="kn">import</span> <span class="n">WCS</span>
@@ -610,11 +711,13 @@ Worst psf is in band N708
 </div>
 </section>
 <section id="better-image-subtraction-match-psfs">
-<h2>Better Image subtraction: match PSFs!<a class="headerlink" href="#better-image-subtraction-match-psfs" title="Permalink to this heading">#</a></h2>
+<h3>Better Image subtraction: match PSFs!<a class="headerlink" href="#better-image-subtraction-match-psfs" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">photutils.psf</span> <span class="kn">import</span> <span class="n">matching</span>
 <span class="kn">from</span> <span class="nn">astropy.convolution</span> <span class="kn">import</span> <span class="n">convolve_fft</span>
+<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">get_central_region</span>
+<span class="kn">from</span> <span class="nn">astropy.visualization</span> <span class="kn">import</span> <span class="n">ImageNormalize</span><span class="p">,</span> <span class="n">LuptonAsinhStretch</span><span class="p">,</span> <span class="n">make_lupton_rgb</span>
 </pre></div>
 </div>
 </div>
@@ -695,14 +798,9 @@ Worst psf is in band N708
 <img alt="../../../_images/ae0d4f1a463a19b4ac565bed56428af0a9695fb346e9d68b41a8d108c25aacbd.png" src="../../../_images/ae0d4f1a463a19b4ac565bed56428af0a9695fb346e9d68b41a8d108c25aacbd.png" />
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">get_central_region</span>
-<span class="kn">from</span> <span class="nn">astropy.visualization</span> <span class="kn">import</span> <span class="n">ImageNormalize</span><span class="p">,</span> <span class="n">LuptonAsinhStretch</span>
-</pre></div>
-</div>
-</div>
-</div>
+</section>
+<section id="make-pretty-image-with-h-alpha-map-highlighted">
+<h3>Make pretty image with H<span class="math notranslate nohighlight">\(\alpha\)</span> map highlighted<a class="headerlink" href="#make-pretty-image-with-h-alpha-map-highlighted" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cuts</span> <span class="o">=</span> <span class="n">get_central_region</span><span class="p">(</span><span class="n">cutouts_matched_reproj</span><span class="p">,</span> <span class="mi">220</span><span class="p">)</span>
@@ -774,12 +872,17 @@ Worst psf is in band N708
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jiaxuanl/Softwares/lsst_stack/conda/miniconda3-py38_4.9.2/envs/lsst-scipipe-8.0.0/lib/python3.11/site-packages/astropy/visualization/basic_rgb.py:153: RuntimeWarning: invalid value encountered in cast
+  return image_rgb.astype(output_dtype)
+</pre></div>
+</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;grz+H$\\alpha$ (blue)&#39;)
 </pre></div>
 </div>
 <img alt="../../../_images/b34b6ee68657d7085e4b55c4dfc1db9bbe63abe4699845cc2337255dffccf08f.png" src="../../../_images/b34b6ee68657d7085e4b55c4dfc1db9bbe63abe4699845cc2337255dffccf08f.png" />
 </div>
 </div>
+</section>
 </section>
 </section>
 
@@ -837,12 +940,19 @@ Worst psf is in band N708
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-the-morphology-of-dwarf-galaxies-in-h-alpha-using-the-merian-survey-data"><em>Explore the morphology of dwarf galaxies in H<span class="math notranslate nohighlight">\(\alpha\)</span> using the Merian Survey data</em></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-make-your-own-h-alpha-map-from-hsc-and-merian-data">Part 3: Make your own H<span class="math notranslate nohighlight">\(\alpha\)</span> map from HSC and Merian data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-a-brief-exercise-for-them-to-determine-the-psf-fwhm">Add a brief exercise for them to determine the PSF FWHM</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vanilla-image-subtraction-n708-z">(Vanilla) Image subtraction: <span class="math notranslate nohighlight">\(N708 - z\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#better-image-subtraction-match-psfs">Better Image subtraction: match PSFs!</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Merian project Part 2</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-make-your-own-h-alpha-map-from-hsc-and-merian-data">Part 3: Make your own H<span class="math notranslate nohighlight">\(\alpha\)</span> map from HSC and Merian data</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-1-measure-psf-fwhm">Part 3.1: measure PSF FWHM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-2-make-h-alpha-map-for-merian-dwarfs">Part 3.2: make H<span class="math notranslate nohighlight">\(\alpha\)</span> map for Merian dwarfs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vanilla-image-subtraction-n708-z">(Vanilla) Image subtraction: <span class="math notranslate nohighlight">\(N708 - z\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#better-image-subtraction-match-psfs">Better Image subtraction: match PSFs!</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#make-pretty-image-with-h-alpha-map-highlighted">Make pretty image with H<span class="math notranslate nohighlight">\(\alpha\)</span> map highlighted</a></li>
 </ul>
+</li>
+</ul>
+</li>
+</ul>
+
   </nav></div>
 
 </div></div>

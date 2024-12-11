@@ -1,0 +1,994 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>LRD project &#8212; Observational Astronomy</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/final_project/lrd/are_LRD_resolved';</script>
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Merian project Part 1" href="../merian/01_merian_intro.html" />
+    <link rel="prev" title="Convolutional Neural Net and Galaxy Zoo" href="../CNN.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/jwst-min.png" class="logo__image only-light" alt="Observational Astronomy - Home"/>
+    <script>document.write(`<img src="../../../_static/jwst-min.png" class="logo__image only-dark" alt="Observational Astronomy - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../about_py.html">About Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Setting up Your Python Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../python_by_example.html">An Introductory Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../notebooks.html">Test notebook</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../stats/basic_stats.html">Basic Statistics (Part 1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stats/more_stats.html">Basic Statistics (Part 2)</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Detector and Imaging</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../imaging/calibration_frames.html">Calibration frames</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../../imaging/img_simulation.html">Simulate an artificial image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../imaging/plotting_jwst.html">Plotting JWST images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intro_gaia_star.html">Introduction to Gaia data</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Final Projects</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../variable_stars_and_planets.html">Lightcurves, transits, and TESS! Oh My!</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../CNN.html">Convolutional Neural Net and Galaxy Zoo</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">LRD project</a></li>
+
+
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Merian Project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../merian/01_merian_intro.html">Merian project Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../merian/02_Halpha_map.html">Merian project Part 2</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/AstroJacobLi/ObsAstGreene/blob/main//book/docs/final_project/lrd/are_LRD_resolved.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/docs/final_project/lrd/are_LRD_resolved.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>LRD project</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">LRD project</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#imports">Imports</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#lrd-information">LRD information</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-f444w-with-the-psf">Compare F444W with the PSF</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#create-radial-profiles-for-all-bands-now">Create radial profiles for all bands now</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-the-half-light-radii-of-psf-f115w-and-f444w">Compare the half-light radii of PSF, F115W, and F444W.</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#if-r-mathrm-eff-mathrm-f444w-r-mathrm-eff-mathrm-psf-1-it-is-resolved">- If <span class="math notranslate nohighlight">\(r_\mathrm{eff}(\mathrm{F444W}) / r_\mathrm{eff}(\mathrm{PSF})&gt;1\)</span> it is resolved.</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#if-r-mathrm-eff-mathrm-f115w-r-mathrm-eff-mathrm-f444w-1-blue-light-is-more-spatially-extended-than-red-light">- If <span class="math notranslate nohighlight">\(r_\mathrm{eff}(\mathrm{F115W}) / r_\mathrm{eff}(\mathrm{F444W})&gt;1\)</span> blue light is more spatially extended than red light.</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#for-fun-do-these-properties-correlate-with-anything-like-redshift-magnification-etc">- For fun, do these properties correlate with anything? Like redshift, magnification, etc?</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="lrd-project">
+<h1>LRD project<a class="headerlink" href="#lrd-project" title="Permalink to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="imports">
+<h1>Imports<a class="headerlink" href="#imports" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scipy</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">astropy</span> <span class="kn">import</span> <span class="n">visualization</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="lrd-information">
+<h1>LRD information<a class="headerlink" href="#lrd-information" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">targets</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mi">4286</span>  <span class="p">:</span> <span class="p">(</span><span class="mf">3.619202</span><span class="p">,</span> <span class="o">-</span><span class="mf">30.423270</span><span class="p">),</span>
+    <span class="mi">13123</span> <span class="p">:</span> <span class="p">(</span><span class="mf">3.579829</span><span class="p">,</span> <span class="o">-</span><span class="mf">30.401570</span><span class="p">),</span>
+    <span class="mi">13821</span> <span class="p">:</span> <span class="p">(</span><span class="mf">3.620607</span><span class="p">,</span> <span class="o">-</span><span class="mf">30.399951</span><span class="p">),</span>
+    <span class="mi">20466</span> <span class="p">:</span> <span class="p">(</span><span class="mf">3.640409</span><span class="p">,</span> <span class="o">-</span><span class="mf">30.386437</span><span class="p">),</span>
+    <span class="mi">23608</span> <span class="p">:</span> <span class="p">(</span><span class="mf">3.542815</span><span class="p">,</span> <span class="o">-</span><span class="mf">30.380646</span><span class="p">),</span>
+    <span class="mi">35488</span> <span class="p">:</span> <span class="p">(</span><span class="mf">3.578984</span><span class="p">,</span> <span class="o">-</span><span class="mf">30.362598</span><span class="p">),</span>
+    <span class="mi">38108</span> <span class="p">:</span> <span class="p">(</span><span class="mf">3.530009</span><span class="p">,</span> <span class="o">-</span><span class="mf">30.358013</span><span class="p">),</span>
+    <span class="mi">41225</span> <span class="p">:</span> <span class="p">(</span><span class="mf">3.533994</span><span class="p">,</span> <span class="o">-</span><span class="mf">30.353308</span><span class="p">),</span>
+<span class="p">}</span>
+
+<span class="c1"># confirmed broadlines in UNCOVER except 45924, because really bright and breaks these simple tests</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># [z, mu, L_Ha, L_bol, F277 – F356]</span>
+<span class="n">supplemental</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mi">4286</span>  <span class="p">:</span> <span class="p">(</span> <span class="mf">5.84</span><span class="p">,</span> <span class="mf">1.62</span><span class="p">,</span>  <span class="mf">43.4</span><span class="p">,</span> <span class="mf">45.4</span><span class="p">,</span> <span class="mf">1.19</span><span class="p">),</span>
+    <span class="mi">13123</span> <span class="p">:</span> <span class="p">(</span> <span class="mf">7.04</span><span class="p">,</span> <span class="mf">6.15</span><span class="p">,</span>  <span class="mf">42.7</span><span class="p">,</span> <span class="mf">45.0</span><span class="p">,</span> <span class="mf">1.89</span><span class="p">),</span>
+    <span class="mi">13821</span> <span class="p">:</span> <span class="p">(</span> <span class="mf">6.34</span><span class="p">,</span> <span class="mf">1.59</span><span class="p">,</span>  <span class="mf">43.3</span><span class="p">,</span> <span class="mf">45.4</span><span class="p">,</span> <span class="mf">1.40</span><span class="p">),</span>
+    <span class="mi">20466</span> <span class="p">:</span> <span class="p">(</span> <span class="mf">8.50</span><span class="p">,</span> <span class="mf">1.33</span><span class="p">,</span>  <span class="mf">43.8</span><span class="p">,</span> <span class="mf">45.8</span><span class="p">,</span> <span class="mf">0.72</span><span class="p">),</span>
+    <span class="mi">23608</span> <span class="p">:</span> <span class="p">(</span> <span class="mf">5.80</span><span class="p">,</span> <span class="mf">2.07</span><span class="p">,</span>  <span class="mf">42.3</span><span class="p">,</span> <span class="mf">44.2</span><span class="p">,</span> <span class="mf">0.88</span><span class="p">),</span>
+    <span class="mi">35488</span> <span class="p">:</span> <span class="p">(</span> <span class="mf">6.26</span><span class="p">,</span> <span class="mf">3.38</span><span class="p">,</span>  <span class="mf">42.8</span><span class="p">,</span> <span class="mf">44.8</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">),</span>
+    <span class="mi">38108</span> <span class="p">:</span> <span class="p">(</span> <span class="mf">4.96</span><span class="p">,</span> <span class="mf">1.59</span><span class="p">,</span>  <span class="mf">43.4</span><span class="p">,</span> <span class="mf">45.3</span><span class="p">,</span> <span class="mf">0.83</span><span class="p">),</span>
+    <span class="mi">41225</span> <span class="p">:</span> <span class="p">(</span> <span class="mf">6.76</span><span class="p">,</span> <span class="mf">1.50</span><span class="p">,</span>  <span class="mf">43.5</span><span class="p">,</span> <span class="mf">45.3</span><span class="p">,</span> <span class="mf">0.71</span><span class="p">),</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bands</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;f480m&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;f460m&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;f444w&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;f430m&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;f410m&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;f360m&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;f356w&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;f335m&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;f300m&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;f277w&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;f250m&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;f210m_block40&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;f200w_block40&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;f182m_block40&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;f162m_block40&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;f150w_block40&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;f140m_block40&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;f115w_block40&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;f090w_block40&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;f070w_block40&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="functions">
+<h1>Functions<a class="headerlink" href="#functions" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">residual</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">z_err</span><span class="p">,</span> <span class="n">sumit</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+    <span class="n">sigma</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">bkg</span><span class="p">,</span> <span class="n">xmu</span><span class="p">,</span> <span class="n">ymu</span> <span class="o">=</span> <span class="n">theta</span>
+    
+    <span class="n">model</span> <span class="o">=</span> <span class="n">gauss2d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span><span class="n">scale</span><span class="o">=</span><span class="n">scale</span><span class="p">,</span><span class="n">bkg</span><span class="o">=</span><span class="n">bkg</span><span class="p">,</span><span class="n">xmu</span><span class="o">=</span><span class="n">xmu</span><span class="p">,</span><span class="n">ymu</span><span class="o">=</span><span class="n">ymu</span><span class="p">)</span>
+    
+    <span class="n">chi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">model</span> <span class="o">-</span> <span class="n">z</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">z_err</span><span class="o">**</span><span class="mi">2</span>
+    
+    <span class="k">if</span> <span class="n">sumit</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nansum</span><span class="p">(</span><span class="n">chi</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">chi</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">c</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">c</span><span class="p">)]</span>
+    
+<span class="k">def</span> <span class="nf">gauss2d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">sigma</span><span class="p">,</span><span class="n">scale</span><span class="p">,</span><span class="n">bkg</span><span class="p">,</span><span class="n">xmu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ymu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">unravel</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Symmetric 2D point-spread function (PSF)</span>
+<span class="sd">    </span>
+<span class="sd">    inputs:</span>
+<span class="sd">        x: np.ndarray, where to evaluate the PSF</span>
+<span class="sd">        y: np.ndarray, where to evaluate the PSF</span>
+<span class="sd">        sigma: float, width of the PDF</span>
+<span class="sd">        scale: float, integrated area under the PSF</span>
+<span class="sd">        bkg: float, background flux level</span>
+<span class="sd">        xmu: float, center of PSF in x</span>
+<span class="sd">        ymu: float, center of PSF in y</span>
+<span class="sd">    outputs:</span>
+<span class="sd">        PSF evalauted at x and y</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">exponent</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">xmu</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">ymu</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="p">)</span> <span class="o">/</span> <span class="n">sigma</span><span class="o">**</span><span class="mi">2</span>
+    
+    <span class="n">mod</span> <span class="o">=</span> <span class="n">scale</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">exponent</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">bkg</span>
+    <span class="k">if</span> <span class="n">unravel</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">mod</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">mod</span>
+    
+<span class="k">def</span> <span class="nf">fit_with_func</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">error</span><span class="p">,</span> <span class="n">first_guess</span><span class="p">):</span>
+    
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">X</span><span class="p">,</span><span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+
+    <span class="n">out</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">optimize</span><span class="o">.</span><span class="n">leastsq</span><span class="p">(</span><span class="n">residual</span><span class="p">,</span> 
+                              <span class="n">x0</span> <span class="o">=</span> <span class="n">first_guess</span><span class="p">,</span>
+                              <span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">image</span><span class="p">,</span><span class="n">error</span><span class="p">),</span>
+                              <span class="n">full_output</span> <span class="o">=</span> <span class="kc">True</span>
+                                <span class="p">)</span>
+    <span class="k">return</span> <span class="n">out</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span>
+
+<span class="k">def</span> <span class="nf">radial_profile</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">error</span><span class="p">,</span> <span class="n">step</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">steps</span> <span class="o">=</span> <span class="mi">4</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">X</span><span class="p">,</span><span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+
+    <span class="n">x0</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span>
+    <span class="n">y0</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span>  
+    
+    <span class="n">R</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">X</span><span class="o">-</span><span class="n">x0</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">Y</span><span class="o">-</span><span class="n">y0</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="p">)</span> 
+    
+    <span class="n">radii</span><span class="p">,</span><span class="n">fluxes</span><span class="p">,</span><span class="n">errors</span><span class="p">,</span><span class="n">areas</span> <span class="o">=</span> <span class="p">[],[],[],[]</span>
+    <span class="n">r0</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">steps</span><span class="p">):</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="p">(</span><span class="n">R</span><span class="o">&lt;</span><span class="n">r0</span><span class="o">+</span><span class="n">step</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">R</span><span class="o">&gt;=</span><span class="n">r0</span><span class="p">)</span>
+
+        <span class="n">radii</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r0</span><span class="o">+</span><span class="n">step</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">fluxes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">nansum</span><span class="p">(</span><span class="n">image</span><span class="p">[</span><span class="n">C</span><span class="p">])</span> <span class="p">)</span> 
+        <span class="n">errors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">nansum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">error</span><span class="p">[</span><span class="n">C</span><span class="p">],</span><span class="mi">2</span><span class="p">)</span> <span class="p">))</span> <span class="p">)</span>
+        <span class="n">areas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="nb">len</span><span class="p">(</span><span class="n">C</span><span class="p">[</span><span class="n">C</span><span class="p">])</span> <span class="p">)</span>
+        
+        <span class="n">r0</span> <span class="o">+=</span> <span class="n">step</span>
+        
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">radii</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">fluxes</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">errors</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">areas</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">get_circle</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span><span class="n">y0</span><span class="p">):</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">x0</span> <span class="o">+</span> <span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="n">y0</span> <span class="o">+</span> <span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">find_half_light_radius</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">xp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">x</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">yp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+    
+    <span class="n">ap</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">ap</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">yp</span><span class="p">[:</span><span class="n">i</span><span class="p">],</span> <span class="n">xp</span><span class="p">[:</span><span class="n">i</span><span class="p">])</span> <span class="p">)</span>  
+        
+    <span class="n">ap</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ap</span><span class="p">)</span>
+    <span class="n">ap</span> <span class="o">/=</span> <span class="n">ap</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="n">half</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">ap</span><span class="p">,</span> <span class="n">xp</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">ap</span><span class="p">,</span> <span class="n">half</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="compare-f444w-with-the-psf">
+<h1>Compare F444W with the PSF<a class="headerlink" href="#compare-f444w-with-the-psf" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">target</span> <span class="ow">in</span> <span class="n">targets</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    
+    <span class="c1"># load images</span>
+    <span class="n">images</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;data/</span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="s1">/sci.npy&#39;</span><span class="p">)</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;data/</span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="s1">/err.npy&#39;</span><span class="p">)</span>
+    <span class="n">masks</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;data/</span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="s1">/msk.npy&#39;</span><span class="p">)</span>
+    <span class="n">psfs</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;data/psf.npy&#39;</span><span class="p">)</span>
+
+    <span class="c1"># place we will put the plots</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">constrained_layout</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">15</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="mi">10</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
+    <span class="n">ax_dict</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">subplot_mosaic</span><span class="p">(</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        ABC</span>
+<span class="sd">        DEF</span>
+<span class="sd">        &quot;&quot;&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># show color image</span>
+    <span class="n">rgb</span> <span class="o">=</span> <span class="n">visualization</span><span class="o">.</span><span class="n">make_lupton_rgb</span><span class="p">(</span><span class="n">images</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">images</span><span class="p">[</span><span class="o">-</span><span class="mi">11</span><span class="p">],</span> <span class="n">images</span><span class="p">[</span><span class="o">-</span><span class="mi">14</span><span class="p">],</span>
+                                    <span class="n">stretch</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+    
+    <span class="n">ax_dict</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rgb</span><span class="p">)</span>
+    <span class="n">ax_dict</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Three filter color image (</span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># mask out nearby sources</span>
+    <span class="n">images</span><span class="p">[</span><span class="n">masks</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+    <span class="n">errors</span><span class="p">[</span><span class="n">masks</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>    
+    
+    <span class="c1"># show reddest image</span>
+    <span class="n">ax_dict</span><span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">images</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">vmin</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">images</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">/</span> <span class="mi">10</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">images</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">/</span> <span class="mi">10</span><span class="p">)</span>    
+    <span class="n">ax_dict</span><span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Red band image&#39;</span><span class="p">)</span>
+
+    <span class="c1"># show point spread function</span>
+    <span class="n">ax_dict</span><span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">psfs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>  <span class="n">vmin</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">psfs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">psfs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="mi">10</span><span class="p">)</span>    
+    <span class="n">ax_dict</span><span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Point Spread Function&#39;</span><span class="p">)</span>
+
+    <span class="c1"># first science image with a 2D gaussian</span>
+    <span class="n">sci</span> <span class="o">=</span> <span class="n">images</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">err</span> <span class="o">=</span> <span class="n">errors</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">first_guess</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">5</span><span class="p">,</span> 
+                    <span class="mi">700</span><span class="p">,</span>  
+                    <span class="mi">0</span><span class="p">,</span> <span class="c1">#np.nanmedian(sci[:10]),  </span>
+                    <span class="n">sci</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>  
+                    <span class="n">sci</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="n">out_sci</span><span class="p">,</span> <span class="n">X_sci</span><span class="p">,</span> <span class="n">Y_sci</span> <span class="o">=</span> <span class="n">fit_with_func</span><span class="p">(</span><span class="n">sci</span><span class="p">,</span> <span class="n">err</span><span class="p">,</span> <span class="n">first_guess</span><span class="p">)</span>
+
+    <span class="c1"># show residuals </span>
+    <span class="n">ax_dict</span><span class="p">[</span><span class="s1">&#39;E&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">sci</span> <span class="o">-</span> <span class="n">gauss2d</span><span class="p">(</span><span class="n">X_sci</span><span class="p">,</span> <span class="n">Y_sci</span><span class="p">,</span><span class="o">*</span><span class="n">out_sci</span><span class="p">),</span>  
+                        <span class="n">vmin</span><span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">sci</span><span class="p">)</span> <span class="o">/</span> <span class="mi">10</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">sci</span><span class="p">)</span> <span class="o">/</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="n">ax_dict</span><span class="p">[</span><span class="s1">&#39;E&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Residual&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># first fit the PSF with a 2D gaussian</span>
+    <span class="n">psf</span> <span class="o">=</span> <span class="n">psfs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">first_guess</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">5</span><span class="p">,</span> 
+                    <span class="mi">1</span><span class="p">,</span>  
+                    <span class="mi">0</span><span class="p">,</span>  
+                    <span class="n">psf</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>  
+                    <span class="n">psf</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="n">out_psf</span><span class="p">,</span> <span class="n">X_psf</span><span class="p">,</span> <span class="n">Y_psf</span> <span class="o">=</span> <span class="n">fit_with_func</span><span class="p">(</span><span class="n">psf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">psf</span><span class="p">),</span> <span class="n">first_guess</span><span class="p">)</span>
+    
+    <span class="c1"># show residuals </span>
+    <span class="n">ax_dict</span><span class="p">[</span><span class="s1">&#39;F&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">psf</span> <span class="o">-</span> <span class="n">gauss2d</span><span class="p">(</span><span class="n">X_psf</span><span class="p">,</span> <span class="n">Y_psf</span><span class="p">,</span><span class="o">*</span><span class="n">out_psf</span><span class="p">),</span>  
+                        <span class="n">vmin</span><span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">psf</span><span class="p">)</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">psf</span><span class="p">)</span><span class="o">/</span><span class="mi">10</span><span class="p">)</span>    
+    <span class="n">ax_dict</span><span class="p">[</span><span class="s1">&#39;F&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Residual&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># now calculate 1D radial profiles</span>
+    <span class="n">step</span>  <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">steps</span> <span class="o">=</span> <span class="mi">12</span>
+    <span class="n">r_sci</span><span class="p">,</span><span class="n">f_sci</span><span class="p">,</span><span class="n">e_sci</span><span class="p">,</span><span class="n">a_sci</span> <span class="o">=</span> <span class="n">radial_profile</span><span class="p">(</span><span class="n">sci</span><span class="p">,</span> <span class="n">err</span><span class="p">,</span> <span class="n">step</span> <span class="o">=</span> <span class="n">step</span><span class="p">,</span> <span class="n">steps</span> <span class="o">=</span> <span class="n">steps</span><span class="p">)</span>
+    <span class="n">r_sci_m</span><span class="p">,</span><span class="n">f_sci_m</span><span class="p">,</span><span class="n">e_sci_m</span><span class="p">,</span><span class="n">a_sci_m</span> <span class="o">=</span> <span class="n">radial_profile</span><span class="p">(</span><span class="n">gauss2d</span><span class="p">(</span><span class="n">X_sci</span><span class="p">,</span> <span class="n">Y_sci</span><span class="p">,</span><span class="o">*</span><span class="n">out_sci</span><span class="p">),</span> <span class="n">err</span><span class="p">,</span> <span class="n">step</span> <span class="o">=</span> <span class="n">step</span><span class="p">,</span> <span class="n">steps</span> <span class="o">=</span> <span class="n">steps</span><span class="p">)</span>
+    
+    <span class="n">r_psf</span><span class="p">,</span><span class="n">f_psf</span><span class="p">,</span><span class="n">e_psf</span><span class="p">,</span><span class="n">a_psf</span> <span class="o">=</span> <span class="n">radial_profile</span><span class="p">(</span><span class="n">psf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">psf</span><span class="p">),</span> <span class="n">step</span> <span class="o">=</span> <span class="n">step</span><span class="p">,</span> <span class="n">steps</span> <span class="o">=</span> <span class="n">steps</span><span class="p">)</span>
+    <span class="n">r_psf_m</span><span class="p">,</span><span class="n">f_psf_m</span><span class="p">,</span><span class="n">e_psf_m</span><span class="p">,</span><span class="n">a_psf_m</span> <span class="o">=</span> <span class="n">radial_profile</span><span class="p">(</span><span class="n">gauss2d</span><span class="p">(</span><span class="n">X_psf</span><span class="p">,</span> <span class="n">Y_psf</span><span class="p">,</span><span class="o">*</span><span class="n">out_psf</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">psf</span><span class="p">),</span> <span class="n">step</span> <span class="o">=</span> <span class="n">step</span><span class="p">,</span> <span class="n">steps</span> <span class="o">=</span> <span class="n">steps</span><span class="p">)</span>
+    
+    <span class="n">f_psf</span> <span class="o">/=</span> <span class="n">a_psf</span>
+    <span class="n">f_psf_m</span> <span class="o">/=</span> <span class="n">a_psf_m</span>
+    
+    <span class="n">f_sci</span> <span class="o">/=</span> <span class="n">a_sci</span>
+    <span class="n">f_sci_m</span> <span class="o">/=</span> <span class="n">a_sci_m</span>
+    
+    <span class="c1"># plot</span>
+    <span class="n">ax_dict</span><span class="p">[</span><span class="s1">&#39;D&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">r_psf</span><span class="p">,</span> <span class="n">f_psf</span><span class="o">/</span><span class="n">f_psf</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;PSF&#39;</span><span class="p">)</span>
+    <span class="n">ax_dict</span><span class="p">[</span><span class="s1">&#39;D&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">r_sci</span><span class="p">,</span> <span class="n">f_sci</span><span class="o">/</span><span class="n">f_sci</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;LRD&#39;</span><span class="p">)</span>
+    
+    <span class="n">ax_dict</span><span class="p">[</span><span class="s1">&#39;D&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r_psf</span><span class="p">,</span> <span class="n">f_psf_m</span><span class="o">/</span><span class="n">f_psf_m</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">ax_dict</span><span class="p">[</span><span class="s1">&#39;D&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r_sci</span><span class="p">,</span> <span class="n">f_sci_m</span><span class="o">/</span><span class="n">f_sci_m</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    
+    <span class="n">ax_dict</span><span class="p">[</span><span class="s1">&#39;D&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+    <span class="n">ax_dict</span><span class="p">[</span><span class="s1">&#39;D&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">ax_dict</span><span class="p">[</span><span class="s1">&#39;D&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Radial profile&#39;</span><span class="p">)</span>
+    <span class="n">ax_dict</span><span class="p">[</span><span class="s1">&#39;D&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Normalized Flux&#39;</span><span class="p">)</span>
+    <span class="n">ax_dict</span><span class="p">[</span><span class="s1">&#39;D&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Radius (pixels)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/91f4882dbd72614778c76d0b35c516e4fa39615553d597f14950ae1e20e86af4.png" src="../../../_images/91f4882dbd72614778c76d0b35c516e4fa39615553d597f14950ae1e20e86af4.png" />
+<img alt="../../../_images/dde3546aada420e2ab3a180d7d0f188153a6c7ccfb42309a0a033cc0f3523007.png" src="../../../_images/dde3546aada420e2ab3a180d7d0f188153a6c7ccfb42309a0a033cc0f3523007.png" />
+<img alt="../../../_images/a651c9732281e66ffedc091b34d22d7c6b6a51838d995eeff120b77346ef84af.png" src="../../../_images/a651c9732281e66ffedc091b34d22d7c6b6a51838d995eeff120b77346ef84af.png" />
+<img alt="../../../_images/fc6fc014b46f80eeb9adc637dd064c906e67bb9441b7631422f11e0b752f8c49.png" src="../../../_images/fc6fc014b46f80eeb9adc637dd064c906e67bb9441b7631422f11e0b752f8c49.png" />
+<img alt="../../../_images/8cf5c07a6b6edc71000ac5cdd936f4ae85282f4c545b97cc5d3a0b4b29cf40dd.png" src="../../../_images/8cf5c07a6b6edc71000ac5cdd936f4ae85282f4c545b97cc5d3a0b4b29cf40dd.png" />
+<img alt="../../../_images/6eca7d1ed4a6535e887bdb48115fd5b3b9f14937a3dadf513ba20e2c139f930a.png" src="../../../_images/6eca7d1ed4a6535e887bdb48115fd5b3b9f14937a3dadf513ba20e2c139f930a.png" />
+<img alt="../../../_images/e4391878700ba038b796cff9803cada80878742ee5b56bdbed9f533ff88f7f08.png" src="../../../_images/e4391878700ba038b796cff9803cada80878742ee5b56bdbed9f533ff88f7f08.png" />
+<img alt="../../../_images/d2681eff4a1857945a5e44eb0ee8468220be98dc0b4a4f9385ca839bc309a251.png" src="../../../_images/d2681eff4a1857945a5e44eb0ee8468220be98dc0b4a4f9385ca839bc309a251.png" />
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="create-radial-profiles-for-all-bands-now">
+<h1>Create radial profiles for all bands now<a class="headerlink" href="#create-radial-profiles-for-all-bands-now" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">halfs</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">target</span> <span class="ow">in</span> <span class="n">targets</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    
+    <span class="c1"># load images</span>
+    <span class="n">images</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;data/</span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="s1">/sci.npy&#39;</span><span class="p">)</span> <span class="c1"># [&#39;f277w&#39;,&#39;f356w&#39;,&#39;f444w&#39;]</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;data/</span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="s1">/err.npy&#39;</span><span class="p">)</span>
+    <span class="n">masks</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;data/</span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="s1">/msk.npy&#39;</span><span class="p">)</span>
+    <span class="n">psfs</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;data/psf.npy&#39;</span><span class="p">)</span>
+
+    
+    <span class="c1"># place we will put the plots</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">constrained_layout</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+    <span class="n">ax_dict</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">subplot_mosaic</span><span class="p">(</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        AB</span>
+<span class="sd">        &quot;&quot;&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># show color image</span>
+    <span class="n">rgb</span> <span class="o">=</span> <span class="n">visualization</span><span class="o">.</span><span class="n">make_lupton_rgb</span><span class="p">(</span><span class="n">images</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">images</span><span class="p">[</span><span class="o">-</span><span class="mi">11</span><span class="p">],</span> <span class="n">images</span><span class="p">[</span><span class="o">-</span><span class="mi">14</span><span class="p">],</span>
+                                    <span class="n">stretch</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+    
+    <span class="n">ax_dict</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rgb</span><span class="p">)</span>
+    <span class="n">ax_dict</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Three filter color image (</span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># radial profiles</span>
+    
+    <span class="c1"># start with PSF</span>
+    <span class="n">r_psf</span><span class="p">,</span><span class="n">f_psf</span><span class="p">,</span><span class="n">e_psf</span><span class="p">,</span><span class="n">a_psf</span> <span class="o">=</span> <span class="n">radial_profile</span><span class="p">(</span><span class="n">psf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">psf</span><span class="p">),</span> <span class="n">step</span> <span class="o">=</span> <span class="n">step</span><span class="p">,</span> <span class="n">steps</span> <span class="o">=</span> <span class="n">steps</span><span class="p">)</span>
+    <span class="n">f_psf</span> <span class="o">/=</span> <span class="n">a_psf</span>
+
+    <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">half</span> <span class="o">=</span> <span class="n">find_half_light_radius</span><span class="p">(</span> <span class="n">r_psf</span><span class="p">,</span> <span class="n">f_psf</span><span class="o">/</span><span class="n">f_psf</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="n">half_light_radii</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">half_light_radii</span><span class="p">[</span><span class="s1">&#39;psf&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">half</span>
+
+    <span class="c1"># loop over bands</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span> 
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">bands</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">bands</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span> <span class="s1">&#39;f444w&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;f356w&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;f277w&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;f200w_block40&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;f150w_block40&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;f115w_block40&#39;</span><span class="p">,</span>
+                       <span class="p">]:</span>
+            
+            <span class="n">sci</span> <span class="o">=</span> <span class="n">images</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">err</span> <span class="o">=</span> <span class="n">errors</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+            <span class="n">r_sci</span><span class="p">,</span><span class="n">f_sci</span><span class="p">,</span><span class="n">e_sci</span><span class="p">,</span><span class="n">a_sci</span> <span class="o">=</span> <span class="n">radial_profile</span><span class="p">(</span><span class="n">sci</span><span class="p">,</span> <span class="n">err</span><span class="p">,</span> <span class="n">step</span> <span class="o">=</span> <span class="n">step</span><span class="p">,</span> <span class="n">steps</span> <span class="o">=</span> <span class="n">steps</span><span class="p">)</span>
+            <span class="n">f_sci</span> <span class="o">/=</span> <span class="n">a_sci</span>
+            <span class="n">e_sci</span> <span class="o">/=</span> <span class="n">a_sci</span>
+
+            <span class="n">ax_dict</span><span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r_sci</span><span class="p">,</span> <span class="n">f_sci</span><span class="o">/</span><span class="n">f_sci</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                             <span class="n">color</span> <span class="o">=</span>  <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">coolwarm_r</span><span class="p">(</span><span class="n">count</span> <span class="o">/</span> <span class="mf">6.</span><span class="p">),</span>
+                             <span class="n">label</span><span class="o">=</span><span class="n">bands</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">ax_dict</span><span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">r_sci</span><span class="p">,</span> <span class="n">f_sci</span><span class="o">/</span><span class="n">f_sci</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">yerr</span> <span class="o">=</span> <span class="n">e_sci</span><span class="o">/</span><span class="n">f_sci</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                             <span class="n">color</span> <span class="o">=</span>  <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">coolwarm_r</span><span class="p">(</span><span class="n">count</span> <span class="o">/</span> <span class="mf">6.</span><span class="p">),</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+            
+            <span class="c1"># log half light</span>
+            <span class="n">half_light_radii</span><span class="p">[</span><span class="n">bands</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+                <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">half</span> <span class="o">=</span> <span class="n">find_half_light_radius</span><span class="p">(</span> <span class="n">r_sci</span><span class="p">,</span> 
+                                                    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">f_sci</span><span class="o">/</span><span class="n">f_sci</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">e_sci</span><span class="o">/</span><span class="n">f_sci</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">)</span>
+                <span class="n">half_light_radii</span><span class="p">[</span><span class="n">bands</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">half</span> <span class="p">)</span>
+                
+            <span class="n">half_light_radii</span><span class="p">[</span><span class="n">bands</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">half_light_radii</span><span class="p">[</span><span class="n">bands</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span>
+            
+ 
+    <span class="n">ax_dict</span><span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r_psf</span><span class="p">,</span> <span class="n">f_psf</span><span class="o">/</span><span class="n">f_psf</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">zorder</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;PSF&#39;</span><span class="p">)</span>    
+    <span class="n">ax_dict</span><span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
+    <span class="n">ax_dict</span><span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Normalized flux&#39;</span><span class="p">)</span>
+    <span class="n">ax_dict</span><span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Radius (pixels)&#39;</span><span class="p">)</span>
+    <span class="n">ax_dict</span><span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+
+    <span class="n">halfs</span><span class="p">[</span><span class="n">target</span><span class="p">]</span> <span class="o">=</span> <span class="n">half_light_radii</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/91b70f1c6706de91cd7c0d20cd7cd4f1a2b2ac76ada5f9f1abc28001b48b30af.png" src="../../../_images/91b70f1c6706de91cd7c0d20cd7cd4f1a2b2ac76ada5f9f1abc28001b48b30af.png" />
+<img alt="../../../_images/573c3d50511fdb029824856f299c44982ca791ccd3810581ecde6649bb85458c.png" src="../../../_images/573c3d50511fdb029824856f299c44982ca791ccd3810581ecde6649bb85458c.png" />
+<img alt="../../../_images/fc9d4201ec4d71ee0c9371acf50af4854619a4cd4a172a85bb95ede78b2abb3e.png" src="../../../_images/fc9d4201ec4d71ee0c9371acf50af4854619a4cd4a172a85bb95ede78b2abb3e.png" />
+<img alt="../../../_images/d861556dd301fc6d77333730a8b3f827d9456ee6a217ef8ebbef4ef6d13dcc32.png" src="../../../_images/d861556dd301fc6d77333730a8b3f827d9456ee6a217ef8ebbef4ef6d13dcc32.png" />
+<img alt="../../../_images/173a77c0ca40595aea1e8d3904e234b1feb4bdc0a9e1dfaafecd3b63a096c37f.png" src="../../../_images/173a77c0ca40595aea1e8d3904e234b1feb4bdc0a9e1dfaafecd3b63a096c37f.png" />
+<img alt="../../../_images/6cf834945da82953a7ebc28bdae76bc95f369e9276a28026f60151f960062f83.png" src="../../../_images/6cf834945da82953a7ebc28bdae76bc95f369e9276a28026f60151f960062f83.png" />
+<img alt="../../../_images/3d9369c80a6bbd15c0beb45e23e0aab2e0d1ff8c2e66746de8eb3415305069a1.png" src="../../../_images/3d9369c80a6bbd15c0beb45e23e0aab2e0d1ff8c2e66746de8eb3415305069a1.png" />
+<img alt="../../../_images/ca9a0fb90a9c83d8a84b6f3bc38516a68d6212be1d2487952e58a6350825a07b.png" src="../../../_images/ca9a0fb90a9c83d8a84b6f3bc38516a68d6212be1d2487952e58a6350825a07b.png" />
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="compare-the-half-light-radii-of-psf-f115w-and-f444w">
+<h1>Compare the half-light radii of PSF, F115W, and F444W.<a class="headerlink" href="#compare-the-half-light-radii-of-psf-f115w-and-f444w" title="Permalink to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="if-r-mathrm-eff-mathrm-f444w-r-mathrm-eff-mathrm-psf-1-it-is-resolved">
+<h1>- If <span class="math notranslate nohighlight">\(r_\mathrm{eff}(\mathrm{F444W}) / r_\mathrm{eff}(\mathrm{PSF})&gt;1\)</span> it is resolved.<a class="headerlink" href="#if-r-mathrm-eff-mathrm-f444w-r-mathrm-eff-mathrm-psf-1-it-is-resolved" title="Permalink to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="if-r-mathrm-eff-mathrm-f115w-r-mathrm-eff-mathrm-f444w-1-blue-light-is-more-spatially-extended-than-red-light">
+<h1>- If <span class="math notranslate nohighlight">\(r_\mathrm{eff}(\mathrm{F115W}) / r_\mathrm{eff}(\mathrm{F444W})&gt;1\)</span> blue light is more spatially extended than red light.<a class="headerlink" href="#if-r-mathrm-eff-mathrm-f115w-r-mathrm-eff-mathrm-f444w-1-blue-light-is-more-spatially-extended-than-red-light" title="Permalink to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="for-fun-do-these-properties-correlate-with-anything-like-redshift-magnification-etc">
+<h1>- For fun, do these properties correlate with anything? Like redshift, magnification, etc?<a class="headerlink" href="#for-fun-do-these-properties-correlate-with-anything-like-redshift-magnification-etc" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Redshift $z$&#39;</span><span class="p">,</span> <span class="s1">&#39;Magnification $\mu$&#39;</span><span class="p">,</span> 
+          <span class="s1">&#39;$H</span><span class="se">\\</span><span class="s1">alpha$ luminosity&#39;</span><span class="p">,</span> <span class="s1">&#39;Bolometric luminosity&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;F277$–$F356&#39;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">constrained_layout</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+    <span class="n">ax_dict</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">subplot_mosaic</span><span class="p">(</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        AB</span>
+<span class="sd">        &quot;&quot;&quot;</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">target</span> <span class="ow">in</span> <span class="n">targets</span><span class="p">:</span>
+
+        <span class="n">r</span> <span class="o">=</span>  <span class="n">halfs</span><span class="p">[</span><span class="n">target</span><span class="p">][</span><span class="s1">&#39;f444w&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">halfs</span><span class="p">[</span><span class="n">target</span><span class="p">][</span><span class="s1">&#39;psf&#39;</span><span class="p">]</span>
+        
+        <span class="n">ax_dict</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">supplemental</span><span class="p">[</span><span class="n">target</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">yerr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> 
+                     <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+        <span class="n">r</span> <span class="o">=</span>  <span class="n">halfs</span><span class="p">[</span><span class="n">target</span><span class="p">][</span><span class="s1">&#39;f115w_block40&#39;</span><span class="p">]</span>  <span class="o">/</span> <span class="n">halfs</span><span class="p">[</span><span class="n">target</span><span class="p">][</span><span class="s1">&#39;f444w&#39;</span><span class="p">]</span>
+        
+        <span class="n">ax_dict</span><span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">supplemental</span><span class="p">[</span><span class="n">target</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">yerr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> 
+                     <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+        
+    <span class="n">ax_dict</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+    <span class="n">ax_dict</span><span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+    
+    <span class="n">ax_dict</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">ax_dict</span><span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    
+    <span class="n">ax_dict</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$r_\mathrm</span><span class="si">{eff}</span><span class="s1">(\mathrm</span><span class="si">{F444W}</span><span class="s1">) / r_\mathrm</span><span class="si">{eff}</span><span class="s1">(\mathrm</span><span class="si">{PSF}</span><span class="s1">)$&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">ax_dict</span><span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$r_\mathrm</span><span class="si">{eff}</span><span class="s1">(\mathrm</span><span class="si">{F115W}</span><span class="s1">) / r_\mathrm</span><span class="si">{eff}</span><span class="s1">(\mathrm</span><span class="si">{F444W}</span><span class="s1">)$&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/2ead453762cdb6ad0572e364f24f7826ebcee18177b9eac730df055df529541d.png" src="../../../_images/2ead453762cdb6ad0572e364f24f7826ebcee18177b9eac730df055df529541d.png" />
+<img alt="../../../_images/3de23ab0f14642d5feeac7d12b0a812c97f4fc3444955517dfe73b73563660b3.png" src="../../../_images/3de23ab0f14642d5feeac7d12b0a812c97f4fc3444955517dfe73b73563660b3.png" />
+<img alt="../../../_images/d7f11b0cb494ac3f80daf2123db44bd2c49905fcd6db68f7c6e453f97088802d.png" src="../../../_images/d7f11b0cb494ac3f80daf2123db44bd2c49905fcd6db68f7c6e453f97088802d.png" />
+<img alt="../../../_images/6ca87003ac55306adc5571325e0f58143d1c04e845bf3b6ca7edf86a3ac3e193.png" src="../../../_images/6ca87003ac55306adc5571325e0f58143d1c04e845bf3b6ca7edf86a3ac3e193.png" />
+<img alt="../../../_images/cf2ea1fa131dcd3b9a395eab9695ad723245455a9430ecdbd0f40a103449fda0.png" src="../../../_images/cf2ea1fa131dcd3b9a395eab9695ad723245455a9430ecdbd0f40a103449fda0.png" />
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/final_project/lrd"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../CNN.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Convolutional Neural Net and Galaxy Zoo</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../merian/01_merian_intro.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Merian project Part 1</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">LRD project</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#imports">Imports</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#lrd-information">LRD information</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-f444w-with-the-psf">Compare F444W with the PSF</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#create-radial-profiles-for-all-bands-now">Create radial profiles for all bands now</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-the-half-light-radii-of-psf-f115w-and-f444w">Compare the half-light radii of PSF, F115W, and F444W.</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#if-r-mathrm-eff-mathrm-f444w-r-mathrm-eff-mathrm-psf-1-it-is-resolved">- If <span class="math notranslate nohighlight">\(r_\mathrm{eff}(\mathrm{F444W}) / r_\mathrm{eff}(\mathrm{PSF})&gt;1\)</span> it is resolved.</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#if-r-mathrm-eff-mathrm-f115w-r-mathrm-eff-mathrm-f444w-1-blue-light-is-more-spatially-extended-than-red-light">- If <span class="math notranslate nohighlight">\(r_\mathrm{eff}(\mathrm{F115W}) / r_\mathrm{eff}(\mathrm{F444W})&gt;1\)</span> blue light is more spatially extended than red light.</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#for-fun-do-these-properties-correlate-with-anything-like-redshift-magnification-etc">- For fun, do these properties correlate with anything? Like redshift, magnification, etc?</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jenny Greene, Jared Siegel, Erin Flowers, Jiaxuan Li
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
