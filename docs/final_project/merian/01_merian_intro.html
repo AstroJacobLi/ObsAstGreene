@@ -396,7 +396,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-understand-the-merian-survey">Part 1: Understand the Merian survey</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-there-any-other-catalog-level-thing-we-can-play-with">Is there any other catalog-level thing we can play with?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#not-tested-yet-generate-cutout">NOT TESTED YET: Generate cutout</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tested-generate-cutout-one-galaxy-takes-10-mb-of-space-grizy-n708-n540-together-with-psfs">Tested: Generate cutout. One galaxy takes 10 Mb of space (grizy+N708+N540, together with PSFs).</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-make-pretty-pictures">Part 2: Make pretty pictures!!</a><ul class="nav section-nav flex-column">
@@ -526,7 +526,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/mq/3_39x3fx4wsghv_g8p9dkm9m0000gn/T/ipykernel_31096/1238779004.py:16: MatplotlibDeprecationWarning: The legendHandles attribute was deprecated in Matplotlib 3.7 and will be removed two minor releases later. Use legend_handles instead.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/mq/3_39x3fx4wsghv_g8p9dkm9m0000gn/T/ipykernel_83007/1238779004.py:16: MatplotlibDeprecationWarning: The legendHandles attribute was deprecated in Matplotlib 3.7 and will be removed two minor releases later. Use legend_handles instead.
   leg.legendHandles[0].set_facecolor(&#39;none&#39;)
 </pre></div>
 </div>
@@ -572,13 +572,39 @@ document.write(`
 <section id="is-there-any-other-catalog-level-thing-we-can-play-with">
 <h3>Is there any other catalog-level thing we can play with?<a class="headerlink" href="#is-there-any-other-catalog-level-thing-we-can-play-with" title="Permalink to this heading">#</a></h3>
 </section>
-<section id="not-tested-yet-generate-cutout">
-<h3>NOT TESTED YET: Generate cutout<a class="headerlink" href="#not-tested-yet-generate-cutout" title="Permalink to this heading">#</a></h3>
+<section id="tested-generate-cutout-one-galaxy-takes-10-mb-of-space-grizy-n708-n540-together-with-psfs">
+<h3>Tested: Generate cutout. One galaxy takes 10 Mb of space (grizy+N708+N540, together with PSFs).<a class="headerlink" href="#tested-generate-cutout-one-galaxy-takes-10-mb-of-space-grizy-n708-n540-together-with-psfs" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">format_object_name</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cat_inband</span> <span class="o">=</span> <span class="n">cat</span><span class="p">[(</span><span class="n">z_spec</span> <span class="o">&lt;</span> <span class="mf">0.11</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">z_spec</span> <span class="o">&gt;</span> <span class="mf">0.05</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">cat</span><span class="p">[</span><span class="s1">&#39;mag_i&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">21.5</span><span class="p">)]</span>
+<span class="n">cat_inband</span><span class="p">[</span><span class="s1">&#39;ssfr_1p0&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cat_inband</span><span class="p">[</span><span class="s1">&#39;sfr_1p0&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">cat_inband</span><span class="p">[</span><span class="s1">&#39;mass_1p0&#39;</span><span class="p">]</span>
+<span class="n">cnames</span> <span class="o">=</span> <span class="p">[</span><span class="n">format_object_name</span><span class="p">(</span><span class="n">obj</span><span class="p">[</span><span class="s1">&#39;ALPHA_J2000&#39;</span><span class="p">],</span> <span class="n">obj</span><span class="p">[</span><span class="s1">&#39;DELTA_J2000&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">cat_inband</span><span class="p">]</span>
+<span class="n">cat_inband</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cnames</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cat_inband</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;./cosmos_Merian_DR1_specz_inband.fits&#39;</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><a class="reference external" href="https://tigress-web.princeton.edu/~jiaxuanl/galary/#merian_final_proj.txt">https://tigress-web.princeton.edu/~jiaxuanl/galary/#merian_final_proj.txt</a></p>
 </section>
 </section>
 <hr class="docutils" />
 <section id="part-2-make-pretty-pictures">
 <h2>Part 2: Make pretty pictures!!<a class="headerlink" href="#part-2-make-pretty-pictures" title="Permalink to this heading">#</a></h2>
+<p>Lupton et al. (2004): <a class="reference external" href="https://ui.adsabs.harvard.edu/abs/2004PASP..116..133L/abstract">https://ui.adsabs.harvard.edu/abs/2004PASP..116..133L/abstract</a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">fits</span>
@@ -852,7 +878,7 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-understand-the-merian-survey">Part 1: Understand the Merian survey</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#is-there-any-other-catalog-level-thing-we-can-play-with">Is there any other catalog-level thing we can play with?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#not-tested-yet-generate-cutout">NOT TESTED YET: Generate cutout</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tested-generate-cutout-one-galaxy-takes-10-mb-of-space-grizy-n708-n540-together-with-psfs">Tested: Generate cutout. One galaxy takes 10 Mb of space (grizy+N708+N540, together with PSFs).</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-make-pretty-pictures">Part 2: Make pretty pictures!!</a><ul class="nav section-nav flex-column">
