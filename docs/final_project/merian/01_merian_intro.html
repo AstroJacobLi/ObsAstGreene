@@ -54,6 +54,7 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/redirect.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../../../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
@@ -526,7 +527,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/mq/3_39x3fx4wsghv_g8p9dkm9m0000gn/T/ipykernel_83007/1238779004.py:16: MatplotlibDeprecationWarning: The legendHandles attribute was deprecated in Matplotlib 3.7 and will be removed two minor releases later. Use legend_handles instead.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/mq/3_39x3fx4wsghv_g8p9dkm9m0000gn/T/ipykernel_11364/1238779004.py:16: MatplotlibDeprecationWarning: The legendHandles attribute was deprecated in Matplotlib 3.7 and will be removed two minor releases later. Use legend_handles instead.
   leg.legendHandles[0].set_facecolor(&#39;none&#39;)
 </pre></div>
 </div>
@@ -559,14 +560,14 @@ document.write(`
             <span class="n">ec</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Spectral&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;i - N708&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\log\,M_\star/M_\odot$&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\log\,\mathrm</span><span class="si">{SFR}</span><span class="s1">\ [M_\odot\,\mathrm</span><span class="si">{yr}</span><span class="s1">^{-1}]$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\log\,\mathrm</span><span class="si">{sSFR}</span><span class="s1">\ [M_\odot\,\mathrm</span><span class="si">{yr}</span><span class="s1">^{-1}]$&#39;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/1130e4fb7ebf97b63d8b0b1895062f2fae011b3c393ae5c09616c7e4382a7d48.png" src="../../../_images/1130e4fb7ebf97b63d8b0b1895062f2fae011b3c393ae5c09616c7e4382a7d48.png" />
+<img alt="../../../_images/ce90c55e69e2e01483d19cbcb91e0251bd400b6f5794fc656221b4b5767443e6.png" src="../../../_images/ce90c55e69e2e01483d19cbcb91e0251bd400b6f5794fc656221b4b5767443e6.png" />
 </div>
 </div>
 <section id="is-there-any-other-catalog-level-thing-we-can-play-with">
@@ -684,7 +685,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "a111fc4c9e1c4cd6ad3449bad9b04ccf", "version_major": 2, "version_minor": 0}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "310e26084f724f72ab7c3f9c57fcc7aa", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <p>Can you try combinations of other bands to make the image prettier?</p>
 <section id="part-2-1-sersic-fitting">
