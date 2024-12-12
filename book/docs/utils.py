@@ -8,6 +8,7 @@ from astropy import visualization as aviz
 from astropy.nddata.blocks import block_reduce
 from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 from mpl_toolkits.axes_grid1 import make_axes_locatable
+from astropy.coordinates import SkyCoord
 
 IMG_CMAP = copy.copy(matplotlib.cm.get_cmap("viridis"))
 IMG_CMAP.set_bad(color='black')
@@ -363,3 +364,53 @@ def get_central_region(cutouts, size):
         central_cutouts[key] = data[y_min:y_max, x_min:x_max]
     
     return central_cutouts
+
+
+
+def calc_rhoc(z,h=0.7,Om=0.3,OL=0.7):
+    """
+    Critical density [Msun kpc^-3] at redshift z.
+    
+    Syntax: 
+    
+        rhoc(z,h=0.7,Om=0.3,OL=0.7)
+    
+    where
+        
+        z: redshift (float or array)
+        h: dimensionless Hubble constant at z=0, defined in
+            H_0 = 100h km s^-1 Mpc^-1 
+                = h/10 km s^-1 kpc^-1 
+                = h/9.778 Gyr^-1 
+            (default=0.7)
+        Om: matter density in units of the critical density, at z=0
+            (default=0.3) 
+        OL: dark-energy density in units of the critical density, at z=0
+            (default=0.7) 
+    """
+    rhoc0 = 277.5 # [h^2 Msun kpc^-3]
+    return rhoc0 * h**2 * (Om*(1.+z)**3 + OL)
+
+def Rvir(Mv,Delta=200.,z=0.):
+    """
+    Compute halo radius given halo mass, overdensity, and redshift.
+    
+    Syntax:
+    
+        Rvir(Mv,Delta=200.,z=0.)
+        
+    where
+    
+        Mv: halo mass [M_sun] (float or array)
+        Delta: spherical overdensity (float, default=200.)
+        z: redshift (float or array of the same size as Mv, default=0.)
+    """
+    h = 0.7
+    Om = 0.3
+    Ob = 0.0465
+    OL = 0.7
+    s8 = 0.8
+    ns = 1.
+
+    rhoc = calc_rhoc(z,h=h,Om=Om,OL=OL)
+    return (3.*Mv / (4 * np.pi *Delta*rhoc))**(1./3.) 
