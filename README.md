@@ -1,4 +1,4 @@
-# Observational Astronomy Course Website
+# Observational Astronomy Course Website -- Instructor Version
 
 [![Jupyter Book Badge](https://jupyterbook.org/badge.svg)](<http://jiaxuanli.me/ObsAstGreene/docs/index.html>)
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/AstroJacobLi/ObsAstGreene/HEAD)
