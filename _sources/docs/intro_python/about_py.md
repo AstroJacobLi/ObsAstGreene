@@ -34,18 +34,16 @@ of the most commonly used programming languages. It has a large and supportive u
 
 Python has become one of the core languages of scientific computing.
 
-It\'s either the dominant player or a major player in
+It\'s either the dominant player or a major player in [machine learning](https://pytorch.org/), [data science](http://scikit-learn.org/stable/), [astronomy](http://www.astropy.org/), [chemistry](http://chemlab.github.io/chemlab/), [computational biology](http://biopython.org/wiki/Main_Page), and [meteorology](https://pypi.org/project/meteorology/).
 
--   [machine learning](https://pytorch.org/)
--   [data science](http://scikit-learn.org/stable/)
--   [astronomy](http://www.astropy.org/)
--   [chemistry](http://chemlab.github.io/chemlab/)
--   [computational biology](http://biopython.org/wiki/Main_Page)
--   [meteorology](https://pypi.org/project/meteorology/)
+### Textbooks and Tutorials
 
+Our favorite Python textbooks/tutorials include:
+- [A Whirlwind Tour of Python](https://nbviewer.org/github/jakevdp/WhirlwindTourOfPython/blob/master/Index.ipynb) by Jake VanderPlas: **highly recommended for everyone**. It's worth reading even if you are already familiar with Python. We will cover some of the materials in the course.
+- [Python Data Science Handbook](https://jakevdp.github.io/PythonDataScienceHandbook/) also by Jake VanderPlas. It covers more advanced packages such as `pandas`.
+- [Learn Astropy](https://learn.astropy.org/) tutorials. 
 
-
-Our favorite Python textbooks/tutorials include [Python Data Science Handbook](https://jakevdp.github.io/PythonDataScienceHandbook/) by Jake VanderPlas, and the [Learn Astropy](https://learn.astropy.org/) tutorials. Of course, when you encounter a problem, you can always ask for help on [Stack Overflow](https://stackoverflow.com/), or ask your favorite large language model. 
+Of course, when you encounter a problem, you can always ask for help on [Stack Overflow](https://stackoverflow.com/), or ask your favorite large language model. 
 
 
 ### Popularity
