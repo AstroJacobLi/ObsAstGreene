@@ -631,7 +631,7 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cat_inband</span> <span class="o">=</span> <span class="n">cat</span><span class="p">[(</span><span class="n">z_spec</span> <span class="o">&lt;</span> <span class="mf">0.11</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">z_spec</span> <span class="o">&gt;</span> <span class="mf">0.05</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">cat</span><span class="p">[</span><span class="s1">&#39;mag_i&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">21.5</span><span class="p">)]</span>
 <span class="n">cat_inband</span><span class="p">[</span><span class="s1">&#39;ssfr_1p0&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cat_inband</span><span class="p">[</span><span class="s1">&#39;sfr_1p0&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">cat_inband</span><span class="p">[</span><span class="s1">&#39;mass_1p0&#39;</span><span class="p">]</span>
-<span class="n">cnames</span> <span class="o">=</span> <span class="p">[</span><span class="n">format_object_name</span><span class="p">(</span><span class="n">obj</span><span class="p">[</span><span class="s1">&#39;ALPHA_J2000&#39;</span><span class="p">],</span> <span class="n">obj</span><span class="p">[</span><span class="s1">&#39;DELTA_J2000&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">cat_inband</span><span class="p">]</span>
+<span class="n">cnames</span> <span class="o">=</span> <span class="p">[</span><span class="n">format_merian_name</span><span class="p">(</span><span class="n">obj</span><span class="p">[</span><span class="s1">&#39;ALPHA_J2000&#39;</span><span class="p">],</span> <span class="n">obj</span><span class="p">[</span><span class="s1">&#39;DELTA_J2000&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">cat_inband</span><span class="p">]</span>
 <span class="n">cat_inband</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cnames</span>
 </pre></div>
 </div>
@@ -731,7 +731,7 @@ WARNING:astropy:OverflowError converting to IntType in column specobjid_S, rever
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "759a321f8503457e9df3c53c1ef2e602"}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "759a321f8503457e9df3c53c1ef2e602", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <p>Can you try combinations of other bands to make the image prettier?</p>
 <section id="part-2-1-sersic-fitting">
