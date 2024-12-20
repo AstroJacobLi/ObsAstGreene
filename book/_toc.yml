@@ -4,15 +4,16 @@ root: docs/index
 parts: 
 - caption: Introduction to Python
   chapters:
-  - file: docs/about_py
-  - file: docs/getting_started
-  - file: docs/python_by_example
-  - file: docs/functions
+  - file: docs/intro_python/about_py
+  - file: docs/intro_python/getting_started
+  - file: docs/intro_python/python_by_example
   - file: docs/notebooks
+
 - caption: Statistics
   chapters:
   - file: docs/stats/basic_stats
   - file: docs/stats/more_stats
+
 - caption: Detector and Imaging
   chapters:
   - file: docs/imaging/calibration_frames
