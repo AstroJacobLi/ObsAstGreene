@@ -374,7 +374,7 @@ def format_merian_name(ra=None, dec=None, skycoordobj=None, unit="deg"):
     return cname
 
 
-def get_central_region(cutouts, size):
+def get_img_central_region(cutouts, size):
     """
     Extract the central `size x size` region from each cutout in the input dictionary.
 
