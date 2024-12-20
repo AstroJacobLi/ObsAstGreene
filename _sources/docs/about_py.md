@@ -28,112 +28,52 @@ Python is free and open source, with development coordinated through the
 [Python Software Foundation](https://www.python.org/psf/).
 
 Python has experienced rapid adoption in the last decade and is now one
-of the most commonly used programming languages.
+of the most commonly used programming languages. It has a large and supportive user community, especially in the scientific and data science domains. Python is beginner-friendly and routinely used to teach computer science and programming in top computer science programs.
 
-Popular textbooks on Python programming include {cite}`guttag2016introduction` and {cite}`hill2016learning`.
-
-### Common Uses
-
-Python is a general-purpose language used in almost all application domains
-such as
-
--   communications
--   web development
--   CGI and graphical user interfaces
--   game development
--   multimedia, data processing, security, etc., etc., etc.
-
-Python is beginner-friendly and routinely used to teach computer science and
-programming in top computer science programs.
-
-Python is particularly popular within the scientific and data science
-communities.
-
-It is steadily [replacing familiar tools like
-Excel](https://news.efinancialcareers.com/us-en/3002556/python-replaced-excel-banking)
-in the fields of finance and banking.
-
-### Relative Popularity
-
-The following chart, produced using Stack Overflow Trends, shows one
-measure of the relative popularity of Python
-
-```{figure} /_static/lecture_specific/about_py/python_vs_matlab.png
-:scale: 72%
-```
-
-The figure indicates not only that Python is widely used but also that
-adoption of Python has accelerated significantly since 2012.
-
-This is driven at least in part by uptake in the scientific
-domain, particularly in rapidly growing fields like data science.
-
-For example, the popularity of [pandas](http://pandas.pydata.org/), a
-library for data analysis with Python has exploded, as seen here.
-
-(The corresponding time path for MATLAB is shown for comparison)
-
-```{figure} /_static/lecture_specific/about_py/pandas_vs_matlab.png
-:scale: 23%
-```
-
-Note that pandas takes off in 2012, which is the same year that we see
-Python\'s popularity begin to spike in the first figure.
-
-Overall, it\'s clear that
-
--   Python is [one of the most popular programming languages worldwide](http://spectrum.ieee.org/computing/software/the-2017-top-programming-languages).
--   Python is a major tool for scientific computing, accounting for a
-    rapidly rising share of scientific work around the globe.
-
-### Features
-
-Python is a [high-level language](https://en.wikipedia.org/wiki/High-level_programming_language)
-suitable for rapid development.
-
-It has a relatively small core language supported by many libraries.
-
-Multiple programming styles are supported (procedural, object-oriented, functional, etc.)
-
-Python is interpreted rather than compiled.
-
-### Syntax and Design
-
-One nice feature of Python is its elegant syntax --- we\'ll see many
-examples later on.
-
-Elegant code might sound superfluous but in fact it\'s highly beneficial
-because it makes the syntax easy to read and easy to remember.
-
-Remembering how to read from files, sort dictionaries and other such
-routine tasks means that you don\'t need to break your flow in order to
-hunt down correct syntax.
-
-Closely related to elegant syntax is an elegant design.
-
-Features like iterators, generators, decorators and list comprehensions
-make Python highly expressive, allowing you to get more done with less
-code.
-
-[Namespaces](https://en.wikipedia.org/wiki/Namespace) improve
-productivity by cutting down on bugs and syntax errors.
-
-## Scientific Programming
+### Python for Scientific Programming
 
 Python has become one of the core languages of scientific computing.
 
 It\'s either the dominant player or a major player in
 
--   [machine learning and data science](http://scikit-learn.org/stable/)
+-   [machine learning](https://pytorch.org/)
+-   [data science](http://scikit-learn.org/stable/)
 -   [astronomy](http://www.astropy.org/)
--   [artificial intelligence](https://wiki.python.org/moin/PythonForArtificialIntelligence)
 -   [chemistry](http://chemlab.github.io/chemlab/)
 -   [computational biology](http://biopython.org/wiki/Main_Page)
 -   [meteorology](https://pypi.org/project/meteorology/)
 
-Its popularity in economics is also beginning to rise.
 
-## Bibliography
 
-<!-- ```{bibliography} ../_bibliography/references.bib
-``` -->
+Our favorite Python textbooks/tutorials include [Python Data Science Handbook](https://jakevdp.github.io/PythonDataScienceHandbook/) by Jake VanderPlas, and the [Learn Astropy](https://learn.astropy.org/) tutorials. Of course, when you encounter a problem, you can always ask for help on [Stack Overflow](https://stackoverflow.com/), or ask your favorite large language model. 
+
+
+### Popularity
+
+The following figure (made by Yuan-Sen Ting) shows the evolution of programming languages used in astronomy papers over time. It's clear that Python has become the dominant language in the field (whereas IRAF and IDL were dominant in the past). Python is now the number one choice not only because it is easy to learn, but also because it has a huge number of libraries that fit the needs of astronomers (especially observational astronomers!!).
+
+You will have a chance to use different Python libraries in the course, and some of them will continue to be useful in your future research.
+
+
+```{figure} /_static/lecture_specific/about_py/astro_language_evolution.jpeg
+---
+height: 450px
+---
+Credit: [Yuan-Sen Ting](https://x.com/TingAstro/status/1869723006354022800)
+```
+
+
+### Features
+
+Python is a [high-level language](https://en.wikipedia.org/wiki/High-level_programming_language) suitable for rapid development. It supports multiple programming styles are supported (procedural, object-oriented, functional, etc.). We will (probably) use all these styles in the course.
+
+## Code Style
+
+It is **very important** to write clean and readable code. We highly recommend you to read this [Python Style Guide](https://www.classes.cs.uchicago.edu/archive/2017/fall/12100-1/style-guide/index.html) to get a sense of what good Python code looks like. As you go through the course materials, you will see how we write code and you will be able to develop your own style based on these guidelines.
+
+
+## What to do if your code doesn't work?
+- Ask Google, Stack Overflow, or your favorite search engine. New programmers often make the mistake of thinking that they need to solve every problem from scratch. In reality, most programming problems have been encountered by someone else before. Don't feel embarrassed by the mistakes you make. Everyone makes mistakes when they are learning to program (including the instructors -- they still suffer a lot now).
+- Ask your classmates. They are likely to have encountered the same problem.
+- Ask large language models (such as GPT or Claude). These models now are really good at debugging code.
+- Try the AI assistant on Google Colab. 
