@@ -2,38 +2,45 @@ import numpy as np
 import copy
 import matplotlib
 import matplotlib.pyplot as plt
-from astropy.visualization import (AsymmetricPercentileInterval,
-                                   ZScaleInterval, make_lupton_rgb)
+from astropy.visualization import (
+    AsymmetricPercentileInterval,
+    ZScaleInterval,
+    make_lupton_rgb,
+)
 from astropy import visualization as aviz
 from astropy.nddata.blocks import block_reduce
 from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 from astropy.coordinates import SkyCoord
+import astropy.units as u
 
 IMG_CMAP = copy.copy(matplotlib.cm.get_cmap("viridis"))
-IMG_CMAP.set_bad(color='black')
+IMG_CMAP.set_bad(color="black")
+
 
 ######################################################################
 ############## Display related functions ############################
 ######################################################################
-def display_single(img,
-                   xsize=10,
-                   ysize=10,
-                   ax=None,
-                   stretch='arcsinh',
-                   scale='zscale',
-                   contrast=0.25,
-                   alpha=1.0,
-                   no_negative=False,
-                   lower_percentile=1.0,
-                   upper_percentile=99.0,
-                   cmap=IMG_CMAP,
-                   norm=None,
-                   color_bar=False,
-                   color_bar_fontsize=18,
-                   color_bar_color='w'):
+def display_single(
+    img,
+    xsize=10,
+    ysize=10,
+    ax=None,
+    stretch="arcsinh",
+    scale="zscale",
+    contrast=0.25,
+    alpha=1.0,
+    no_negative=False,
+    lower_percentile=1.0,
+    upper_percentile=99.0,
+    cmap=IMG_CMAP,
+    norm=None,
+    color_bar=False,
+    color_bar_fontsize=18,
+    color_bar_color="w",
+):
     """
-    Display single image using ``arcsinh`` stretching, "zscale" scaling, 
+    Display single image using ``arcsinh`` stretching, "zscale" scaling,
     and ``viridis`` colormap as default.
 
     Parameters
@@ -64,50 +71,53 @@ def display_single(img,
         ax1 = ax
 
     # Stretch option
-    if stretch.strip() == 'arcsinh':
+    if stretch.strip() == "arcsinh":
         img_scale = np.arcsinh(img)
-    elif stretch.strip() == 'log':
+    elif stretch.strip() == "log":
         if no_negative:
-            img[img <= 0.0] = 1.0E-10
+            img[img <= 0.0] = 1.0e-10
         img_scale = np.log(img)
-    elif stretch.strip() == 'log10':
+    elif stretch.strip() == "log10":
         if no_negative:
-            img[img <= 0.0] = 1.0E-10
+            img[img <= 0.0] = 1.0e-10
         img_scale = np.log10(img)
-    elif stretch.strip() == 'linear':
+    elif stretch.strip() == "linear":
         img_scale = img
     else:
         raise Exception("# Wrong stretch option.")
 
     # Scale option
-    if scale.strip() == 'zscale':
+    if scale.strip() == "zscale":
         try:
-            zmin, zmax = ZScaleInterval(
-                contrast=contrast).get_limits(img_scale)
+            zmin, zmax = ZScaleInterval(contrast=contrast).get_limits(img_scale)
         except IndexError:
             # TODO: Deal with problematic image
             zmin, zmax = -1.0, 1.0
-    elif scale.strip() == 'percentile':
+    elif scale.strip() == "percentile":
         try:
             zmin, zmax = AsymmetricPercentileInterval(
-                lower_percentile=lower_percentile,
-                upper_percentile=upper_percentile).get_limits(img_scale)
+                lower_percentile=lower_percentile, upper_percentile=upper_percentile
+            ).get_limits(img_scale)
         except IndexError:
             # TODO: Deal with problematic image
             zmin, zmax = -1.0, 1.0
     else:
         zmin, zmax = np.nanmin(img_scale), np.nanmax(img_scale)
 
-    show = ax1.imshow(img_scale, origin='lower', cmap=cmap, norm=norm,
-                      vmin=zmin, vmax=zmax, alpha=alpha)
+    show = ax1.imshow(
+        img_scale,
+        origin="lower",
+        cmap=cmap,
+        norm=norm,
+        vmin=zmin,
+        vmax=zmax,
+        alpha=alpha,
+    )
 
     # Hide ticks and tick labels
     ax1.tick_params(
-        labelbottom=False,
-        labelleft=False,
-        axis=u'both',
-        which=u'both',
-        length=0)
+        labelbottom=False, labelleft=False, axis="both", which="both", length=0
+    )
 
     if color_bar:
         divider = make_axes_locatable(ax1)
@@ -121,22 +131,41 @@ def display_single(img,
         cbar.ax.xaxis.set_tick_params(color=color_bar_color)
         cbar.ax.yaxis.set_tick_params(color=color_bar_color)
         cbar.outline.set_edgecolor(color_bar_color)
-        plt.setp(plt.getp(cbar.ax.axes, 'xticklabels'),
-                 color=color_bar_color, fontsize=color_bar_fontsize)
-        plt.setp(plt.getp(cbar.ax.axes, 'yticklabels'),
-                 color=color_bar_color, fontsize=color_bar_fontsize)
+        plt.setp(
+            plt.getp(cbar.ax.axes, "xticklabels"),
+            color=color_bar_color,
+            fontsize=color_bar_fontsize,
+        )
+        plt.setp(
+            plt.getp(cbar.ax.axes, "yticklabels"),
+            color=color_bar_color,
+            fontsize=color_bar_fontsize,
+        )
 
     if ax is None:
         return fig
     return ax1
 
 
-def show_image(image,
-               percl=99, percu=None, vmin=None, vmax=None, norm=None,
-               is_mask=False, figsize=(7, 7),
-               cmap='viridis', log=False, clip=True,
-               show_colorbar=False, show_ticks=False,
-               fig=None, ax=None, input_ratio=None, title=None):
+def show_image(
+    image,
+    percl=99,
+    percu=None,
+    vmin=None,
+    vmax=None,
+    norm=None,
+    is_mask=False,
+    figsize=(7, 7),
+    cmap="viridis",
+    log=False,
+    clip=True,
+    show_colorbar=False,
+    show_ticks=False,
+    fig=None,
+    ax=None,
+    input_ratio=None,
+    title=None,
+):
     """
     Show an image in matplotlib with some basic astronomically-appropriate stretching.
     From https://github.com/astropy/ccd-reduction-and-photometry-guide/blob/main/notebooks/convenience_functions.py
@@ -166,8 +195,9 @@ def show_image(image,
         percl = 100 - percl
 
     if (fig is None and ax is not None) or (fig is not None and ax is None):
-        raise ValueError('Must provide both "fig" and "ax" '
-                         'if you provide one of them')
+        raise ValueError(
+            'Must provide both "fig" and "ax" ' "if you provide one of them"
+        )
     elif fig is None and ax is None:
         if figsize is not None:
             # Rescale the fig size to match the image dimensions, roughly
@@ -215,9 +245,9 @@ def show_image(image,
     else:
         interval = aviz.AsymmetricPercentileInterval(percl, percu)
     if norm is None:
-        norm = aviz.ImageNormalize(reduced_data,
-                                interval=interval,
-                                stretch=stretch, clip=clip)
+        norm = aviz.ImageNormalize(
+            reduced_data, interval=interval, stretch=stretch, clip=clip
+        )
 
     if is_mask:
         # The image is a mask in which pixels should be zero or one.
@@ -228,23 +258,26 @@ def show_image(image,
     else:
         scale_args = dict(norm=norm)
 
-    im = ax.imshow(reduced_data, origin='lower',
-                   cmap=cmap, extent=extent, aspect='equal', **scale_args)
+    im = ax.imshow(
+        reduced_data,
+        origin="lower",
+        cmap=cmap,
+        extent=extent,
+        aspect="equal",
+        **scale_args,
+    )
 
     if show_colorbar:
         divider = make_axes_locatable(ax)
         ax_cbar = divider.append_axes("right", size="5%", pad=0.05)
         cbar = plt.colorbar(im, ax=ax, cax=ax_cbar)
-        plt.setp(plt.getp(cbar.ax.axes, 'xticklabels'), fontsize=11)
-        plt.setp(plt.getp(cbar.ax.axes, 'yticklabels'), fontsize=11)
+        plt.setp(plt.getp(cbar.ax.axes, "xticklabels"), fontsize=11)
+        plt.setp(plt.getp(cbar.ax.axes, "yticklabels"), fontsize=11)
 
     if not show_ticks:
         ax.tick_params(
-            labelbottom=False,
-            labelleft=False,
-            axis=u'both',
-            which=u'both',
-            length=0)
+            labelbottom=False, labelleft=False, axis="both", which="both", length=0
+        )
     if title is not None:
         ax.set_title(title, fontsize=14)
 
@@ -259,14 +292,14 @@ def show_image(image,
 def pad_psf(psf, size=65):
     """
     Zero-pad a PSF image such that it has the square shape of `size`.
-    
+
     Parameters
     ----------
     psf: numpy array
         The PSF image.
     size: int
         The size of the padded PSF.
-    
+
     Returns
     -------
     padded_psf: numpy array
@@ -283,18 +316,19 @@ def pad_psf(psf, size=65):
 def calc_PSF_FWHM(psfs=None):
     """
     Measure the FWHM of the PSF by fitting a 2D Moffat profile to each PSF cutout.
-    
+
     Parameters
     ----------
     psfs: dict
         A dictionary containing the PSF images for each band.
-    
+
     Returns
     -------
     fwhm: dict
         A dictionary containing the FWHM of the PSF for each band (in pixels).
     """
     from astropy.modeling import models, fitting
+
     bands = list(psfs.keys())
 
     fit_p = fitting.LevMarLSQFitter()
@@ -309,7 +343,8 @@ def calc_PSF_FWHM(psfs=None):
 
     return fwhms
 
-def format_object_name(ra=None, dec=None, skycoordobj=None, unit="deg"):
+
+def format_merian_name(ra=None, dec=None, skycoordobj=None, unit="deg"):
     """
     Given a `skycoordobj` object, returns a string representing the object name in the standard form:
     J{RAhms}{+/-}{DECdms}
@@ -338,14 +373,15 @@ def format_object_name(ra=None, dec=None, skycoordobj=None, unit="deg"):
     cname = f"J{rastring}{sign}{decstring}"
     return cname
 
+
 def get_central_region(cutouts, size):
     """
     Extract the central `size x size` region from each cutout in the input dictionary.
-    
+
     Parameters:
         cutouts (dict): A dictionary containing image data arrays.
         size (int): The size of the central region to extract.
-        
+
     Returns:
         dict: A dictionary with the central region cutouts.
     """
@@ -353,54 +389,54 @@ def get_central_region(cutouts, size):
     for key, data in cutouts.items():
         # Calculate the center of the array
         y_center, x_center = data.shape[0] // 2, data.shape[1] // 2
-        
+
         # Calculate the bounds for the central region
         y_min = max(0, y_center - size // 2)
         y_max = min(data.shape[0], y_center + size // 2)
         x_min = max(0, x_center - size // 2)
         x_max = min(data.shape[1], x_center + size // 2)
-        
+
         # Extract the central region
         central_cutouts[key] = data[y_min:y_max, x_min:x_max]
-    
+
     return central_cutouts
 
 
-
-def calc_rhoc(z,h=0.7,Om=0.3,OL=0.7):
+def calc_rhoc(z, h=0.7, Om=0.3, OL=0.7):
     """
     Critical density [Msun kpc^-3] at redshift z.
-    
-    Syntax: 
-    
+
+    Syntax:
+
         rhoc(z,h=0.7,Om=0.3,OL=0.7)
-    
+
     where
-        
+
         z: redshift (float or array)
         h: dimensionless Hubble constant at z=0, defined in
-            H_0 = 100h km s^-1 Mpc^-1 
-                = h/10 km s^-1 kpc^-1 
-                = h/9.778 Gyr^-1 
+            H_0 = 100h km s^-1 Mpc^-1
+                = h/10 km s^-1 kpc^-1
+                = h/9.778 Gyr^-1
             (default=0.7)
         Om: matter density in units of the critical density, at z=0
-            (default=0.3) 
+            (default=0.3)
         OL: dark-energy density in units of the critical density, at z=0
-            (default=0.7) 
+            (default=0.7)
     """
-    rhoc0 = 277.5 # [h^2 Msun kpc^-3]
-    return rhoc0 * h**2 * (Om*(1.+z)**3 + OL)
+    rhoc0 = 277.5  # [h^2 Msun kpc^-3]
+    return rhoc0 * h**2 * (Om * (1.0 + z) ** 3 + OL)
 
-def Rvir(Mv,Delta=200.,z=0.):
+
+def Rvir(Mv, Delta=200.0, z=0.0):
     """
     Compute halo radius given halo mass, overdensity, and redshift.
-    
+
     Syntax:
-    
+
         Rvir(Mv,Delta=200.,z=0.)
-        
+
     where
-    
+
         Mv: halo mass [M_sun] (float or array)
         Delta: spherical overdensity (float, default=200.)
         z: redshift (float or array of the same size as Mv, default=0.)
@@ -410,7 +446,7 @@ def Rvir(Mv,Delta=200.,z=0.):
     Ob = 0.0465
     OL = 0.7
     s8 = 0.8
-    ns = 1.
+    ns = 1.0
 
-    rhoc = calc_rhoc(z,h=h,Om=Om,OL=OL)
-    return (3.*Mv / (4 * np.pi *Delta*rhoc))**(1./3.) 
+    rhoc = calc_rhoc(z, h=h, Om=Om, OL=OL)
+    return (3.0 * Mv / (4 * np.pi * Delta * rhoc)) ** (1.0 / 3.0)
