@@ -1,0 +1,1130 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Introduction to Gaia data &#8212; Observational Astronomy</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/redirect.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/intro_gaia_star_jegedit';</script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/lsst-full.jpg" class="logo__image only-light" alt="Observational Astronomy - Home"/>
+    <script>document.write(`<img src="../_static/lsst-full.jpg" class="logo__image only-dark" alt="Observational Astronomy - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="intro_python/about_py.html">About Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_python/getting_started.html">Setting up Your Python Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_python/python_by_example.html">An Introductory Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Test notebook</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="stats/basic_stats.html">Basic Statistics (Part 1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stats/more_stats.html">Basic Statistics (Part 2)</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Detector and Imaging</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="imaging/calibration_frames.html">Calibration frames</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="imaging/img_simulation.html">Simulate an artificial image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="imaging/plotting_jwst.html">Plotting JWST images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro_gaia_star.html">Introduction to Gaia data</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Final Projects</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="final_project/variable_stars_and_planets.html">Lightcurves, transits, and TESS! Oh My!</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="final_project/GalaxyZoo_NeuralNet.html">Solve package versions</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="final_project/lrd/are_LRD_resolved.html">LRD project</a></li>
+
+
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Merian Project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="final_project/merian/01_merian_intro.html">Merian project Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="final_project/merian/02_Halpha_map.html">Merian project Part 2</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/AstroJacobLi/ObsAstGreene/blob/main//book/docs/intro_gaia_star_jegedit.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/docs/intro_gaia_star_jegedit.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Introduction to Gaia data</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Introduction to Gaia data</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#new-texttt-python-skills">New <span class="math notranslate nohighlight">\(\texttt{python}\)</span> skills</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#astro-concepts">Astro concepts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-data-set-are-we-looking-at">What data set are we looking at?</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-a-table-with-texttt-pandas">1. Reading a table with <span class="math notranslate nohighlight">\(\texttt{pandas}\)</span></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-in-the-table-and-how-can-we-access-it">What’s in the table and how can we access it?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#playing-with-the-catalog">2. Playing with the Catalog</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-can-we-visualize-the-data">2. How can we visualize the data?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#what-can-we-now-learn-about-stars">3. What can we now learn about stars?</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="introduction-to-gaia-data">
+<h1>Introduction to Gaia data<a class="headerlink" href="#introduction-to-gaia-data" title="Permalink to this heading">#</a></h1>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading">#</a></h2>
+<p><span class="math notranslate nohighlight">\(\texttt{numpy}\)</span> and <span class="math notranslate nohighlight">\(\texttt{matplotlib}\)</span>.</p>
+<p>Some familiarity with astronomy coordinate systems.</p>
+</section>
+<section id="new-texttt-python-skills">
+<h2>New <span class="math notranslate nohighlight">\(\texttt{python}\)</span> skills<a class="headerlink" href="#new-texttt-python-skills" title="Permalink to this heading">#</a></h2>
+<p><span class="math notranslate nohighlight">\(\texttt{pandas}\)</span>: a package for loading and manipulating tables of data (you can think of this as <span class="math notranslate nohighlight">\(\texttt{python}\)</span>’s version of excel or google sheets).</p>
+</section>
+<section id="astro-concepts">
+<h2>Astro concepts<a class="headerlink" href="#astro-concepts" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>The Gaia mission</p></li>
+<li><p>Magnitude and absolute magnitude scales</p></li>
+<li><p>Basic properties of stars: radius, temperature, color, etc.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s start with importing our packages</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># We can beautify our plots by changing the matpltlib setting a little</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">18</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.linewidth&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;serif&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="what-data-set-are-we-looking-at">
+<h2>What data set are we looking at?<a class="headerlink" href="#what-data-set-are-we-looking-at" title="Permalink to this heading">#</a></h2>
+<p>(To do: picture of Gaia statalite and verys short overview of the mission)</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="reading-a-table-with-texttt-pandas">
+<h1>1. Reading a table with <span class="math notranslate nohighlight">\(\texttt{pandas}\)</span><a class="headerlink" href="#reading-a-table-with-texttt-pandas" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># path to the table</span>
+<span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;data/gaia_100pc.csv&#39;</span>
+
+<span class="c1"># loading the table; this function assumes a &#39;comma separated file (aka csv)&#39;</span>
+<span class="n">gaia</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+<span class="c1"># behind the scenes cleaning (likely want to distribute this shortened version)</span>
+<span class="n">gaia</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;radius&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gaia</span><span class="o">.</span><span class="n">radius_gspphot</span>
+<span class="n">gaia</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;teff&#39;</span><span class="p">]</span>   <span class="o">=</span> <span class="n">gaia</span><span class="o">.</span><span class="n">teff_gspphot</span>
+<span class="n">gaia</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;gmag&#39;</span><span class="p">]</span>   <span class="o">=</span> <span class="n">gaia</span><span class="o">.</span><span class="n">phot_g_mean_mag</span>
+<span class="n">gaia</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;rmag&#39;</span><span class="p">]</span>   <span class="o">=</span> <span class="n">gaia</span><span class="o">.</span><span class="n">phot_rp_mean_mag</span>
+<span class="n">gaia</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;bmag&#39;</span><span class="p">]</span>   <span class="o">=</span> <span class="n">gaia</span><span class="o">.</span><span class="n">phot_bp_mean_mag</span>
+<span class="n">gaia</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;distance&#39;</span><span class="p">]</span>   <span class="o">=</span> <span class="n">gaia</span><span class="o">.</span><span class="n">distance_gspphot</span>
+
+<span class="n">gaia</span> <span class="o">=</span> <span class="n">gaia</span><span class="p">[[</span><span class="s1">&#39;radius&#39;</span><span class="p">,</span><span class="s1">&#39;teff&#39;</span><span class="p">,</span><span class="s1">&#39;distance&#39;</span><span class="p">,</span><span class="s1">&#39;gmag&#39;</span><span class="p">,</span><span class="s1">&#39;rmag&#39;</span><span class="p">,</span><span class="s1">&#39;bmag&#39;</span><span class="p">,</span><span class="s1">&#39;ecl_lon&#39;</span><span class="p">,</span><span class="s1">&#39;ecl_lat&#39;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-2-ca4b29dcb7e0&gt;</span> in <span class="ni">&lt;cell line: 5&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> 
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># loading the table; this function assumes a &#39;comma separated file (aka csv)&#39;</span>
+<span class="ne">----&gt; </span><span class="mi">5</span> <span class="n">gaia</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> 
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="c1"># behind the scenes cleaning (likely want to distribute this shortened version)</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/pandas/io/parsers/readers.py</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options, dtype_backend)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1024</span>     <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1025</span> 
+<span class="ne">-&gt; </span><span class="mi">1026</span>     <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1027</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1028</span> 
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/pandas/io/parsers/readers.py</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">618</span> 
+<span class="g g-Whitespace">    </span><span class="mi">619</span>     <span class="c1"># Create the parser.</span>
+<span class="ne">--&gt; </span><span class="mi">620</span>     <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">621</span> 
+<span class="g g-Whitespace">    </span><span class="mi">622</span>     <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/pandas/io/parsers/readers.py</span> in <span class="ni">__init__</span><span class="nt">(self, f, engine, **kwds)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1618</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1619</span>         <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">:</span> <span class="n">IOHandles</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="ne">-&gt; </span><span class="mi">1620</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1621</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1622</span>     <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/pandas/io/parsers/readers.py</span> in <span class="ni">_make_engine</span><span class="nt">(self, f, engine)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1878</span>                 <span class="k">if</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">mode</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1879</span>                     <span class="n">mode</span> <span class="o">+=</span> <span class="s2">&quot;b&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1880</span>             <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="o">=</span> <span class="n">get_handle</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1881</span>                 <span class="n">f</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1882</span>                 <span class="n">mode</span><span class="p">,</span>
+
+<span class="nn">/usr/local/lib/python3.10/dist-packages/pandas/io/common.py</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">871</span>         <span class="k">if</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span> <span class="ow">and</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">872</span>             <span class="c1"># Encoding</span>
+<span class="ne">--&gt; </span><span class="mi">873</span>             <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">874</span>                 <span class="n">handle</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">875</span>                 <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;data/gaia_100pc.csv&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<section id="what-s-in-the-table-and-how-can-we-access-it">
+<h2>What’s in the table and how can we access it?<a class="headerlink" href="#what-s-in-the-table-and-how-can-we-access-it" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s print the first couple rows of data</span>
+<span class="n">gaia</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>radius</th>
+      <th>teff</th>
+      <th>distance</th>
+      <th>gmag</th>
+      <th>rmag</th>
+      <th>bmag</th>
+      <th>ecl_lon</th>
+      <th>ecl_lat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.5023</td>
+      <td>3224.9536</td>
+      <td>13.3978</td>
+      <td>10.241307</td>
+      <td>9.135763</td>
+      <td>11.498909</td>
+      <td>279.484182</td>
+      <td>8.627836</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.4488</td>
+      <td>3508.4785</td>
+      <td>13.5867</td>
+      <td>10.019066</td>
+      <td>8.943984</td>
+      <td>11.186045</td>
+      <td>63.836273</td>
+      <td>38.387682</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.4814</td>
+      <td>3310.7295</td>
+      <td>13.5787</td>
+      <td>10.193903</td>
+      <td>9.102655</td>
+      <td>11.395733</td>
+      <td>63.836924</td>
+      <td>38.388986</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.6412</td>
+      <td>3473.9587</td>
+      <td>7.0383</td>
+      <td>7.756715</td>
+      <td>6.747296</td>
+      <td>8.790974</td>
+      <td>7.104283</td>
+      <td>71.152618</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.4892</td>
+      <td>3155.9285</td>
+      <td>8.5053</td>
+      <td>9.495382</td>
+      <td>8.347611</td>
+      <td>10.836117</td>
+      <td>249.618870</td>
+      <td>-15.836896</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We can also print the last couple rows of data</span>
+<span class="n">gaia</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>radius</th>
+      <th>teff</th>
+      <th>distance</th>
+      <th>gmag</th>
+      <th>rmag</th>
+      <th>bmag</th>
+      <th>ecl_lon</th>
+      <th>ecl_lat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>501</th>
+      <td>0.1677</td>
+      <td>2878.0027</td>
+      <td>12.7056</td>
+      <td>13.652472</td>
+      <td>12.276646</td>
+      <td>15.956352</td>
+      <td>212.820918</td>
+      <td>21.919965</td>
+    </tr>
+    <tr>
+      <th>502</th>
+      <td>0.1887</td>
+      <td>2959.8933</td>
+      <td>12.2233</td>
+      <td>13.079426</td>
+      <td>11.746457</td>
+      <td>15.165963</td>
+      <td>271.133288</td>
+      <td>60.948970</td>
+    </tr>
+    <tr>
+      <th>503</th>
+      <td>0.8268</td>
+      <td>4914.2610</td>
+      <td>11.0935</td>
+      <td>6.129808</td>
+      <td>5.502101</td>
+      <td>6.585531</td>
+      <td>273.994073</td>
+      <td>61.861649</td>
+    </tr>
+    <tr>
+      <th>504</th>
+      <td>0.6636</td>
+      <td>3889.6328</td>
+      <td>3.4947</td>
+      <td>5.450645</td>
+      <td>4.556912</td>
+      <td>6.272253</td>
+      <td>336.994179</td>
+      <td>51.894370</td>
+    </tr>
+    <tr>
+      <th>505</th>
+      <td>0.6760</td>
+      <td>4353.7437</td>
+      <td>3.4904</td>
+      <td>4.766713</td>
+      <td>3.977203</td>
+      <td>5.439793</td>
+      <td>336.994324</td>
+      <td>51.903146</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># What columns are in the table?</span>
+<span class="n">gaia</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;radius&#39;, &#39;teff&#39;, &#39;distance&#39;, &#39;gmag&#39;, &#39;rmag&#39;, &#39;bmag&#39;, &#39;ecl_lon&#39;,
+       &#39;ecl_lat&#39;],
+      dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s access a single column</span>
+<span class="n">gaia</span><span class="p">[</span><span class="s1">&#39;teff&#39;</span><span class="p">]</span> <span class="c1"># this is the same as: gaia.teff</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0      3224.9536
+1      3508.4785
+2      3310.7295
+3      3473.9587
+4      3155.9285
+         ...    
+501    2878.0027
+502    2959.8933
+503    4914.2610
+504    3889.6328
+505    4353.7437
+Name: teff, Length: 506, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="playing-with-the-catalog">
+<h2>2. Playing with the Catalog<a class="headerlink" href="#playing-with-the-catalog" title="Permalink to this heading">#</a></h2>
+<p>What we have now are a set of lists of numbers. Now we can spend a few minutes getting familiar with these values. Let us start by investigating the maximum and minimum values of magnitudes in this data set.</p>
+<p>Should we also ask them to investigate any correlations? For instance if magnitude and reff or magnitude and teff are correlated? Could be useful later when we show what is correlated.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="how-can-we-visualize-the-data">
+<h1>2. How can we visualize the data?<a class="headerlink" href="#how-can-we-visualize-the-data" title="Permalink to this heading">#</a></h1>
+<p>First, let’s see where the stars are located relative to us. In the table, we have the distance to each star, as well as the ecliptic longitude and latitude. We can convert to Cartesian coordinates (x, y, z) and plot where the stars lie in the plane of the galaxy.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lon</span> <span class="o">=</span> <span class="n">gaia</span><span class="o">.</span><span class="n">ecl_lon</span>  <span class="c1"># ecliptic longitude</span>
+<span class="n">lat</span> <span class="o">=</span> <span class="n">gaia</span><span class="o">.</span><span class="n">ecl_lat</span>  <span class="c1"># ecliptic latitude</span>
+<span class="n">r</span>   <span class="o">=</span> <span class="n">gaia</span><span class="o">.</span><span class="n">distance</span> <span class="c1"># distance from the Sun in pc</span>
+
+<span class="c1"># conversion from cartesian to spherical coordinates</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">lon</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">lat</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">lon</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">lat</span><span class="p">)</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">lat</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot the positions of the stars</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="c1"># alpha sets the transparancy of the points (1 is fully opaque and 0 is fully transparent)</span>
+
+<span class="c1"># for context, let&#39;s place a star symbol at the position of the Sun</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+<span class="c1"># it&#39;s always good practice to label the axes (even if it&#39;s a bit arbitrary in our case)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+
+<span class="c1"># let&#39;s make the plot square, for easy interpretation</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;square&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/9799eb431a79918bce4c62c2fbd6256e8de2f2d371cf9980933040adb1d62a08.png" src="../_images/9799eb431a79918bce4c62c2fbd6256e8de2f2d371cf9980933040adb1d62a08.png" />
+</div>
+</div>
+<p>We now have an idea of where the stars are relative to us, but we can’t tell much about them. Let’s now set the size of the points on the scatter plot accordint to the size of the star.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># size of the star in solar radii</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">gaia</span><span class="o">.</span><span class="n">radius</span>
+
+<span class="c1"># if we pass these radii to matplotlib, we&#39;ll end up with some very small markers</span>
+<span class="c1"># let&#39;s rescale the radii so that the largest star has a value of 100</span>
+<span class="n">s</span> <span class="o">=</span> <span class="p">(</span><span class="n">s</span><span class="o">-</span><span class="n">s</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">/</span> <span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">s</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+<span class="n">s</span> <span class="o">*=</span> <span class="mi">100</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># the s parameter sets the size of markers</span>
+<span class="c1"># (it can either be a single number, or a list of numbers)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;square&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/dc628f43433351afae1380a8f0a28a8a2e96fd522052035c861d00167fdd0385.png" src="../_images/dc628f43433351afae1380a8f0a28a8a2e96fd522052035c861d00167fdd0385.png" />
+</div>
+</div>
+<p>Our plot certainly is more interesting now. To pack even more information onto our plot, we can set the color of the points according to the temperature of the star.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># to set each point it&#39;s own color, we set &#39;c&#39; equal to the stellar temperatures</span>
+<span class="c1"># the color gradient is set by &#39;cmap&#39;</span>
+<span class="n">sc</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="n">gaia</span><span class="o">.</span><span class="n">teff</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;coolwarm_r&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+
+<span class="c1"># let&#39;s add a color bar, for easy interpretation</span>
+<span class="n">cb</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">sc</span><span class="p">)</span>
+<span class="n">cb</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;Temperature [K]&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;square&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/c8919681df2b1a176a5ec4fd2f950513fe4a74bbeda88b64dad691cfc87da79d.png" src="../_images/c8919681df2b1a176a5ec4fd2f950513fe4a74bbeda88b64dad691cfc87da79d.png" />
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="what-can-we-now-learn-about-stars">
+<h1>3. What can we now learn about stars?<a class="headerlink" href="#what-can-we-now-learn-about-stars" title="Permalink to this heading">#</a></h1>
+<p>From our last plot, we can quickly notice a few things about our local region of space:</p>
+<ul class="simple">
+<li><p>Stars appear uniformly distributed in the galactic plane</p></li>
+<li><p>Stars span a wide range of temperatures and sizes</p></li>
+<li><p>The largest stars also appear to be the hottest stars</p></li>
+</ul>
+<p>The last trend is one of the most important results in astrophysics. Let’s take a closer look at a plot of stellar temperature vs. radius:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">gaia</span><span class="o">.</span><span class="n">teff</span><span class="p">,</span><span class="n">gaia</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature [K]&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Radius [$R_\odot$]&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ec265af512aa737a14db9e836c918696a4f4d9dc488fdff54bd61a3176ce88c8.png" src="../_images/ec265af512aa737a14db9e836c918696a4f4d9dc488fdff54bd61a3176ce88c8.png" />
+</div>
+</div>
+<p>While radius and temperature are important properties of stars, they’re not the whole story. For instance, we could also ask:</p>
+<ul class="simple">
+<li><p>How bright are the stars?</p></li>
+<li><p>What color are the stars?</p></li>
+</ul>
+<p>Luckily, our table also includes the stars’ magnitudes (how bright a star appears in the sky) in different color ranges. We can subtract two of these bands to define a “color.” For example, let’s consider the green band (g) and the red band (r). Below we plot the color <span class="math notranslate nohighlight">\(g-r\)</span> against stellar temperature.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g_r</span> <span class="o">=</span> <span class="n">gaia</span><span class="o">.</span><span class="n">gmag</span> <span class="o">-</span> <span class="n">gaia</span><span class="o">.</span><span class="n">rmag</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">gaia</span><span class="o">.</span><span class="n">teff</span><span class="p">,</span><span class="n">g_r</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature [K]&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$g-r$&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/93e55db50272960c1bec359edeeece49c2497e758563ae82ed50f0e739ed07a7.png" src="../_images/93e55db50272960c1bec359edeeece49c2497e758563ae82ed50f0e739ed07a7.png" />
+</div>
+</div>
+<p>Wow! We’ve certainly found a very strong correlation. This trend between color and temperature is known as Wein’s law. (insert blurb on Wein’s law here and how color is a proxy for <span class="math notranslate nohighlight">\(\lambda_\mathrm{max}\)</span>)</p>
+<div class="math notranslate nohighlight">
+\[ \lambda_\mathrm{max} \propto 1 / T \]</div>
+<p>Let’s see how closely the data match Wein’s law. To do so, we’ll need to solve for the free-parameters in the equation:
+$<span class="math notranslate nohighlight">\( g-r = b / T + c \)</span>$</p>
+<p>(for now, I’m using scipy.optimize but this would work well using by hand fitting instead)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">curve_fit</span>
+
+<span class="k">def</span> <span class="nf">weins_law</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">b</span> <span class="o">/</span> <span class="n">temp</span> <span class="o">+</span> <span class="n">c</span>
+
+<span class="c1"># plot the observations</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">gaia</span><span class="o">.</span><span class="n">teff</span><span class="p">,</span> <span class="n">g_r</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="c1"># now let&#39;s fit a model</span>
+<span class="n">popt</span><span class="p">,</span> <span class="n">pcov</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">weins_law</span><span class="p">,</span> <span class="n">gaia</span><span class="o">.</span><span class="n">teff</span><span class="p">,</span> <span class="n">g_r</span><span class="p">)</span>
+
+<span class="c1"># now let&#39;s plot the model as a line</span>
+<span class="n">xp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span><span class="mi">7000</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span><span class="n">weins_law</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span><span class="o">*</span><span class="n">popt</span><span class="p">),</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature [K]&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$g-r$&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/fcad2c63f586966afa159ce88f146b17f969df53aa7fbdcf44e4066fdfb5f0c5.png" src="../_images/fcad2c63f586966afa159ce88f146b17f969df53aa7fbdcf44e4066fdfb5f0c5.png" />
+</div>
+</div>
+<p>Above, we investigated stars’ temperatures, radii, and colors. We’ve even seen how temperature and color are closely related via Wein’s law.</p>
+<p>Next, let’s consider how “bright” the star’s are. In astrophysics, we quantify “brightness” with the magnitude scale.
+However, a star’s magnitude is dependent on the star’s distance from us.
+To understand the star’s <em>intrinsic</em> brightness we need to correct for distance. To do so, we must convert from magntides to <strong>absolute magnitudes</strong> with the formula:
+$<span class="math notranslate nohighlight">\( M = m - 5 \log_{10} [d/\mathrm{pc}] + 5, \)</span><span class="math notranslate nohighlight">\(
+where \)</span>m<span class="math notranslate nohighlight">\( is the magnitude and \)</span>M$ is the absolute magnitude.</p>
+<p>Absolute magnitude is certainly useful, but it’s often more convenient to use luminosity (the amount of energy emitted by the star per unit time). Absolute magnitude and luminosity are related via:
+$<span class="math notranslate nohighlight">\(  M \propto -2.5 \log_{10} L. \)</span>$</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">M</span> <span class="o">=</span> <span class="n">gaia</span><span class="o">.</span><span class="n">gmag</span> <span class="o">-</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">gaia</span><span class="o">.</span><span class="n">distance</span><span class="p">)</span> <span class="o">+</span> <span class="mi">5</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>How does absolute magnitude depend on the other properties of stars (such as temperature and radius)?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># temperature?</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">gaia</span><span class="o">.</span><span class="n">teff</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature [K]&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;M&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/4381890dac65fdd26d012ad10301e74cdf347b5fbad594a79b90a692fa6d35eb.png" src="../_images/4381890dac65fdd26d012ad10301e74cdf347b5fbad594a79b90a692fa6d35eb.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># stellar radius?</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">gaia</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Radius [$R_\odot$]&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;M&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/9a1bdfd884bde56e90afefbbd292a8b41d444bc56aec265857bcb04fc38ffdb4.png" src="../_images/9a1bdfd884bde56e90afefbbd292a8b41d444bc56aec265857bcb04fc38ffdb4.png" />
+</div>
+</div>
+<p>The two plots above show that absolute magnitude (aka, a star’s intrinsic brightness) is closely tied to stellar size and temperature. We’ve stumbled onto another key result: the Stefan–Boltzmann law
+$<span class="math notranslate nohighlight">\( L \propto R^3 T^4, \)</span><span class="math notranslate nohighlight">\(
+since \)</span> \log_{10}L \propto M <span class="math notranslate nohighlight">\( it follows that
+\)</span><span class="math notranslate nohighlight">\( M \propto \log_{10} [R^3 T^4], \)</span>$</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">gaia</span><span class="o">.</span><span class="n">radius</span><span class="o">**</span><span class="mi">3</span> <span class="o">*</span> <span class="n">gaia</span><span class="o">.</span><span class="n">teff</span><span class="o">**</span><span class="mi">3</span><span class="p">),</span> <span class="n">M</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;log$_</span><span class="si">{10}</span><span class="s1"> R^3 T^4$&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;M&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/3bb77ae5d128bb8d16a8d48ace5e917c9da0407496f0d728f67f16c8fe863f32.png" src="../_images/3bb77ae5d128bb8d16a8d48ace5e917c9da0407496f0d728f67f16c8fe863f32.png" />
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Introduction to Gaia data</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#new-texttt-python-skills">New <span class="math notranslate nohighlight">\(\texttt{python}\)</span> skills</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#astro-concepts">Astro concepts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-data-set-are-we-looking-at">What data set are we looking at?</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-a-table-with-texttt-pandas">1. Reading a table with <span class="math notranslate nohighlight">\(\texttt{pandas}\)</span></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-in-the-table-and-how-can-we-access-it">What’s in the table and how can we access it?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#playing-with-the-catalog">2. Playing with the Catalog</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-can-we-visualize-the-data">2. How can we visualize the data?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#what-can-we-now-learn-about-stars">3. What can we now learn about stars?</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jenny Greene, Jared Siegel, Erin Flowers, Jiaxuan Li
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
