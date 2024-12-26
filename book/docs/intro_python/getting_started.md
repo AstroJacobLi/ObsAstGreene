@@ -183,8 +183,9 @@ Let\'s start with how to edit code and run simple programs. The demonstration be
 
 ```{figure} /_static/lecture_specific/getting_started/nb1.png
 :name: nb1
-:height: 400px
+:height: 300px
 ```
+
 Each "cell" here is a little snippet of code. The number `[1]` on the left of the first cell indicates that this is the first cell run so far. 
 You can run each cell by clicking the little "play" button on the left side of the cell, or by pressing `Shift+Enter` on your keyboard. 
 
@@ -302,3 +303,10 @@ plt.show()
 
 Don\'t worry about the details for now --- let\'s just run it and see
 what happens. Hopefully you will get a beautiful plot!
+
+
+## Homework
+1. Set up your Python environment, either on Google Colab, or on your own laptop. If you are working on your local machine, please make sure you can run a Jupyter notebook. If you are working on Google Colab, please make sure you can open a notebook and run the code.
+2. Familiarize yourself with the Jupyter notebook interface. Try running some code, writing some text, and inserting a figure in a Markdown cell.
+3. Run the test program above and make sure you get a plot. If you encounter any errors, please let us know. 
+4. Download the notebook as `.ipynb` and print it as a PDF. Submit both files through Canvas.
