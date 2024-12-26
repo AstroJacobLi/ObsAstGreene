@@ -9,6 +9,10 @@ parts:
   - file: docs/intro_python/python_by_example
   - file: docs/notebooks
 
+- caption: Introduction to Stars
+  chapters:
+  - file: docs/gaia_part1_jared
+
 - caption: Statistics
   chapters:
   - file: docs/stats/basic_stats
