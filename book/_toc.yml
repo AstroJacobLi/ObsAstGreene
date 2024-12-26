@@ -6,8 +6,7 @@ parts:
   chapters:
   - file: docs/intro_python/about_py
   - file: docs/intro_python/getting_started
-  - file: docs/intro_python/python_by_example
-  - file: docs/notebooks
+  - file: docs/intro_python/numpy_and_plotting
 
 - caption: Introduction to Stars
   chapters:
