@@ -1,0 +1,1046 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Working with arrays &#8212; Observational Astronomy</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/redirect.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/intro_python/numpy_and_plotting';</script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/lsst-full.jpg" class="logo__image only-light" alt="Observational Astronomy - Home"/>
+    <script>document.write(`<img src="../../_static/lsst-full.jpg" class="logo__image only-dark" alt="Observational Astronomy - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="about_py.html">About Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Setting up Your Python Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="python_by_example.html">An Introductory Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks.html">Test notebook</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to Stars</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../gaia_part1_jared.html">Prerequisites</a></li>
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../stats/basic_stats.html">Basic Statistics (Part 1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stats/more_stats.html">Basic Statistics (Part 2)</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Detector and Imaging</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../imaging/calibration_frames.html">Calibration frames</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../imaging/img_simulation.html">Simulate an artificial image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../imaging/plotting_jwst.html">Plotting JWST images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro_gaia_star.html">Introduction to Gaia data</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Final Projects</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../final_project/variable_stars_and_planets.html">Lightcurves, transits, and TESS! Oh My!</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../final_project/GalaxyZoo_NeuralNet.html">Solve package versions</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../final_project/lrd/are_LRD_resolved.html">LRD project</a></li>
+
+
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Merian Project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../final_project/merian/01_merian_intro.html">Merian project Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../final_project/merian/02_Halpha_map.html">Merian project Part 2</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/AstroJacobLi/ObsAstGreene/blob/main//book/docs/intro_python/numpy_and_plotting.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/intro_python/numpy_and_plotting.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Working with arrays</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-a-catalog-of-the-football-players">1. Read a catalog of the football players</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing-and-slicing">Indexing and slicing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#who-s-the-tallest-and-heaviest-player">2. Who’s the tallest and heaviest player?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sort-the-players-by-height">3. Sort the players by height</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-and-logical-operations">4. Comparison and logical operations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-the-height-and-weight-of-the-players">5. Plotting the height and weight of the players</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="working-with-arrays">
+<h1>Working with arrays<a class="headerlink" href="#working-with-arrays" title="Permalink to this heading">#</a></h1>
+<p><strong>Prerequisite:</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://jgreene100.github.io/Ast207/docs/intro_python/about_py.html">About Python</a></p></li>
+<li><p><a class="reference external" href="https://jgreene100.github.io/Ast207/docs/intro_python/getting_started.html">Setting up your Python Environment</a></p></li>
+</ul>
+<p><strong>We will learn:</strong></p>
+<ul class="simple">
+<li><p>Manipulate catalog data using <code class="docutils literal notranslate"><span class="pre">astropy.table.Table</span></code></p></li>
+<li><p>Understand data types and structures</p></li>
+<li><p>Learn <code class="docutils literal notranslate"><span class="pre">print</span></code> and <code class="docutils literal notranslate"><span class="pre">f-string</span></code> formatting</p></li>
+<li><p>Working with <code class="docutils literal notranslate"><span class="pre">numpy</span></code> arrays</p></li>
+<li><p>Plotting basic figures using <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></p></li>
+</ul>
+<hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s start with importing our packages</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">astropy.table</span> <span class="kn">import</span> <span class="n">Table</span>
+
+<span class="c1"># We can beautify our plots by changing the matpltlib setting a little</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">18</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.linewidth&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Don&#39;t worry about this cell, it&#39;s just to make the notebook look a little nicer.</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">google.colab</span>
+    <span class="n">IN_COLAB</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">IN_COLAB</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="c1"># Get the directory right</span>
+<span class="k">if</span> <span class="n">IN_COLAB</span><span class="p">:</span>
+  <span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
+  <span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">&#39;/content/drive/&#39;</span><span class="p">)</span>
+  <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;/content/drive/Shareddrives/AST207/data&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;../../../_static/ObsAstroData/&quot;</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">&quot;../../../_static/ObsAstroData/&quot;</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;../../../_static/ObsAstroData/&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<p><strong>Import packages</strong></p>
+<p>Note how we import the packages. There are mainly 3 ways to import packages:</p>
+<ul class="simple">
+<li><p>directly import something, such as <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">matplotlib</span></code>. In this way, you can call the functions under this package like <code class="docutils literal notranslate"><span class="pre">matplotlib.colorbar</span></code> directly.</p></li>
+<li><p>import something as something, such as <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">numpy</span> <span class="pre">as</span> <span class="pre">np</span></code>. Now <code class="docutils literal notranslate"><span class="pre">np</span></code> is an alias of the package <code class="docutils literal notranslate"><span class="pre">numpy</span></code>. It is a super convenient feature and will save your life. However, there are <strong>conventions</strong> of some popular packages. E.g., <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">numpy</span> <span class="pre">as</span> <span class="pre">np</span></code>, <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">pandas</span> <span class="pre">as</span> <span class="pre">pd</span></code>, etc.</p></li>
+<li><p>import a subpackage from a package, such as <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">matplotlib.pyplot</span> <span class="pre">as</span> <span class="pre">plt</span></code>. By doing this, we import a subpackage <code class="docutils literal notranslate"><span class="pre">pyplot</span></code> from <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>, and set up an alias <code class="docutils literal notranslate"><span class="pre">plt</span></code>. Another example is <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">astropy.table</span> <span class="pre">import</span> <span class="pre">Table</span></code>, where <code class="docutils literal notranslate"><span class="pre">Table</span></code> is a Python class in <code class="docutils literal notranslate"><span class="pre">astropy.table</span></code>. Some other examples are <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">astropy.units</span> <span class="pre">as</span> <span class="pre">u</span></code>, <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">astropy.constants</span> <span class="pre">as</span> <span class="pre">const</span></code>.</p></li>
+</ul>
+<p>In this notebook, we are going to learn (for the first time!) how to work with data in Python. As astronomers, a huge amount of what we do involves taking observations in the form of catalogs and comparing them visually. Today, we’re going to take a step back from space and think about <strong>football</strong>, and play around with some data for the 2023 NFL rosters.</p>
+<section id="read-a-catalog-of-the-football-players">
+<h2>1. Read a catalog of the football players<a class="headerlink" href="#read-a-catalog-of-the-football-players" title="Permalink to this heading">#</a></h2>
+<p>We have a catalog of the 2023 NFL rosters. The catalog is in the form of a CSV file, which is a common format for storing data. You can also open this CSV file using Microsoft Excel or MacOS Numbers. In Python, we can read this file using the <code class="docutils literal notranslate"><span class="pre">astropy.table.Table</span></code> class. We have imported this class as <code class="docutils literal notranslate"><span class="pre">Table</span></code> from the <code class="docutils literal notranslate"><span class="pre">astropy.table</span></code> package. Now we use <code class="docutils literal notranslate"><span class="pre">Table.read()</span></code> to read the CSV file.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cat</span> <span class="o">=</span> <span class="n">Table</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;/Users/jiaxuanl/Dropbox/Courses/Ast207/book/_static/ObsAstroData/players_age.csv&#39;</span><span class="p">)</span>
+<span class="n">cat</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div><i>Table length=1433</i>
+<table id="table5395305680" class="table-striped table-bordered table-condensed">
+<thead><tr><th>nflId</th><th>height</th><th>weight</th><th>birthDate</th><th>collegeName</th><th>officialPosition</th><th>displayName</th><th>height_inches</th><th>age</th></tr></thead>
+<thead><tr><th>int64</th><th>str4</th><th>int64</th><th>str10</th><th>str30</th><th>str3</th><th>str26</th><th>float64</th><th>int64</th></tr></thead>
+<tr><td>25511</td><td>6-4</td><td>225</td><td>1977-08-03</td><td>Michigan</td><td>QB</td><td>Tom Brady</td><td>76.0</td><td>47</td></tr>
+<tr><td>28963</td><td>6-5</td><td>240</td><td>1982-03-02</td><td>Miami, O.</td><td>QB</td><td>Ben Roethlisberger</td><td>77.0</td><td>42</td></tr>
+<tr><td>29550</td><td>6-4</td><td>328</td><td>1982-01-22</td><td>Arkansas</td><td>T</td><td>Jason Peters</td><td>76.0</td><td>42</td></tr>
+<tr><td>29851</td><td>6-2</td><td>225</td><td>1983-12-02</td><td>California</td><td>QB</td><td>Aaron Rodgers</td><td>74.0</td><td>41</td></tr>
+<tr><td>30078</td><td>6-2</td><td>228</td><td>1982-11-24</td><td>Harvard</td><td>QB</td><td>Ryan Fitzpatrick</td><td>74.0</td><td>42</td></tr>
+<tr><td>30842</td><td>6-6</td><td>267</td><td>1984-05-19</td><td>UCLA</td><td>TE</td><td>Marcedes Lewis</td><td>78.0</td><td>40</td></tr>
+<tr><td>30869</td><td>6-7</td><td>330</td><td>1981-12-12</td><td>Louisiana State</td><td>T</td><td>Andrew Whitworth</td><td>79.0</td><td>43</td></tr>
+<tr><td>33084</td><td>6-4</td><td>217</td><td>1985-05-17</td><td>Boston College</td><td>QB</td><td>Matt Ryan</td><td>76.0</td><td>39</td></tr>
+<tr><td>33107</td><td>6-4</td><td>315</td><td>1985-08-30</td><td>Virginia Tech</td><td>T</td><td>Duane Brown</td><td>76.0</td><td>39</td></tr>
+<tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+<tr><td>53053</td><td>6-3</td><td>255</td><td>1998-04-17</td><td>Memphis</td><td>DE</td><td>Bryce Huff</td><td>75.0</td><td>26</td></tr>
+<tr><td>53059</td><td>6-3</td><td>239</td><td>1998-05-24</td><td>Iowa</td><td>MLB</td><td>Kristian Welch</td><td>75.0</td><td>26</td></tr>
+<tr><td>53063</td><td>6-3</td><td>270</td><td>1997-10-28</td><td>Texas State</td><td>C</td><td>Aaron Brewer</td><td>75.0</td><td>27</td></tr>
+<tr><td>53065</td><td>6-5</td><td>255</td><td>1997-02-22</td><td>Arizona State</td><td>TE</td><td>Tommy Hudson</td><td>77.0</td><td>27</td></tr>
+<tr><td>53073</td><td>6-3</td><td>290</td><td>1997-02-28</td><td>Florida International</td><td>DT</td><td>Teair Tart</td><td>75.0</td><td>27</td></tr>
+<tr><td>53074</td><td>6-3</td><td>215</td><td>1997-03-21</td><td>Indiana</td><td>WR</td><td>Nick Westbrook-Ikhine</td><td>75.0</td><td>27</td></tr>
+<tr><td>53079</td><td>6-1</td><td>255</td><td>1997-08-20</td><td>Toledo</td><td>FB</td><td>Reggie Gilliam</td><td>73.0</td><td>27</td></tr>
+<tr><td>53091</td><td>5-11</td><td>208</td><td>1996-05-17</td><td>Oregon State</td><td>RB</td><td>Artavis Pierce</td><td>71.0</td><td>28</td></tr>
+<tr><td>53098</td><td>6-2</td><td>204</td><td>1998-03-27</td><td>Tennessee</td><td>WR</td><td>Marquez Callaway</td><td>74.0</td><td>26</td></tr>
+<tr><td>53172</td><td>6-3</td><td>235</td><td>1997-06-03</td><td>Indiana State</td><td>TE</td><td>Dominique Dafney</td><td>75.0</td><td>27</td></tr>
+</table></div></div></div>
+</div>
+<p>This table includes many columns, including the players ID, height, weight, birthdate, etc. If you want to check all the column names, you can use <code class="docutils literal notranslate"><span class="pre">cat.colnames</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cat</span><span class="o">.</span><span class="n">colnames</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;nflId&#39;,
+ &#39;height&#39;,
+ &#39;weight&#39;,
+ &#39;birthDate&#39;,
+ &#39;collegeName&#39;,
+ &#39;officialPosition&#39;,
+ &#39;displayName&#39;,
+ &#39;height_inches&#39;,
+ &#39;age&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s define two variables, namely <code class="docutils literal notranslate"><span class="pre">height</span></code> and <code class="docutils literal notranslate"><span class="pre">weight</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">height</span> <span class="o">=</span> <span class="n">cat</span><span class="p">[</span><span class="s1">&#39;height_inches&#39;</span><span class="p">]</span>
+<span class="n">weight</span> <span class="o">=</span> <span class="n">cat</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We note that different data have different <strong>data types</strong>. For example, the player’s name is a <code class="docutils literal notranslate"><span class="pre">string</span></code>, the player’s height is a <code class="docutils literal notranslate"><span class="pre">float</span></code> number, and the player’s weight is an <code class="docutils literal notranslate"><span class="pre">int</span></code>eger. Data with different types might not be able to operate together. For example, you cannot add a string to a number! Some other data types include <code class="docutils literal notranslate"><span class="pre">bool</span></code>ean, <code class="docutils literal notranslate"><span class="pre">complex</span></code>, etc.</p>
+<p>Let’s check the data types of height and weight:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Height datatype:&quot;</span><span class="p">,</span> <span class="n">height</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Weight datatype:&quot;</span><span class="p">,</span> <span class="n">weight</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Height datatype: float64
+Weight datatype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we used the <code class="docutils literal notranslate"><span class="pre">print</span></code> function. The <code class="docutils literal notranslate"><span class="pre">print</span></code> function is used to print the specified message to the screen, or other standard output device. The message can be a string, or any other object, the object will be converted into a string before written to the screen. The arguments seperated by commas are concatenated with a space. Another very cool way of using <code class="docutils literal notranslate"><span class="pre">print</span></code> is to use the <code class="docutils literal notranslate"><span class="pre">f-string</span></code> format. You can use <code class="docutils literal notranslate"><span class="pre">f</span></code> before the string and use <code class="docutils literal notranslate"><span class="pre">{}</span></code> to include the variables. E.g., the above code can be written as <code class="docutils literal notranslate"><span class="pre">print(f&quot;Height</span> <span class="pre">is</span> <span class="pre">{cat['height'].dtype},</span> <span class="pre">weight</span> <span class="pre">is</span> <span class="pre">{cat['weight'].dtype}&quot;)</span></code>. This is a very convenient way to print out the variables in a string.</p>
+<p>Let’s check the type of the height and weight columns in the catalog. They are actually <code class="docutils literal notranslate"><span class="pre">astropy.table.column.Column</span></code> objects.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Height column type = </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">height</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Weight column type = </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">weight</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Height column type = &lt;class &#39;astropy.table.column.Column&#39;&gt;
+Weight column type = &lt;class &#39;astropy.table.column.Column&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Often it’s more convenient to work with the data as a <em>numpy array</em>. We can convert the column to a <strong>numpy array</strong> using <code class="docutils literal notranslate"><span class="pre">np.array(cat['height'])</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">height</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">height</span><span class="p">)</span>
+<span class="n">weight</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">weight</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;height = </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">height</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;weight = </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">weight</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>height = &lt;class &#39;numpy.ndarray&#39;&gt;
+weight = &lt;class &#39;numpy.ndarray&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Another common way to store data is a <code class="docutils literal notranslate"><span class="pre">list</span></code>. A list is a collection which is ordered and changeable. In Python lists are written with square brackets. You can convert a <code class="docutils literal notranslate"><span class="pre">numpy</span></code> array to a list using <code class="docutils literal notranslate"><span class="pre">list()</span></code>. e.g.:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">height_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">height</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">height_list</span><span class="p">))</span>
+<span class="n">height_list</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;list&#39;&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[76.0, 77.0, 76.0, 74.0, 74.0]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition-quiz admonition">
+<p class="admonition-title">Quiz</p>
+<p>Can you find out the length of the height and weight arrays?</p>
+<p><em>Tips: you can use the <code class="docutils literal notranslate"><span class="pre">len()</span></code> function to find out the length of an array.</em></p>
+</div>
+<section id="indexing-and-slicing">
+<h3>Indexing and slicing<a class="headerlink" href="#indexing-and-slicing" title="Permalink to this heading">#</a></h3>
+<p>Indexing refers to selecting an element from an array. Slicing refers to selecting a range of elements from an array. In Python, the index starts from 0. For example, the first element of an array is indexed as 0, the second element is indexed as 1, and so on.</p>
+<p>If we wanna select the first element of an array, we can use <code class="docutils literal notranslate"><span class="pre">array[0]</span></code>. If we wanna select the forth element of an array, we can use <code class="docutils literal notranslate"><span class="pre">array[3]</span></code>. For the last element of an array, we can use <code class="docutils literal notranslate"><span class="pre">array[-1]</span></code>. The second last element of an array can be selected as <code class="docutils literal notranslate"><span class="pre">array[-2]</span></code>.</p>
+<p>If we wanna select the first 3 elements of an array, we can use <code class="docutils literal notranslate"><span class="pre">array[0:3]</span></code>. The first number is the starting index, and the second number is the ending index. The ending index is not included in the selection. If we wanna select the first 3 elements of an array, we can also use <code class="docutils literal notranslate"><span class="pre">array[:3]</span></code>. If we wanna select the last 3 elements of an array, we can use <code class="docutils literal notranslate"><span class="pre">array[-3:]</span></code>. If we wanna select every other element of an array, we can use <code class="docutils literal notranslate"><span class="pre">array[::2]</span></code>.</p>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>Try to select the first 5 elements of the height array, and the last 5 elements of the weight array.</p>
+</div>
+</section>
+</section>
+<section id="who-s-the-tallest-and-heaviest-player">
+<h2>2. Who’s the tallest and heaviest player?<a class="headerlink" href="#who-s-the-tallest-and-heaviest-player" title="Permalink to this heading">#</a></h2>
+<p>To gain more insight into the data, let’s try to find out who’s the tallest and heaviest player in the dataset. <code class="docutils literal notranslate"><span class="pre">Numpy</span></code> provides a lot of useful functions to work with arrays. For example, <code class="docutils literal notranslate"><span class="pre">np.max()</span></code> can find the maximum value of an array; <code class="docutils literal notranslate"><span class="pre">np.argmax()</span></code> (argument of the max) can find the index of the maximum value in an array.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">height</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">height</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(81.0, 191)
+</pre></div>
+</div>
+</div>
+</div>
+<p>This means the tallest player is 81 inches tall, and the index of that player is 191 in the catalog. Let’s see who that player is by indexing the catalog using the index:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">cat</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">height</span><span class="p">)])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>nflId height weight birthDate  collegeName officialPosition     displayName      height_inches age
+----- ------ ------ ---------- ----------- ---------------- -------------------- ------------- ---
+41222    6-9    320 1988-09-22        Army                T Alejandro Villanueva          81.0  36
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition-quiz admonition">
+<p class="admonition-title">Quiz</p>
+<p>Find out the player with the maximum weight.</p>
+</div>
+</section>
+<section id="sort-the-players-by-height">
+<h2>3. Sort the players by height<a class="headerlink" href="#sort-the-players-by-height" title="Permalink to this heading">#</a></h2>
+<p>We can sort the players by height using <code class="docutils literal notranslate"><span class="pre">np.argsort()</span></code>. This function returns the indices of the players from the shortest to the tallest. We can then use these indices to sort the catalog.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">height</span><span class="p">)</span> <span class="c1"># Returns the indices of players sorted by height (low to high)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1154,  888, 1420, ...,  803,  148,  191])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">height</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">height</span><span class="p">)]</span> <span class="c1"># indexing the original height array with the sorted indices would give us the sorted height array</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([66., 66., 66., ..., 80., 80., 81.])
+</pre></div>
+</div>
+</div>
+</div>
+<p>This can also be achieved using the np.sort() function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">height_sorted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">height</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you wanna get the sorted array but in the inverse order, you can use <code class="docutils literal notranslate"><span class="pre">[::-1]</span></code> to reverse the array.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">height_sorted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">height</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">height_sorted</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[81. 80. 80. ... 66. 66. 66.]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="comparison-and-logical-operations">
+<h2>4. Comparison and logical operations<a class="headerlink" href="#comparison-and-logical-operations" title="Permalink to this heading">#</a></h2>
+<p>We can use comparison operators to compare two values. The result of the comparison is a <strong>boolean</strong> value, either <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code>. The comparison operators include <code class="docutils literal notranslate"><span class="pre">==</span></code> (equal), <code class="docutils literal notranslate"><span class="pre">!=</span></code> (not equal), <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> (greater than), <code class="docutils literal notranslate"><span class="pre">&lt;</span></code> (less than), <code class="docutils literal notranslate"><span class="pre">&gt;=</span></code> (greater than or equal to), <code class="docutils literal notranslate"><span class="pre">&lt;=</span></code> (less than or equal to). For example, <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">==</span> <span class="pre">1</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>, <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">!=</span> <span class="pre">1</span></code> is <code class="docutils literal notranslate"><span class="pre">False</span></code>, <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">&gt;</span> <span class="pre">1</span></code> is <code class="docutils literal notranslate"><span class="pre">False</span></code>, <code class="docutils literal notranslate"><span class="pre">-10</span> <span class="pre">&lt;</span> <span class="pre">1</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>, <code class="docutils literal notranslate"><span class="pre">3</span> <span class="pre">&gt;=</span> <span class="pre">1</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>, <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">&lt;=</span> <span class="pre">1</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+<p>Sometimes we wanna combine multiple conditions. We can use logical operators to do that. The logical operators include <code class="docutils literal notranslate"><span class="pre">and</span></code>, <code class="docutils literal notranslate"><span class="pre">or</span></code>, <code class="docutils literal notranslate"><span class="pre">not</span></code>. For example, we can use the following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">price</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="k">if</span> <span class="n">price</span> <span class="o">&gt;</span> <span class="mi">20</span> <span class="ow">and</span> <span class="n">price</span> <span class="o">&lt;</span> <span class="mi">40</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The price is between 20 and 40&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The price is not between 20 and 40&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The above code tries to check if the price is between 20 and 40. <code class="docutils literal notranslate"><span class="pre">price</span> <span class="pre">&gt;</span> <span class="pre">20</span> <span class="pre">and</span> <span class="pre">price</span> <span class="pre">&lt;</span> <span class="pre">40</span></code> is a composite condition, and it is <code class="docutils literal notranslate"><span class="pre">True</span></code> if the price is between 20 and 40. However, in Python, you can’t write <code class="docutils literal notranslate"><span class="pre">20</span> <span class="pre">&lt;</span> <span class="pre">price</span> <span class="pre">&lt;</span> <span class="pre">40</span></code>. You have to write <code class="docutils literal notranslate"><span class="pre">20</span> <span class="pre">&lt;</span> <span class="pre">price</span> <span class="pre">and</span> <span class="pre">price</span> <span class="pre">&lt;</span> <span class="pre">40</span></code>.</p>
+<p>We also see <code class="docutils literal notranslate"><span class="pre">if</span></code> and <code class="docutils literal notranslate"><span class="pre">else</span></code> in the code. <code class="docutils literal notranslate"><span class="pre">if</span></code> is a conditional statement that executes some specified code after checking if the condition is <code class="docutils literal notranslate"><span class="pre">True</span></code>. <code class="docutils literal notranslate"><span class="pre">else</span></code> is a conditional statement that executes some specified code if the condition is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<div class="admonition-example admonition">
+<p class="admonition-title">Example</p>
+<p>Let’s check how many players have a height greater than 75 inches and a weight greater than 200 pounds.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The command below will give us a boolean array with True for players taller than 75 inches</span>
+<span class="n">height</span> <span class="o">&gt;</span> <span class="mi">75</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ True,  True,  True, ..., False, False, False])
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following code will give us the number of players taller than 75 inches, by summing the True values in the boolean array. The sum function treats True as 1 and False as 0.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">height</span> <span class="o">&gt;</span> <span class="mi">75</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>491
+</pre></div>
+</div>
+</div>
+</div>
+<p>If we wanna find out how many players are taller than 75 inches and heavier than 300 pounds, we wanna <strong>combine</strong> the two conditions. We can use the <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> operator to combine the two conditions.
+The <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> operator is used to perform a element-wise <code class="docutils literal notranslate"><span class="pre">AND</span></code> operation. For example, <code class="docutils literal notranslate"><span class="pre">[True,</span> <span class="pre">False]</span> <span class="pre">&amp;</span> <span class="pre">[True,</span> <span class="pre">True]</span></code> will give <code class="docutils literal notranslate"><span class="pre">[True,</span> <span class="pre">False]</span></code>. Similarly, the <code class="docutils literal notranslate"><span class="pre">|</span></code> operator is used to perform a element-wise <code class="docutils literal notranslate"><span class="pre">OR</span></code> operation. For example, <code class="docutils literal notranslate"><span class="pre">[True,</span> <span class="pre">False]</span> <span class="pre">|</span> <span class="pre">[True,</span> <span class="pre">True]</span></code> will give <code class="docutils literal notranslate"><span class="pre">[True,</span> <span class="pre">True]</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">height</span> <span class="o">&gt;</span> <span class="mi">75</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">weight</span> <span class="o">&gt;</span> <span class="mi">300</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>210
+</pre></div>
+</div>
+</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Tips</p>
+<p>See also: <code class="docutils literal notranslate"><span class="pre">np.all</span></code> and <code class="docutils literal notranslate"><span class="pre">np.any</span></code> functions.</p>
+</div>
+</section>
+<section id="plotting-the-height-and-weight-of-the-players">
+<h2>5. Plotting the height and weight of the players<a class="headerlink" href="#plotting-the-height-and-weight-of-the-players" title="Permalink to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> package is a very powerful package for plotting figures. We have imported the <code class="docutils literal notranslate"><span class="pre">pyplot</span></code> subpackage from <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> as <code class="docutils literal notranslate"><span class="pre">plt</span></code>. We can use <code class="docutils literal notranslate"><span class="pre">plt.plot()</span></code> to plot a line plot, <code class="docutils literal notranslate"><span class="pre">plt.scatter()</span></code> to plot a scatter plot, <code class="docutils literal notranslate"><span class="pre">plt.hist()</span></code> to plot a histogram, etc. Let’s first try to plot the height and weight of the players as a scatter plot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your very first python plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="n">weight</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x1405debd0&gt;
+</pre></div>
+</div>
+<img alt="../../_images/daa6612954e7f3430fbe2e22c8177ec8ac2b7992356e6acda6375e4a1aed9009.png" src="../../_images/daa6612954e7f3430fbe2e22c8177ec8ac2b7992356e6acda6375e4a1aed9009.png" />
+</div>
+</div>
+<p>Yeah! We have our first plot. But it is not very informative. Let’s add some labels and titles to make it more informative.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="n">weight</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Height (inches)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Weight (lbs)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Football Players&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Football Players&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/117387ee64cb3b2cbedf80df5440dcbeca189c02eb0725f1dd439b2afc874198.png" src="../../_images/117387ee64cb3b2cbedf80df5440dcbeca189c02eb0725f1dd439b2afc874198.png" />
+</div>
+</div>
+<p>Much better! Please remember to add labels to your plots!! It is very important to make your plots informative.</p>
+<p>You can customize the scatter plot in many ways. Please read the documentation of <a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.scatter.html"><code class="docutils literal notranslate"><span class="pre">plt.scatter()</span></code></a> to learn more about the customization options. We list some common options here:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">s</span></code>: the size of the markers. e.g., <code class="docutils literal notranslate"><span class="pre">plt.scatter(x,</span> <span class="pre">y,</span> <span class="pre">s=100)</span></code> will make the markers quite large.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">c</span></code>: the color of the markers. e.g., <code class="docutils literal notranslate"><span class="pre">plt.scatter(x,</span> <span class="pre">y,</span> <span class="pre">c='red')</span></code> will make the markers red. The color can also be an array, e.g., <code class="docutils literal notranslate"><span class="pre">plt.scatter(x,</span> <span class="pre">y,</span> <span class="pre">c=age)</span></code> will color the markers by the age of the players. You can also use a colormap, e.g., <code class="docutils literal notranslate"><span class="pre">plt.scatter(x,</span> <span class="pre">y,</span> <span class="pre">c=age,</span> <span class="pre">cmap='viridis')</span></code> will color the markers by the age of the players using the <code class="docutils literal notranslate"><span class="pre">viridis</span></code> colormap. You can find a list of colormaps <a class="reference external" href="https://matplotlib.org/stable/tutorials/colors/colormaps.html">here</a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">marker</span></code>: the shape of the markers. e.g., <code class="docutils literal notranslate"><span class="pre">plt.scatter(x,</span> <span class="pre">y,</span> <span class="pre">marker='x')</span></code> will make the markers crosses. Other commonly used markers include <code class="docutils literal notranslate"><span class="pre">o</span></code> (circle), <code class="docutils literal notranslate"><span class="pre">s</span></code> (square), <code class="docutils literal notranslate"><span class="pre">^</span></code> (triangle), etc. See <a class="reference external" href="https://matplotlib.org/stable/api/markers_api.html"><code class="docutils literal notranslate"><span class="pre">matplotlib.markers</span></code></a> for a full list of markers.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">alpha</span></code>: the transparency of the markers. e.g., <code class="docutils literal notranslate"><span class="pre">plt.scatter(x,</span> <span class="pre">y,</span> <span class="pre">alpha=0.5)</span></code> will make the markers semi-transparent. The value of <code class="docutils literal notranslate"><span class="pre">alpha</span></code> ranges from 0 to 1, where 0 is fully transparent and 1 is fully opaque.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">label</span></code>: the label of the markers. e.g., <code class="docutils literal notranslate"><span class="pre">plt.scatter(x,</span> <span class="pre">y,</span> <span class="pre">label='data')</span></code> will add a label to the markers. You can use <code class="docutils literal notranslate"><span class="pre">plt.legend()</span></code> to show the labels.</p></li>
+</ul>
+<p>Let’s try a more sophisticated scatter plot. We will plot the height and weight of the players, and color the markers by the player’s age. We will also add a colorbar to show the age-color mapping.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">height</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">cat</span><span class="p">[</span><span class="s1">&#39;height_inches&#39;</span><span class="p">])</span>
+<span class="n">weight</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">cat</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">])</span>
+<span class="n">age</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">cat</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">age</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Height (inches)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Weight (lbs)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Football Players&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Age&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/cab39f3ec3b18c34987b2dcaa202ccc5c64f229dd07ba275902276ae094145d3.png" src="../../_images/cab39f3ec3b18c34987b2dcaa202ccc5c64f229dd07ba275902276ae094145d3.png" />
+</div>
+</div>
+<p>Another way to plot the above figure is to work with the <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> object-oriented interface. This is a more flexible way to plot figures. You can create a figure and an axis object using <code class="docutils literal notranslate"><span class="pre">plt.subplots()</span></code>, and then use the axis object to plot the figure. You can also add labels, titles, legends, etc. to the axis object. It will be powerful when you have multiple subplots.</p>
+<p>We create a new figure and axis using:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Then we plot the figure using:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>It seems a bit confusing at first, but it is actually quite simple. The <code class="docutils literal notranslate"><span class="pre">plt.subplots()</span></code> function creates a figure and an axis object. The <code class="docutils literal notranslate"><span class="pre">fig</span></code> object is the figure, and the <code class="docutils literal notranslate"><span class="pre">ax</span></code> object is the axis. You can use the <code class="docutils literal notranslate"><span class="pre">ax</span></code> object to plot the figure. For example, you can use <code class="docutils literal notranslate"><span class="pre">ax.scatter()</span></code> to plot a scatter plot, <code class="docutils literal notranslate"><span class="pre">ax.plot()</span></code> to plot a line plot, etc. You can also add labels, titles, legends, etc. to the <code class="docutils literal notranslate"><span class="pre">ax</span></code> object. A more complete example is shown below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span> <span class="c1"># here I set the figure size to be 8x6 inches</span>
+
+<span class="n">height</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">cat</span><span class="p">[</span><span class="s1">&#39;height_inches&#39;</span><span class="p">])</span>
+<span class="n">weight</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">cat</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">])</span>
+<span class="n">age</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">cat</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">])</span>
+
+<span class="n">sct</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">age</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Height (inches)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Weight (lbs)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Football Players&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1"># show colorbar</span>
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">sct</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/e999ccac7b0a83d54dfa53245124c37238071e425569d8ae94d4c8cb75bca499.png" src="../../_images/e999ccac7b0a83d54dfa53245124c37238071e425569d8ae94d4c8cb75bca499.png" />
+</div>
+</div>
+<p>To practice your plotting skills, let’s try to plot two figures in one plot:</p>
+<ul class="simple">
+<li><p>left: a scatter plot of height vs. weight, color-coded by the player’s age</p></li>
+<li><p>right: a scatter plot of weight vs. age, color-coded by the player’s height</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="p">[</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">]</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># left: height vs weight</span>
+<span class="n">sct1</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">age</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Height (inches)&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Weight (lbs)&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">cbar1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">sct1</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">)</span>
+<span class="n">cbar1</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;Age&#39;</span><span class="p">)</span>
+
+<span class="c1"># right: height vs age</span>
+<span class="n">sct2</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">weight</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Height (inches)&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Age&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">cbar2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">sct2</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">)</span>
+<span class="n">cbar2</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;Weight&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/3674f45b594e96b4e6982b3a280068ddcd4b18e14e51283f9166fdc61c0b476d.png" src="../../_images/3674f45b594e96b4e6982b3a280068ddcd4b18e14e51283f9166fdc61c0b476d.png" />
+</div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Tips</p>
+<p>You can adjust the subplots separation by using <code class="docutils literal notranslate"><span class="pre">plt.subplots_adjust()</span></code>. e.g., <code class="docutils literal notranslate"><span class="pre">plt.subplots_adjust(wspace=0.5)</span></code> will adjust the width space between the two subplots to be 0.5.</p>
+</div>
+<div class="important admonition">
+<p class="admonition-title">Exercises</p>
+<ol class="arabic simple">
+<li><p>Plot a scatter plot of weight vs. age. Set the marker type to “squares”, and the marker color to orange.</p></li>
+<li><p>Let’s calculate the BMI of these football players. BMI is defined as <code class="docutils literal notranslate"><span class="pre">BMI</span> <span class="pre">=</span> <span class="pre">weight</span> <span class="pre">/</span> <span class="pre">height**2</span></code>, where weight is in kg and height is in meters. The weight and height in the above data are in lbs and inches. Please convert the units, and then calculate the BMI.</p></li>
+<li><p>Plot a scatter plot of the calculated BMI vs. age. Do you see any trend?</p></li>
+</ol>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/intro_python"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-a-catalog-of-the-football-players">1. Read a catalog of the football players</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indexing-and-slicing">Indexing and slicing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#who-s-the-tallest-and-heaviest-player">2. Who’s the tallest and heaviest player?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sort-the-players-by-height">3. Sort the players by height</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-and-logical-operations">4. Comparison and logical operations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-the-height-and-weight-of-the-players">5. Plotting the height and weight of the players</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jenny Greene, Jared Siegel, Erin Flowers, Jiaxuan Li
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
