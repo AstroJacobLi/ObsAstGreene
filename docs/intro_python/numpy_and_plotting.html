@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Working with arrays &#8212; Observational Astronomy</title>
+    <title>Arrays and plots in Python &#8212; Observational Astronomy</title>
   
   
   
@@ -166,7 +166,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="about_py.html">About Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Setting up Your Python Environment</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Working with arrays</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Arrays and plots in Python</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to Stars</span></p>
 <ul class="nav bd-sidenav">
@@ -401,7 +401,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Working with arrays</h1>
+    <h1>Arrays and plots in Python</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -419,6 +419,8 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sort-the-players-by-height">3. Sort the players by height</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-and-logical-operations">4. Comparison and logical operations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-the-height-and-weight-of-the-players">5. Plotting the height and weight of the players</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
             </nav>
         </div>
@@ -430,8 +432,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="working-with-arrays">
-<h1>Working with arrays<a class="headerlink" href="#working-with-arrays" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="arrays-and-plots-in-python">
+<h1>Arrays and plots in Python<a class="headerlink" href="#arrays-and-plots-in-python" title="Permalink to this heading">#</a></h1>
 <p><strong>Prerequisite:</strong></p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://jgreene100.github.io/Ast207/docs/intro_python/about_py.html">About Python</a></p></li>
@@ -490,13 +492,15 @@ document.write(`
 </div>
 </details>
 </div>
-<p><strong>Import packages</strong></p>
+<div class="tip admonition">
+<p class="admonition-title">Import packages</p>
 <p>Note how we import the packages. There are mainly 3 ways to import packages:</p>
 <ul class="simple">
 <li><p>directly import something, such as <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">matplotlib</span></code>. In this way, you can call the functions under this package like <code class="docutils literal notranslate"><span class="pre">matplotlib.colorbar</span></code> directly.</p></li>
 <li><p>import something as something, such as <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">numpy</span> <span class="pre">as</span> <span class="pre">np</span></code>. Now <code class="docutils literal notranslate"><span class="pre">np</span></code> is an alias of the package <code class="docutils literal notranslate"><span class="pre">numpy</span></code>. It is a super convenient feature and will save your life. However, there are <strong>conventions</strong> of some popular packages. E.g., <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">numpy</span> <span class="pre">as</span> <span class="pre">np</span></code>, <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">pandas</span> <span class="pre">as</span> <span class="pre">pd</span></code>, etc.</p></li>
 <li><p>import a subpackage from a package, such as <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">matplotlib.pyplot</span> <span class="pre">as</span> <span class="pre">plt</span></code>. By doing this, we import a subpackage <code class="docutils literal notranslate"><span class="pre">pyplot</span></code> from <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>, and set up an alias <code class="docutils literal notranslate"><span class="pre">plt</span></code>. Another example is <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">astropy.table</span> <span class="pre">import</span> <span class="pre">Table</span></code>, where <code class="docutils literal notranslate"><span class="pre">Table</span></code> is a Python class in <code class="docutils literal notranslate"><span class="pre">astropy.table</span></code>. Some other examples are <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">astropy.units</span> <span class="pre">as</span> <span class="pre">u</span></code>, <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">astropy.constants</span> <span class="pre">as</span> <span class="pre">const</span></code>.</p></li>
 </ul>
+</div>
 <p>In this notebook, we are going to learn (for the first time!) how to work with data in Python. As astronomers, a huge amount of what we do involves taking observations in the form of catalogs and comparing them visually. Today, we’re going to take a step back from space and think about <strong>football</strong>, and play around with some data for the 2023 NFL rosters.</p>
 <section id="read-a-catalog-of-the-football-players">
 <h2>1. Read a catalog of the football players<a class="headerlink" href="#read-a-catalog-of-the-football-players" title="Permalink to this heading">#</a></h2>
@@ -632,8 +636,8 @@ weight = &lt;class &#39;numpy.ndarray&#39;&gt;
 </div>
 </div>
 </div>
-<div class="admonition-quiz admonition">
-<p class="admonition-title">Quiz</p>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
 <p>Can you find out the length of the height and weight arrays?</p>
 <p><em>Tips: you can use the <code class="docutils literal notranslate"><span class="pre">len()</span></code> function to find out the length of an array.</em></p>
 </div>
@@ -678,8 +682,8 @@ weight = &lt;class &#39;numpy.ndarray&#39;&gt;
 </div>
 </div>
 </div>
-<div class="admonition-quiz admonition">
-<p class="admonition-title">Quiz</p>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
 <p>Find out the player with the maximum weight.</p>
 </div>
 </section>
@@ -926,14 +930,31 @@ The <code class="docutils literal notranslate"><span class="pre">&amp;</span></c
 <p class="admonition-title">Tips</p>
 <p>You can adjust the subplots separation by using <code class="docutils literal notranslate"><span class="pre">plt.subplots_adjust()</span></code>. e.g., <code class="docutils literal notranslate"><span class="pre">plt.subplots_adjust(wspace=0.5)</span></code> will adjust the width space between the two subplots to be 0.5.</p>
 </div>
-<div class="important admonition">
-<p class="admonition-title">Exercises</p>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>Plot a scatter plot of weight vs. age. Set the marker type to “squares”, and the marker color to orange.</p></li>
 <li><p>Let’s calculate the BMI of these football players. BMI is defined as <code class="docutils literal notranslate"><span class="pre">BMI</span> <span class="pre">=</span> <span class="pre">weight</span> <span class="pre">/</span> <span class="pre">height**2</span></code>, where weight is in kg and height is in meters. The weight and height in the above data are in lbs and inches. Please convert the units, and then calculate the BMI.</p></li>
 <li><p>Plot a scatter plot of the calculated BMI vs. age. Do you see any trend?</p></li>
 </ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Your answer here</span>
+</pre></div>
 </div>
+</div>
+</div>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>We have learned how to read a catalog using <code class="docutils literal notranslate"><span class="pre">astropy.table.Table</span></code>.</p></li>
+<li><p>We have learned how to convert a column to a <code class="docutils literal notranslate"><span class="pre">numpy</span></code> array.</p></li>
+<li><p>We have learned how to sort an array using <code class="docutils literal notranslate"><span class="pre">np.argsort()</span></code>.</p></li>
+<li><p>We have learned how to compare and combine conditions using comparison and logical operators.</p></li>
+<li><p>We have learned how to plot figures using <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot</span></code>.</p></li>
+</ul>
 </section>
 </section>
 
@@ -1008,6 +1029,8 @@ The <code class="docutils literal notranslate"><span class="pre">&amp;</span></c
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sort-the-players-by-height">3. Sort the players by height</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-and-logical-operations">4. Comparison and logical operations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-the-height-and-weight-of-the-players">5. Plotting the height and weight of the players</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
   </nav></div>
 
