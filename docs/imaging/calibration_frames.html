@@ -199,6 +199,10 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../homework/hw2.html">Homework 2 Notebook</a></li>
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Final Projects</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../final_project/variable_stars_and_planets.html">Lightcurves, transits, and TESS! Oh My!</a></li>
@@ -420,8 +424,11 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sigma-clipping">Sigma-clipping</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dark-frame">2. Dark frame</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#flat-fielding">3. Flat fielding</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dark-frames">2. Dark frames</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#flat-frames">3. Flat frames</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-and-homework">Summary and Homework</a></li>
+</ul>
+</li>
 </ul>
 
             </nav>
@@ -438,7 +445,7 @@ document.write(`
 <h1>Calibration frames<a class="headerlink" href="#calibration-frames" title="Permalink to this heading">#</a></h1>
 <p><strong>Prerequisites</strong></p>
 <ul class="simple">
-<li><p>Basic statistics (covered in <span class="xref myst">this notebook</span>)</p></li>
+<li><p>Basic statistics</p></li>
 <li><p>Knowledge about CCD, bias, dark, and flat frames.</p></li>
 </ul>
 <p><strong>We will learn</strong></p>
@@ -453,7 +460,6 @@ document.write(`
 <li><p><a class="reference external" href="https://www.astropy.org/ccd-reduction-and-photometry-guide/v/dev/notebooks/01-01-astronomical-CCD-image-components.html">Here</a> is a <strong>great</strong> tutorial on CCD data reduction. Please check out!!</p></li>
 <li><p>Howell, S., Handbook of CCD Astronomy, Second Ed, Cambridge University Press 2006</p></li>
 </ul>
-<p><code class="docutils literal notranslate"><span class="pre">I</span> <span class="pre">suppose</span> <span class="pre">Jenny</span> <span class="pre">already</span> <span class="pre">introduced</span> <span class="pre">bias,</span> <span class="pre">dark,</span> <span class="pre">flat</span> <span class="pre">frames.</span> <span class="pre">Here</span> <span class="pre">I</span> <span class="pre">will</span> <span class="pre">demonstrate</span> <span class="pre">what</span> <span class="pre">real</span> <span class="pre">bias</span> <span class="pre">frames</span> <span class="pre">look</span> <span class="pre">like,</span> <span class="pre">and</span> <span class="pre">why</span> <span class="pre">we</span> <span class="pre">need</span> <span class="pre">to</span> <span class="pre">stack</span> <span class="pre">them.</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> autoreload
@@ -461,8 +467,6 @@ document.write(`
 
 <span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">scipy</span>
-<span class="kn">import</span> <span class="nn">matplotlib</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="c1"># We can beautify our plots by changing the matpltlib setting a little</span>
@@ -481,36 +485,35 @@ document.write(`
 <span class="expanded">Hide code cell source</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Don&#39;t worry about this cell, it&#39;s just to make the notebook look a little nicer.</span>
+<span class="k">try</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">google.colab</span>
     <span class="n">IN_COLAB</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="k">except</span><span class="p">:</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
     <span class="n">IN_COLAB</span> <span class="o">=</span> <span class="kc">False</span>
 
-<span class="k">if</span> <span class="ow">not</span> <span class="n">IN_COLAB</span><span class="p">:</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;../_static/ObsAstroData/calibration_frames/bias/&quot;</span><span class="p">):</span>
-        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">&quot;../_static/ObsAstroData/calibration_frames/bias/&quot;</span><span class="p">)</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;../_static/ObsAstroData/calibration_frames/&#39;</span><span class="p">)</span>
-
-<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="s1">&#39;b0860c1.fits&#39;</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Data is already there&#39;</span><span class="p">)</span>
+<span class="c1"># Get the directory right</span>
+<span class="k">if</span> <span class="n">IN_COLAB</span><span class="p">:</span>
+    <span class="c1"># Download utils.py</span>
+    <span class="o">!</span>wget<span class="w"> </span>-q<span class="w"> </span>-O<span class="w"> </span>/content/utils.py<span class="w"> </span>https://raw.githubusercontent.com/AstroJacobLi/ObsAstGreene/refs/heads/main/book/docs/utils.py
+    <span class="c1"># Function to check and install missing packages</span>
+    <span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
+    <span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">&#39;/content/drive/&#39;</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;/content/drive/Shareddrives/AST207/data&#39;</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Download data&#39;</span><span class="p">)</span>
-<span class="c1">#     !wget https://tigress-web.princeton.edu/~jiaxuanl/cutoutRGB_NIRCAM.pkl</span>
+    <span class="c1"># if not os.path.exists(&quot;../../../_static/ObsAstroData/&quot;):</span>
+        <span class="c1"># os.makedirs(&quot;../../../_static/ObsAstroData/&quot;)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;../../docs/&#39;</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;../../_static/ObsAstroData/&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </details>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Download data
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="bias-frames">
 <h1>1. Bias frames<a class="headerlink" href="#bias-frames" title="Permalink to this heading">#</a></h1>
-<p>As introduced in class, a voltage is applied to every pixel to make sure the pixel value is always positive. This voltage introduces a “bias” to pixel values. However, this bias is slightly different for each pixel and might change over time. Therefore, we need to take some zero-time exposures (such that dark current and real photons don’t contribute to the pixel values) to characterize the bias.</p>
+<p>As discussed in class, a small voltage is applied to every pixel to ensure the pixel value is always positive. This voltage introduces a “bias” to the pixel values. However, the bias can vary slightly between pixels and may change over time. To account for this, we take zero-time exposures (where dark current and real photons do not contribute to the pixel values) to characterize the bias.</p>
 <p>Below we load bias frames taken using the camera of IFU-M on the 6.5 m <a class="reference external" href="https://en.wikipedia.org/wiki/Magellan_Telescopes">Magellan telescope</a> in Chile.</p>
 <section id="read-a-bias-frame">
 <h2>Read a bias frame<a class="headerlink" href="#read-a-bias-frame" title="Permalink to this heading">#</a></h2>
@@ -521,15 +524,15 @@ document.write(`
 </div>
 </div>
 </div>
-<p>It’s our first time reading a FITS file. FITS (Flexible Image Transport System) format is widely used in astronomy for images and tables. The following code will read the file <code class="docutils literal notranslate"><span class="pre">b0854c1.fits</span></code>, which is a list containing only one HDU (Header Data Unit).</p>
+<p>FITS (Flexible Image Transport System) format is widely used in astronomy for images and tables. The following code will read the file <code class="docutils literal notranslate"><span class="pre">b0854c1.fits</span></code>, which is a list containing only one HDU (Header Data Unit).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./bias/b0860c1.fits&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./calibration_frames/bias/b0860c1.fits&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;astropy.io.fits.hdu.image.PrimaryHDU object at 0x7f91c2a327c0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;astropy.io.fits.hdu.image.PrimaryHDU object at 0x10e7606d0&gt;]
 </pre></div>
 </div>
 </div>
@@ -540,12 +543,12 @@ document.write(`
 </aside>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./bias/b0860c1.fits&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./calibration_frames/bias/b0860c1.fits&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Filename: ./bias/b0860c1.fits
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Filename: ./calibration_frames/bias/b0860c1.fits
 No.    Name      Ver    Type      Cards   Dimensions   Format
   0  PRIMARY       1 PrimaryHDU     143   (2176, 1156)   int16 (rescales to uint16)   
 </pre></div>
@@ -555,7 +558,7 @@ No.    Name      Ver    Type      Cards   Dimensions   Format
 <p>Now we know that this file has one HDU, which is an image containing 2176 * 1156 pixels. The data type in <code class="docutils literal notranslate"><span class="pre">int16</span></code>. We can check the header of the HDU.</p>
 <div class="cell tag_output_scroll docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hdu</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./bias/b0860c1.fits&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hdu</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./calibration_frames/bias/b0860c1.fits&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">hdu</span><span class="o">.</span><span class="n">header</span>
 </pre></div>
 </div>
@@ -728,115 +731,83 @@ COMMENT
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">img</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
-</pre></div>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>Use the statistical tools that you’ve learned to understand this bias data. This will help you to understand the characteristics of the bias frame.</p>
+<ul class="simple">
+<li><p>Where do the pixel values concentrate? How to quantify this?</p></li>
+<li><p>What’s the dispersion of the pixel values? How to quantify this?</p></li>
+<li><p>Are there any outliers? How to identify them?</p></li>
+<li><p>What’s the distribution of the pixel values? How to visualize this?</p></li>
+<li><p>Check the fact that there is no negative pixel value in the bias frame. Why?</p></li>
+</ul>
 </div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The dispersion in the pixel values of a bias frame is largely contributed by the read-out noise, a noise that added to each pixel when reading the charge out. Read-out noise may be viewed as a “toll” that must be paid for reading the stored charge. Thanks to the bias voltage, none of the pixels are negative.</p>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(817.0, 10.545205968480271)
-</pre></div>
-</div>
-</div>
-</div>
-<p>The pixel values in this bias frame are centered around ~817, and have a dispersion of ~10.5. This dispersion is largely contributed by the read-out noise, a noise that added to each pixel when reading the charge out. Read-out noise may be viewed as a “toll” that must be paid for reading the stored charge.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">img</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
-</pre></div>
-</div>
-</div>
-</div>
-<p>Thanks to the bias voltage, none of the pixels are negative. We can further visualize the bias frame as follows.</p>
-<aside class="margin sidebar">
-<p class="sidebar-title"></p>
 <p>We provide a function <code class="docutils literal notranslate"><span class="pre">show_image</span></code> to help visualize astronomical images that typically have a large dynamical range. Please feel free to use it.</p>
-</aside>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">show_image</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_image</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">show_colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span>
+<span class="n">show_image</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">show_colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">));</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/aaf7affcc50bf8b20e919ba745eb8210aa009478c65ab7c2245e61ccdcedf072.png" src="../../_images/aaf7affcc50bf8b20e919ba745eb8210aa009478c65ab7c2245e61ccdcedf072.png" />
+<img alt="../../_images/988e7274581b17323570f6cffd626f7571180d197eddaeabde5e482e56594ab0.png" src="../../_images/988e7274581b17323570f6cffd626f7571180d197eddaeabde5e482e56594ab0.png" />
 </div>
 </div>
 <p>The bias frame shows some spatial patterns: some rows have a lower bias value than others. We also see some distinct “bright” pixels. They could be either bad pixels, or caused by Cosmic Rays (CR). As a consequence, when we plot the histogram of pixel values, we will see some outliers from the bulk of pixels.</p>
-<aside class="margin sidebar">
-<p class="sidebar-title"></p>
-<p>This figure highlights the difference between linear (left) and logarithmic (right) scales when plotting histogram. The number of outliers is too small to be visible in the left histogram with a linear scale in the y-axis. Logarithmic scale comes to save us. When you encounter a dataset that spans a huge dynamical range, maybe you should consider using <code class="docutils literal notranslate"><span class="pre">log</span></code> scale.</p>
-</aside>
+<!-- ```{margin}
+This figure highlights the difference between linear (left) and logarithmic (right) scales when plotting histogram. The number of outliers is too small to be visible in the left histogram with a linear scale in the y-axis. Logarithmic scale comes to save us. When you encounter a dataset that spans a huge dynamical range, maybe you should consider using `log` scale. 
+``` -->
+<!-- fig, [ax1, ax2] = plt.subplots(1, 2, figsize=(12, 4))
+
+ax1.hist(img.flatten(), bins=30)
+ax1.set_xlabel('Pixel value [counts]')
+ax1.set_ylabel('Frequency')
+ax2.hist(img.flatten(), bins=30)
+ax2.set_yscale('log')
+ax2.set_xlabel('Pixel value [counts]')
+ax2.set_ylabel('log Frequency')
+
+plt.tight_layout() --><p>During the Magellan observation, we took many bias frames. So let’s load another bias frame. What do you expect? Will it be very different from the one above?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="p">[</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">]</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-
-<span class="n">ax1</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Pixel value [counts]&#39;</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Pixel value [counts]&#39;</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;log Frequency&#39;</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_image</span><span class="p">(</span><span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./calibration_frames/bias/b0861c1.fits&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/1898ef9d38c48691a8fc0a2afc6d4308d2e7766ab0b5eacc7f31a34d8317adc9.png" src="../../_images/1898ef9d38c48691a8fc0a2afc6d4308d2e7766ab0b5eacc7f31a34d8317adc9.png" />
-</div>
-</div>
-<p>During the Magellan observation, we took many bias frames (why??). So let’s load another bias frame. What do you expect? Will it be very different from the one above?</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_image</span><span class="p">(</span><span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./bias/b0861c1.fits&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../../_images/778c5726d3865aae1f95df07d36906ad09f022b5cdd0eea78b2e5ff3cc5e423e.png" src="../../_images/778c5726d3865aae1f95df07d36906ad09f022b5cdd0eea78b2e5ff3cc5e423e.png" />
+<img alt="../../_images/b4cee1b0447821b3ddead1dd3bc878c4ff91bfdfbd55c4aa5337fe445dbeb474.png" src="../../_images/b4cee1b0447821b3ddead1dd3bc878c4ff91bfdfbd55c4aa5337fe445dbeb474.png" />
 </div>
 </div>
 <p>Yeah, the bright spots changed their positions in the image. So it does seem like they are caused by cosmic rays.</p>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>What remains the same between different bias frames? What is different? How can we use this information to come up with a robust bias correction?</p>
+<p>We have provided lots of bias frames in <code class="docutils literal notranslate"><span class="pre">./calibration_frames/bias</span></code>. You are encouraged to load them and explore the data.</p>
+</div>
 </section>
 <section id="combine-bias-frames-to-make-master-bias">
 <h2>Combine bias frames to make “master” bias<a class="headerlink" href="#combine-bias-frames-to-make-master-bias" title="Permalink to this heading">#</a></h2>
-<p>We have already learned from <span class="xref myst">this notebook</span> that combining images will reduce the noise level. Belowe we try to combine 40 bias frames.</p>
-<aside class="margin sidebar">
-<p class="sidebar-title"></p>
-<p>Here I use <a class="reference external" href="https://docs.python.org/3/tutorial/datastructures.html">“Nested List Comprehensions”</a> to construct a list. This is equivalent to the following snippet, but is much shorter.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">biases</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">860</span><span class="p">,</span> <span class="mi">900</span><span class="p">):</span>
-    <span class="n">biases</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span>
-        <span class="sa">f</span><span class="s1">&#39;./b0</span><span class="si">{</span><span class="n">ind</span><span class="si">}</span><span class="s1">c1.fits&#39;</span>
-        <span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
-</pre></div>
-</div>
-</aside>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
+<p>We have already learned from <strong>basic statistics</strong> that combining images will reduce the noise level. Belowe we try to combine 40 bias frames. The bias frames are all named <code class="docutils literal notranslate"><span class="pre">bXXXXc1.fits</span></code>, where <code class="docutils literal notranslate"><span class="pre">XXXX</span></code> is a four-digit number, from 0860 to 0900.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">biases</span> <span class="o">=</span> <span class="p">[</span><span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./bias/b0</span><span class="si">{</span><span class="n">ind</span><span class="si">}</span><span class="s1">c1.fits&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span> <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">860</span><span class="p">,</span> <span class="mi">900</span><span class="p">)]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">biases</span> <span class="o">=</span> <span class="p">[</span><span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./calibration_frames/bias/b0</span><span class="si">{</span><span class="n">ind</span><span class="si">}</span><span class="s1">c1.fits&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span> <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">860</span><span class="p">,</span> <span class="mi">900</span><span class="p">)]</span>
 <span class="n">biases</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">biases</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+</div>
+<p>Here I use <a class="reference external" href="https://docs.python.org/3/tutorial/datastructures.html">“Nested List Comprehensions”</a> to construct a list. This is equivalent to the following snippet, but is much shorter.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">biases</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">860</span><span class="p">,</span> <span class="mi">900</span><span class="p">):</span>
+    <span class="n">biases</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s1">&#39;./calibration_frames/bias/b0</span><span class="si">{</span><span class="n">ind</span><span class="si">}</span><span class="s1">c1.fits&#39;</span>
+        <span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -877,7 +848,7 @@ COMMENT
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/aa4622cb9879b6906beb7aa6be3755951e94c6f8f2b26536aaaf4fb4476bb443.png" src="../../_images/aa4622cb9879b6906beb7aa6be3755951e94c6f8f2b26536aaaf4fb4476bb443.png" />
+<img alt="../../_images/7dde74cc10b1bfc23cdd54862f480247bb6c9feda92d2f2776f57cab8f3337b0.png" src="../../_images/7dde74cc10b1bfc23cdd54862f480247bb6c9feda92d2f2776f57cab8f3337b0.png" />
 </div>
 </div>
 <p>Wow! The cosmic rays are everywhere in the mean-combined image! The vast difference between the median-combined and mean-combined images highlights that the mean is far less immune to outliers (i.e., cosmic rays) than the median. Because of this, we often use median to combine images.</p>
@@ -900,7 +871,7 @@ COMMENT
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/a96eecec48970e82f97a09b9777a1986e0bc25e8017b9c5ad7b2882cc73176b7.png" src="../../_images/a96eecec48970e82f97a09b9777a1986e0bc25e8017b9c5ad7b2882cc73176b7.png" />
+<img alt="../../_images/9285630ca2a8e486d1cbad54592def9e06f92a52c01d4bc6053c6cf3173f6378.png" src="../../_images/9285630ca2a8e486d1cbad54592def9e06f92a52c01d4bc6053c6cf3173f6378.png" />
 </div>
 </div>
 </section>
@@ -908,10 +879,10 @@ COMMENT
 <h2>Sigma-clipping<a class="headerlink" href="#sigma-clipping" title="Permalink to this heading">#</a></h2>
 <p>In astronomy, there is yet another way to deal with outliers.</p>
 <p>Recall that for a Gaussian distribution, the probability for a data point being <span class="math notranslate nohighlight">\(&gt;3\sigma\)</span> away from the mean <span class="math notranslate nohighlight">\(\mu\)</span> is very very slim. So if we see such a data point that is quite far from the center of the data set, it is probably an outlier and should be removed. This is the idea of <strong>sigma clipping</strong>.</p>
-<p>In the following, we flag out pixels that are <span class="math notranslate nohighlight">\(&gt;3\sigma\)</span> away from the median value (we don’t use the mean value because it is heavily biased by these cosmic rays). You can see the cosmic rays being marked as red in the figure below (they are tiny dots).</p>
+<p>In the following, we flag out pixels that are <span class="math notranslate nohighlight">\(&gt;3\sigma\)</span> away from the median value (we don’t use the mean value because it is heavily biased by these cosmic rays). You can see the cosmic rays being marked as <strong>black</strong> in the figure below (they are tiny dots).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hdu</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./bias/b0860c1.fits&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hdu</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./calibration_frames/bias/b0860c1.fits&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">img</span> <span class="o">=</span> <span class="n">hdu</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
 <span class="n">med</span><span class="p">,</span> <span class="n">std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">img</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
 <span class="n">flag</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">img</span> <span class="o">-</span> <span class="n">med</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">std</span><span class="p">)</span>
@@ -921,12 +892,12 @@ COMMENT
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_image</span><span class="p">(</span><span class="n">flag</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Reds&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">show_colorbar</span><span class="o">=</span><span class="kc">False</span><span class="p">);</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_image</span><span class="p">(</span><span class="n">flag</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Greys&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">show_colorbar</span><span class="o">=</span><span class="kc">False</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/ca54ac5d03a9f09e1ec13c01cc68153e38b204feb2aee44e1bfadd7f155420e9.png" src="../../_images/ca54ac5d03a9f09e1ec13c01cc68153e38b204feb2aee44e1bfadd7f155420e9.png" />
+<img alt="../../_images/a713c40d8c8d7a09c0cc493a1bae7c300695a3a33da590996ab9b53f79d1c93a.png" src="../../_images/a713c40d8c8d7a09c0cc493a1bae7c300695a3a33da590996ab9b53f79d1c93a.png" />
 </div>
 </div>
 <p>We can replace these outlier pixels with <code class="docutils literal notranslate"><span class="pre">np.nan</span></code> (not a number, typically used to indicate a bad value). Then we repeat this for all 40 bias frames and combine them.</p>
@@ -935,7 +906,7 @@ COMMENT
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This might be slow</span>
 <span class="n">biases_clipped</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">860</span><span class="p">,</span> <span class="mi">900</span><span class="p">):</span>
-    <span class="n">img</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./bias/b0</span><span class="si">{</span><span class="n">ind</span><span class="si">}</span><span class="s1">c1.fits&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./calibration_frames/bias/b0</span><span class="si">{</span><span class="n">ind</span><span class="si">}</span><span class="s1">c1.fits&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
     <span class="n">med</span><span class="p">,</span> <span class="n">std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">img</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
     <span class="n">flag</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">img</span> <span class="o">-</span> <span class="n">med</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">std</span><span class="p">)</span>
     <span class="n">img</span><span class="p">[</span><span class="n">flag</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
@@ -971,7 +942,7 @@ COMMENT
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/ccc4e90a1eb4d62578a53208f5ccf203e55bee9f710bec03aaffd130b92f9f06.png" src="../../_images/ccc4e90a1eb4d62578a53208f5ccf203e55bee9f710bec03aaffd130b92f9f06.png" />
+<img alt="../../_images/3f139350869d7265669085b3d15e471a07d846dedbdaa1026554a7cbefab6bae.png" src="../../_images/3f139350869d7265669085b3d15e471a07d846dedbdaa1026554a7cbefab6bae.png" />
 </div>
 </div>
 <p>Yeah! After sigma-clipping, the mean-combined image looks much better and very similar to the median-combined one. This sigma-clipping trick is quite common in astronomy. We used a threshold of 3-sigma and only clipped once. You can repeat the procedure for several times to make sure all outliers are flagged. Actually, <code class="docutils literal notranslate"><span class="pre">astropy</span></code> already provides us a function <code class="docutils literal notranslate"><span class="pre">sigma_clip</span></code> to do these jobs. Let’s check it out.</p>
@@ -1021,7 +992,7 @@ COMMENT
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/f124d5a8c9eb4cf2b4105cff4ef101d65ee5cece181c83c5e14390a5e8c0df28.png" src="../../_images/f124d5a8c9eb4cf2b4105cff4ef101d65ee5cece181c83c5e14390a5e8c0df28.png" />
+<img alt="../../_images/3430cd0ea95940195d8421d2c43f3541b7c9d1fb86f7f46967f1302c2f8b6671.png" src="../../_images/3430cd0ea95940195d8421d2c43f3541b7c9d1fb86f7f46967f1302c2f8b6671.png" />
 </div>
 </div>
 <p>We can write the median-combined image to a FITS file for future usage.</p>
@@ -1029,19 +1000,19 @@ COMMENT
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hdu</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">PrimaryHDU</span><span class="p">(</span><span class="n">med_bias_clipped</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">))</span>
 <span class="n">hdulist</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">HDUList</span><span class="p">([</span><span class="n">hdu</span><span class="p">])</span>
-<span class="n">hdulist</span><span class="o">.</span><span class="n">writeto</span><span class="p">(</span><span class="s1">&#39;./bias/master_bias.fits&#39;</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">hdulist</span><span class="o">.</span><span class="n">writeto</span><span class="p">(</span><span class="s1">&#39;./calibration_frames/bias/master_bias.fits&#39;</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="dark-frame">
-<h1>2. Dark frame<a class="headerlink" href="#dark-frame" title="Permalink to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="dark-frames">
+<h1>2. Dark frames<a class="headerlink" href="#dark-frames" title="Permalink to this heading">#</a></h1>
 <p>Just to give you a flavor of dark frame, here we show the five dark frames that we took during the Magellan observation. They are full of cosmic rays. We construct a master dark frame by combining them using median.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">darks</span> <span class="o">=</span> <span class="p">[</span><span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./dark/b</span><span class="si">{</span><span class="n">ind</span><span class="si">}</span><span class="s1">c1.fits&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span> <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1212</span><span class="p">,</span> <span class="mi">1217</span><span class="p">)]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">darks</span> <span class="o">=</span> <span class="p">[</span><span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./calibration_frames/dark/b</span><span class="si">{</span><span class="n">ind</span><span class="si">}</span><span class="s1">c1.fits&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span> <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1212</span><span class="p">,</span> <span class="mi">1217</span><span class="p">)]</span>
 <span class="n">darks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">darks</span><span class="p">)</span>
 <span class="n">med_dark</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">darks</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
@@ -1065,13 +1036,119 @@ COMMENT
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/f9038608f0d5c6c14c3dfd91349079e52b0d75287fcc7db7891069f95ebf4377.png" src="../../_images/f9038608f0d5c6c14c3dfd91349079e52b0d75287fcc7db7891069f95ebf4377.png" />
+<img alt="../../_images/58209f74bdaa47bd8f67517ac097ddbeef3f9ace5ff8dbc510b15b600c999607.png" src="../../_images/58209f74bdaa47bd8f67517ac097ddbeef3f9ace5ff8dbc510b15b600c999607.png" />
 </div>
 </div>
 <p>The light area in the lower left corner is due to sensor glow, which is light emitted by the electronics of the CCD. The counts in a dark frame scales linearly with time. The exposure time for a dark frame is typically similar to (or longer than) the exposure time of your science frames.</p>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="flat-fielding">
-<h1>3. Flat fielding<a class="headerlink" href="#flat-fielding" title="Permalink to this heading">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="flat-frames">
+<h1>3. Flat frames<a class="headerlink" href="#flat-frames" title="Permalink to this heading">#</a></h1>
+<p>Flat frames are used to correct for pixel-to-pixel sensitivity variations due to dust on the optics, vignetting, CCD quantum efficiency, etc. They are taken by pointing the telescope at a uniformly illuminated screen. The screen can be a white screen, a twilight sky, or a dome screen. Below, we load the flat frames taken during the Magellan observation.</p>
+<p>Let’s load a few flat frames of the Magellan <a class="reference external" href="https://www.lco.cl/?epkb_post_type_1=imacs-user-manual">IMACS camera</a> and see how they look like. These data are taken with for the <code class="docutils literal notranslate"><span class="pre">i</span></code> filter using the “screen” in the dome (so-called “dome flat”).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">camera</span> <span class="o">=</span> <span class="s1">&#39;ift&#39;</span>
+<span class="n">detector</span> <span class="o">=</span> <span class="s1">&#39;c2&#39;</span>
+<span class="n">flats</span> <span class="o">=</span> <span class="p">[</span><span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./calibration_frames/flat/</span><span class="si">{</span><span class="n">camera</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">camera</span><span class="si">}{</span><span class="n">ind</span><span class="si">:</span><span class="s1">04d</span><span class="si">}{</span><span class="n">detector</span><span class="si">}</span><span class="s1">.fits&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">T</span> <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">19</span><span class="p">)]</span>
+<span class="n">flats</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">flats</span><span class="p">)[:,</span> <span class="p">:</span><span class="mi">1024</span><span class="p">,</span> <span class="p">:</span><span class="mi">2048</span><span class="p">]</span> <span class="c1"># we trim off the overscan region</span>
+<span class="n">med_flat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">flats</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="p">[</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">]</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">show_image</span><span class="p">(</span><span class="n">flats</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">fig</span><span class="o">=</span><span class="n">fig</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;Single dome flat frame for </span><span class="si">{</span><span class="n">camera</span><span class="si">}</span><span class="s1">-</span><span class="si">{</span><span class="n">detector</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> 
+         <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax1</span><span class="o">.</span><span class="n">transAxes</span><span class="p">)</span>
+
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">show_image</span><span class="p">(</span><span class="n">med_flat</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">fig</span><span class="o">=</span><span class="n">fig</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;Master flat frame for </span><span class="si">{</span><span class="n">camera</span><span class="si">}</span><span class="s1">-</span><span class="si">{</span><span class="n">detector</span><span class="si">}</span><span class="s1"> </span><span class="se">\n</span><span class="s1"> (median-combined)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> 
+         <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax2</span><span class="o">.</span><span class="n">transAxes</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/524dfe3a88826c16a6e76ced87d19d8c968f71dac67727f2424000433b72abff.png" src="../../_images/524dfe3a88826c16a6e76ced87d19d8c968f71dac67727f2424000433b72abff.png" />
+</div>
+</div>
+<p>For the above figure, we see that the flat frames are not flat at all! The vignetting effect (i.e., the illumination is not uniform across the field)  is quite obvious. The absolute value of the pixels in the flat frame is not important, but the relative value is. So we normalize the flat frames by dividing them by their median value.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">med_flat_norm</span> <span class="o">=</span> <span class="n">med_flat</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmedian</span><span class="p">(</span><span class="n">med_flat</span><span class="p">)</span>
+<span class="n">show_image</span><span class="p">(</span><span class="n">med_flat_norm</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">1.1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;inferno&#39;</span><span class="p">,</span> 
+           <span class="n">show_colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">colorbar_label</span><span class="o">=</span><span class="s1">&#39;Normalized pixel value&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/7dc2a08ce0b89b0c7837624b4e3b3757f373695ecfb221080482fb586bbde4a9.png" src="../../_images/7dc2a08ce0b89b0c7837624b4e3b3757f373695ecfb221080482fb586bbde4a9.png" />
+</div>
+</div>
+<p>Note that the above flat frame is only 1/8 of the full field-of-view of the IMACS camera, but the illumination pattern is still quite obvious.
+Stars at the edge/corner of the field-of-view will look dimmer than those in the center, despite having the same magnitude/intrinsic brightness. In order to correct for this, we need to divide any science frame by the flat frame.</p>
+<p>Not all flat frames look this good! Let’s see the flat frames of another camera (also on Magellan)! You’ll see lots of dust spots and artifacts.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">camera</span> <span class="o">=</span> <span class="s1">&#39;iff&#39;</span>
+<span class="n">detector</span> <span class="o">=</span> <span class="s1">&#39;c3&#39;</span>
+<span class="n">flats</span> <span class="o">=</span> <span class="p">[</span><span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./calibration_frames/flat/</span><span class="si">{</span><span class="n">camera</span><span class="si">}</span><span class="s1">/</span><span class="si">{</span><span class="n">camera</span><span class="si">}{</span><span class="n">ind</span><span class="si">:</span><span class="s1">04d</span><span class="si">}{</span><span class="n">detector</span><span class="si">}</span><span class="s1">.fits&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">T</span> <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">13</span><span class="p">)]</span>
+<span class="n">flats</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">flats</span><span class="p">)[:,</span> <span class="p">:</span><span class="mi">1024</span><span class="p">,</span> <span class="p">:</span><span class="mi">2048</span><span class="p">]</span> <span class="c1"># we trim off the overscan region</span>
+<span class="n">med_flat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">flats</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="p">[</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">]</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">show_image</span><span class="p">(</span><span class="n">flats</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">fig</span><span class="o">=</span><span class="n">fig</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;Single dome flat frame for </span><span class="si">{</span><span class="n">camera</span><span class="si">}</span><span class="s1">-</span><span class="si">{</span><span class="n">detector</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> 
+         <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax1</span><span class="o">.</span><span class="n">transAxes</span><span class="p">)</span>
+
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">show_image</span><span class="p">(</span><span class="n">med_flat</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">fig</span><span class="o">=</span><span class="n">fig</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;Master flat frame for </span><span class="si">{</span><span class="n">camera</span><span class="si">}</span><span class="s1">-</span><span class="si">{</span><span class="n">detector</span><span class="si">}</span><span class="s1"> </span><span class="se">\n</span><span class="s1"> (median-combined)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> 
+         <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax2</span><span class="o">.</span><span class="n">transAxes</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/bfe1d0820455816e805fb6cae2137f7b59fe5ef9a7b37565f98fd76ef69659ce.png" src="../../_images/bfe1d0820455816e805fb6cae2137f7b59fe5ef9a7b37565f98fd76ef69659ce.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">med_flat_norm</span> <span class="o">=</span> <span class="n">med_flat</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmedian</span><span class="p">(</span><span class="n">med_flat</span><span class="p">)</span>
+<span class="n">show_image</span><span class="p">(</span><span class="n">med_flat_norm</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">1.1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;inferno&#39;</span><span class="p">,</span> 
+           <span class="n">show_colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">colorbar_label</span><span class="o">=</span><span class="s1">&#39;Normalized pixel value&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/f54f82f57608334ed7ea3e96cf2ae071382df756c06bb6d77285d34d9c478599.png" src="../../_images/f54f82f57608334ed7ea3e96cf2ae071382df756c06bb6d77285d34d9c478599.png" />
+</div>
+</div>
+<p>Oh my gosh… The flat frames are full of dust spots and dead pixels! The dust spots are caused by dust on the optics, while the dead pixels are pixels that are not sensitive to light (you can see their sensitivity is &lt;0.6 from the colorbar). These dust spots and dead pixels are “fixed” in the camera and will show up in every science frame. This highlights the need of flat frames to correct the science exposures!</p>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>Actually, the median flat we just made is not ready to use for flat-fielding. Do you know why? Does the flat frame also have a bias level and a dark current? How can we correct for this?</p>
+</div>
+<section id="summary-and-homework">
+<h2>Summary and Homework<a class="headerlink" href="#summary-and-homework" title="Permalink to this heading">#</a></h2>
+<p>We have learned how to read and understand bias, dark, and flat frames. We have also learned how to combine multiple calibration frames to make “master” calibration frames. We have also learned how to deal with outliers using sigma-clipping.</p>
+<div class="admonition-homework admonition">
+<p class="admonition-title">Homework</p>
+<ul class="simple">
+<li><p>Does a dark frame also have a bias level? If so, how can we correct for this?</p></li>
+<li><p>Load all dark frames in <code class="docutils literal notranslate"><span class="pre">./calibration_frames/dark</span></code>, subtract the master bias frame from each dark frame, and then combine them to make a master dark frame. Try different combining methods (mean, median, sigma-clipping) and compare the results.</p></li>
+</ul>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1144,8 +1221,11 @@ COMMENT
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sigma-clipping">Sigma-clipping</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dark-frame">2. Dark frame</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#flat-fielding">3. Flat fielding</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dark-frames">2. Dark frames</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#flat-frames">3. Flat frames</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-and-homework">Summary and Homework</a></li>
+</ul>
+</li>
 </ul>
 
   </nav></div>
