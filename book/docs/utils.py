@@ -155,11 +155,12 @@ def show_image(
     vmax=None,
     norm=None,
     is_mask=False,
-    figsize=(7, 7),
+    figsize=(12, 12),
     cmap="viridis",
     log=False,
     clip=True,
     show_colorbar=False,
+    colorbar_label=None,
     show_ticks=False,
     fig=None,
     ax=None,
@@ -270,7 +271,7 @@ def show_image(
     if show_colorbar:
         divider = make_axes_locatable(ax)
         ax_cbar = divider.append_axes("right", size="5%", pad=0.05)
-        cbar = plt.colorbar(im, ax=ax, cax=ax_cbar)
+        cbar = plt.colorbar(im, ax=ax, cax=ax_cbar, label=colorbar_label)
         plt.setp(plt.getp(cbar.ax.axes, "xticklabels"), fontsize=11)
         plt.setp(plt.getp(cbar.ax.axes, "yticklabels"), fontsize=11)
 

@@ -24,6 +24,10 @@ parts:
   - file: docs/imaging/plotting_jwst
   - file: docs/intro_gaia_star
 
+- caption: Homework
+  chapters:
+  - file: docs/homework/hw2
+
 - caption: Final Projects
   chapters:
   - file: docs/final_project/variable_stars_and_planets
