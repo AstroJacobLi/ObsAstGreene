@@ -1,0 +1,1044 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Basic Statistics (Part 2) &#8212; Observational Astronomy</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/redirect.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/stats/more_stats_jared_v2';</script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/lsst-full.jpg" class="logo__image only-light" alt="Observational Astronomy - Home"/>
+    <script>document.write(`<img src="../../_static/lsst-full.jpg" class="logo__image only-dark" alt="Observational Astronomy - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../intro_python/about_py.html">About Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro_python/getting_started.html">Setting up Your Python Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro_python/numpy_and_plotting.html">Arrays and plots in Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to Stars</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../gaia_part1_jared.html">Prerequisites</a></li>
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="basic_stats.html">Basic Statistics (Part 1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="more_stats.html">Basic Statistics (Part 2)</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Detector and Imaging</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../imaging/calibration_frames.html">Calibration frames</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../imaging/img_simulation.html">Simulate an artificial image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../imaging/plotting_jwst.html">Plotting JWST images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro_gaia_star.html">Introduction to Gaia data</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../homework/hw2.html">Homework 2 Notebook</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Final Projects</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../final_project/variable_stars_and_planets.html">Lightcurves, transits, and TESS! Oh My!</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../final_project/GalaxyZoo_NeuralNet.html">Solve package versions</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../final_project/lrd/are_LRD_resolved.html">LRD project</a></li>
+
+
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Merian Project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../final_project/merian/01_merian_intro.html">Merian project Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../final_project/merian/02_Halpha_map.html">Merian project Part 2</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/AstroJacobLi/ObsAstGreene/blob/main//book/docs/stats/more_stats_jared_v2.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/stats/more_stats_jared_v2.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Basic Statistics (Part 2)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Basic Statistics (Part 2)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisite">Prerequisite</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#new-skills">New skills</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-probability-functions">Part 1: probability functions</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-fitting-models-to-data">Part 2: fitting models to data</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-fit">Linear fit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-astronomical-data">Fitting astronomical data</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="basic-statistics-part-2">
+<h1>Basic Statistics (Part 2)<a class="headerlink" href="#basic-statistics-part-2" title="Permalink to this heading">#</a></h1>
+<section id="prerequisite">
+<h2>Prerequisite<a class="headerlink" href="#prerequisite" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\texttt{numpy}\)</span> and <span class="math notranslate nohighlight">\(\texttt{matplotlib}\)</span>.</p></li>
+</ul>
+</section>
+<section id="new-skills">
+<h2>New skills<a class="headerlink" href="#new-skills" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Probability notation and basic rules</p></li>
+<li><p>Likelihood functions</p></li>
+<li><p>Fitting a model</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s start with importing our packages</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># We can beautify our plots by changing the matplotlib settings a little</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">18</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.linewidth&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;serif&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="part-1-probability-functions">
+<h2>Part 1: probability functions<a class="headerlink" href="#part-1-probability-functions" title="Permalink to this heading">#</a></h2>
+<p>We recently learned how to draw random numbers using <span class="math notranslate nohighlight">\(\texttt{python}\)</span> from Gaussian and Poisson distributions. Let’s brefily review those skills.</p>
+<p><strong>Exercise:</strong> Draw 100 random numbers from a Gaussian distribution (with <span class="math notranslate nohighlight">\(\sigma=1\)</span> and <span class="math notranslate nohighlight">\(\mu=0\)</span>) and plot the numbers in a histogram. On the same plot, repeat this experiment with 1000 and 10000 random draws. For each histogram, set <code class="docutils literal notranslate"><span class="pre">bins=30</span></code>, <code class="docutils literal notranslate"><span class="pre">range=[-4,4]</span></code>, <code class="docutils literal notranslate"><span class="pre">density=False</span></code>.</p>
+<p>Repeat your experiments on a second plot but now set <code class="docutils literal notranslate"><span class="pre">density=True</span></code>.</p>
+<p>Be sure to label your plots.</p>
+<p><strong>Bonus:</strong> try using for loops</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># parameters of our Gaussian distribution</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">sigma</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># plot the histogram</span>
+<span class="k">for</span> <span class="n">density</span> <span class="ow">in</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span><span class="kc">False</span><span class="p">]:</span>
+
+  <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">10000</span><span class="p">]:</span>
+
+    <span class="c1"># draw random values using numpy</span>
+    <span class="n">rand</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="n">mu</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="n">n</span><span class="p">)</span>
+
+    <span class="c1"># plot the hist</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">rand</span><span class="p">,</span><span class="n">density</span><span class="o">=</span><span class="n">density</span><span class="p">,</span><span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">,</span><span class="nb">range</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+
+  <span class="c1"># it&#39;s always good practice to label the axes (even if it&#39;s a bit arbitrary in our case)</span>
+  <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">density</span><span class="p">:</span>
+    <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;PDF&#39;</span><span class="p">)</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;N&#39;</span><span class="p">)</span>
+  <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;density=</span><span class="si">{</span><span class="n">density</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/0843e46d363c40ff8d47fc7a321052c7787c0a861ca43833be9e7f52118f69f0.png" src="../../_images/0843e46d363c40ff8d47fc7a321052c7787c0a861ca43833be9e7f52118f69f0.png" />
+<img alt="../../_images/0eb0fdb4f697cb721e759e620096962d73d3df05a430a383c28b4fe74f4a3f79.png" src="../../_images/0eb0fdb4f697cb721e759e620096962d73d3df05a430a383c28b4fe74f4a3f79.png" />
+</div>
+</div>
+<p><strong>Exercise:</strong> Based on your plots, what does <code class="docutils literal notranslate"><span class="pre">density=True</span></code> and <code class="docutils literal notranslate"><span class="pre">density=False</span></code> do? What do you notice about the shape of the histogram as the number of random draws increases?</p>
+<p>As we increase the number of random draws, we see the shape of our histograms appears to converge to a smooth bell shaped curve. If there was a mathematical function that described that shape, we would no longer need to draw random numbers to understand the Guassian distribution. Instead, we could ask our function what numbers are likely and what numbers are unlikely.</p>
+<p>Fortunately, we know the function that describes the histogram of Gaussian random variables. It is called the Gaussian Probability Density Function (PDF):
+$<span class="math notranslate nohighlight">\(p(x) = \frac{1}{\sqrt{2\pi} \sigma} e^{-\frac{(x-\mu)^2}{2\sigma^2}}\)</span>$</p>
+<p><strong>Exercise:</strong> Write a function for the Gaussian pdf: <code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">gaussian_pdf(x,</span> <span class="pre">mu,</span> <span class="pre">sigma)</span></code> that returns <code class="docutils literal notranslate"><span class="pre">p(x)</span></code>. Then plot the Gaussian pdf for <code class="docutils literal notranslate"><span class="pre">-4</span> <span class="pre">&lt;</span> <span class="pre">x</span> <span class="pre">&lt;</span> <span class="pre">4</span></code> alongside a histogram of random draws from the Gaussian distribution (with <code class="docutils literal notranslate"><span class="pre">density=True</span></code>). Repeat this process for <span class="math notranslate nohighlight">\(\sigma = 0.5, 1.0\)</span> (all with <span class="math notranslate nohighlight">\(\mu = 0\)</span>).</p>
+<p>How many random draws do you need for the histogram to closely match <code class="docutils literal notranslate"><span class="pre">p(x)</span></code>? Does <code class="docutils literal notranslate"><span class="pre">p(x)</span></code> match the histogram if we instead set <code class="docutils literal notranslate"><span class="pre">density=False</span></code>?</p>
+<p><strong>Bonus:</strong> use for loops</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gaussian_pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">mu</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># parameters of our Gaussian distribution</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">n</span>  <span class="o">=</span> <span class="mi">100000</span>
+
+<span class="c1"># plot the histogram</span>
+<span class="k">for</span> <span class="n">sigma</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">1</span><span class="p">]:</span>
+
+    <span class="c1"># draw random values using numpy</span>
+    <span class="n">rand</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="n">mu</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="n">n</span><span class="p">)</span>
+
+    <span class="c1"># plot the hist</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">rand</span><span class="p">,</span><span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">,</span><span class="nb">range</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+
+    <span class="c1"># plot the pdf</span>
+    <span class="n">xp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+    <span class="n">yp</span> <span class="o">=</span> <span class="n">gaussian_pdf</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span><span class="n">yp</span><span class="p">)</span>
+
+<span class="c1"># it&#39;s always good practice to label the axes (even if it&#39;s a bit arbitrary in our case)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">density</span><span class="p">:</span>
+  <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;PDF&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;N&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/135d3b512352e8d56715639a3d72b07f28234f6e58918c69bc352f6168f7253e.png" src="../../_images/135d3b512352e8d56715639a3d72b07f28234f6e58918c69bc352f6168f7253e.png" />
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="part-2-fitting-models-to-data">
+<h1>Part 2: fitting models to data<a class="headerlink" href="#part-2-fitting-models-to-data" title="Permalink to this heading">#</a></h1>
+<section id="linear-fit">
+<h2>Linear fit<a class="headerlink" href="#linear-fit" title="Permalink to this heading">#</a></h2>
+<p>Let’s revist the data on football players from earlier. We already saw that height and weight are correlated in the data (taller players tend to weight more). While we can clearly see the trend ‘by eye,’ is there a way to describe this correlation mathematically? For example, we may want to ask: “what is the typical weight of players who are 6 feet tall?”</p>
+<p>In astronomy, we often find ourselves asking questions like that. For example, how does the size of a star depend on it’s brightness? or how does the shape of a galaxy depend on its age?</p>
+<p>In this section, we will learn how to find the mathemtical function that best describes a set of data.</p>
+<p><strong>Exercise:</strong> Run the code below to load in the height and weights from the football player data base.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s load in the data</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
+<span class="kn">from</span> <span class="nn">astropy.table</span> <span class="kn">import</span> <span class="n">Table</span>
+
+<span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">&#39;/content/drive/&#39;</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;/content/drive/Shareddrives/AST207/data&#39;</span><span class="p">)</span>
+
+<span class="n">cat</span> <span class="o">=</span> <span class="n">Table</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;./players_age.csv&#39;</span><span class="p">)</span>
+
+<span class="n">height</span> <span class="o">=</span> <span class="n">cat</span><span class="p">[</span><span class="s1">&#39;height_inches&#39;</span><span class="p">]</span>
+<span class="n">weight</span> <span class="o">=</span> <span class="n">cat</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>
+
+<span class="n">height</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">height</span><span class="p">)</span>
+<span class="n">weight</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">weight</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Drive already mounted at /content/drive/; to attempt to forcibly remount, call drive.mount(&quot;/content/drive/&quot;, force_remount=True).
+</pre></div>
+</div>
+</div>
+</div>
+<p>The simplist relation between two variables <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> is the linear function:
+$<span class="math notranslate nohighlight">\( y = m * x + b \)</span>$
+in our case, <code class="docutils literal notranslate"><span class="pre">x</span></code> is a player’s height and <code class="docutils literal notranslate"><span class="pre">y</span></code> is the player’s weight.</p>
+<p><strong>Exercise:</strong> Make the function <code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">linear(x,m,b)</span></code> that returns <code class="docutils literal notranslate"><span class="pre">y=m*x+b</span></code>. For <code class="docutils literal notranslate"><span class="pre">65</span> <span class="pre">&lt;</span> <span class="pre">x</span> <span class="pre">&lt;</span> <span class="pre">80</span></code> plot <code class="docutils literal notranslate"><span class="pre">linear(x,</span> <span class="pre">m,</span> <span class="pre">b)</span></code> alongside the observed heights and weights. Choose <code class="docutils literal notranslate"><span class="pre">m,b</span></code> such that the line best matches the observed data.</p>
+<p>Be sure to include labels.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">linear</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">m</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="n">b</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">b</span> <span class="o">=</span> <span class="o">-</span><span class="mi">500</span>
+
+<span class="n">xp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">65</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">10</span> <span class="p">)</span>
+<span class="n">yp</span> <span class="o">=</span> <span class="n">linear</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="n">weight</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Height [inches]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Weight [lbs]&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Weight [lbs]&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/c940bde7c7f7aa3649d798072416bd65dd102354e0a8cf0e687cd3e319c8fc36.png" src="../../_images/c940bde7c7f7aa3649d798072416bd65dd102354e0a8cf0e687cd3e319c8fc36.png" />
+</div>
+</div>
+<p>Finding values of <code class="docutils literal notranslate"><span class="pre">m,b</span></code> (the slope and intercept of our linear function) by hand wasn’t too difficult but we have a few problems:</p>
+<ol class="arabic simple">
+<li><p>How do we convince our friends that we found the <strong>best</strong> values of <code class="docutils literal notranslate"><span class="pre">m,b</span></code>?</p></li>
+<li><p>What if we have a function with lots of variables? Then finding the best by hand is no longer feasible.</p></li>
+</ol>
+<p>Thankfully, we don’t have the find the best values by hand, we can ask our computers to help us. To have the computer find the best fitting line to the data, we’ll follow a two step process:</p>
+<ol class="arabic simple">
+<li><p>Define a function that tells us how well our line matches the data. Let’s call this our <em>objective function</em>.</p></li>
+<li><p>Find the values of <code class="docutils literal notranslate"><span class="pre">m,b</span></code> that optimize our objective function.</p></li>
+</ol>
+<p>The simplist objective function would be to calculate the difference between our model’s prediction for a player’s weight given their height and the player’s actual weight. If we calculate the difference between the model and the data for all the players, we’ll know how closely we match the data. Mathematically this looks like:</p>
+<div class="math notranslate nohighlight">
+\[ \mathrm{Simple~Objective~Function}(m,b)  = | \mathrm{linear}(x_1,m,b) - y_1 | + | \mathrm{linear}(x_2,m,b) - y_2 | + \dots \]</div>
+<p>the “<span class="math notranslate nohighlight">\(\dots\)</span>” means that we sum the difference between the model and the data for all the players in the table. The “| |” mean we are taking the absolute value (for example <span class="math notranslate nohighlight">\(| -1 |=1\)</span>).</p>
+<p>This simple function is close but let’s make two small changes:</p>
+<ol class="arabic simple">
+<li><p>Let’s consider the <strong>fractional</strong> difference between the model prediction and the observed data (this will make sure we can fit data will small and large numbers easily).</p></li>
+<li><p>Let’s take the square of the difference instead of absolute value. This is a common convention and will help us later on in the class.</p></li>
+</ol>
+<p>Now our final objective function is:</p>
+<div class="math notranslate nohighlight">
+\[ \mathrm{Objective~Function}(m,b)  =  \frac{[ \mathrm{linear}(x_1,m,b) - y_1 )]^2}{|y_1|} + \frac{[ \mathrm{linear}(x_2,m,b) - y_2 )]^2}{|y_2|}  + \dots \]</div>
+<p>(this objective function is commonly known as <span class="math notranslate nohighlight">\(\chi^2\)</span>)</p>
+<p><strong>Exercise:</strong> Write a function that calculates the “Objective Function” for a given set of <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> data and the two parameters <code class="docutils literal notranslate"><span class="pre">m,b</span></code> of the linear function. Your function should have the form: <code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">objective_function(x,y,m,b)</span></code></p>
+<p>As a test, <code class="docutils literal notranslate"><span class="pre">objective_function(x=height,y=weight,m=10,b=-500)</span></code> should return <code class="docutils literal notranslate"><span class="pre">6216.87</span></code></p>
+<p>Hint: use <code class="docutils literal notranslate"><span class="pre">np.abs</span></code> to take the absolute value</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">objective_function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+  <span class="n">y_model</span> <span class="o">=</span> <span class="n">linear</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+
+  <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">y_model</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">objective_function</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">height</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">weight</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">b</span><span class="o">=-</span><span class="mi">500</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6216.870738454954
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise:</strong> Use your <code class="docutils literal notranslate"><span class="pre">objective_function</span></code> to search for good values of <code class="docutils literal notranslate"><span class="pre">m,b</span></code>. Using <code class="docutils literal notranslate"><span class="pre">for</span></code> loops, calculate <code class="docutils literal notranslate"><span class="pre">objective_function</span></code> for <span class="math notranslate nohighlight">\(0&lt;m&lt;20\)</span> and <span class="math notranslate nohighlight">\(-1000&lt;b&lt;0\)</span>. For each combination of <code class="docutils literal notranslate"><span class="pre">b,m</span></code> plot <code class="docutils literal notranslate"><span class="pre">b</span></code> vs. <code class="docutils literal notranslate"><span class="pre">m</span></code> on a scatter plot with the color set by <code class="docutils literal notranslate"><span class="pre">simple_objective_function(x,y,m,b)</span></code>. For an example of a scatter plot with the points colored by a third parameter, return to the <code class="docutils literal notranslate"><span class="pre">numpy_and_plotting.ipynb</span></code> notebook. Try 50 values of <code class="docutils literal notranslate"><span class="pre">b</span></code> and 50 values of <code class="docutils literal notranslate"><span class="pre">m</span></code> (it should run in less than a second). For ease of reading, plot <code class="docutils literal notranslate"><span class="pre">np.log10</span></code> of the objective function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="n">bs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">ms</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">os</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">):</span>
+  <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">):</span>
+      <span class="n">bs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+      <span class="n">ms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+      <span class="n">os</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">objective_function</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">height</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">weight</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="n">m</span><span class="p">,</span><span class="n">b</span><span class="o">=</span><span class="n">b</span><span class="p">)</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 309 ms, sys: 3.62 ms, total: 312 ms
+Wall time: 492 ms
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">ms</span><span class="p">,</span> <span class="n">bs</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">os</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;m&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;log$_10$ Objective Score&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/b16e7d2b662f95058ec2e5dcb35a4e7c6d62c352f517a7ee700dcbc7713a20c2.png" src="../../_images/b16e7d2b662f95058ec2e5dcb35a4e7c6d62c352f517a7ee700dcbc7713a20c2.png" />
+</div>
+</div>
+<p><strong>Exercise:</strong> from your grid search above, find the values of <code class="docutils literal notranslate"><span class="pre">m,b</span></code> that yield the lowest <code class="docutils literal notranslate"><span class="pre">simple_objective_function</span></code>. Plot the linear function using these parameters alongside the football data and your by-band linear function. Be sure to label your plot.</p>
+<p>Hint: try using <code class="docutils literal notranslate"><span class="pre">np.argmin</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">b</span> <span class="o">=</span> <span class="o">-</span><span class="mi">500</span>
+
+<span class="n">xp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">65</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">10</span> <span class="p">)</span>
+<span class="n">yp</span> <span class="o">=</span> <span class="n">linear</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">yp</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;By hand&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">linear</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">ms</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">os</span><span class="p">)],</span> <span class="n">bs</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">os</span><span class="p">)]),</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Grid search&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="n">weight</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Height [inches]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Weight [lbs]&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Weight [lbs]&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/c16ec5a73dbe9fd7f332588aef6a5269982a6c198d294e61720a89c3ee457729.png" src="../../_images/c16ec5a73dbe9fd7f332588aef6a5269982a6c198d294e61720a89c3ee457729.png" />
+</div>
+</div>
+</section>
+<section id="fitting-astronomical-data">
+<h2>Fitting astronomical data<a class="headerlink" href="#fitting-astronomical-data" title="Permalink to this heading">#</a></h2>
+<p>Earlier, we looked at data from the Gaia space telescope. Gaia carefully observes the positions and properties of stars in our galaxy. The code below loads in the Gaia data for all stars within 15 parsec of the Sun.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s load in the data</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
+<span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">&#39;/content/drive/&#39;</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;/content/drive/Shareddrives/AST207/data&#39;</span><span class="p">)</span>
+
+<span class="c1"># path to the table</span>
+<span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;gaia_15pc.csv&#39;</span>
+
+<span class="c1"># loading the table; this function assumes a &#39;comma separated file (aka csv)&#39;</span>
+<span class="n">gaia</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+<span class="c1"># simple errors</span>
+<span class="n">gaia</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;color&#39;</span><span class="p">]</span>     <span class="o">=</span> <span class="n">gaia</span><span class="o">.</span><span class="n">gmag</span> <span class="o">-</span> <span class="n">gaia</span><span class="o">.</span><span class="n">rmag</span>
+<span class="n">gaia</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;color_err&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.04</span>
+<span class="n">gaia</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">&#39;teff_err&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="mf">10.</span> <span class="c1"># K</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Drive already mounted at /content/drive/; to attempt to forcibly remount, call drive.mount(&quot;/content/drive/&quot;, force_remount=True).
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise:</strong> In a previous activity, we searched for which properties of a star are correlated (like how football players heights and weights are correlated). Let’s revist that activity here. Below, plot <code class="docutils literal notranslate"><span class="pre">teff</span></code> versus <code class="docutils literal notranslate"><span class="pre">color</span></code> for the Gaia data (<code class="docutils literal notranslate"><span class="pre">teff</span></code> is the temperature of the star and <code class="docutils literal notranslate"><span class="pre">color</span></code> is the difference between the stars’ <code class="docutils literal notranslate"><span class="pre">g</span></code> and <code class="docutils literal notranslate"><span class="pre">r</span></code> magnitudes). Be sure to label your plot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">gaia</span><span class="o">.</span><span class="n">teff</span><span class="p">,</span><span class="n">gaia</span><span class="o">.</span><span class="n">color</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature [K]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Color [mag.]&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Color [mag.]&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/1eca26f245d83918ad90e8dd181786a446b4eae0b4f75d9153c09c23844f15d0.png" src="../../_images/1eca26f245d83918ad90e8dd181786a446b4eae0b4f75d9153c09c23844f15d0.png" />
+</div>
+</div>
+<p>Cool! We have a clear observational result: color and temperature of a star are strongly correlated.</p>
+<p>However, we still don’t know <em>how</em> color and temperature are related. Is the relation linear, quadratic, or perhaps much more complex? Answering this question will greatly increase our understanding of the stars in our catalog (it will also help our theorist friends try to <em>explain</em> what’s happening here).</p>
+<p><strong>Exercise:</strong> Like we did for the football data, fit the <code class="docutils literal notranslate"><span class="pre">teff</span></code> and <code class="docutils literal notranslate"><span class="pre">color</span></code> data with a linear function. Use the “grid search” method we used for the football data. Try fitting the data by hand first to choose appropriate ranges of <code class="docutils literal notranslate"><span class="pre">m,b</span></code> to search.</p>
+<p>Print out the best fit <code class="docutils literal notranslate"><span class="pre">m,b</span></code> and plot the best fit line against the observed data.</p>
+<p>Hint: the slope (<code class="docutils literal notranslate"><span class="pre">m</span></code>) will be small. Try <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">=</span> <span class="pre">-1e-4</span></code> to start.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="n">bs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">ms</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">os</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">50</span><span class="p">):</span>
+  <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="o">-</span><span class="mi">10</span><span class="o">**</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">50</span><span class="p">):</span>
+      <span class="n">bs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+      <span class="n">ms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+      <span class="n">os</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">objective_function</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">gaia</span><span class="o">.</span><span class="n">teff</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">gaia</span><span class="o">.</span><span class="n">color</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="n">m</span><span class="p">,</span><span class="n">b</span><span class="o">=</span><span class="n">b</span><span class="p">)</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 2.27 s, sys: 77.3 ms, total: 2.35 s
+Wall time: 2.79 s
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ms</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">os</span><span class="p">)],</span> <span class="n">bs</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">os</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-0.0002811768697974231, 2.0408163265306123)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">7000</span><span class="p">,</span> <span class="mi">10</span> <span class="p">)</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">linear</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">ms</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">os</span><span class="p">)],</span> <span class="n">bs</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">os</span><span class="p">)]),</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Grid search&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">gaia</span><span class="o">.</span><span class="n">teff</span><span class="p">,</span> <span class="n">gaia</span><span class="o">.</span><span class="n">color</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature [K]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Color [mag.]&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Color [mag.]&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/36d8b658bc5760e4e08325e7f612031bb9fad7c5c23008ff2d1cd3ddf8220aea.png" src="../../_images/36d8b658bc5760e4e08325e7f612031bb9fad7c5c23008ff2d1cd3ddf8220aea.png" />
+</div>
+</div>
+<p>We just fit a model to astronomical data! This is a critical tool in modern astronomy. But so far, we can only find the best solution by a time consuming “grid search.” Let’s find a better way.</p>
+<p>Many algorithms have been developed to find the parameters that minimize a function (our grid search is one example). Let’s use <code class="docutils literal notranslate"><span class="pre">scipy.optimize.minimize</span></code>.</p>
+<p><strong>Exercise:</strong> Run the code below to use <code class="docutils literal notranslate"><span class="pre">scipy.optimize.minimize</span></code>. Then plot the best fit linear function from <code class="docutils literal notranslate"><span class="pre">scipy.optimize.minimize</span></code> alongside the observed data and your “grid search” fit.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">general_objective_function</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+
+  <span class="n">y_model</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="o">*</span><span class="n">theta</span><span class="p">)</span>
+
+  <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">y_model</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="p">)</span>
+
+<span class="n">out</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">optimize</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">general_objective_function</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mf">1e-4</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">bounds</span> <span class="o">=</span> <span class="p">[[</span><span class="o">-</span><span class="mf">1e-3</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">]],</span> <span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="n">linear</span><span class="p">,</span> <span class="n">gaia</span><span class="o">.</span><span class="n">teff</span><span class="p">,</span> <span class="n">gaia</span><span class="o">.</span><span class="n">color</span><span class="p">)</span> <span class="p">)</span>
+<span class="n">m_fit</span><span class="p">,</span> <span class="n">b_fit</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">7000</span><span class="p">,</span> <span class="mi">10</span> <span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">linear</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">ms</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">os</span><span class="p">)],</span> <span class="n">bs</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">os</span><span class="p">)]),</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Grid search&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">linear</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">m_fit</span><span class="p">,</span> <span class="n">b_fit</span><span class="p">),</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;scipy&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">gaia</span><span class="o">.</span><span class="n">teff</span><span class="p">,</span> <span class="n">gaia</span><span class="o">.</span><span class="n">color</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature [K]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Color [mag.]&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Color [mag.]&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/e9f09eb9223ed0ead92942e06193aaf9928e8354c1dd6ed43cd95ca60e61cd92.png" src="../../_images/e9f09eb9223ed0ead92942e06193aaf9928e8354c1dd6ed43cd95ca60e61cd92.png" />
+</div>
+</div>
+<p>We can now perform a linear fit and even can do it quicky using <code class="docutils literal notranslate"><span class="pre">scipy</span></code>. However, the above plots show that a linear fit is not a great match to the data. So what is?</p>
+<p>Fortunately, <code class="docutils literal notranslate"><span class="pre">general_objective_function</span></code> (which we provided for the activity above) allows us to change the function we are fitting…</p>
+<p><strong>Exercise:</strong> Let’s try a model where color is <em>inversely</em> proportional to temperature:
+$<span class="math notranslate nohighlight">\( \mathrm{color} = m / T + b \)</span>$
+Write function <code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">inverse(x,</span> <span class="pre">m,</span> <span class="pre">b)</span></code> that returns the inverse function. Then use <code class="docutils literal notranslate"><span class="pre">scipy</span></code> to find the best fit parameters. Plot the best fit inverse function alongside the observed data and the best fit linear function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">m</span><span class="o">/</span><span class="n">x</span> <span class="o">+</span><span class="n">b</span>
+
+<span class="n">out</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">optimize</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">general_objective_function</span><span class="p">,</span>
+                        <span class="n">x0</span><span class="o">=</span><span class="p">[</span><span class="mf">5e3</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+                        <span class="n">bounds</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">1e3</span><span class="p">,</span><span class="mf">1e4</span><span class="p">),(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">)],</span>
+                        <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">inverse</span><span class="p">,</span> <span class="n">gaia</span><span class="o">.</span><span class="n">teff</span><span class="p">,</span> <span class="n">gaia</span><span class="o">.</span><span class="n">color</span><span class="p">)</span> <span class="p">)</span>
+
+<span class="n">m_inv</span><span class="p">,</span> <span class="n">b_inv</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">7000</span><span class="p">,</span> <span class="mi">10</span> <span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">linear</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">m_fit</span><span class="p">,</span> <span class="n">b_fit</span><span class="p">),</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">inverse</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">m_inv</span><span class="p">,</span> <span class="n">b_inv</span><span class="p">),</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;inverse&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">gaia</span><span class="o">.</span><span class="n">teff</span><span class="p">,</span> <span class="n">gaia</span><span class="o">.</span><span class="n">color</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature [K]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Color [mag.]&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Color [mag.]&#39;)
+</pre></div>
+</div>
+<img alt="../../_images/580a475662d2527d0ab1999be261007baecb6333f02a09f8b0385fa4bc05d183.png" src="../../_images/580a475662d2527d0ab1999be261007baecb6333f02a09f8b0385fa4bc05d183.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/stats"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Basic Statistics (Part 2)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisite">Prerequisite</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#new-skills">New skills</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-probability-functions">Part 1: probability functions</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-fitting-models-to-data">Part 2: fitting models to data</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-fit">Linear fit</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-astronomical-data">Fitting astronomical data</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jenny Greene, Jared Siegel, Erin Flowers, Jiaxuan Li
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
