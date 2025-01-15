@@ -417,19 +417,24 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-a-blank-image">Start: a blank image</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-out-noise">Read-out noise</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bias">Bias</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dark-frame">Dark frame</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sky-background">Sky background</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-some-real-stars">Add some real stars</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wcs-and-image-coordinates">WCS and image coordinates</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#point-spread-function-psf">Point Spread Function (PSF)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-cook">Let’s cook!</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-a-blank-image">1. Start: a blank image</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-calibration-frames">Generate calibration frames</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-out-noise">2.1 Read-out noise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bias">2.2 Bias</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dark-frame">2.3 Dark frame</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sky-background">2.4 Sky background</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#signal-to-noise-ratio">2.5 Signal-to-noise ratio</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-some-real-stars">3. Add some real stars</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wcs-and-image-coordinates">3.1 WCS and image coordinates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#point-spread-function-psf">3.2 Point Spread Function (PSF)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-cook">3.3 Let’s cook!</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-demo">Interactive demo</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion-data-generating-process">Discussion: Data generating process</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
             </nav>
         </div>
@@ -446,14 +451,15 @@ document.write(`
 <p>The goal of this notebook is to simulate an artificial image of a star field at RA=280 deg, Dec=0 deg. This will familiarize you with the data generating process of an astronomical image, especially help you understand how do bias, dark, read-out noise, and sky background affect the final image. At the end of this notebook, you will play with an interactive tool to simulate a realistic image of any given exposure time, sky background, read-out noise, bias value, dark current, and seeing condition. Have fun!</p>
 <p><strong>Prerequisites</strong></p>
 <ul class="simple">
-<li><p>Basic statistics (covered in <span class="xref myst">this notebook</span>)</p></li>
-<li><p>Knowledge about CCD, bias, dark, and flat frames.</p></li>
+<li><p>Basic statistics</p></li>
+<li><p>Knowledge about CCD, bias, dark, and flat frames</p></li>
+<li><p>Finished the “Calibration frame” notebook</p></li>
 </ul>
 <p><strong>We will learn</strong></p>
 <ul class="simple">
 <li><p>Understand the <a class="reference external" href="https://en.wikipedia.org/wiki/Data_generating_process">data generating process</a> of an astronomical image</p></li>
 <li><p>Point Spread Function and 2-D Gaussian function</p></li>
-<li><p>World Coordinate System (WCS) and how to convert (RA, DEC) to (x, y)</p></li>
+<li><p>World Coordinate System (WCS) and how to convert (RA, DEC) on the sky to (x, y) on the image</p></li>
 <li><p>How to write docstrings for your functions</p></li>
 </ul>
 <div class="cell docutils container">
@@ -483,39 +489,37 @@ document.write(`
 <span class="expanded">Hide code cell source</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Don&#39;t worry about this cell, it&#39;s just to make the notebook look a little nicer.</span>
+<span class="k">try</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">google.colab</span>
     <span class="n">IN_COLAB</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="k">except</span><span class="p">:</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
     <span class="n">IN_COLAB</span> <span class="o">=</span> <span class="kc">False</span>
 
-<span class="k">if</span> <span class="ow">not</span> <span class="n">IN_COLAB</span><span class="p">:</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;../_static/ObsAstroData/&quot;</span><span class="p">):</span>
-        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">&quot;../_static/ObsAstroData/&quot;</span><span class="p">)</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;../_static/ObsAstroData/&#39;</span><span class="p">)</span>
-
-<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="s1">&#39;simulate_star_cat.fits&#39;</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Data is already there&#39;</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Download data&#39;</span><span class="p">)</span>
+<span class="c1"># Get the directory right</span>
+<span class="k">if</span> <span class="n">IN_COLAB</span><span class="p">:</span>
+    <span class="c1"># Download utils.py</span>
+    <span class="o">!</span>wget<span class="w"> </span>-q<span class="w"> </span>-O<span class="w"> </span>/content/utils.py<span class="w"> </span>https://raw.githubusercontent.com/AstroJacobLi/ObsAstGreene/refs/heads/main/book/docs/utils.py
+    <span class="c1"># Function to check and install missing packages</span>
+    <span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
+    <span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">&#39;/content/drive/&#39;</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;/content/drive/Shareddrives/AST207/data&#39;</span><span class="p">)</span>
     <span class="o">!</span>wget<span class="w"> </span>https://github.com/AstroJacobLi/ObsAstGreene/raw/main/book/_static/ObsAstroData/simulate_star_cat.fits
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;../../docs/&#39;</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;../../_static/ObsAstroData/&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </details>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data is already there
-</pre></div>
-</div>
-</div>
 </div>
 <section id="start-a-blank-image">
-<h2>Start: a blank image<a class="headerlink" href="#start-a-blank-image" title="Permalink to this heading">#</a></h2>
+<h2>1. Start: a blank image<a class="headerlink" href="#start-a-blank-image" title="Permalink to this heading">#</a></h2>
 <p>This is easy! We use <code class="docutils literal notranslate"><span class="pre">np.zeros</span></code> to construct an array full of zeros. We will add signals and noises as we proceed.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">synthetic_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">500</span><span class="p">,</span> <span class="mi">500</span><span class="p">])</span>
-<span class="n">show_image</span><span class="p">(</span><span class="n">synthetic_image</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">show_image</span><span class="p">(</span><span class="n">synthetic_image</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">show_colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -523,12 +527,14 @@ document.write(`
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
 </pre></div>
 </div>
-<img alt="../../_images/e6c392bd4b30002caf9b63e15478263ada2ece417b3ae90d3ad76cdf1a06ab0d.png" src="../../_images/e6c392bd4b30002caf9b63e15478263ada2ece417b3ae90d3ad76cdf1a06ab0d.png" />
+<img alt="../../_images/004dd8dd5487a1022d9b105098459eb633c3204e9345afeace78651bbead628a.png" src="../../_images/004dd8dd5487a1022d9b105098459eb633c3204e9345afeace78651bbead628a.png" />
 </div>
 </div>
 </section>
+<section id="generate-calibration-frames">
+<h2>Generate calibration frames<a class="headerlink" href="#generate-calibration-frames" title="Permalink to this heading">#</a></h2>
 <section id="read-out-noise">
-<h2>Read-out noise<a class="headerlink" href="#read-out-noise" title="Permalink to this heading">#</a></h2>
+<h3>2.1 Read-out noise<a class="headerlink" href="#read-out-noise" title="Permalink to this heading">#</a></h3>
 <p>When we read out an image from a CCD, some small random noise is added to each pixel. This “read-out” noise follows a Gaussian distribution centered at zero. Typically you can find the “width” of this Gaussian in the CCD operating manual. For example, let’s assume that the CCD manual said the read-out noise is <code class="docutils literal notranslate"><span class="pre">READ</span> <span class="pre">NOISE:</span> <span class="pre">4e-</span> <span class="pre">rms</span></code> and the gain we used is <code class="docutils literal notranslate"><span class="pre">GAIN</span> <span class="pre">=</span> <span class="pre">2</span> <span class="pre">e-</span> <span class="pre">/</span> <span class="pre">ADU</span></code>. This means that the standard deviation of the read-out noise is 4 electron per read-out. Read noise of a CCD is almost always given in electrons, but images are typically in counts (ADUs). To convert electrons to counts (ADUs), we have to devide the number of electrons by gain (electrons per count). Therefore, the standard deviation of read-out noise in counts is 2.</p>
 <p>Below we write a function <code class="docutils literal notranslate"><span class="pre">read_noise</span></code> to generate the read-out noise to be added to the blank image that we generated above. Note that each time you run this function you’ll get a different set of pixels so that it behaves like real noise.</p>
 <aside class="margin sidebar">
@@ -565,7 +571,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">noise_im</span> <span class="o">=</span> <span class="n">synthetic_image</span> <span class="o">+</span> <span class="n">read_noise</span><span class="p">(</span><span class="n">synthetic_image</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">gain</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">show_image</span><span class="p">(</span><span class="n">noise_im</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">show_image</span><span class="p">(</span><span class="n">noise_im</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">show_colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Read noise&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;20&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -574,14 +580,15 @@ document.write(`
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Read noise&#39;)
 </pre></div>
 </div>
-<img alt="../../_images/4e04b3d101b6da30d51a12bee4310a5da124cf1d8ea177a0ed590792403cc73a.png" src="../../_images/4e04b3d101b6da30d51a12bee4310a5da124cf1d8ea177a0ed590792403cc73a.png" />
+<img alt="../../_images/ec3c77186d7e28ddb8fb6ee02f79c40f3888d76a845793efe53c62bf21c90eda.png" src="../../_images/ec3c77186d7e28ddb8fb6ee02f79c40f3888d76a845793efe53c62bf21c90eda.png" />
 </div>
 </div>
+<p>Nice! We get a beautiful noise image :)</p>
 </section>
 <section id="bias">
-<h2>Bias<a class="headerlink" href="#bias" title="Permalink to this heading">#</a></h2>
-<p>As we have already discussed in <a class="reference internal" href="calibration_frames.html"><span class="doc std std-doc">Calibration Frames</span></a>, bias is a positive offset added to each pixel to make sure the counts are non-negative. If there is no this offset, as we see in the above image, some pixels are negative.</p>
-<p>As shown in <a class="reference internal" href="calibration_frames.html"><span class="doc std std-doc">Calibration Frames</span></a>, the bias value is roughly the same across the CCD, but there is still some spatial patterns including “bad” columns. To model such a bias, we create a uniform array and add some “bad” columns. Note that the bias is not a function of exposure time and does not have read-out noise.</p>
+<h3>2.2 Bias<a class="headerlink" href="#bias" title="Permalink to this heading">#</a></h3>
+<p>As we have already discussed in <code class="docutils literal notranslate"><span class="pre">Calibration</span> <span class="pre">Frames</span></code>, bias is a positive offset added to each pixel to make sure the counts are non-negative. If there is no this offset, as we see in the above image, some pixels are negative.</p>
+<p>As shown in <code class="docutils literal notranslate"><span class="pre">Calibration</span> <span class="pre">Frames</span></code>, the bias value is roughly the same across the CCD, but there is still some spatial patterns including “bad” columns. To model such a bias, we create a uniform array and add some “bad” columns (when you set <code class="docutils literal notranslate"><span class="pre">realistic=True</span></code>). Note that the bias is not a function of exposure time and does not have read-out noise.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bias</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">realistic</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -632,8 +639,8 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bias_only</span> <span class="o">=</span> <span class="n">bias</span><span class="p">(</span><span class="n">synthetic_image</span><span class="p">,</span> <span class="mi">1100</span><span class="p">,</span> <span class="n">realistic</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">show_image</span><span class="p">(</span><span class="n">bias_only</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Bias alone, bad columns included&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">show_image</span><span class="p">(</span><span class="n">bias_only</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">show_colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Bias alone, bad columns included&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -641,14 +648,13 @@ document.write(`
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Bias alone, bad columns included&#39;)
 </pre></div>
 </div>
-<img alt="../../_images/e1e4eafb71503142bb2ee8057fdf8d0262633c2351bb6c3d9405bebe237084af.png" src="../../_images/e1e4eafb71503142bb2ee8057fdf8d0262633c2351bb6c3d9405bebe237084af.png" />
+<img alt="../../_images/95cd459054accaed879d7b2e61b09a0ee99c853cc10a72bb444c9361d84baff3.png" src="../../_images/95cd459054accaed879d7b2e61b09a0ee99c853cc10a72bb444c9361d84baff3.png" />
 </div>
 </div>
-<p>Now create realistic bias frame by adding bias and read noise together.</p>
-<p>Note that we did not include any cosmic rays.</p>
+<p>Now create realistic bias frame by adding bias and read noise together. <strong>Note that we did not include any cosmic rays.</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">show_image</span><span class="p">(</span><span class="n">noise_im</span> <span class="o">+</span> <span class="n">bias_only</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">show_image</span><span class="p">(</span><span class="n">noise_im</span> <span class="o">+</span> <span class="n">bias_only</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">show_colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Realistic bias frame&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -657,16 +663,16 @@ document.write(`
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Realistic bias frame&#39;)
 </pre></div>
 </div>
-<img alt="../../_images/e871244958069cf897170be77b1394c6bd749bc63073de1a1b20b10f79bc45d3.png" src="../../_images/e871244958069cf897170be77b1394c6bd749bc63073de1a1b20b10f79bc45d3.png" />
+<img alt="../../_images/b843a1243726589a28649b69c1700537d83cac2951677acf92834a40497a2f35.png" src="../../_images/b843a1243726589a28649b69c1700537d83cac2951677acf92834a40497a2f35.png" />
 </div>
 </div>
 </section>
 <section id="dark-frame">
-<h2>Dark frame<a class="headerlink" href="#dark-frame" title="Permalink to this heading">#</a></h2>
+<h3>2.3 Dark frame<a class="headerlink" href="#dark-frame" title="Permalink to this heading">#</a></h3>
 <p>For modern cooled CCD, the dark current is typically very small (0.1 electrons/pixel/second or less).
 Dark counts in the function below are calculated by multiplying the dark current by the exposure time
 after converting the dark current unit from electrons to counts using the gain. Notice that the dark counts follow a Poisson distribution. So it will look noisy.</p>
-<p>However, as we seen in <a class="reference internal" href="calibration_frames.html"><span class="doc std std-doc">Calibration Frames</span></a>, some pixels as “hot” pixels. Their dark current is much larger than the other pixels.</p>
+<p>However, as we seen in <code class="docutils literal notranslate"><span class="pre">Calibration</span> <span class="pre">Frames</span></code>, some pixels as “hot” pixels. Their dark current is much larger than the other pixels.</p>
 <p>The function below simulates dark current only, i.e. it does <em>not</em> simulate the
 read noise that is a part of any actual dark frame from a CCD.</p>
 <div class="cell docutils container">
@@ -722,7 +728,7 @@ read noise that is a part of any actual dark frame from a CCD.</p>
 <span class="n">dark_cur</span> <span class="o">=</span> <span class="mf">0.1</span>
 <span class="n">dark_only</span> <span class="o">=</span> <span class="n">dark_current</span><span class="p">(</span><span class="n">synthetic_image</span><span class="p">,</span> <span class="n">dark_cur</span><span class="p">,</span> <span class="n">dark_exposure</span><span class="p">,</span> <span class="n">hot_pixels</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">fig</span> <span class="o">=</span> <span class="n">show_image</span><span class="p">(</span><span class="n">dark_only</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">show_image</span><span class="p">(</span><span class="n">dark_only</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">show_colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">title_string</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Dark current only, </span><span class="si">{</span><span class="n">dark_cur</span><span class="si">}</span><span class="s1"> $e^-$/sec/pix</span><span class="se">\n</span><span class="si">{</span><span class="n">dark_exposure</span><span class="si">}</span><span class="s1"> sec exposure&#39;</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title_string</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 </pre></div>
@@ -732,13 +738,13 @@ read noise that is a part of any actual dark frame from a CCD.</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Dark current only, 0.1 $e^-$/sec/pix\n900 sec exposure&#39;)
 </pre></div>
 </div>
-<img alt="../../_images/4da918b938aa8650323a61300db55bc2ed22f004be12ce07bb03feb1310a67b2.png" src="../../_images/4da918b938aa8650323a61300db55bc2ed22f004be12ce07bb03feb1310a67b2.png" />
+<img alt="../../_images/ea92530cd871c9f7359754eaf2e1e414a02e753cc36ce18491d2a0339fdc2e0a.png" src="../../_images/ea92530cd871c9f7359754eaf2e1e414a02e753cc36ce18491d2a0339fdc2e0a.png" />
 </div>
 </div>
 <p>Realistic dark frame is a combination of all of them: bias-only, read-out noise, and dark-only</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">show_image</span><span class="p">(</span><span class="n">dark_only</span> <span class="o">+</span> <span class="n">bias_only</span> <span class="o">+</span> <span class="n">noise_im</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">show_image</span><span class="p">(</span><span class="n">dark_only</span> <span class="o">+</span> <span class="n">bias_only</span> <span class="o">+</span> <span class="n">noise_im</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">show_colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Realistic dark frame </span><span class="se">\n</span><span class="s1">(with bias, read noise)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -747,13 +753,13 @@ read noise that is a part of any actual dark frame from a CCD.</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Realistic dark frame \n(with bias, read noise)&#39;)
 </pre></div>
 </div>
-<img alt="../../_images/85e847b3fbfe50d611bed94863254ed68fb894b649daada9dabe184a76e1d085.png" src="../../_images/85e847b3fbfe50d611bed94863254ed68fb894b649daada9dabe184a76e1d085.png" />
+<img alt="../../_images/89805e188c7c883c25e0335c2303fa19be70538ee695014dff20c7f021e38765.png" src="../../_images/89805e188c7c883c25e0335c2303fa19be70538ee695014dff20c7f021e38765.png" />
 </div>
 </div>
 <p>It looks quite real! However, we did not include any cosmic rays and flat field.</p>
 </section>
 <section id="sky-background">
-<h2>Sky background<a class="headerlink" href="#sky-background" title="Permalink to this heading">#</a></h2>
+<h3>2.4 Sky background<a class="headerlink" href="#sky-background" title="Permalink to this heading">#</a></h3>
 <p>The amount of sky background depends on the atmospheric conditions (humidity, presence of light clouds, etc.), the light sources in the sky (the Moon) and lights from the surrounding area. It may or may not be uniform across the field of view. The <a class="reference external" href="https://iopscience.iop.org/article/10.1086/133993">sky brightness on Mauna Kea</a> in the V band is <span class="math notranslate nohighlight">\(\mu_V \approx 21.5\ \mathrm{mag/arcsec}^2\)</span>.</p>
 <p>The function below generates a homogeneous sky background in the field of view. The photons from sky background also follow a Poisson distribution. The sky counts also scales with exposure time.</p>
 <aside class="margin sidebar">
@@ -793,7 +799,7 @@ read noise that is a part of any actual dark frame from a CCD.</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sky_level</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="c1"># counts per sec</span>
 <span class="n">sky_only</span> <span class="o">=</span> <span class="n">sky_background</span><span class="p">(</span><span class="n">synthetic_image</span><span class="p">,</span> <span class="n">sky_level</span><span class="p">,</span> <span class="n">exposure_time</span><span class="o">=</span><span class="mi">900</span><span class="p">,</span> <span class="n">gain</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
-<span class="n">fig</span> <span class="o">=</span> <span class="n">show_image</span><span class="p">(</span><span class="n">sky_only</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">show_image</span><span class="p">(</span><span class="n">sky_only</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">show_colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Sky background only, </span><span class="si">{</span><span class="n">sky_level</span><span class="si">}</span><span class="s1"> counts input&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -802,14 +808,14 @@ read noise that is a part of any actual dark frame from a CCD.</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Sky background only, 0.5 counts input&#39;)
 </pre></div>
 </div>
-<img alt="../../_images/28ba73f7f52eddf9d16a0d0eee63c1007c7687bac8ebc4f482c20a048409de91.png" src="../../_images/28ba73f7f52eddf9d16a0d0eee63c1007c7687bac8ebc4f482c20a048409de91.png" />
+<img alt="../../_images/967b1ab56b1cd06c917eede02eaa34bc42da4009191124f4733a5b8ce8e1de84.png" src="../../_images/967b1ab56b1cd06c917eede02eaa34bc42da4009191124f4733a5b8ce8e1de84.png" />
 </div>
 </div>
 <p>Nice! Let’s combine <code class="docutils literal notranslate"><span class="pre">sky_only</span></code> with dark current, bias, and read-out noise to make our “sky” more realistic. This is how the image of clouds look like.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">show_image</span><span class="p">(</span><span class="n">sky_only</span> <span class="o">+</span> <span class="n">dark_only</span> <span class="o">+</span> <span class="n">bias_only</span> <span class="o">+</span> <span class="n">noise_im</span><span class="p">,</span> 
-                 <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+                 <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">show_colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Sky, dark, bias, and read noise&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -818,12 +824,123 @@ read noise that is a part of any actual dark frame from a CCD.</p>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Sky, dark, bias, and read noise&#39;)
 </pre></div>
 </div>
-<img alt="../../_images/9170454a3364bb35d49270b56891f4a88a544ff69ef97dd5b625573597750af1.png" src="../../_images/9170454a3364bb35d49270b56891f4a88a544ff69ef97dd5b625573597750af1.png" />
+<img alt="../../_images/45bcdec8402614e2b37ee6b26a30f12300b728626411c207427acbd0f069ae94.png" src="../../_images/45bcdec8402614e2b37ee6b26a30f12300b728626411c207427acbd0f069ae94.png" />
 </div>
 </div>
 </section>
+<section id="signal-to-noise-ratio">
+<h3>2.5 Signal-to-noise ratio<a class="headerlink" href="#signal-to-noise-ratio" title="Permalink to this heading">#</a></h3>
+<p>As we already learned from <code class="docutils literal notranslate"><span class="pre">Basic</span> <span class="pre">Statistics</span></code> and the above cells, the counts from astronomical objects, sky background, and dark current all follow Poisson distribution. Let’s now take a look at the the signal-to-noise ratio and how that scales with the exposure time. In the exercise below, we simply study the signal on one pixel. The signal comes from a star (with <code class="docutils literal notranslate"><span class="pre">star_flux</span></code> in <code class="docutils literal notranslate"><span class="pre">e-/s</span></code>), the sky background (<code class="docutils literal notranslate"><span class="pre">sky_flux</span></code>, in <code class="docutils literal notranslate"><span class="pre">e-/s</span></code>), and readout noise (<code class="docutils literal notranslate"><span class="pre">sigma_read</span></code>, in <code class="docutils literal notranslate"><span class="pre">e-</span></code>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s assume the following values:</span>
+<span class="n">star_flux</span> <span class="o">=</span> <span class="mi">20</span> <span class="c1"># e- / s</span>
+<span class="n">sky_flux</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="c1"># e- / s</span>
+<span class="n">sigma_read</span> <span class="o">=</span> <span class="mi">4</span> <span class="c1"># e- / s</span>
+<span class="n">t_exp</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># s</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s see what’s the total signal we receive on this pixel:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">star_signal</span> <span class="o">=</span> <span class="n">star_flux</span> <span class="o">*</span> <span class="n">t_exp</span>
+<span class="n">sky_signal</span> <span class="o">=</span> <span class="n">sky_flux</span> <span class="o">*</span> <span class="n">t_exp</span>
+<span class="n">read_signal</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">total_signal</span> <span class="o">=</span> <span class="n">star_signal</span> <span class="o">+</span> <span class="n">sky_signal</span> <span class="o">+</span> <span class="n">read_signal</span>
+</pre></div>
+</div>
+<p>We note that the readout noise doesn’t contribute to the signal, since the average value of the readout noise is zero. However, it contributes to the “noise”. The noises from sky and star are all Poisson. Because these noises are independent, we can add the standard deviations in quadrature:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">star_noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">star_signal</span><span class="p">)</span>
+<span class="n">sky_noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sky_signal</span><span class="p">)</span>
+<span class="n">read_noise</span> <span class="o">=</span> <span class="n">sigma_read</span>
+
+<span class="n">total_noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">star_noise</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">sky_noise</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">read_noise</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now we can define the <strong>signal-to-noise ratio</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">SNR</span> <span class="o">=</span> <span class="n">total_signal</span> <span class="o">/</span> <span class="n">total_noise</span>
+</pre></div>
+</div>
+<p>Let’s see what’s the SNR for the above situation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">star_signal</span> <span class="o">=</span> <span class="n">star_flux</span> <span class="o">*</span> <span class="n">t_exp</span>
+<span class="n">sky_signal</span> <span class="o">=</span> <span class="n">sky_flux</span> <span class="o">*</span> <span class="n">t_exp</span>
+<span class="n">read_signal</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">total_signal</span> <span class="o">=</span> <span class="n">star_signal</span> <span class="o">+</span> <span class="n">sky_signal</span> <span class="o">+</span> <span class="n">read_signal</span>
+
+<span class="n">star_noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">star_signal</span><span class="p">)</span>
+<span class="n">sky_noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sky_signal</span><span class="p">)</span>
+<span class="n">read_noise</span> <span class="o">=</span> <span class="n">sigma_read</span>
+
+<span class="n">total_noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">star_noise</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">sky_noise</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">read_noise</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">SNR</span> <span class="o">=</span> <span class="n">total_signal</span> <span class="o">/</span> <span class="n">total_noise</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SNR = </span><span class="si">{</span><span class="n">SNR</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SNR = 3.3931841432697087
+</pre></div>
+</div>
+</div>
+</div>
+<p>Great! This means that the star’s signal is about 3 times brighter than the noise. A <code class="docutils literal notranslate"><span class="pre">SNR=3</span></code> detection is not so great. What if we increase the exposure time?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t_exp</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1"># s</span>
+
+<span class="n">star_signal</span> <span class="o">=</span> <span class="n">star_flux</span> <span class="o">*</span> <span class="n">t_exp</span>
+<span class="n">sky_signal</span> <span class="o">=</span> <span class="n">sky_flux</span> <span class="o">*</span> <span class="n">t_exp</span>
+<span class="n">read_signal</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">total_signal</span> <span class="o">=</span> <span class="n">star_signal</span> <span class="o">+</span> <span class="n">sky_signal</span> <span class="o">+</span> <span class="n">read_signal</span>
+
+<span class="n">star_noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">star_signal</span><span class="p">)</span>
+<span class="n">sky_noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sky_signal</span><span class="p">)</span>
+<span class="n">read_noise</span> <span class="o">=</span> <span class="n">sigma_read</span>
+
+<span class="n">total_noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">star_noise</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">sky_noise</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">read_noise</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">SNR</span> <span class="o">=</span> <span class="n">total_signal</span> <span class="o">/</span> <span class="n">total_noise</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SNR = </span><span class="si">{</span><span class="n">SNR</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SNR = 13.789792276924405
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now the SNR is much higher and it means that we are very confident about detecting this star over noise. Now you can solve the following exercises:</p>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
+<ol class="arabic simple">
+<li><p>Write the above code of calculating SNR to a function, like the following:</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calc_SNR</span><span class="p">(</span><span class="n">star_flux</span><span class="p">,</span> <span class="n">sky_flux</span><span class="p">,</span> <span class="n">sigma_read</span><span class="p">,</span> <span class="n">t_exp</span><span class="p">):</span>
+    <span class="c1">### Your answer here ###</span>
+
+    <span class="k">return</span> <span class="n">SNR</span>
+</pre></div>
+</div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Using this function, calculate the SNR of the star when the exposure time is in <code class="docutils literal notranslate"><span class="pre">t_exps</span> <span class="pre">=</span> <span class="pre">np.linspace(1,</span> <span class="pre">200,</span> <span class="pre">50)</span></code>. Plot the SNR as a function of exposure time. What’s the best functional form to describe this relation? (Hint: you can plot the <code class="docutils literal notranslate"><span class="pre">SNR-texp</span></code> relation in <code class="docutils literal notranslate"><span class="pre">loglog</span></code> scale.)</p></li>
+<li><p>For this star, if you wanna double the SNR, should you also double the exposure time? Or triple the exposure time?</p></li>
+<li><p>For a faint source with a short exposure time, what dominates the SNR (sky or read noise)?</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</section>
+</section>
 <section id="add-some-real-stars">
-<h2>Add some real stars<a class="headerlink" href="#add-some-real-stars" title="Permalink to this heading">#</a></h2>
+<h2>3. Add some real stars<a class="headerlink" href="#add-some-real-stars" title="Permalink to this heading">#</a></h2>
 <p>The images that we generated look quite boring so far. Shall we add some stars to it? Let’s do it.</p>
 <p>In order to make it look very realistic, we prepared <span class="xref myst">a catalog</span> containing 307 stars around <code class="docutils literal notranslate"><span class="pre">RA</span> <span class="pre">=</span> <span class="pre">280</span> <span class="pre">deg,</span> <span class="pre">Dec</span> <span class="pre">=</span> <span class="pre">0</span> <span class="pre">deg</span></code> from the <a class="reference external" href="https://www.esa.int/Science_Exploration/Space_Science/Gaia_overview">Gaia mission</a>. The catalog has the <code class="docutils literal notranslate"><span class="pre">RA</span></code>, <code class="docutils literal notranslate"><span class="pre">Dec</span></code>, and the g-band flux (<code class="docutils literal notranslate"><span class="pre">g_flux</span></code> in electron/sec) of each star. There are three more things to do before we can inject these stars to the image:</p>
 <ul class="simple">
@@ -841,8 +958,8 @@ read noise that is a part of any actual dark frame from a CCD.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><i>Table length=5</i>
-<table id="table140673982093872" class="table-striped table-bordered table-condensed">
+<div class="output text_html"><div><i>Table length=5</i>
+<table id="table5398720080" class="table-striped table-bordered table-condensed">
 <thead><tr><th>ra</th><th>dec</th><th>g_flux</th></tr></thead>
 <thead><tr><th>deg</th><th>deg</th><th></th></tr></thead>
 <thead><tr><th>float64</th><th>float64</th><th>float32</th></tr></thead>
@@ -851,10 +968,10 @@ read noise that is a part of any actual dark frame from a CCD.</p>
 <tr><td>280.0004310363741</td><td>-0.003360890132438791</td><td>0.2738112</td></tr>
 <tr><td>280.00533847454955</td><td>0.0009738996826714352</td><td>0.5869863</td></tr>
 <tr><td>279.99457484780316</td><td>-0.0020924098806938255</td><td>0.2795567</td></tr>
-</table></div></div>
+</table></div></div></div>
 </div>
 <section id="wcs-and-image-coordinates">
-<h3>WCS and image coordinates<a class="headerlink" href="#wcs-and-image-coordinates" title="Permalink to this heading">#</a></h3>
+<h3>3.1 WCS and image coordinates<a class="headerlink" href="#wcs-and-image-coordinates" title="Permalink to this heading">#</a></h3>
 <p>WCS is nicely introduced <a class="reference external" href="https://docs.astropy.org/en/stable/wcs/">here</a>. We assume that our “telescope” has a pixel scale of 0.5 arcsec / pixel, and assume the field of view has no distorion.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -921,7 +1038,7 @@ NAXIS : 0  0
 </div>
 </section>
 <section id="point-spread-function-psf">
-<h3>Point Spread Function (PSF)<a class="headerlink" href="#point-spread-function-psf" title="Permalink to this heading">#</a></h3>
+<h3>3.2 Point Spread Function (PSF)<a class="headerlink" href="#point-spread-function-psf" title="Permalink to this heading">#</a></h3>
 <p>This is actually a huge topic. Maybe I should write another notebook on this.</p>
 <p>We use a Gaussian function to describe the PSF of the “telescope” we use, although the PSF of real telescopes is not precisely Gaussian. The Gaussian function in 2-D is:  <span class="math notranslate nohighlight">\(f(x, y) = \frac{1}{2\pi \sigma^2} e^{-\frac{1}{2\sigma^2}\left[(x - x_0)^2 + (y - y_0)^2\right]}\)</span>. This is a normalized Gaussian function, i.e., <span class="math notranslate nohighlight">\(\int_x \int_y f(x,y)=1\)</span>. Although you can write your own implementation, we use <a class="reference external" href="https://docs.astropy.org/en/latest/api/astropy.modeling.functional_models.Gaussian2D.html#astropy.modeling.functional_models.Gaussian2D"><code class="docutils literal notranslate"><span class="pre">astropy.modeling.functional_models.Gaussian2D</span></code></a> for convenience. As you may notice, for a normalized Gaussian, the amplitude in <code class="docutils literal notranslate"><span class="pre">Gaussian2D</span></code> should be <span class="math notranslate nohighlight">\(\frac{1}{2\pi \sigma^2}\)</span>.</p>
 <p>We know that the width of a Gaussian is described by <span class="math notranslate nohighlight">\(\sigma\)</span>. In astronomy, the width of the PSF is often described by its <a class="reference external" href="https://en.wikipedia.org/wiki/Full_width_at_half_maximum">Full Width at Half Maximum (FWHM)</a>. For a Gaussian function with <span class="math notranslate nohighlight">\(\sigma\)</span>, its FWHM is <span class="math notranslate nohighlight">\(2\sqrt{2\ln 2} \sigma \approx 2.355 \sigma\)</span>.</p>
@@ -962,16 +1079,20 @@ NAXIS : 0  0
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0000000000000488
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7ff136c6d850&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x142283550&gt;
 </pre></div>
 </div>
-<img alt="../../_images/95666879b33c1be267010db17158c2d149c404fc375ce200d2b936d8bc1559bd.png" src="../../_images/95666879b33c1be267010db17158c2d149c404fc375ce200d2b936d8bc1559bd.png" />
+<img alt="../../_images/0d282334f8ef79489c7551949e73aa80cc7a8f8b89f61723c2655e62417c849b.png" src="../../_images/0d282334f8ef79489c7551949e73aa80cc7a8f8b89f61723c2655e62417c849b.png" />
 </div>
 </div>
 </section>
 <section id="let-s-cook">
-<h3>Let’s cook!<a class="headerlink" href="#let-s-cook" title="Permalink to this heading">#</a></h3>
+<h3>3.3 Let’s cook!<a class="headerlink" href="#let-s-cook" title="Permalink to this heading">#</a></h3>
 <p>We have all the ingredients! Let’s glue the above snippets together and write a function to inject stars from the catalog. Please note how we calculate counts from <code class="docutils literal notranslate"><span class="pre">g_flux</span></code> and how we sample the Poisson distributions.</p>
+<p>A reminder: the final image is:
+$<span class="math notranslate nohighlight">\(
+\text{Image = stars + sky + dark + bias + readnoise}
+\)</span>$</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">inject_stars</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">star_cat</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">exposure_time</span><span class="o">=</span><span class="mi">900</span><span class="p">,</span> <span class="n">gain</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">seeing</span><span class="o">=</span><span class="mf">1.5</span><span class="p">):</span>
@@ -1038,7 +1159,7 @@ NAXIS : 0  0
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stars_only</span> <span class="o">=</span> <span class="n">inject_stars</span><span class="p">(</span><span class="n">synthetic_image</span><span class="p">,</span> <span class="n">cat</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> 
                           <span class="n">exposure_time</span><span class="o">=</span><span class="mi">900</span><span class="p">,</span> <span class="n">gain</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">seeing</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">show_image</span><span class="p">(</span><span class="n">stars_only</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">show_image</span><span class="p">(</span><span class="n">stars_only</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Stars only&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1047,14 +1168,14 @@ NAXIS : 0  0
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Stars only&#39;)
 </pre></div>
 </div>
-<img alt="../../_images/d1b466fdc33450f8bba0d08181f04a78dd58aeed92944f1b252e46e0d6439289.png" src="../../_images/d1b466fdc33450f8bba0d08181f04a78dd58aeed92944f1b252e46e0d6439289.png" />
+<img alt="../../_images/2b2806ae979d805d6b94091b912cef17e21a4d9ba8114588540d6ee5745bafbb.png" src="../../_images/2b2806ae979d805d6b94091b912cef17e21a4d9ba8114588540d6ee5745bafbb.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add everything together</span>
 <span class="n">realistic_img</span> <span class="o">=</span> <span class="n">stars_only</span> <span class="o">+</span> <span class="n">sky_only</span> <span class="o">+</span> <span class="n">dark_only</span> <span class="o">+</span> <span class="n">bias_only</span> <span class="o">+</span> <span class="n">noise_im</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">show_image</span><span class="p">(</span><span class="n">realistic_img</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">show_image</span><span class="p">(</span><span class="n">realistic_img</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
 
 <span class="n">fig</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Realistic image at RA = 280 deg, Dec = 0 deg </span><span class="se">\n</span><span class="s1"> exptime = 900 s&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 </pre></div>
@@ -1064,7 +1185,7 @@ NAXIS : 0  0
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Realistic image at RA = 280 deg, Dec = 0 deg \n exptime = 900 s&#39;)
 </pre></div>
 </div>
-<img alt="../../_images/3164e7c134e8cc7ac28fc98cbf555b1050bbf36cbff54f2aa2fb2e4cac1420d8.png" src="../../_images/3164e7c134e8cc7ac28fc98cbf555b1050bbf36cbff54f2aa2fb2e4cac1420d8.png" />
+<img alt="../../_images/3379238a0bddfa5b483f39e66926d0e32dceeb4932ec048bef37a8e6477693cb.png" src="../../_images/3379238a0bddfa5b483f39e66926d0e32dceeb4932ec048bef37a8e6477693cb.png" />
 </div>
 </div>
 </section>
@@ -1073,7 +1194,7 @@ NAXIS : 0  0
 <p>You can play with different combinations of all parameters. Change each of them independently to build intuition on how these parameters affect the final image. You might have to wait a few seconds each time you change the parameters.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This does not run directly on this website. You can download the notebook and run it locally, or run it on Google Colab.</p>
+<p>This does not run directly on this website. You can download the notebook and run it locally, or run it on Google Colab. <strong>It might be quite slow (depending on your machine)</strong>.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1122,8 +1243,6 @@ NAXIS : 0  0
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "ad6105e59bf84d9cab15e72b4d7b5555", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 </section>
 </section>
@@ -1153,6 +1272,48 @@ X_{\text{stars}} = X_{\text{image}} - \text{bias} - X_{\text{dark current}} - X_
 X_{\text{image}} = \text{bias} + X_{\text{read noise}} + X_{\text{dark current}} + \text{flat} * (X_{\text{sky}} + X_{\text{stars}}).
 \)</span>
 Flat fielding is a multiplicative effect.</p>
+</section>
+<section id="homework">
+<h2>Homework<a class="headerlink" href="#homework" title="Permalink to this heading">#</a></h2>
+<div class="admonition-homework admonition">
+<p class="admonition-title">Homework</p>
+<ul class="simple">
+<li><p>Does a dark frame also have a bias level? If so, how can we correct for this?</p></li>
+<li><p>Load all dark frames in <code class="docutils literal notranslate"><span class="pre">./calibration_frames/dark</span></code>, subtract the master bias frame from each dark frame, and then combine them to make a master dark frame. Try different combining methods (mean, median, sigma-clipping) and compare the results.</p></li>
+</ul>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">bias_only</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">noise_im</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">sky_only</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1100.0, 0.002896702918170552, 450.0)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">im</span> <span class="o">=</span> <span class="n">realistic_img</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">bias_only</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">noise_im</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">sky_only</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_image</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">show_colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: &gt;
+</pre></div>
+</div>
+<img alt="../../_images/b859b7a7ec091a8221851decbe8d904408496d10b56dabd975cb9a8ae1b70ee8.png" src="../../_images/b859b7a7ec091a8221851decbe8d904408496d10b56dabd975cb9a8ae1b70ee8.png" />
+</div>
+</div>
 <hr class="docutils" />
 </section>
 </section>
@@ -1220,19 +1381,24 @@ Flat fielding is a multiplicative effect.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-a-blank-image">Start: a blank image</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-out-noise">Read-out noise</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bias">Bias</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dark-frame">Dark frame</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sky-background">Sky background</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-some-real-stars">Add some real stars</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wcs-and-image-coordinates">WCS and image coordinates</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#point-spread-function-psf">Point Spread Function (PSF)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-cook">Let’s cook!</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-a-blank-image">1. Start: a blank image</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-calibration-frames">Generate calibration frames</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-out-noise">2.1 Read-out noise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bias">2.2 Bias</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dark-frame">2.3 Dark frame</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sky-background">2.4 Sky background</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#signal-to-noise-ratio">2.5 Signal-to-noise ratio</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-some-real-stars">3. Add some real stars</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wcs-and-image-coordinates">3.1 WCS and image coordinates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#point-spread-function-psf">3.2 Point Spread Function (PSF)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-cook">3.3 Let’s cook!</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-demo">Interactive demo</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion-data-generating-process">Discussion: Data generating process</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homework">Homework</a></li>
 </ul>
   </nav></div>
 
