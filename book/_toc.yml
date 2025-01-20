@@ -15,14 +15,13 @@ parts:
 - caption: Statistics
   chapters:
   - file: docs/stats/basic_stats
-  - file: docs/stats/more_stats
+  - file: docs/stats/more_stats_jared_v2.ipynb
 
 - caption: Detector and Imaging
   chapters:
   - file: docs/imaging/calibration_frames
   - file: docs/imaging/img_simulation
   - file: docs/imaging/plotting_jwst
-  - file: docs/intro_gaia_star
 
 - caption: Homework
   chapters:
