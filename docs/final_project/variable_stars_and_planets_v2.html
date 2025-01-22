@@ -1,0 +1,1453 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Lightcurves, transits, and TESS! Oh My! &#8212; Observational Astronomy</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/redirect.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/final_project/variable_stars_and_planets_v2';</script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/lsst-full.jpg" class="logo__image only-light" alt="Observational Astronomy - Home"/>
+    <script>document.write(`<img src="../../_static/lsst-full.jpg" class="logo__image only-dark" alt="Observational Astronomy - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../intro_python/about_py.html">About Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro_python/getting_started.html">Setting up Your Python Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro_python/numpy_and_plotting.html">Getting started with arrays and plots in Python</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to Stars</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../gaia_part1_jared.html">Prerequisites</a></li>
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../stats/basic_stats.html">Basic Statistics (Part 1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stats/more_stats_jared_v2.html">Basic Statistics (Part 2)</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Detector and Imaging</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../imaging/calibration_frames.html">Calibration frames</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../imaging/img_simulation.html">Simulate an artificial image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../imaging/plotting_jwst.html">Plotting JWST images</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../homework/hw2.html">Homework 2 Notebook</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Final Projects</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="variable_stars_and_planets.html">Lightcurves, transits, and TESS! Oh My!</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="GalaxyZoo_NeuralNet.html">Solve package versions</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="lrd/are_LRD_resolved.html">LRD project</a></li>
+
+
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Merian Project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="merian/01_merian_intro.html">Merian project Part 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="merian/02_Halpha_map.html">Merian project Part 2</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/AstroJacobLi/ObsAstGreene/blob/main//book/docs/final_project/variable_stars_and_planets_v2.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/docs/final_project/variable_stars_and_planets_v2.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lightcurves, transits, and TESS! Oh My!</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Lightcurves, transits, and TESS! Oh My!</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-0-imports">Step 0: imports</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-loading-data-from-the-tess-mission">Step 1: loading data from the TESS mission</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-make-a-lightcurve">Step 2: Make a lightcurve</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-finding-the-oscillation-period">Step 3: finding the oscillation period</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-finding-planets">Step 4: finding planets</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="lightcurves-transits-and-tess-oh-my">
+<h1>Lightcurves, transits, and TESS! Oh My!<a class="headerlink" href="#lightcurves-transits-and-tess-oh-my" title="Permalink to this heading">#</a></h1>
+<p>Assumed knowledege:</p>
+<ol class="arabic simple">
+<li><p>CCD operation and structure</p></li>
+<li><p>Point-spread functions</p></li>
+<li><p>Plotting tools</p></li>
+<li><p>Model fitting</p></li>
+</ol>
+<section id="step-0-imports">
+<h2>Step 0: imports<a class="headerlink" href="#step-0-imports" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run this once to install a python package for downloading lightcurves from the TESS mission</span>
+<span class="c1"># ! python -m pip install lightkurve --upgrade</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># these should be familar</span>
+<span class="kn">import</span> <span class="nn">scipy</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># this package will allow us to make progress bars</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+
+<span class="c1"># We can beautify our plots by changing the matpltlib setting a little</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">18</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.linewidth&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;serif&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="step-1-loading-data-from-the-tess-mission">
+<h1>Step 1: loading data from the TESS mission<a class="headerlink" href="#step-1-loading-data-from-the-tess-mission" title="Permalink to this heading">#</a></h1>
+<p>The function below uses the python package <code class="docutils literal notranslate"><span class="pre">lightkurve</span></code> to load data from the TESS mission. To search for exoplanets, TESS takes pictures of a patch of the sky once every 2 minutes. The function <code class="docutils literal notranslate"><span class="pre">load_TESS_data</span></code> takes in the name of a star and the size of image cutout we want to downdload (centered on the star).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># this function downloades TESS lightcurves (I recommend we supply this function</span>
+<span class="c1"># and have the student&#39;s use it as a black box)</span>
+
+<span class="k">def</span> <span class="nf">load_TESS_data</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">cutout_size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">exptime</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Download TESS images for a given target.</span>
+
+<span class="sd">    inputs:</span>
+<span class="sd">        target: str, same of star (ex. TOI-700)</span>
+<span class="sd">        cutout_size: int, size of the returned cutout</span>
+<span class="sd">                     (in units of pixels)</span>
+<span class="sd">        verbose: bool, controls whether to include printouts</span>
+<span class="sd">        exptime: str, determines if we use short or long cadence mode</span>
+<span class="sd">                 (if None, defaults to first observing semester)</span>
+<span class="sd">    outputs:</span>
+<span class="sd">        time: numpy 1D array</span>
+<span class="sd">        flux: numpy 3D array (time x cutout_size x cutout_size)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="kn">import</span> <span class="nn">lightkurve</span> <span class="k">as</span> <span class="nn">lk</span>
+
+    <span class="c1"># find all available data</span>
+    <span class="n">search_result</span> <span class="o">=</span> <span class="n">lk</span><span class="o">.</span><span class="n">search_tesscut</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">exptime</span> <span class="o">==</span> <span class="s1">&#39;short&#39;</span><span class="p">:</span>
+        <span class="n">search_result</span> <span class="o">=</span> <span class="n">search_result</span><span class="p">[</span><span class="n">search_result</span><span class="o">.</span><span class="n">exptime</span><span class="o">.</span><span class="n">value</span><span class="o">==</span><span class="n">search_result</span><span class="o">.</span><span class="n">exptime</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">min</span><span class="p">()]</span>
+    <span class="k">elif</span> <span class="n">exptime</span> <span class="o">==</span> <span class="s1">&#39;long&#39;</span><span class="p">:</span>
+        <span class="n">search_result</span> <span class="o">=</span> <span class="n">search_result</span><span class="p">[</span><span class="n">search_result</span><span class="o">.</span><span class="n">exptime</span><span class="o">.</span><span class="n">value</span><span class="o">==</span><span class="n">search_result</span><span class="o">.</span><span class="n">exptime</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">max</span><span class="p">()]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">search_result</span><span class="p">)</span>
+
+    <span class="c1"># select the first available observing sector</span>
+    <span class="k">if</span> <span class="n">exptime</span><span class="p">:</span>
+        <span class="n">search_result</span> <span class="o">=</span> <span class="n">search_result</span><span class="p">[</span><span class="n">search_result</span><span class="o">.</span><span class="n">exptime</span> <span class="o">==</span> <span class="n">exptime</span><span class="p">]</span>
+    <span class="n">search_result</span> <span class="o">=</span> <span class="n">search_result</span><span class="p">[</span><span class="n">search_result</span><span class="o">.</span><span class="n">mission</span> <span class="o">==</span> <span class="n">search_result</span><span class="o">.</span><span class="n">mission</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+
+    <span class="c1"># download it</span>
+    <span class="n">tpf</span> <span class="o">=</span> <span class="n">search_result</span><span class="o">.</span><span class="n">download_all</span><span class="p">(</span><span class="n">cutout_size</span><span class="o">=</span><span class="n">cutout_size</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># convert it to a numpy array format</span>
+    <span class="n">flux</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+        <span class="n">tpf</span><span class="o">.</span><span class="n">flux</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tpf</span><span class="o">.</span><span class="n">flux</span><span class="p">))</span> <span class="k">if</span> <span class="n">tpf</span><span class="o">.</span><span class="n">flux</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">&gt;</span><span class="mi">0</span>
+    <span class="p">])</span>
+    <span class="n">flux_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+        <span class="n">tpf</span><span class="o">.</span><span class="n">flux_err</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tpf</span><span class="o">.</span><span class="n">flux_err</span><span class="p">))</span> <span class="k">if</span> <span class="n">tpf</span><span class="o">.</span><span class="n">flux</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">&gt;</span><span class="mi">0</span>
+    <span class="p">])</span>
+
+    <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+        <span class="n">tpf</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tpf</span><span class="o">.</span><span class="n">flux</span><span class="p">))</span> <span class="k">if</span> <span class="n">tpf</span><span class="o">.</span><span class="n">flux</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">&gt;</span><span class="mi">0</span>
+                    <span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">time</span><span class="p">,</span> <span class="n">flux</span><span class="p">,</span> <span class="n">flux_err</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise:</strong> Run the code below to load all the TESS data for one small patch of the sky. We’ll center our images on a single variable star.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">target</span> <span class="o">=</span> <span class="s1">&#39;Gaia_DR2279382060625871360&#39;</span>
+<span class="n">cutout_size</span> <span class="o">=</span> <span class="mi">20</span> <span class="c1"># dimensions of the image in pixels x pixels</span>
+<span class="n">time</span><span class="p">,</span> <span class="n">flux</span><span class="p">,</span> <span class="n">flux_err</span> <span class="o">=</span> <span class="n">load_TESS_data</span><span class="p">(</span><span class="n">target</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">cutout_size</span><span class="o">=</span><span class="n">cutout_size</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SearchResult containing 3 data products.
+
+ #     mission     year  author exptime        target_name         distance
+                                   s                                arcsec 
+--- -------------- ---- ------- ------- -------------------------- --------
+  0 TESS Sector 19 2019 TESScut    1426 Gaia_DR2279382060625871360      0.0
+  1 TESS Sector 59 2022 TESScut     158 Gaia_DR2279382060625871360      0.0
+  2 TESS Sector 73 2023 TESScut     158 Gaia_DR2279382060625871360      0.0
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise:</strong> Run the code below to plot the mean of the TESS cutouts.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_cutout</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">logscale</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">vrange</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">99</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plot 2D image.</span>
+
+<span class="sd">    inputs:</span>
+<span class="sd">        image: 2D numpy array</span>
+<span class="sd">        logscale: bool, if True plots np.log10(image)</span>
+<span class="sd">        vrnge: list, sets range of colorbar</span>
+<span class="sd">               (based on percentiles of &#39;image&#39;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">logscale</span><span class="p">:</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+
+    <span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">q</span> <span class="o">=</span> <span class="n">vrange</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span> <span class="n">image</span><span class="p">,</span> <span class="n">vmin</span> <span class="o">=</span> <span class="n">q</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">vmax</span> <span class="o">=</span> <span class="n">q</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># linear scale</span>
+<span class="n">plot_cutout</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">flux</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/a08e10ae72b81aadb29a63791107d6e4c9b2764bac0a07f971f4c987b1de68b3.png" src="../../_images/a08e10ae72b81aadb29a63791107d6e4c9b2764bac0a07f971f4c987b1de68b3.png" />
+</div>
+</div>
+<p><strong>Exercise:</strong> Now use the same function to plot the mean TESS cutout with <code class="docutils literal notranslate"><span class="pre">logscale=True</span></code>. How many stars to do see in our cutout? How might this make searching for planets complicated?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># log scale</span>
+<span class="n">plot_cutout</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">flux</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span><span class="n">logscale</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/7dc9b26cd753875bbd4fa901772c26b865adb2131144b6ddacead7156a93e2fd.png" src="../../_images/7dc9b26cd753875bbd4fa901772c26b865adb2131144b6ddacead7156a93e2fd.png" />
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="step-2-make-a-lightcurve">
+<h1>Step 2: Make a lightcurve<a class="headerlink" href="#step-2-make-a-lightcurve" title="Permalink to this heading">#</a></h1>
+<p>We want to measure the flux of the star in each image. We can then see how the star’s flux changes with time. This allows us to study binary stars, exoplanets, and stellar pulsations (like Earthquakes but on stars). Let’s start with the simplest option: taking the sum all pixels in image.</p>
+<p><strong>Exercise:</strong> Plot the total flux in each cutout as a function of time. Be sure to label your plot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sums</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">flux</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">time</span><span class="p">,</span><span class="n">sums</span><span class="p">)</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time [days]&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Flux&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/f93a3bf29cfb5fa5b455e74c34fb49bb5ba359e926d6cdfe1225679b907c1094.png" src="../../_images/f93a3bf29cfb5fa5b455e74c34fb49bb5ba359e926d6cdfe1225679b907c1094.png" />
+</div>
+</div>
+<p>We can see this area of the sky is populated by more than one star (this is especially clear when we plot in log scale). This is very common occurance.</p>
+<p>Because the image includes more than one star, simply taking the sum of all pixels in the image will not give us a very accurate number for the flux of the star we’re intersted in. We also have to be careful about the background flux changing with time due to instrumental systematics.</p>
+<p>A common method of overcoming these challenges is fitting the image with a two component model: background + star.</p>
+<p>Since the star is being ‘blurred’ by the point spread function of TESS, we can reasonably model the star as a 2-dimensional Gaussian.</p>
+<p>To keep things simple, let’s assume a uniform background.</p>
+<p><strong>Exercise:</strong> Using the function below, plot a 2-d gaussian with the <code class="docutils literal notranslate"><span class="pre">plot_cutout</span></code> function. Set <code class="docutils literal notranslate"><span class="pre">mu=0,</span> <span class="pre">bkg=0,</span> <span class="pre">xmu=0,</span> <span class="pre">ymu=0</span></code>. Since we are plotting a 2-d gaussian, we need to create a grid of <code class="docutils literal notranslate"><span class="pre">x,y</span></code> values. Use the code below, which turns 1-d arrays of x and y into a 2-d grid of x and y.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">psf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">sigma</span><span class="p">,</span><span class="n">scale</span><span class="p">,</span><span class="n">bkg</span><span class="p">,</span><span class="n">xmu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ymu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">unravel</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Symmetric 2D point-spread function (PSF)</span>
+
+<span class="sd">    inputs:</span>
+<span class="sd">        x: np.ndarray, where to evaluate the PSF</span>
+<span class="sd">        y: np.ndarray, where to evaluate the PSF</span>
+<span class="sd">        sigma: float, width of the PDF</span>
+<span class="sd">        scale: float, integrated area under the PSF</span>
+<span class="sd">        bkg: float, background flux level</span>
+<span class="sd">        xmu: float, center of PSF in x</span>
+<span class="sd">        ymu: float, center of PSF in y</span>
+<span class="sd">    outputs:</span>
+<span class="sd">        PSF evalauted at x and y</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">exponent</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">xmu</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">ymu</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="p">)</span> <span class="o">/</span> <span class="n">sigma</span><span class="o">**</span><span class="mi">2</span>
+
+    <span class="n">mod</span> <span class="o">=</span> <span class="n">scale</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">exponent</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">bkg</span>
+    <span class="k">if</span> <span class="n">unravel</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">mod</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">mod</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Z</span> <span class="o">=</span> <span class="n">psf</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">bkg</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">xmu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ymu</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">plot_cutout</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span><span class="n">logscale</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/9236fa20e2a2f56e62c35394beac03f4a9906f788fd18adcb3c8540d3f84b33e.png" src="../../_images/9236fa20e2a2f56e62c35394beac03f4a9906f788fd18adcb3c8540d3f84b33e.png" />
+</div>
+</div>
+<p>We now have the ingredients for our model. To fit our model we need to quantify ‘goodness of fit.’</p>
+<p><strong>Exercise:</strong> Run the code below to evaluate the residual between the first TESS cutout and our model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">residual</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">z_err</span><span class="p">):</span>
+    <span class="n">sigma</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">bkg</span><span class="p">,</span> <span class="n">xmu</span><span class="p">,</span> <span class="n">ymu</span> <span class="o">=</span> <span class="n">theta</span>
+
+    <span class="n">model</span> <span class="o">=</span> <span class="n">psf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span><span class="n">scale</span><span class="o">=</span><span class="n">scale</span><span class="p">,</span><span class="n">bkg</span><span class="o">=</span><span class="n">bkg</span><span class="p">,</span><span class="n">xmu</span><span class="o">=</span><span class="n">xmu</span><span class="p">,</span><span class="n">ymu</span><span class="o">=</span><span class="n">ymu</span><span class="p">)</span>
+
+    <span class="n">chi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">model</span> <span class="o">-</span> <span class="n">z</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">z_err</span><span class="o">**</span><span class="mi">2</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">chi</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># where to evaluate our PSF</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">flux</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">flux</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">X</span><span class="p">,</span><span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># lets evaluate the model for a set of parameters</span>
+<span class="n">theta</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="mi">1</span><span class="p">,</span>  <span class="c1"># sigma</span>
+    <span class="mi">200</span><span class="p">,</span>  <span class="c1"># scale</span>
+    <span class="mi">0</span><span class="p">,</span>  <span class="c1"># bkg</span>
+    <span class="n">cutout_size</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="c1"># xmu</span>
+    <span class="n">cutout_size</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="c1"># ymu</span>
+<span class="p">]</span>
+
+<span class="n">residual</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">flux</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">flux</span><span class="p">),</span> <span class="n">flux_err</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">flux</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>415386221.45279515
+</pre></div>
+</div>
+</div>
+</div>
+<p>Using our residual function, we can now ask: what parameters (like stellar flux) best fit the image? To give some intuition, let’s start with a simple grid search.</p>
+<p><strong>Exercise:</strong> For <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">&lt;</span> <span class="pre">scale</span> <span class="pre">&lt;</span> <span class="pre">1000</span></code> calculate <code class="docutils literal notranslate"><span class="pre">residual</span></code>. Then plot <code class="docutils literal notranslate"><span class="pre">scale</span></code> vs. <code class="docutils literal notranslate"><span class="pre">residual</span></code>. Set <code class="docutils literal notranslate"><span class="pre">sigma=1,</span> <span class="pre">bkg</span> <span class="pre">=1,</span> <span class="pre">xmu=cutout_size/2,</span> <span class="pre">ymu=cutout_size/2</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># let&#39;s vary the &#39;scale&#39; parameter to see what works best</span>
+<span class="n">scales</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1000</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">residuals</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">scale</span> <span class="ow">in</span> <span class="n">scales</span><span class="p">:</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="mi">1</span><span class="p">,</span>  <span class="c1"># sigma</span>
+        <span class="n">scale</span><span class="p">,</span>  <span class="c1"># scale</span>
+        <span class="mi">0</span><span class="p">,</span>  <span class="c1"># bkg</span>
+        <span class="n">cutout_size</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="c1"># xmu</span>
+        <span class="n">cutout_size</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="c1"># ymu</span>
+    <span class="p">]</span>
+
+    <span class="n">residuals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">residual</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">flux</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">flux</span><span class="p">),</span> <span class="n">flux_err</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">flux</span><span class="p">)</span> <span class="p">)</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">scales</span><span class="p">,</span><span class="n">residuals</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Scale&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$\chi^2$&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/1350b574cb1be22a750bd3078f99982e61da4ed6b1d80149d89838ab1df29436.png" src="../../_images/1350b574cb1be22a750bd3078f99982e61da4ed6b1d80149d89838ab1df29436.png" />
+</div>
+</div>
+<p><strong>Exercise:</strong> Based on the above plot, what <code class="docutils literal notranslate"><span class="pre">scale</span></code> gives the best fit?</p>
+<p>Above, we found the best fit flux (what we call <code class="docutils literal notranslate"><span class="pre">scale</span></code> in our function) for a single TESS cutout. To make a lightcurve we need to repeat that process for each image.</p>
+<p><strong>Exercise:</strong> For each cutout, find the <code class="docutils literal notranslate"><span class="pre">scale</span></code> that minimizes <code class="docutils literal notranslate"><span class="pre">residual</span></code> (search for <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">&lt;</span> <span class="pre">scale</span> <span class="pre">&lt;</span> <span class="pre">1000</span></code>). Like above, set <code class="docutils literal notranslate"><span class="pre">sigma=1,</span> <span class="pre">bkg</span> <span class="pre">=1,</span> <span class="pre">xmu=cutout_size/2,</span> <span class="pre">ymu=cutout_size/2</span></code>. Plot the best fit <code class="docutils literal notranslate"><span class="pre">scale</span></code> vs. time to make our lightcurve. Plot our simple “summed” lightcurve for comparison.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">manual_lightcurve</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">flux</span><span class="p">))):</span>
+    <span class="c1"># let&#39;s vary the &#39;scale&#39; parameter to see what works best</span>
+    <span class="n">scales</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1000</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">residuals</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">scale</span> <span class="ow">in</span> <span class="n">scales</span><span class="p">:</span>
+        <span class="n">theta</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="mi">1</span><span class="p">,</span>  <span class="c1"># sigma</span>
+            <span class="n">scale</span><span class="p">,</span>  <span class="c1"># scale</span>
+            <span class="mi">0</span><span class="p">,</span>  <span class="c1"># bkg</span>
+            <span class="n">cutout_size</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="c1"># xmu</span>
+            <span class="n">cutout_size</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="c1"># ymu</span>
+        <span class="p">]</span>
+
+        <span class="n">residuals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">residual</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">flux</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">flux</span><span class="p">),</span> <span class="n">flux_err</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">flux</span><span class="p">)</span> <span class="p">)</span> <span class="p">)</span>
+
+    <span class="n">manual_lightcurve</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">scales</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">residuals</span><span class="p">)]</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 1150/1150 [00:54&lt;00:00, 21.06it/s]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">time</span><span class="o">-</span><span class="n">time</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="p">(</span><span class="n">sums</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sums</span><span class="p">))</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">sums</span><span class="p">)</span> <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">time</span><span class="o">-</span><span class="n">time</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="p">(</span><span class="n">manual_lightcurve</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">manual_lightcurve</span><span class="p">))</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">manual_lightcurve</span><span class="p">)</span> <span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">])</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time [days]&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Normalized flux&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/81e53d5bb015553fc0e4663ef5d4b6d3ccefb272181dbd81ee9e20332dca79cf.png" src="../../_images/81e53d5bb015553fc0e4663ef5d4b6d3ccefb272181dbd81ee9e20332dca79cf.png" />
+</div>
+</div>
+<p><strong>Exercise:</strong> What are the differences between our “grid-search” and “sum” light curves? What might be the reason(s)?</p>
+<p>We’ve made a lightcurve! And we can clearly see by eye that the star is variable (it’s flux is changing with time). However, our approach is still a little too simple. While we are optimizing the <code class="docutils literal notranslate"><span class="pre">scale</span></code> parameter, we’ve left all the other model parameters fixed.</p>
+<p>As we discussed in class, we can optimize all the parameters of model using <code class="docutils literal notranslate"><span class="pre">scipy.optimize.minimize</span></code>. This is much much faster than trying a grid search across all the parameters at once.</p>
+<p><strong>Exercise:</strong> Using <code class="docutils literal notranslate"><span class="pre">scipy.optimize.minimize</span></code> find the best-fit <code class="docutils literal notranslate"><span class="pre">scale</span></code> for each TESS cutout. Plot the resulting lightcurve alongside out “grid-search” and “sum” lightcurves.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scipy</span>
+<span class="n">lightcurve</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">f</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">flux</span><span class="p">)):</span>
+    <span class="c1"># total flux?</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">optimize</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">residual</span><span class="p">,</span>
+                              <span class="n">x0</span> <span class="o">=</span> <span class="p">[</span>
+                                    <span class="mi">1</span><span class="p">,</span>
+                                    <span class="mi">500</span><span class="p">,</span>
+                                    <span class="mf">0.1</span><span class="p">,</span>
+                                    <span class="n">cutout_size</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>
+                                    <span class="n">cutout_size</span><span class="o">/</span><span class="mi">2</span><span class="p">],</span>
+                              <span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">f</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">flux</span><span class="p">),</span><span class="n">flux_err</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">flux</span><span class="p">)),</span>
+                              <span class="n">bounds</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">.1</span><span class="p">,</span><span class="mi">5</span><span class="p">),(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1000</span><span class="p">),(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">),(</span><span class="mi">5</span><span class="p">,</span><span class="mi">15</span><span class="p">),(</span><span class="mi">5</span><span class="p">,</span><span class="mi">15</span><span class="p">)]</span>
+                              <span class="c1"># full_output = True</span>
+                                <span class="p">)</span>
+    <span class="n">lightcurve</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">out</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">)</span>
+
+<span class="n">lightcurve</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lightcurve</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1150it [00:22, 50.76it/s]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">time</span><span class="o">-</span><span class="n">time</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="p">(</span><span class="n">sums</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sums</span><span class="p">))</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">sums</span><span class="p">)</span> <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">time</span><span class="o">-</span><span class="n">time</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="p">(</span><span class="n">manual_lightcurve</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">manual_lightcurve</span><span class="p">))</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">manual_lightcurve</span><span class="p">)</span> <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">time</span><span class="o">-</span><span class="n">time</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="p">(</span><span class="n">lightcurve</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">lightcurve</span><span class="p">))</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">lightcurve</span><span class="p">)</span> <span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">])</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time [days]&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Normalized flux&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/eeb2990a91864f33f94fe498c8404a58c62e2e0fe9cacc13c7b2afbd5b96cf29.png" src="../../_images/eeb2990a91864f33f94fe498c8404a58c62e2e0fe9cacc13c7b2afbd5b96cf29.png" />
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="step-3-finding-the-oscillation-period">
+<h1>Step 3: finding the oscillation period<a class="headerlink" href="#step-3-finding-the-oscillation-period" title="Permalink to this heading">#</a></h1>
+<p>We’ve now successfully made a lightcurve for our star! By eye we can see the star is <strong>variable</strong> (it’s flux is periodically varying with time). How long does it take to complete a cycle?</p>
+<p>Let’s start by simply fitting the lightcurve with a simple periodic function: a sine wave.</p>
+<p><strong>Exercise:</strong> Write the function <code class="docutils literal notranslate"><span class="pre">sinusoid_model(time,ampl,period,phase,background)</span></code> where <code class="docutils literal notranslate"><span class="pre">time</span></code> is a numpy array, and <code class="docutils literal notranslate"><span class="pre">ampl,period,phase,background</span></code> all all floats. The function shound return:
+$<span class="math notranslate nohighlight">\(  y(t) = A \sin[t \times (2\pi / \mathrm{period})+ \mathrm{phase}] + \mathrm{background} \)</span>$
+Plot the sine wave alongside the lightcurve we calculated above. Set the parameters of <code class="docutils literal notranslate"><span class="pre">sinusoid_model</span></code> hand to best fit the lightcurve.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sinusoid_model</span><span class="p">(</span><span class="n">time</span><span class="p">,</span><span class="n">ampl</span><span class="p">,</span><span class="n">period</span><span class="p">,</span><span class="n">phase</span><span class="p">,</span><span class="n">background</span><span class="p">):</span>
+    <span class="n">omega</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">period</span>
+    <span class="k">return</span> <span class="n">ampl</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span> <span class="n">time</span> <span class="o">*</span> <span class="n">omega</span> <span class="o">+</span> <span class="n">phase</span> <span class="p">)</span> <span class="o">+</span> <span class="n">background</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">time</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">-</span><span class="n">time</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">time</span><span class="o">-</span><span class="n">time</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">lightcurve</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span> <span class="n">sinusoid_model</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span> <span class="o">*</span><span class="p">[</span>
+                                <span class="mi">100</span><span class="p">,</span> <span class="c1"># amplitude</span>
+                                <span class="mf">3.3</span><span class="p">,</span> <span class="c1"># period (days)</span>
+                                <span class="mf">1.5</span><span class="p">,</span> <span class="c1"># phase (radians, between 0 and 2 pi)</span>
+                                <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">lightcurve</span><span class="p">)</span>
+                          <span class="p">]),</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span> <span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">])</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time [days]&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Normalized flux&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/a896825c3277f3287af30802a6fa8cf9a77c0037b8e1cbdad644051602353f5f.png" src="../../_images/a896825c3277f3287af30802a6fa8cf9a77c0037b8e1cbdad644051602353f5f.png" />
+</div>
+</div>
+<p>Now let’s try automating the process.</p>
+<p><strong>Exercise:</strong> For a grid of periods (<code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">&lt;</span> <span class="pre">period</span> <span class="pre">&lt;</span> <span class="pre">5</span></code>) and phases (<code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">&lt;</span> <span class="pre">phase</span> <span class="pre">&lt;</span> <span class="pre">2</span> <span class="pre">*</span> <span class="pre">np.pi</span></code>), calculate the goodness of fit:
+<code class="docutils literal notranslate"><span class="pre">np.sum(np.power(lightcurve-model,2)</span> <span class="pre">)</span></code></p>
+<p>Compare the best fit sine wave with your by hand fit.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">periods</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">phases</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="n">period_grid</span><span class="p">,</span> <span class="n">phase_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">periods</span><span class="p">,</span><span class="n">phases</span><span class="p">)</span>
+
+<span class="n">chi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">period_grid</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">period</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">periods</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span><span class="n">phase</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">phases</span><span class="p">):</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">sinusoid_model</span><span class="p">(</span><span class="n">time</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="n">period</span><span class="p">,</span><span class="n">phase</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">lightcurve</span><span class="p">))</span>
+
+        <span class="n">chi</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">lightcurve</span><span class="o">-</span><span class="n">model</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">best_index</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">chi</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span>
+<span class="n">best_period_grid</span> <span class="o">=</span> <span class="n">period_grid</span><span class="o">.</span><span class="n">ravel</span><span class="p">()[</span><span class="n">best_index</span><span class="p">]</span>
+<span class="n">best_phase_grid</span>  <span class="o">=</span> <span class="n">phase_grid</span><span class="o">.</span><span class="n">ravel</span><span class="p">()[</span><span class="n">best_index</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Best: </span><span class="si">{</span><span class="n">best_period_grid</span><span class="si">:</span><span class="s1">.3</span><span class="si">}</span><span class="s1"> days&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best: 3.22 days
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">period_grid</span><span class="p">,</span> <span class="n">phase_grid</span><span class="p">,</span> <span class="n">chi</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">best_period_grid</span><span class="p">,</span><span class="n">best_phase_grid</span><span class="p">)</span>
+
+<span class="n">_</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Period [day]&#39;</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Phase [rad]&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/248140af33731c74208af17312e678e3a7be332e99978de1132edaf1e9ff6fc8.png" src="../../_images/248140af33731c74208af17312e678e3a7be332e99978de1132edaf1e9ff6fc8.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span><span class="n">time</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">time</span><span class="o">-</span><span class="n">time</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">lightcurve</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tp</span><span class="o">-</span><span class="n">time</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">sinusoid_model</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span> <span class="o">*</span><span class="p">[</span>
+                                <span class="mi">100</span><span class="p">,</span> <span class="c1"># amplitude</span>
+                                <span class="n">best_period_grid</span><span class="p">,</span> <span class="c1"># period (days)</span>
+                                <span class="n">best_phase_grid</span><span class="p">,</span> <span class="c1"># phase (radians, between 0 and 2 pi)</span>
+                                <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">lightcurve</span><span class="p">)</span>
+                          <span class="p">]),</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span> <span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">])</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time [days]&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Normalized flux&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/c23b2a5583ae8ad53111f174cecdb8c3dc5786e23a944d74cc4f4373743bb270.png" src="../../_images/c23b2a5583ae8ad53111f174cecdb8c3dc5786e23a944d74cc4f4373743bb270.png" />
+</div>
+</div>
+<p>Our sine model works okay but certainly isn’t a perfect fit to the data. Instead let’s try a Lomb-Scargle periodogram. This method finds the periodic signals in a dataset using Fourier transforms. See some background: <a class="reference external" href="https://iopscience.iop.org/article/10.3847/1538-4365/aab766/pdf">https://iopscience.iop.org/article/10.3847/1538-4365/aab766/pdf</a></p>
+<p><strong>Exercise:</strong> Run the code below to calculate the Lomb-Scargle periodogram. Plot <code class="docutils literal notranslate"><span class="pre">period</span></code> vs. <code class="docutils literal notranslate"><span class="pre">power</span></code>. Use a log scale on the x-axes.</p>
+<p>This tell us how much a particular period contributes to the observed signal (so spikes tell us that period is strongly present in the data).</p>
+<p><strong>Exercise:</strong> How does the peak from the Lomb-Scargle periodogram compare to the best fit period you found with out sine function above?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.timeseries</span> <span class="kn">import</span> <span class="n">LombScargle</span>
+
+<span class="n">periods</span>   <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="mi">2</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">frequency</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">periods</span>
+<span class="n">power</span> <span class="o">=</span> <span class="n">LombScargle</span><span class="p">(</span><span class="n">time</span><span class="p">,</span><span class="n">lightcurve</span><span class="p">)</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">frequency</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">periods</span><span class="p">,</span><span class="n">power</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Period [days]&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Power&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/adf51a9cefb4323e965115ec821ffdde84e4326434b54334a62d1c4efb784be3.png" src="../../_images/adf51a9cefb4323e965115ec821ffdde84e4326434b54334a62d1c4efb784be3.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">best_period</span> <span class="o">=</span> <span class="n">periods</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">power</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Best: </span><span class="si">{</span><span class="n">best_period</span><span class="si">:</span><span class="s1">.3</span><span class="si">}</span><span class="s1"> days&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best: 3.29 days
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="step-4-finding-planets">
+<h1>Step 4: finding planets<a class="headerlink" href="#step-4-finding-planets" title="Permalink to this heading">#</a></h1>
+<p>Above we measured the lightcurve for a star from TESS cutouts and then calculated it’s oscillation period. Let’s now repeat that process for a star known to host a transiting planet!</p>
+<p>Let’s start with a relatively bright star hosting a Jupiter sized planet:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">target</span> <span class="o">=</span> <span class="s1">&#39;Gaia_DR24624979393181971328&#39;</span>
+
+<span class="n">period_tess</span> <span class="o">=</span> <span class="mf">2.084544</span> <span class="c1"># days</span>
+<span class="n">radius_planet_tess</span> <span class="o">=</span> <span class="mf">1.286</span> <span class="c1"># R_jup</span>
+<span class="n">radius_star_tess</span>   <span class="o">=</span> <span class="mf">1.17</span> <span class="c1"># R_sun</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise:</strong>  Run the code below to load the TESS data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cutout_size</span> <span class="o">=</span> <span class="mi">20</span> <span class="c1"># dimensions of the image in pixels x pixels</span>
+
+<span class="c1"># stamps</span>
+<span class="n">time</span><span class="p">,</span> <span class="n">flux</span><span class="p">,</span> <span class="n">flux_err</span> <span class="o">=</span> <span class="n">load_TESS_data</span><span class="p">(</span><span class="n">target</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">cutout_size</span><span class="o">=</span><span class="n">cutout_size</span><span class="p">,</span><span class="n">exptime</span><span class="o">=</span><span class="mi">158</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SearchResult containing 34 data products.
+
+ #     mission     year  author exptime         target_name         distance
+                                   s                                 arcsec 
+--- -------------- ---- ------- ------- --------------------------- --------
+  0 TESS Sector 06 2018 TESScut    1426 Gaia_DR24624979393181971328      0.0
+  1 TESS Sector 05 2018 TESScut    1426 Gaia_DR24624979393181971328      0.0
+  2 TESS Sector 04 2018 TESScut    1426 Gaia_DR24624979393181971328      0.0
+  3 TESS Sector 03 2018 TESScut    1426 Gaia_DR24624979393181971328      0.0
+  4 TESS Sector 01 2018 TESScut    1426 Gaia_DR24624979393181971328      0.0
+  5 TESS Sector 02 2018 TESScut    1426 Gaia_DR24624979393181971328      0.0
+  6 TESS Sector 13 2019 TESScut    1426 Gaia_DR24624979393181971328      0.0
+  7 TESS Sector 11 2019 TESScut    1426 Gaia_DR24624979393181971328      0.0
+  8 TESS Sector 12 2019 TESScut    1426 Gaia_DR24624979393181971328      0.0
+...            ...  ...     ...     ...                         ...      ...
+ 24 TESS Sector 35 2021 TESScut     475 Gaia_DR24624979393181971328      0.0
+ 25 TESS Sector 68 2023 TESScut     158 Gaia_DR24624979393181971328      0.0
+ 26 TESS Sector 67 2023 TESScut     158 Gaia_DR24624979393181971328      0.0
+ 27 TESS Sector 66 2023 TESScut     158 Gaia_DR24624979393181971328      0.0
+ 28 TESS Sector 65 2023 TESScut     158 Gaia_DR24624979393181971328      0.0
+ 29 TESS Sector 61 2023 TESScut     158 Gaia_DR24624979393181971328      0.0
+ 30 TESS Sector 69 2023 TESScut     158 Gaia_DR24624979393181971328      0.0
+ 31 TESS Sector 63 2023 TESScut     158 Gaia_DR24624979393181971328      0.0
+ 32 TESS Sector 62 2023 TESScut     158 Gaia_DR24624979393181971328      0.0
+ 33 TESS Sector 64 2023 TESScut     158 Gaia_DR24624979393181971328      0.0
+Length = 34 rows
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise:</strong>  Like we did above, use <code class="docutils literal notranslate"><span class="pre">scipy.optimize.minimize</span></code> to extract the lightcurve from the TESS cutouts by fitting the images with the 2-d gaussian model.</p>
+<p>Plot the lightcurve. What do you notice? Can you spot transits by eye?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">extract_lightcurve</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">flux</span><span class="p">,</span> <span class="n">flux_err</span><span class="p">):</span>
+
+  <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">flux</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">flux</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+  <span class="n">X</span><span class="p">,</span><span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+
+  <span class="n">lightcurve</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">f</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">flux</span><span class="p">)):</span>
+  <span class="c1"># total flux?</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">optimize</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">residual</span><span class="p">,</span>
+                            <span class="n">x0</span> <span class="o">=</span> <span class="p">[</span>
+                                  <span class="mi">1</span><span class="p">,</span>
+                                  <span class="mi">45</span><span class="p">,</span>
+                                  <span class="mf">0.1</span><span class="p">,</span>
+                                  <span class="n">cutout_size</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>
+                                  <span class="n">cutout_size</span><span class="o">/</span><span class="mi">2</span><span class="p">],</span>
+                            <span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">f</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">flux</span><span class="p">),</span><span class="n">flux_err</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">flux</span><span class="p">)),</span>
+                            <span class="n">bounds</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">.1</span><span class="p">,</span><span class="mi">5</span><span class="p">),(</span><span class="mi">30</span><span class="p">,</span><span class="mi">50</span><span class="p">),(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">),(</span><span class="mi">5</span><span class="p">,</span><span class="mi">15</span><span class="p">),(</span><span class="mi">5</span><span class="p">,</span><span class="mi">15</span><span class="p">)]</span>
+                            <span class="c1"># full_output = True</span>
+                              <span class="p">)</span>
+    <span class="n">lightcurve</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">out</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">)</span>
+
+  <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lightcurve</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">plot_lightcurve</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time [days]&#39;</span><span class="p">)</span>
+    <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Normalized flux&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># to lightcurve</span>
+<span class="n">lc</span> <span class="o">=</span> <span class="n">extract_lightcurve</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">flux</span><span class="p">,</span> <span class="n">flux_err</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>980it [00:29, 33.38it/s]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_lightcurve</span><span class="p">(</span><span class="n">time</span><span class="p">,</span><span class="n">lc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/4804dcb49655e6a7e47d5bd2062993d9b255588824fd51a5d08cca0f16cde0c6.png" src="../../_images/4804dcb49655e6a7e47d5bd2062993d9b255588824fd51a5d08cca0f16cde0c6.png" />
+</div>
+</div>
+<p>In addition to transits, we can also see the star is undergoing a more steady change in brightness with time. We want to study the transits to let’s try to remove the non-transit flux changes (this called “detrending” the lightcurve).</p>
+<p><strong>Exercise:</strong> Use the function <code class="docutils literal notranslate"><span class="pre">median_filter(x,y,width)</span></code> where <code class="docutils literal notranslate"><span class="pre">x,y</span></code> are arrays (for example time and lightcurve) and <code class="docutils literal notranslate"><span class="pre">width</span></code> is a float to detrend the lightcurve. For each x value, the function returns with the median y within width of the given x value (i.e., a rolling median filter).</p>
+<p>Detrend the lightcurve by subtracting <code class="docutils literal notranslate"><span class="pre">median_filter(x,y,width)</span></code>. Choose <code class="docutils literal notranslate"><span class="pre">width</span></code> such that the transits are not affected by the detrending but the long term trends are removed.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">median_filter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">width</span><span class="p">):</span>
+    <span class="n">smooth</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">xi</span> <span class="ow">in</span> <span class="n">x</span><span class="p">:</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">xi</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">&lt;</span><span class="n">width</span><span class="o">/</span><span class="mi">2</span>
+        <span class="n">smooth</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">C</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">smooth</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lc_detrended</span> <span class="o">=</span> <span class="n">lc</span> <span class="o">-</span> <span class="n">median_filter</span><span class="p">(</span><span class="n">time</span><span class="p">,</span><span class="n">lc</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">plot_lightcurve</span><span class="p">(</span><span class="n">time</span><span class="p">,</span><span class="n">lc_detrended</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/864e1018393cac351e948595f82c4122c944de6908a77c80ed0ebce83469e0f5.png" src="../../_images/864e1018393cac351e948595f82c4122c944de6908a77c80ed0ebce83469e0f5.png" />
+</div>
+</div>
+<p><strong>Exercise:</strong> use the Lomb-Scargle periodogram to find the period of the planet.</p>
+<p>Hint: search periods longer than 1 day.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_max_period</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">plot_it</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">l</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="mi">100</span><span class="p">):</span>
+    <span class="kn">from</span> <span class="nn">astropy.timeseries</span> <span class="kn">import</span> <span class="n">LombScargle</span>
+
+    <span class="n">periods</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">l</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">h</span><span class="p">),</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="n">frequency</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">periods</span>
+    <span class="n">power</span> <span class="o">=</span> <span class="n">LombScargle</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">frequency</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">plot_it</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">periods</span><span class="p">,</span><span class="n">power</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Period [days]&#39;</span><span class="p">)</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Power&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">periods</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">power</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">period</span> <span class="o">=</span> <span class="n">get_max_period</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">lc_detrended</span><span class="p">,</span> <span class="n">plot_it</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">l</span> <span class="o">=</span> <span class="mf">1.1</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/335942832da32eb3ca52d2835585258fb7dff58d08eb98b826d18ebec11a056c.png" src="../../_images/335942832da32eb3ca52d2835585258fb7dff58d08eb98b826d18ebec11a056c.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">period</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.088302096620561
+</pre></div>
+</div>
+</div>
+</div>
+<p>We now have a clean lightcurve and a solid estimate of the planet’s orbital period. So we have everything we need to study the planet! Unfortunately, this is difficult with individual transits, because each transit is quite a noisy measurement.  We can overcome this challenge by combining the individual transits into one ‘average’ transit.</p>
+<p><strong>Exercise:</strong> Since the planet’s orbital period is constant, the transit times should follow a simple formula:
+$<span class="math notranslate nohighlight">\( T(n) = T_0 + P \times n \)</span><span class="math notranslate nohighlight">\(
+where \)</span>T(n)<span class="math notranslate nohighlight">\( is the \)</span>n<span class="math notranslate nohighlight">\(th transit time (i.e., \)</span>n=0,1,2,\dots<span class="math notranslate nohighlight">\(), \)</span>T_0<span class="math notranslate nohighlight">\( is the first observed transit time, and \)</span>P$ is the orbital period.
+This means we can “fold” all the individual transits on top of each other to create a higher signal average transit, if we know the planet’s period.
+Use the provided function <code class="docutils literal notranslate"><span class="pre">phase_it</span></code> to fold the light curve to the Lomb-Scargle period and plot the folded lightcurve. Change the x limits to zoom in on the transit. Be sure to use the detrended light curve.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">phase_it</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">period</span><span class="p">):</span>
+    <span class="n">x_phased</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="n">period</span><span class="p">)</span><span class="o">%</span><span class="k">1</span>
+    <span class="n">y_phased</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">x_phased</span><span class="p">)]</span>
+
+    <span class="k">return</span> <span class="n">x_phased</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">x_phased</span><span class="p">)],</span> <span class="n">y_phased</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_phased</span><span class="p">,</span> <span class="n">y_phased</span> <span class="o">=</span> <span class="n">phase_it</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">lc_detrended</span><span class="o">/</span><span class="n">lc</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span> <span class="c1"># phase</span>
+
+<span class="n">_</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_phased</span><span class="p">,</span> <span class="n">y_phased</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Normalized flux&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Phase&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/8fd5b7c9fbae8fb62034da960224c9be4a784bf019546bc47e9742e52bd8eef0.png" src="../../_images/8fd5b7c9fbae8fb62034da960224c9be4a784bf019546bc47e9742e52bd8eef0.png" />
+</div>
+</div>
+<p>We now have a very clear transit signal to study!</p>
+<p><strong>Exercise:</strong> Above we plotted the detrended lightcurve (i.e., the observed lightcurve minus the smooth median filter). Now plot the detrended lightcurve divided by the observed lightcurve. This way we now looking at the fractional change in flux.</p>
+<p>By eye estimate the transit depth and calculate the planet to star size ratio:
+$<span class="math notranslate nohighlight">\(\delta = (R_p / R_\star)^2\)</span>$</p>
+<p><strong>Exercise:</strong> The provided function <code class="docutils literal notranslate"><span class="pre">transit_model(phase,</span> <span class="pre">depth,</span> <span class="pre">duration,</span> <span class="pre">ingress)</span></code> describes the shape of a transit with a few free paremters. Try changing the transit depth, duration, and ingress time to fit the observed shape.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">transit_model</span><span class="p">(</span><span class="n">phase</span><span class="p">,</span> <span class="n">midpoint</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="n">duration</span><span class="p">,</span> <span class="n">ingress</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">norm</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">x</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">/</span> <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">x</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+
+    <span class="n">model</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">phase</span><span class="p">)</span>
+
+    <span class="n">start</span> <span class="o">=</span> <span class="n">midpoint</span> <span class="o">-</span> <span class="n">duration</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="n">ingress</span>
+    <span class="n">end</span>   <span class="o">=</span> <span class="n">midpoint</span> <span class="o">+</span> <span class="n">duration</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">ingress</span>
+
+
+    <span class="n">C_ingress</span> <span class="o">=</span> <span class="p">(</span><span class="n">phase</span> <span class="o">&gt;</span> <span class="n">start</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">phase</span> <span class="o">&lt;</span> <span class="n">midpoint</span> <span class="o">-</span> <span class="n">duration</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">C_egress</span>  <span class="o">=</span> <span class="p">(</span><span class="n">phase</span> <span class="o">&lt;</span> <span class="n">end</span><span class="p">)</span>   <span class="o">&amp;</span> <span class="p">(</span><span class="n">phase</span> <span class="o">&gt;</span> <span class="n">midpoint</span> <span class="o">+</span> <span class="n">duration</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">C_ingress</span><span class="p">[</span><span class="n">C_ingress</span><span class="p">])</span><span class="o">&gt;</span><span class="mi">3</span><span class="p">:</span>
+        <span class="n">model</span><span class="p">[</span><span class="n">C_ingress</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">depth</span> <span class="o">*</span> <span class="n">norm</span><span class="p">(</span><span class="n">phase</span><span class="p">[</span><span class="n">C_ingress</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">C_egress</span><span class="p">[</span><span class="n">C_egress</span><span class="p">])</span><span class="o">&gt;</span><span class="mi">3</span><span class="p">:</span>
+        <span class="n">model</span><span class="p">[</span><span class="n">C_egress</span><span class="p">]</span>  <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">depth</span><span class="p">)</span> <span class="o">+</span> <span class="n">depth</span> <span class="o">*</span> <span class="n">norm</span><span class="p">(</span><span class="n">phase</span><span class="p">[</span><span class="n">C_egress</span><span class="p">])</span>
+
+    <span class="n">model</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">phase</span><span class="o">-</span><span class="n">midpoint</span><span class="p">)</span><span class="o">&lt;</span><span class="n">duration</span><span class="o">/</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">-</span><span class="n">depth</span>
+
+    <span class="k">return</span> <span class="n">model</span><span class="o">-</span><span class="mi">1</span>
+
+<span class="k">def</span> <span class="nf">residual_transit_model</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">phase</span><span class="p">,</span> <span class="n">lc</span><span class="p">):</span>
+    <span class="n">midpoint</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="n">duration</span><span class="p">,</span> <span class="n">ingress</span> <span class="o">=</span> <span class="n">theta</span>
+
+    <span class="n">model</span> <span class="o">=</span> <span class="n">transit_model</span><span class="p">(</span><span class="n">phase</span><span class="p">,</span> <span class="n">midpoint</span><span class="p">,</span> <span class="n">depth</span><span class="p">,</span> <span class="n">duration</span><span class="p">,</span> <span class="n">ingress</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">model</span> <span class="o">-</span> <span class="n">lc</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">10000</span><span class="p">)</span>
+<span class="n">yp</span> <span class="o">=</span> <span class="n">transit_model</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.015</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+
+<span class="n">_</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_phased</span><span class="p">,</span> <span class="n">y_phased</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span><span class="n">yp</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Normalized flux&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Phase&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.2</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/45fb6732b77744ce1275c0dcf28ae0bcd60b834309ac9615343c9d2e43f47fd6.png" src="../../_images/45fb6732b77744ce1275c0dcf28ae0bcd60b834309ac9615343c9d2e43f47fd6.png" />
+</div>
+</div>
+<p><strong>Exercise:</strong> fit the folded lightcurve with <code class="docutils literal notranslate"><span class="pre">transit_model</span></code> using <code class="docutils literal notranslate"><span class="pre">scipy.optimize.differential_evolution</span></code>. How does the fit transit depth compare to your by eye estimate?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">out</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">optimize</span><span class="o">.</span><span class="n">differential_evolution</span><span class="p">(</span><span class="n">residual_transit_model</span><span class="p">,</span>
+                          <span class="n">bounds</span>   <span class="o">=</span> <span class="p">[</span>
+                              <span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span>
+                              <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.02</span><span class="p">),</span>
+                              <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.05</span><span class="p">),</span>
+                              <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.05</span><span class="p">)],</span>
+                          <span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="n">x_phased</span><span class="p">,</span> <span class="n">y_phased</span><span class="p">),</span>
+            <span class="p">)</span>
+
+<span class="c1"># out = scipy.optimize.minimize(residual_transit_model,</span>
+<span class="c1">#                         x0 = [0.09591683, 0.01311028, 0.00789228, 0.02259183],</span>
+<span class="c1">#                         args = (x_phased, y_phased),</span>
+<span class="c1">#                         bounds = [(0.05,0.15),(0,0.1),(0,0.05),(0,0.05)]</span>
+<span class="c1">#                           )</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">out</span><span class="o">.</span><span class="n">x</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.09619774, 0.01296238, 0.01003873, 0.02171905])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">yp</span> <span class="o">=</span> <span class="n">transit_model</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="o">*</span><span class="n">out</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">_</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_phased</span><span class="p">,</span> <span class="n">y_phased</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span><span class="n">yp</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Normalized flux&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Phase&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.2</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/212f5445bbb474675767b27f610d8831a30268b1be974a6c8668ca548beb02e9.png" src="../../_images/212f5445bbb474675767b27f610d8831a30268b1be974a6c8668ca548beb02e9.png" />
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/final_project"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Lightcurves, transits, and TESS! Oh My!</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-0-imports">Step 0: imports</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-loading-data-from-the-tess-mission">Step 1: loading data from the TESS mission</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-make-a-lightcurve">Step 2: Make a lightcurve</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-finding-the-oscillation-period">Step 3: finding the oscillation period</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-finding-planets">Step 4: finding planets</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jenny Greene, Jared Siegel, Erin Flowers, Jiaxuan Li
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
