@@ -436,7 +436,12 @@ This will lay the foundation for the Merian final project.</p>
 <ul class="simple">
 <li><p>Concept of spectrum and redshift</p></li>
 </ul>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> autoreload
 <span class="o">%</span><span class="k">autoreload</span> 2
@@ -463,6 +468,7 @@ This will lay the foundation for the Merian final project.</p>
 </pre></div>
 </div>
 </div>
+</details>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The autoreload extension is already loaded. To reload it, use:
   %reload_ext autoreload
@@ -473,7 +479,12 @@ This will lay the foundation for the Merian final project.</p>
 <section id="spectrum-of-a-star-forming-galaxy">
 <h2>1. Spectrum of a star-forming galaxy<a class="headerlink" href="#spectrum-of-a-star-forming-galaxy" title="Permalink to this heading">#</a></h2>
 <p>Let’s first load the spectrum of a star-forming galaxy, explore it interactively. We also show <a class="reference external" href="https://classic.sdss.org/dr6/algorithms/linestable.php">a list of emission lines</a> which are quite common in a star-forming galaxy. (Understanding how to write this interative framework is <strong>not</strong> required!!)</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wave_obs</span><span class="p">,</span> <span class="n">spec_obs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;sf_gal_spec_obs.txt&#39;</span><span class="p">)</span>
 <span class="n">emission_lines</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;Lyα&#39;</span><span class="p">,</span> <span class="mf">1215.24</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;[OII]&#39;</span><span class="p">,</span> <span class="mi">3727</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Hγ&#39;</span><span class="p">,</span> <span class="mf">4341.68</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Hβ&#39;</span><span class="p">,</span> <span class="mf">4862.68</span><span class="p">),</span>
@@ -482,6 +493,7 @@ This will lay the foundation for the Merian final project.</p>
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <div class="cell tag_full-width tag_hide-input docutils container">
 <details class="hide above-input">
