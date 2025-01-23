@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Prerequisites &#8212; Observational Astronomy</title>
+    <title>Understand stars in Gaia data (student version) &#8212; Observational Astronomy</title>
   
   
   
@@ -69,6 +69,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Basic Statistics (Part 1)" href="stats/basic_stats.html" />
+    <link rel="prev" title="Getting started with arrays and plots in Python" href="intro_python/numpy_and_plotting.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -163,17 +165,11 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to Python</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="intro_python/about_py.html">About Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="intro_python/getting_started.html">Setting up Your Python Environment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="intro_python/numpy_and_plotting.html">Getting started with arrays and plots in Python</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to Stars</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="gaia_part1_jared.html">Prerequisites</a></li>
-
-
-
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Understand stars in Gaia data (student version)</a></li>
 
 
 
@@ -402,7 +398,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Prerequisites</h1>
+    <h1>Understand stars in Gaia data (student version)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -412,9 +408,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Prerequisites</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#new-texttt-python-skills">New <span class="math notranslate nohighlight">\(\texttt{python}\)</span> skills</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#astro-concepts">Astro concepts</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Understand stars in Gaia data (student version)</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-a-table-with-texttt-pandas">1. Reading a table with <span class="math notranslate nohighlight">\(\texttt{pandas}\)</span></a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-in-the-table-and-how-can-we-access-it">What’s in the table and how can we access it?</a></li>
 </ul>
@@ -433,16 +427,17 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="prerequisites">
-<h1>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading">#</a></h1>
-<p><span class="math notranslate nohighlight">\(\texttt{numpy}\)</span>, <span class="math notranslate nohighlight">\(\texttt{matplotlib}\)</span>, and stats 101.</p>
-</section>
-<section id="new-texttt-python-skills">
-<h1>New <span class="math notranslate nohighlight">\(\texttt{python}\)</span> skills<a class="headerlink" href="#new-texttt-python-skills" title="Permalink to this heading">#</a></h1>
-<p><span class="math notranslate nohighlight">\(\texttt{pandas}\)</span>: a package for loading and manipulating tables of data (you can think of this as <span class="math notranslate nohighlight">\(\texttt{python}\)</span>’s version of excel or google sheets).</p>
-</section>
-<section id="astro-concepts">
-<h1>Astro concepts<a class="headerlink" href="#astro-concepts" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="understand-stars-in-gaia-data-student-version">
+<h1>Understand stars in Gaia data (student version)<a class="headerlink" href="#understand-stars-in-gaia-data-student-version" title="Permalink to this heading">#</a></h1>
+<p><strong>Prerequisites</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\texttt{numpy}\)</span>, <span class="math notranslate nohighlight">\(\texttt{matplotlib}\)</span>, and stats 101.</p></li>
+</ul>
+<p><strong>New <span class="math notranslate nohighlight">\(\texttt{python}\)</span> skills</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\texttt{pandas}\)</span>: a package for loading and manipulating tables of data (you can think of this as <span class="math notranslate nohighlight">\(\texttt{python}\)</span>’s version of Excel or google sheets).</p></li>
+</ul>
+<p><strong>Astro concepts</strong></p>
 <ul class="simple">
 <li><p>The Gaia mission</p></li>
 <li><p>Magnitude and absolute magnitude scales</p></li>
@@ -1203,28 +1198,42 @@ document.write(`
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="getting-started-with-data">
 <h1>2. Getting started with data<a class="headerlink" href="#getting-started-with-data" title="Permalink to this heading">#</a></h1>
-<p><strong>Exercise:</strong> Using <span class="math notranslate nohighlight">\(\texttt{numpy}\)</span> calculate the mean, median, and standard deviation of the <code class="docutils literal notranslate"><span class="pre">distance</span></code> column.</p>
-<p><strong>Exercise:</strong> It’s hard to how what these numbers mean without visualizing the data. Let’s make a histogram of the distances. Be sure to include labels on the x and y axis. Include the mean and median as vertical lines.</p>
-<p><strong>Exercise:</strong> What can we learn about the distances of near by stars based on the histogram? For instance, is the histogram skewed towards very high or very low values? or is the histogram symmetric? What does this tell us about stars near the Sun?</p>
-<p><strong>Exercise:</strong> In astronomy, we often ask how different properties of stars depend on each other. For example, does the size of a star depend on it’s temperature? First let’s make scatter plots of temperature vs. radius, distance vs. radius, and distance vs. temperature.</p>
-<p>Bonus: try using for loops to reduce duplicated code</p>
-<p><strong>Exercise:</strong> Write a single sentence summary of each plot. Based on your scatter plots, which properties are most strongly correlated?</p>
+<div class="admonition-exercise-1 admonition">
+<p class="admonition-title">Exercise 1</p>
+<ol class="arabic simple">
+<li><p>Using <span class="math notranslate nohighlight">\(\texttt{numpy}\)</span> calculate the mean, median, and standard deviation of the <code class="docutils literal notranslate"><span class="pre">distance</span></code> column.</p></li>
+<li><p>It’s hard to how what these numbers mean without visualizing the data. Let’s make a histogram of the distances. Be sure to include labels on the x and y axis. Include the mean and median as vertical lines.</p></li>
+<li><p>What can we learn about the distances of near by stars based on the histogram? For instance, is the histogram skewed towards very high or very low values? or is the histogram symmetric? What does this tell us about stars near the Sun?</p></li>
+<li><p>In astronomy, we often ask how different properties of stars depend on each other. For example, does the size of a star depend on it’s temperature? First let’s make scatter plots of temperature vs. radius, distance vs. radius, and distance vs. temperature.
+<em>Bonus: try using for loops to reduce duplicated code</em></p></li>
+<li><p>Write a single sentence summary of each plot. Based on your scatter plots, which properties are most strongly correlated?</p></li>
+</ol>
+</div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="practicing-with-magnitudes">
 <h1>3. Practicing with magnitudes<a class="headerlink" href="#practicing-with-magnitudes" title="Permalink to this heading">#</a></h1>
 <p>As we discussed in lecture, magnitudes appear everywhere in astronomy. Let’s practice using magnitudes with our Gaia stars. Remember, the definition of magnitude is:
 $<span class="math notranslate nohighlight">\( m_1 - m_2 = - 2.5 \log_{10} (F_1 / F_2) \)</span><span class="math notranslate nohighlight">\(
 where \)</span>m_1, m_2<span class="math notranslate nohighlight">\( are the magnitudes of two stars (creatively named 1 and 2) and \)</span>F_1, F_2$ are the fluxes of those two stars.</p>
-<p><strong>Exercise:</strong> To get some practice, let’s convert the magnitudes listed in the table to fluxes. Let’s calculate our fluxes relative to the Sun:
+<div class="admonition-exercise-2 admonition">
+<p class="admonition-title">Exercise 2</p>
+<p>To get some practice, let’s convert the magnitudes listed in the table to fluxes. Let’s calculate our fluxes relative to the Sun:
 $<span class="math notranslate nohighlight">\( m_1 + 26.83 = - 2.5 \log_{10} (F_1 / F_\mathrm{Sun}) \)</span><span class="math notranslate nohighlight">\(
 we've set \)</span>m_2 = −26.83<span class="math notranslate nohighlight">\( and \)</span>F_2 = F_\mathrm{Sun}<span class="math notranslate nohighlight">\(, where \)</span>F_\mathrm{Sun}$ is the flux (aka. brightness) of the Sun as measured from Earth.</p>
-<p>Make a histogram of <span class="math notranslate nohighlight">\(\log_{10}(F_1 / F_\mathrm{Sun})\)</span> for the <span class="math notranslate nohighlight">\(g\)</span>, <span class="math notranslate nohighlight">\(r\)</span>, and <span class="math notranslate nohighlight">\(b\)</span> Gaia filters (the Gaia magnitudes are stored under the <span class="math notranslate nohighlight">\(\texttt{gmag, rmag, bmag}\)</span> columns).</p>
-<p>Bonus: write a function for the flux to magnitude conversion</p>
-<p><strong>Exercise:</strong> Based on your histograms how much brighter does the Sun appear to us than the brightest nearby star (in gaia g-band)?</p>
+<ol class="arabic simple">
+<li><p>Make a histogram of <span class="math notranslate nohighlight">\(\log_{10}(F_1 / F_\mathrm{Sun})\)</span> for the <span class="math notranslate nohighlight">\(g\)</span>, <span class="math notranslate nohighlight">\(r\)</span>, and <span class="math notranslate nohighlight">\(b\)</span> Gaia filters (the Gaia magnitudes are stored under the <span class="math notranslate nohighlight">\(\texttt{gmag, rmag, bmag}\)</span> columns). <strong>Bonus: write a function for the flux to magnitude conversion</strong></p></li>
+<li><p>Based on your histograms how much brighter does the Sun appear to us than the brightest nearby star (in gaia g-band)?</p></li>
+</ol>
+</div>
 <p>So far, we have considered how bright stars appear in the sky. However, we know this depends on the stars’ distances from the Earth. Remember the apparent brightness of a star (aka flux <span class="math notranslate nohighlight">\(F\)</span>) is related to its luminosity <span class="math notranslate nohighlight">\(L\)</span> (the amount of energy output by the star each second) and distance <span class="math notranslate nohighlight">\(d\)</span> by:
 $<span class="math notranslate nohighlight">\(  F = \frac{L}{4 \pi d^2} \)</span>$</p>
-<p><strong>Exercise:</strong> Use the above equation to write an equation for <span class="math notranslate nohighlight">\(L\)</span>. Then write an equation for <span class="math notranslate nohighlight">\(L / L_\mathrm{sun}\)</span>. Using your equation, make a histogram of <span class="math notranslate nohighlight">\(\log_{10} (L / L_\mathrm{Sun})\)</span> (based on the <span class="math notranslate nohighlight">\(g\)</span>-band magnitude).</p>
-<p><strong>Exercise:</strong> What can we learn from this histogram? Is the Sun typical compared to nearby stars?</p>
+<div class="admonition-exercise-3 admonition">
+<p class="admonition-title">Exercise 3</p>
+<ol class="arabic simple">
+<li><p>Use the above equation to write an equation for <span class="math notranslate nohighlight">\(L\)</span>. Then write an equation for <span class="math notranslate nohighlight">\(L / L_\mathrm{sun}\)</span>. Using your equation, make a histogram of <span class="math notranslate nohighlight">\(\log_{10} (L / L_\mathrm{Sun})\)</span> (based on the <span class="math notranslate nohighlight">\(g\)</span>-band magnitude).</p></li>
+<li><p>What can we learn from this histogram? Is the Sun typical compared to nearby stars?</p></li>
+</ol>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1257,6 +1266,24 @@ $<span class="math notranslate nohighlight">\(  F = \frac{L}{4 \pi d^2} \)</span
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="intro_python/numpy_and_plotting.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Getting started with arrays and plots in Python</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="stats/basic_stats.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Basic Statistics (Part 1)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -1272,9 +1299,7 @@ $<span class="math notranslate nohighlight">\(  F = \frac{L}{4 \pi d^2} \)</span
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Prerequisites</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#new-texttt-python-skills">New <span class="math notranslate nohighlight">\(\texttt{python}\)</span> skills</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#astro-concepts">Astro concepts</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Understand stars in Gaia data (student version)</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-a-table-with-texttt-pandas">1. Reading a table with <span class="math notranslate nohighlight">\(\texttt{pandas}\)</span></a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-in-the-table-and-how-can-we-access-it">What’s in the table and how can we access it?</a></li>
 </ul>
