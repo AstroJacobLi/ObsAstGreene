@@ -453,12 +453,6 @@ This will lay the foundation for the Merian final project.</p>
 <span class="kn">from</span> <span class="nn">astropy.table</span> <span class="kn">import</span> <span class="n">Table</span>
 <span class="kn">from</span> <span class="nn">astropy.coordinates</span> <span class="kn">import</span> <span class="n">SkyCoord</span>
 
-<span class="c1"># Load bokeh functions for interactive functionalities</span>
-<span class="kn">from</span> <span class="nn">bokeh.plotting</span> <span class="kn">import</span> <span class="n">figure</span><span class="p">,</span> <span class="n">show</span>
-<span class="kn">from</span> <span class="nn">bokeh.models</span> <span class="kn">import</span> <span class="n">ColumnDataSource</span><span class="p">,</span> <span class="n">Slider</span><span class="p">,</span> <span class="n">CustomJS</span><span class="p">,</span> <span class="n">Label</span><span class="p">,</span> <span class="n">LabelSet</span><span class="p">,</span> <span class="n">Span</span><span class="p">,</span> <span class="n">Range1d</span><span class="p">,</span> <span class="n">LinearAxis</span>
-<span class="kn">from</span> <span class="nn">bokeh.layouts</span> <span class="kn">import</span> <span class="n">column</span>
-<span class="kn">from</span> <span class="nn">bokeh.io</span> <span class="kn">import</span> <span class="n">output_notebook</span>
-
 <span class="c1"># We can beautify our plots by changing the matpltlib setting a little</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">18</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;image.origin&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;lower&#39;</span>
@@ -469,9 +463,50 @@ This will lay the foundation for the Merian final project.</p>
 </div>
 </div>
 </details>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The autoreload extension is already loaded. To reload it, use:
-  %reload_ext autoreload
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">required_packages</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;sedpy&#39;</span><span class="p">,</span> <span class="s1">&#39;bokeh&#39;</span><span class="p">]</span>  <span class="c1"># Define the required packages for this notebook</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">google.colab</span>
+    <span class="n">IN_COLAB</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">IN_COLAB</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="k">if</span> <span class="n">IN_COLAB</span><span class="p">:</span>
+    <span class="c1"># Download utils.py</span>
+    <span class="o">!</span>wget<span class="w"> </span>-q<span class="w"> </span>-O<span class="w"> </span>/content/utils.py<span class="w"> </span>https://raw.githubusercontent.com/AstroJacobLi/ObsAstGreene/refs/heads/main/book/docs/utils.py
+    <span class="c1"># Function to check and install missing packages</span>
+    <span class="k">def</span> <span class="nf">install_packages</span><span class="p">(</span><span class="n">packages</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">package</span> <span class="ow">in</span> <span class="n">packages</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="nb">__import__</span><span class="p">(</span><span class="n">package</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Installing </span><span class="si">{</span><span class="n">package</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+                <span class="n">subprocess</span><span class="o">.</span><span class="n">check_call</span><span class="p">([</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s1">&#39;-m&#39;</span><span class="p">,</span> <span class="s1">&#39;pip&#39;</span><span class="p">,</span> <span class="s1">&#39;install&#39;</span><span class="p">,</span> <span class="n">package</span><span class="p">])</span>
+    <span class="c1"># Install any missing packages</span>
+    <span class="n">install_packages</span><span class="p">(</span><span class="n">required_packages</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># If not in Colab, adjust the path for local development</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;../../&#39;</span><span class="p">)</span>
+
+<span class="c1"># Load bokeh functions for interactive functionalities</span>
+<span class="kn">from</span> <span class="nn">bokeh.plotting</span> <span class="kn">import</span> <span class="n">figure</span><span class="p">,</span> <span class="n">show</span>
+<span class="kn">from</span> <span class="nn">bokeh.models</span> <span class="kn">import</span> <span class="n">ColumnDataSource</span><span class="p">,</span> <span class="n">Slider</span><span class="p">,</span> <span class="n">CustomJS</span><span class="p">,</span> <span class="n">Label</span><span class="p">,</span> <span class="n">LabelSet</span><span class="p">,</span> <span class="n">Span</span><span class="p">,</span> <span class="n">Range1d</span><span class="p">,</span> <span class="n">LinearAxis</span>
+<span class="kn">from</span> <span class="nn">bokeh.layouts</span> <span class="kn">import</span> <span class="n">column</span>
+<span class="kn">from</span> <span class="nn">bokeh.io</span> <span class="kn">import</span> <span class="n">output_notebook</span>
+
+<span class="c1"># Get the directory right</span>
+<span class="k">if</span> <span class="n">IN_COLAB</span><span class="p">:</span>
+  <span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
+  <span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">&#39;/content/drive/&#39;</span><span class="p">)</span>
+  <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;/content/drive/Shareddrives/AST207/data&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;../../_static/ObsAstroData/&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -486,7 +521,7 @@ This will lay the foundation for the Merian final project.</p>
 <span class="expanded">Hide code cell source</span>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wave_obs</span><span class="p">,</span> <span class="n">spec_obs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;sf_gal_spec_obs.txt&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wave_obs</span><span class="p">,</span> <span class="n">spec_obs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;./merian/sf_gal_spec_obs.txt&#39;</span><span class="p">)</span>
 <span class="n">emission_lines</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;Lyα&#39;</span><span class="p">,</span> <span class="mf">1215.24</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;[OII]&#39;</span><span class="p">,</span> <span class="mi">3727</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Hγ&#39;</span><span class="p">,</span> <span class="mf">4341.68</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Hβ&#39;</span><span class="p">,</span> <span class="mf">4862.68</span><span class="p">),</span>
                 <span class="p">(</span><span class="s1">&#39;[OIII]&#39;</span><span class="p">,</span> <span class="mf">4960.295</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;[OIII]&#39;</span><span class="p">,</span> <span class="mf">5008.240</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;He I&#39;</span><span class="p">,</span> <span class="mf">5875.624</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;[NII]&#39;</span><span class="p">,</span> <span class="mf">6549.86</span><span class="p">),</span>
                 <span class="p">(</span><span class="s1">&#39;Hα&#39;</span><span class="p">,</span> <span class="mf">6564.61</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;[NII]&#39;</span><span class="p">,</span> <span class="mf">6585.27</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;[SII]&#39;</span><span class="p">,</span> <span class="mf">6718.29</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;[SII]&#39;</span><span class="p">,</span> <span class="mf">6732.67</span><span class="p">)]</span>
@@ -1440,7 +1475,7 @@ function(Bokeh) {
 <span class="kn">from</span> <span class="nn">sedpy</span> <span class="kn">import</span> <span class="n">observate</span>
 <span class="n">filternames</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;hsc_g&#39;</span><span class="p">,</span> <span class="s1">&#39;hsc_r&#39;</span><span class="p">,</span> <span class="s1">&#39;hsc_i&#39;</span><span class="p">,</span> <span class="s1">&#39;hsc_z&#39;</span><span class="p">,</span> <span class="s1">&#39;hsc_y&#39;</span><span class="p">]</span>
 <span class="n">filters</span> <span class="o">=</span> <span class="n">observate</span><span class="o">.</span><span class="n">load_filters</span><span class="p">(</span><span class="n">filternames</span><span class="p">)</span>
-<span class="n">filters</span> <span class="o">+=</span> <span class="n">observate</span><span class="o">.</span><span class="n">load_filters</span><span class="p">([</span><span class="s2">&quot;merian_n540&quot;</span><span class="p">,</span> <span class="s1">&#39;merian_n708&#39;</span><span class="p">],</span> <span class="n">directory</span><span class="o">=</span><span class="s1">&#39;/Users/jiaxuanl/Downloads/&#39;</span><span class="p">)</span>
+<span class="n">filters</span> <span class="o">+=</span> <span class="n">observate</span><span class="o">.</span><span class="n">load_filters</span><span class="p">([</span><span class="s2">&quot;merian_n540&quot;</span><span class="p">,</span> <span class="s1">&#39;merian_n708&#39;</span><span class="p">],</span> <span class="n">directory</span><span class="o">=</span><span class="s1">&#39;./merian/&#39;</span><span class="p">)</span>
 <span class="n">filter_waves</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="n">filter_trans</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">for</span> <span class="n">filt</span> <span class="ow">in</span> <span class="n">filters</span><span class="p">:</span>
