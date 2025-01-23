@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Merian project Part 1 &#8212; Observational Astronomy</title>
+    <title>Merian Part 1: catalogs and images &#8212; Observational Astronomy</title>
   
   
   
@@ -226,7 +226,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Merian Project</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="00_photoz.html">Photometric Redshifts</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Merian project Part 1</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Merian Part 1: catalogs and images</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_Halpha_map.html">Merian project Part 2</a></li>
 
 </ul>
@@ -398,7 +398,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Merian project Part 1</h1>
+    <h1>Merian Part 1: catalogs and images</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -428,8 +428,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="merian-project-part-1">
-<h1>Merian project Part 1<a class="headerlink" href="#merian-project-part-1" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="merian-part-1-catalogs-and-images">
+<h1>Merian Part 1: catalogs and images<a class="headerlink" href="#merian-part-1-catalogs-and-images" title="Permalink to this heading">#</a></h1>
 <p><strong>Explore the morphology of dwarf galaxies in H<span class="math notranslate nohighlight">\(\alpha\)</span> using the Merian Survey data</strong></p>
 <ul class="contains-task-list simple">
 <li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> Parse the photo-z catalog in COSMOS, and understand how many of them have spec-z</p></li>
@@ -527,7 +527,7 @@ document.write(`
 <section id="part-1-understand-the-merian-survey">
 <h2>Part 1: Understand the Merian survey<a class="headerlink" href="#part-1-understand-the-merian-survey" title="Permalink to this heading">#</a></h2>
 <p>Some text about the Merian survey goes here, e.g., filters, H-alpha, and why we can catch galaxies in the redshift range.</p>
-<p>We start by exploring the color <span class="math notranslate nohighlight">\(N708-i\)</span> as a function of galaxy redshift. This color roughly represents how much H<span class="math notranslate nohighlight">\(\alpha\)</span> is emitted by the galaxy.</p>
+<p>We start by exploring the color <span class="math notranslate nohighlight">\(i - \rm N708\)</span> as a function of galaxy redshift. This color roughly represents how much H<span class="math notranslate nohighlight">\(\alpha\)</span> is emitted by the galaxy.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cat</span> <span class="o">=</span> <span class="n">Table</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;./merian/cosmos_Merian_DR1_photoz_v1.0.fits&#39;</span><span class="p">)</span>
