@@ -7,10 +7,7 @@ parts:
   - file: docs/intro_python/about_py
   - file: docs/intro_python/getting_started
   - file: docs/intro_python/numpy_and_plotting
-
-- caption: Introduction to Stars
-  chapters:
-  - file: docs/gaia_part1_jared
+  - file: docs/gaia_part1_jared_v2_class_ready
 
 - caption: Statistics
   chapters:
