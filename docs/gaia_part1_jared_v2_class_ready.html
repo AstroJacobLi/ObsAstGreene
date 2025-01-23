@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Understand stars in Gaia data (student version) &#8212; Observational Astronomy</title>
+    <title>Understand stars in Gaia data &#8212; Observational Astronomy</title>
   
   
   
@@ -169,7 +169,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="intro_python/about_py.html">About Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="intro_python/getting_started.html">Setting up Your Python Environment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="intro_python/numpy_and_plotting.html">Getting started with arrays and plots in Python</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Understand stars in Gaia data (student version)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Understand stars in Gaia data</a></li>
 
 
 
@@ -398,7 +398,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Understand stars in Gaia data (student version)</h1>
+    <h1>Understand stars in Gaia data</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -408,7 +408,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Understand stars in Gaia data (student version)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Understand stars in Gaia data</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-a-table-with-texttt-pandas">1. Reading a table with <span class="math notranslate nohighlight">\(\texttt{pandas}\)</span></a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-in-the-table-and-how-can-we-access-it">What’s in the table and how can we access it?</a></li>
 </ul>
@@ -427,8 +427,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="understand-stars-in-gaia-data-student-version">
-<h1>Understand stars in Gaia data (student version)<a class="headerlink" href="#understand-stars-in-gaia-data-student-version" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="understand-stars-in-gaia-data">
+<h1>Understand stars in Gaia data<a class="headerlink" href="#understand-stars-in-gaia-data" title="Permalink to this heading">#</a></h1>
 <p><strong>Prerequisites</strong></p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\texttt{numpy}\)</span>, <span class="math notranslate nohighlight">\(\texttt{matplotlib}\)</span>, and stats 101.</p></li>
@@ -1212,21 +1212,23 @@ document.write(`
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="practicing-with-magnitudes">
 <h1>3. Practicing with magnitudes<a class="headerlink" href="#practicing-with-magnitudes" title="Permalink to this heading">#</a></h1>
-<p>As we discussed in lecture, magnitudes appear everywhere in astronomy. Let’s practice using magnitudes with our Gaia stars. Remember, the definition of magnitude is:
-$<span class="math notranslate nohighlight">\( m_1 - m_2 = - 2.5 \log_{10} (F_1 / F_2) \)</span><span class="math notranslate nohighlight">\(
-where \)</span>m_1, m_2<span class="math notranslate nohighlight">\( are the magnitudes of two stars (creatively named 1 and 2) and \)</span>F_1, F_2$ are the fluxes of those two stars.</p>
+<p>As we discussed in lecture, magnitudes appear everywhere in astronomy. Let’s practice using magnitudes with our Gaia stars. Remember, the definition of magnitude is:</p>
+<div class="math notranslate nohighlight">
+\[ m_1 - m_2 = - 2.5 \log_{10} (F_1 / F_2), \]</div>
+<p>where <span class="math notranslate nohighlight">\(m_1, m_2\)</span> are the magnitudes of two stars (creatively named 1 and 2) and <span class="math notranslate nohighlight">\(F_1, F_2\)</span> are the fluxes of those two stars.</p>
 <div class="admonition-exercise-2 admonition">
 <p class="admonition-title">Exercise 2</p>
 <p>To get some practice, let’s convert the magnitudes listed in the table to fluxes. Let’s calculate our fluxes relative to the Sun:
-$<span class="math notranslate nohighlight">\( m_1 + 26.83 = - 2.5 \log_{10} (F_1 / F_\mathrm{Sun}) \)</span><span class="math notranslate nohighlight">\(
-we've set \)</span>m_2 = −26.83<span class="math notranslate nohighlight">\( and \)</span>F_2 = F_\mathrm{Sun}<span class="math notranslate nohighlight">\(, where \)</span>F_\mathrm{Sun}$ is the flux (aka. brightness) of the Sun as measured from Earth.</p>
+<span class="math notranslate nohighlight">\(m_1 + 26.83 = - 2.5 \log_{10} (F_1 / F_\mathrm{Sun})\)</span>,
+we’ve set <span class="math notranslate nohighlight">\(m_2 = −26.83\)</span> and <span class="math notranslate nohighlight">\(F_2 = F_\mathrm{Sun}\)</span>, where <span class="math notranslate nohighlight">\(F_\mathrm{Sun}\)</span> is the flux (aka. brightness) of the Sun as measured from Earth.</p>
 <ol class="arabic simple">
 <li><p>Make a histogram of <span class="math notranslate nohighlight">\(\log_{10}(F_1 / F_\mathrm{Sun})\)</span> for the <span class="math notranslate nohighlight">\(g\)</span>, <span class="math notranslate nohighlight">\(r\)</span>, and <span class="math notranslate nohighlight">\(b\)</span> Gaia filters (the Gaia magnitudes are stored under the <span class="math notranslate nohighlight">\(\texttt{gmag, rmag, bmag}\)</span> columns). <strong>Bonus: write a function for the flux to magnitude conversion</strong></p></li>
 <li><p>Based on your histograms how much brighter does the Sun appear to us than the brightest nearby star (in gaia g-band)?</p></li>
 </ol>
 </div>
-<p>So far, we have considered how bright stars appear in the sky. However, we know this depends on the stars’ distances from the Earth. Remember the apparent brightness of a star (aka flux <span class="math notranslate nohighlight">\(F\)</span>) is related to its luminosity <span class="math notranslate nohighlight">\(L\)</span> (the amount of energy output by the star each second) and distance <span class="math notranslate nohighlight">\(d\)</span> by:
-$<span class="math notranslate nohighlight">\(  F = \frac{L}{4 \pi d^2} \)</span>$</p>
+<p>So far, we have considered how bright stars appear in the sky. However, we know this depends on the stars’ distances from the Earth. Remember the apparent brightness of a star (aka flux <span class="math notranslate nohighlight">\(F\)</span>) is related to its luminosity <span class="math notranslate nohighlight">\(L\)</span> (the amount of energy output by the star each second) and distance <span class="math notranslate nohighlight">\(d\)</span> by:</p>
+<div class="math notranslate nohighlight">
+\[  F = \frac{L}{4 \pi d^2} \]</div>
 <div class="admonition-exercise-3 admonition">
 <p class="admonition-title">Exercise 3</p>
 <ol class="arabic simple">
@@ -1299,7 +1301,7 @@ $<span class="math notranslate nohighlight">\(  F = \frac{L}{4 \pi d^2} \)</span
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Understand stars in Gaia data (student version)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Understand stars in Gaia data</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#reading-a-table-with-texttt-pandas">1. Reading a table with <span class="math notranslate nohighlight">\(\texttt{pandas}\)</span></a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-in-the-table-and-how-can-we-access-it">What’s in the table and how can we access it?</a></li>
 </ul>
