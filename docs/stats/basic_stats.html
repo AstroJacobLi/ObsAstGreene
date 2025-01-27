@@ -408,14 +408,15 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-variable-histogram-probability">Random variable, histogram, probability</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-median-standard-deviation">Mean, Median, Standard Deviation</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-variable-histogram-probability">1. Random variable, histogram, probability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-median-standard-deviation">2. Mean, Median, Standard Deviation</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#outlier">Outlier</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-normal-distribution">Gaussian (normal) distribution</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#poisson-distribution-and-its-relation-to-gaussian">Poisson distribution and its relation to Gaussian</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-a-noisy-image">Example: A noisy image</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-normal-distribution">3. Gaussian (normal) distribution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#poisson-distribution-and-its-relation-to-gaussian">4. Poisson distribution and its relation to Gaussian</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-a-noisy-image">5. Example: A noisy image</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
 </ul>
             </nav>
         </div>
@@ -462,7 +463,7 @@ document.write(`
 </div>
 </div>
 <section id="random-variable-histogram-probability">
-<h2>Random variable, histogram, probability<a class="headerlink" href="#random-variable-histogram-probability" title="Permalink to this heading">#</a></h2>
+<h2>1. Random variable, histogram, probability<a class="headerlink" href="#random-variable-histogram-probability" title="Permalink to this heading">#</a></h2>
 <p>Let’s look at a cubic die with faces numbered from 1 to 6. When you roll a die once, you write down the number on the top (e.g., 4). Then when you roll it again, you might see a different number (e.g., 2). You can repeat this many times, and you will probably see all six numbers. An event such as a die roll is called a <strong>random event</strong>. The outcome of a die roll is a <strong>random variable</strong>. Let’s denote the random variable of a die roll as <span class="math notranslate nohighlight">\(X\)</span>, so the value of <span class="math notranslate nohighlight">\(X\)</span> must be in <span class="math notranslate nohighlight">\(\{1, 2, 3, 4, 5, 6\}\)</span>. One must realize that a random variable is a variable – it can have different values <span class="math notranslate nohighlight">\(x\)</span> when repeating the random event.</p>
 <p>Let’s use Python to generate random numbers to get a sense of rolling a “fair” die. <code class="docutils literal notranslate"><span class="pre">np.random.randint</span></code> (or <code class="docutils literal notranslate"><span class="pre">scipy.stats.randint</span></code>) provides a nice function to generate a random variable that is an integer between 1 and 6.</p>
 <div class="cell docutils container">
@@ -649,7 +650,7 @@ The frequency of 6 is 19
 </section>
 <hr class="docutils" />
 <section id="mean-median-standard-deviation">
-<h2>Mean, Median, Standard Deviation<a class="headerlink" href="#mean-median-standard-deviation" title="Permalink to this heading">#</a></h2>
+<h2>2. Mean, Median, Standard Deviation<a class="headerlink" href="#mean-median-standard-deviation" title="Permalink to this heading">#</a></h2>
 <p>These are the most useful statistics and are of great importance in astronomical data. If we have a set of data <span class="math notranslate nohighlight">\(\{x_1, x_2, \dots, x_{n}\}\)</span>, these statistics are defined to be:</p>
 <ul class="simple">
 <li><p>Mean: <span class="math notranslate nohighlight">\(\overline{x} = \dfrac{1}{n}(x_1 + x_2 + \cdots + x_n)\)</span></p></li>
@@ -757,7 +758,7 @@ The frequency of 6 is 19
 </section>
 <hr class="docutils" />
 <section id="gaussian-normal-distribution">
-<h2>Gaussian (normal) distribution<a class="headerlink" href="#gaussian-normal-distribution" title="Permalink to this heading">#</a></h2>
+<h2>3. Gaussian (normal) distribution<a class="headerlink" href="#gaussian-normal-distribution" title="Permalink to this heading">#</a></h2>
 <p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Normal_distribution">normal distribution</a> is <em>the</em> most important distribution in statistics. The probability distribution function (PDF) has a <em>beautiful</em> form of
 <span class="math notranslate nohighlight">\(p(x) = \frac{1}{\sqrt{2\pi} \sigma} e^{-\frac{(x-\mu)^2}{2\sigma^2}},\)</span>
 where <span class="math notranslate nohighlight">\(e=2.71828..\)</span> is the base of natural logarithms, and <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> control the centroid and the width (dispersion) of the distribution, respectively. A normal distribution is often written as <span class="math notranslate nohighlight">\(\mathcal{N}(\mu, \sigma^2)\)</span>. Its PDF has a bell-like shape.</p>
@@ -848,7 +849,7 @@ P(-1\sigma &lt; x-\mu &lt; 1\sigma) = 0.68,\quad P(-2\sigma &lt; x-\mu &lt; 2\si
 </section>
 <hr class="docutils" />
 <section id="poisson-distribution-and-its-relation-to-gaussian">
-<h2>Poisson distribution and its relation to Gaussian<a class="headerlink" href="#poisson-distribution-and-its-relation-to-gaussian" title="Permalink to this heading">#</a></h2>
+<h2>4. Poisson distribution and its relation to Gaussian<a class="headerlink" href="#poisson-distribution-and-its-relation-to-gaussian" title="Permalink to this heading">#</a></h2>
 <p>Named after the French mathematician Siméon Denis Poisson (Poisson in French means fish 🐟), a <a class="reference external" href="https://en.wikipedia.org/wiki/Poisson_distribution">Poisson distribution</a> describes the probability of a given number of events occurring in a fixed interval of time if these events occur with a known constant mean rate. Because now the probability is a function the “number” of events, the Poisson distribution is a discrete distribution – the values sampled from a Poisson distribution are all positive integers.</p>
 <p>The PDF of a Poisson distribution is
 <span class="math notranslate nohighlight">\(
@@ -965,7 +966,7 @@ where <span class="math notranslate nohighlight">\(\lambda\)</span> is the mean 
 </section>
 <hr class="docutils" />
 <section id="example-a-noisy-image">
-<h2>Example: A noisy image<a class="headerlink" href="#example-a-noisy-image" title="Permalink to this heading">#</a></h2>
+<h2>5. Example: A noisy image<a class="headerlink" href="#example-a-noisy-image" title="Permalink to this heading">#</a></h2>
 <p>Most astronomical data are in the form of image. An image is typically a two-dimentional array. In this section, we will try to simulate an image of a flat object which emits photon at a constant rate (<code class="docutils literal notranslate"><span class="pre">photon_rate=4</span></code>). We will also understand how to possibly reduce the noise in images.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1140,6 +1141,94 @@ where <span class="math notranslate nohighlight">\(\lambda\)</span> is the mean 
 </div>
 <p>By combining 16 exposures, we boost the SNR by a factor of 4! Again, an effective way to fight down noise is to combine lots of exposures. More generally, SNR is proportional to <span class="math notranslate nohighlight">\(\sqrt{N}\)</span> where <span class="math notranslate nohighlight">\(N\)</span> is the number of exposures combined.</p>
 </section>
+<section id="exercise">
+<h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this heading">#</a></h2>
+<p>Let’s revisit the <strong>football</strong> data from last week in order to practice calculating the mean, median, and mode of some distributions.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Don&#39;t worry about this cell, it&#39;s just to make the notebook look a little nicer.</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">google.colab</span>
+    <span class="n">IN_COLAB</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">IN_COLAB</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="c1"># Get the directory right</span>
+<span class="k">if</span> <span class="n">IN_COLAB</span><span class="p">:</span>
+  <span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
+  <span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">&#39;/content/drive/&#39;</span><span class="p">)</span>
+  <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;/content/drive/Shareddrives/AST207/data&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;../../../_static/ObsAstroData/&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read the catalog of the football players</span>
+<span class="n">cat</span> <span class="o">=</span> <span class="n">Table</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;./players_age.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="arabic simple">
+<li><p>Calculate the <strong>mean</strong>, <strong>median</strong>, and <strong>mode</strong> of the player height (in inches).</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Your answer goes here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Are the three numbers different? If so, why? If not, why not?</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Your answer goes here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Make a <strong>histogram</strong> of the player height in the same units. Do your answers make sense?</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Your answer goes here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Calculate the <strong>mean</strong>, <strong>median</strong>, and <strong>mode</strong> of the player age. Again histogram the player age and determine if your answers make sense.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Your answer goes here</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="arabic simple" start="5">
+<li><p>Extra credit: find <strong>height</strong> and <strong>age</strong> data for typical people in the United States and compare our statistics with those of football players. How can you compare the distributions?</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Your answer goes here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1205,14 +1294,15 @@ where <span class="math notranslate nohighlight">\(\lambda\)</span> is the mean 
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-variable-histogram-probability">Random variable, histogram, probability</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-median-standard-deviation">Mean, Median, Standard Deviation</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-variable-histogram-probability">1. Random variable, histogram, probability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-median-standard-deviation">2. Mean, Median, Standard Deviation</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#outlier">Outlier</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-normal-distribution">Gaussian (normal) distribution</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#poisson-distribution-and-its-relation-to-gaussian">Poisson distribution and its relation to Gaussian</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-a-noisy-image">Example: A noisy image</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-normal-distribution">3. Gaussian (normal) distribution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#poisson-distribution-and-its-relation-to-gaussian">4. Poisson distribution and its relation to Gaussian</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-a-noisy-image">5. Example: A noisy image</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise">Exercise</a></li>
 </ul>
   </nav></div>
 
