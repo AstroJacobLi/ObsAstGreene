@@ -500,16 +500,13 @@ document.write(`
 <p>The Merian (and the corresponding HSC) images for objects in the Merian redshift range are made available in class’s google drive.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cat</span> <span class="o">=</span> <span class="n">Table</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;./merian/cosmos_Merian_DR1_photoz_v1.0.fits&#39;</span><span class="p">)</span>
-<span class="n">cat</span> <span class="o">=</span> <span class="n">cat</span><span class="p">[</span><span class="n">cat</span><span class="p">[</span><span class="s1">&#39;z_desi&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mf">99.0</span><span class="p">]</span>
-<span class="n">cat</span> <span class="o">=</span> <span class="n">cat</span><span class="p">[</span><span class="n">cat</span><span class="p">[</span><span class="s1">&#39;good_desi&#39;</span><span class="p">]]</span> <span class="c1"># ensure good DESI spec-z</span>
-<span class="n">cat</span> <span class="o">=</span> <span class="n">cat</span><span class="p">[</span><span class="n">cat</span><span class="p">[</span><span class="s1">&#39;z_desi&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">0.6</span><span class="p">]</span>
-
-<span class="n">zp</span> <span class="o">=</span> <span class="mf">31.4</span> <span class="c1"># this is the photometric zeropoint for Merian</span>
-<span class="k">for</span> <span class="n">filt</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;N708&#39;</span><span class="p">,</span> <span class="s1">&#39;N540&#39;</span><span class="p">]:</span>
-    <span class="n">cat</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;mag_</span><span class="si">{</span><span class="n">filt</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">zp</span> <span class="o">-</span> <span class="mf">2.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">cat</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">filt</span><span class="si">}</span><span class="s1">_gaap1p0Flux_Merian&#39;</span><span class="p">])</span>
-<span class="n">z_spec</span> <span class="o">=</span> <span class="n">cat</span><span class="p">[</span><span class="s1">&#39;z_desi&#39;</span><span class="p">]</span>
-<span class="n">cat_inband</span> <span class="o">=</span> <span class="n">cat</span><span class="p">[(</span><span class="n">z_spec</span> <span class="o">&lt;</span> <span class="mf">0.11</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">z_spec</span> <span class="o">&gt;</span> <span class="mf">0.05</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">cat</span><span class="p">[</span><span class="s1">&#39;mag_i&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">21.5</span><span class="p">)]</span> <span class="c1"># we require i_mag &lt; 21.5 to make sure all galaxies have high S/N</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cat_inband</span> <span class="o">=</span> <span class="n">Table</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;./merian/cosmos_Merian_DR1_specz_inband.fits&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total number of galaxies:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cat_inband</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total number of galaxies: 161
 </pre></div>
 </div>
 </div>
@@ -524,14 +521,20 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">fits</span>
-<span class="n">i</span> <span class="o">=</span> <span class="mi">1850</span>
-<span class="n">obj</span> <span class="o">=</span> <span class="n">merian</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="n">i</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">obj</span> <span class="o">=</span> <span class="n">cat_inband</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
 <span class="n">coord</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="p">(</span><span class="n">obj</span><span class="p">[</span><span class="s1">&#39;coord_ra_Merian&#39;</span><span class="p">],</span> <span class="n">obj</span><span class="p">[</span><span class="s1">&#39;coord_dec_Merian&#39;</span><span class="p">],</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;deg&#39;</span><span class="p">)</span>
-<span class="n">cname</span> <span class="o">=</span> <span class="n">obj</span><span class="p">[</span><span class="s1">&#39;cname&#39;</span><span class="p">]</span>
+<span class="n">name</span> <span class="o">=</span> <span class="n">obj</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Name:&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
 
 <span class="c1"># Open images and psfs</span>
-<span class="n">cutouts</span> <span class="o">=</span> <span class="p">{</span><span class="n">band</span><span class="p">:</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cutout_dir</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cname</span><span class="si">}</span><span class="s2">_HSC-</span><span class="si">{</span><span class="n">band</span><span class="si">}</span><span class="s2">.fits&quot;</span><span class="p">))[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">data</span> <span class="k">for</span> <span class="n">band</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">]}</span>
-<span class="n">cutouts</span><span class="p">[</span><span class="s1">&#39;N708&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cutout_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cname</span><span class="si">}</span><span class="s2">_N708_merim.fits&quot;</span><span class="p">))[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+<span class="n">cutouts</span> <span class="o">=</span> <span class="p">{</span><span class="n">band</span><span class="p">:</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cutout_dir</span><span class="p">,</span> <span class="s2">&quot;hsc&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">_HSC-</span><span class="si">{</span><span class="n">band</span><span class="si">}</span><span class="s2">.fits&quot;</span><span class="p">))[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">data</span> <span class="k">for</span> <span class="n">band</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">]}</span>
+<span class="n">cutouts</span><span class="p">[</span><span class="s1">&#39;N708&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cutout_dir</span><span class="p">,</span> <span class="s2">&quot;merian&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">_N708_merim.fits&quot;</span><span class="p">))[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Name: J095828.56+013901.69
 </pre></div>
 </div>
 </div>
@@ -539,7 +542,7 @@ document.write(`
 <p>We use the function <code class="docutils literal notranslate"><span class="pre">show_image</span></code> to display the data:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">percl</span> <span class="o">=</span> <span class="mi">92</span> <span class="c1"># this changes the contrast and dynamic range of the display</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">percl</span> <span class="o">=</span> <span class="mi">98</span> <span class="c1"># this changes the contrast and dynamic range of the display</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">band</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cutouts</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
@@ -549,7 +552,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/c32559e90c075c2945b536761c483a21e68fe2fae205ea9581c6ab018df648b7.png" src="../../../_images/c32559e90c075c2945b536761c483a21e68fe2fae205ea9581c6ab018df648b7.png" />
+<img alt="../../../_images/ad1ebced003b2a39577377d350eba7c797f1422a5376a52a0969de739caecd8a.png" src="../../../_images/ad1ebced003b2a39577377d350eba7c797f1422a5376a52a0969de739caecd8a.png" />
 </div>
 </div>
 <p><strong>Exercise 1</strong></p>
@@ -582,7 +585,7 @@ document.write(`
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 1.02, &#39;g&#39;)
 </pre></div>
 </div>
-<img alt="../../../_images/add696f3faaa0fe9f58f2522f54a8e6b03e7c44d8306882b86aa1e00c11fc76a.png" src="../../../_images/add696f3faaa0fe9f58f2522f54a8e6b03e7c44d8306882b86aa1e00c11fc76a.png" />
+<img alt="../../../_images/49c6a0724f71bfc29cc053673ba35e976dd449d33d38feccf4ccb175fc1c2a46.png" src="../../../_images/49c6a0724f71bfc29cc053673ba35e976dd449d33d38feccf4ccb175fc1c2a46.png" />
 </div>
 </div>
 <p><strong>Exercise 2</strong></p>
@@ -598,8 +601,8 @@ document.write(`
 <section id="sersic-fitting">
 <h2>2: Sersic fitting<a class="headerlink" href="#sersic-fitting" title="Permalink to this heading">#</a></h2>
 <p>A galaxy’s light distribution is often described by a <a class="reference external" href="https://en.wikipedia.org/wiki/S%C3%A9rsic_profile">Sersic</a> model. For a comprehensive introduction to the Sersic model, see <a class="reference external" href="https://arxiv.org/abs/astro-ph/0503176">this paper</a>. Here let’s try to fit a Sersic model to the Merian galaxies.</p>
-<!-- - We can make them do their own Source Extractor: define threshold, then do detection, and generate a segmantation map -->
-<!-- - Then we use `statmorph` to do the Sersic fit + other non-par measurement --><div class="cell docutils container">
+<p><strong>Note</strong>: For HSC and Merian images below, the zeropoint is always 27.0 mag, and the pixel scale is away 0.168 arcsec/pixel.</p>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statmorph</span>
 <span class="kn">from</span> <span class="nn">photutils.segmentation</span> <span class="kn">import</span> <span class="n">detect_threshold</span><span class="p">,</span> <span class="n">detect_sources</span>
@@ -612,35 +615,27 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">i</span> <span class="o">=</span> <span class="mi">1850</span>
-<span class="n">obj</span> <span class="o">=</span> <span class="n">merian</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-<span class="n">coord</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="p">(</span><span class="n">obj</span><span class="p">[</span><span class="s1">&#39;coord_ra_Merian&#39;</span><span class="p">],</span> <span class="n">obj</span><span class="p">[</span><span class="s1">&#39;coord_dec_Merian&#39;</span><span class="p">],</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;deg&#39;</span><span class="p">)</span>
-<span class="n">cname</span> <span class="o">=</span> <span class="n">obj</span><span class="p">[</span><span class="s1">&#39;cname&#39;</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Open images and psfs</span>
-<span class="n">cutouts</span> <span class="o">=</span> <span class="p">{</span><span class="n">band</span><span class="p">:</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cutout_dir</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cname</span><span class="si">}</span><span class="s2">_HSC-</span><span class="si">{</span><span class="n">band</span><span class="si">}</span><span class="s2">.fits&quot;</span><span class="p">))[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">data</span> <span class="k">for</span> <span class="n">band</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">]}</span>
-<span class="n">cutouts</span><span class="p">[</span><span class="s1">&#39;N708&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cutout_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cname</span><span class="si">}</span><span class="s2">_N708_merim.fits&quot;</span><span class="p">))[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+<span class="n">cutouts</span> <span class="o">=</span> <span class="p">{</span><span class="n">band</span><span class="p">:</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cutout_dir</span><span class="p">,</span> <span class="s2">&quot;hsc&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">_HSC-</span><span class="si">{</span><span class="n">band</span><span class="si">}</span><span class="s2">.fits&quot;</span><span class="p">))[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">data</span> <span class="k">for</span> <span class="n">band</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">]}</span>
+<span class="n">cutouts</span><span class="p">[</span><span class="s1">&#39;N708&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cutout_dir</span><span class="p">,</span> <span class="s2">&quot;merian&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">_N708_merim.fits&quot;</span><span class="p">))[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
 
-<span class="n">cutout_headers</span> <span class="o">=</span> <span class="p">{</span><span class="n">band</span><span class="p">:</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cutout_dir</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cname</span><span class="si">}</span><span class="s2">_HSC-</span><span class="si">{</span><span class="n">band</span><span class="si">}</span><span class="s2">.fits&quot;</span><span class="p">))[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">header</span> <span class="k">for</span> <span class="n">band</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">]}</span>
-<span class="n">cutout_headers</span><span class="p">[</span><span class="s1">&#39;N708&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cutout_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cname</span><span class="si">}</span><span class="s2">_N708_merim.fits&quot;</span><span class="p">))[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">header</span>
+<span class="n">cutout_headers</span> <span class="o">=</span> <span class="p">{</span><span class="n">band</span><span class="p">:</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cutout_dir</span><span class="p">,</span> <span class="s2">&quot;hsc&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">_HSC-</span><span class="si">{</span><span class="n">band</span><span class="si">}</span><span class="s2">.fits&quot;</span><span class="p">))[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">header</span> <span class="k">for</span> <span class="n">band</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">]}</span>
+<span class="n">cutout_headers</span><span class="p">[</span><span class="s1">&#39;N708&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cutout_dir</span><span class="p">,</span> <span class="s2">&quot;merian&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">_N708_merim.fits&quot;</span><span class="p">))[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">header</span>
 
-<span class="n">psfs</span> <span class="o">=</span> <span class="p">{</span><span class="n">band</span><span class="p">:</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cutout_dir</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cname</span><span class="si">}</span><span class="s2">_HSC-</span><span class="si">{</span><span class="n">band</span><span class="si">}</span><span class="s2">_psf.fits&quot;</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span> <span class="k">for</span> <span class="n">band</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">]}</span>
-<span class="n">psfs</span><span class="p">[</span><span class="s1">&#39;N708&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cutout_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cname</span><span class="si">}</span><span class="s2">_N708_merpsf.fits&quot;</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+<span class="n">psfs</span> <span class="o">=</span> <span class="p">{</span><span class="n">band</span><span class="p">:</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cutout_dir</span><span class="p">,</span> <span class="s2">&quot;hsc&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">_HSC-</span><span class="si">{</span><span class="n">band</span><span class="si">}</span><span class="s2">_psf.fits&quot;</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span> <span class="k">for</span> <span class="n">band</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">]}</span>
+<span class="n">psfs</span><span class="p">[</span><span class="s1">&#39;N708&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cutout_dir</span><span class="p">,</span> <span class="s2">&quot;merian&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">_N708_merpsf.fits&quot;</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We only include the central region of the bigger image</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We only include the central region (150 x 150 pix) of the bigger image</span>
 <span class="c1"># This makes the fitting faster</span>
+<span class="n">band</span> <span class="o">=</span> <span class="s1">&#39;i&#39;</span>
 <span class="n">imgs</span> <span class="o">=</span> <span class="n">get_img_central_region</span><span class="p">(</span><span class="n">cutouts</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span>
-<span class="n">img</span> <span class="o">=</span> <span class="n">imgs</span><span class="p">[</span><span class="s1">&#39;N708&#39;</span><span class="p">]</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">imgs</span><span class="p">[</span><span class="n">band</span><span class="p">]</span>
+<span class="n">psf</span> <span class="o">=</span> <span class="n">psfs</span><span class="p">[</span><span class="n">band</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -664,10 +659,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x154f074d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x14c0fe610&gt;
 </pre></div>
 </div>
-<img alt="../../../_images/1ce5a96532358e71779663da20e1602b95233c52e35ae48d0d1c2d6177beec9a.png" src="../../../_images/1ce5a96532358e71779663da20e1602b95233c52e35ae48d0d1c2d6177beec9a.png" />
+<img alt="../../../_images/91af52bb18b4252539215eec085236e0d74144d14a8046e55def34456dcf91c9.png" src="../../../_images/91af52bb18b4252539215eec085236e0d74144d14a8046e55def34456dcf91c9.png" />
 </div>
 </div>
 <p>In the left panel, we show the “segmentation map” for all sources above <span class="math notranslate nohighlight">\(1.5\sigma\)</span>. Many sources are detected. However, we only want the central one, so we use <code class="docutils literal notranslate"><span class="pre">segmap.keep_label(ind)</span></code>. The right panel shows the segmentation map after this step. This segmentation map will be used in the Sersic fitting.</p>
@@ -675,7 +670,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">photutils.background</span> <span class="kn">import</span> <span class="n">Background2D</span>
-<span class="n">bkg</span> <span class="o">=</span> <span class="n">Background2D</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">obj_mask</span><span class="p">)</span>
+<span class="n">bkg</span> <span class="o">=</span> <span class="n">Background2D</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">obj_mask</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -688,19 +683,19 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.0804221 , 0.0804221 , 0.0804221 , ..., 0.08041927, 0.08041922,
-        0.08041916],
-       [0.0804221 , 0.0804221 , 0.0804221 , ..., 0.08041926, 0.0804192 ,
-        0.08041915],
-       [0.0804221 , 0.0804221 , 0.0804221 , ..., 0.08041923, 0.08041917,
-        0.08041911],
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.04678689, 0.04678655, 0.04678586, ..., 0.04762321, 0.0476259 ,
+        0.04762836],
+       [0.04678664, 0.0467863 , 0.04678561, ..., 0.04762315, 0.04762583,
+        0.04762829],
+       [0.04678614, 0.0467858 , 0.04678512, ..., 0.04762302, 0.0476257 ,
+        0.04762815],
        ...,
-       [0.08022214, 0.08022214, 0.08022214, ..., 0.08032062, 0.08032095,
-        0.08032127],
-       [0.08022214, 0.08022214, 0.08022214, ..., 0.08032009, 0.08032042,
-        0.08032075],
-       [0.08022214, 0.08022214, 0.08022214, ..., 0.08031956, 0.0803199 ,
-        0.08032023]])
+       [0.04861095, 0.04861053, 0.0486097 , ..., 0.04812019, 0.04812055,
+        0.04812087],
+       [0.0486109 , 0.04861048, 0.04860964, ..., 0.04812046, 0.04812081,
+        0.04812114],
+       [0.04861085, 0.04861043, 0.04860959, ..., 0.04812071, 0.04812106,
+        0.04812138]])
 </pre></div>
 </div>
 </div>
@@ -724,10 +719,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../../_images/286d502c0a3e87856c945bd6413da9e5f077eed7daee3874d1ff4f32ad718309.png" src="../../../_images/286d502c0a3e87856c945bd6413da9e5f077eed7daee3874d1ff4f32ad718309.png" />
+<img alt="../../../_images/7871bb3418ae90e5757abc006088c9b204a27fb26685116d29aff6989cb8b6c8.png" src="../../../_images/7871bb3418ae90e5757abc006088c9b204a27fb26685116d29aff6989cb8b6c8.png" />
 </div>
 </div>
-<p>We see lots of information on this plot! For Sersic fitting, we should only focus on the first three panels. The first panel shows the original image, the second shows the best-fit Sersic model, and the third shows the residual. Overall, the fit is pretty good (also indicated by <code class="docutils literal notranslate"><span class="pre">flag_sersic</span> <span class="pre">=</span> <span class="pre">0</span></code>)! As seen in the residual, there are some structures not captured by the Sersic model, e.g., the bright blob above the center of the galaxy. Sersic model is not perfect, but it’s useful. It gives you a rough idea of the size and luminosity of the galaxy.</p>
+<p>We see lots of information on this plot! For Sersic fitting, we should only focus on the first three panels. The first panel shows the original image, the second shows the best-fit Sersic model, and the third shows the residual. Overall, the fit is pretty good (also indicated by <code class="docutils literal notranslate"><span class="pre">flag_sersic</span> <span class="pre">=</span> <span class="pre">0</span></code>)! The residual for this galaxy is very smooth. However, for other galaxies, there will be some structures not captured by the Sersic model. Sersic model is not perfect, but it’s useful. It gives you a rough idea of the size and luminosity of the galaxy.</p>
 <p>Let’s check the best-fit parameters, such as the half-light radius, ellipticity, etc.
 In this way, we can measure the properties of many more galaxies.</p>
 <div class="cell docutils container">
@@ -740,22 +735,53 @@ In this way, we can measure the properties of many more galaxies.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Half light radius: 11.965680875477142
-Ellipticity: 0.7161691468369256
-Sersic index: 0.9160618674054026
-Sersic amplitude: 5.41225976642093
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Half light radius: 9.315653811816333
+Ellipticity: 0.44231088259076656
+Sersic index: 0.7515958101899337
+Sersic amplitude: 0.6895891711804388
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can use the following function to calculate the total magnitude of the best-fit Sersic model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calc_mtot</span><span class="p">(</span><span class="n">morph</span><span class="p">,</span> <span class="n">zpt</span><span class="o">=</span><span class="mf">27.0</span><span class="p">,</span> <span class="n">pixscale</span><span class="o">=</span><span class="mf">0.168</span><span class="p">):</span>
+    <span class="c1"># based on https://arxiv.org/abs/astro-ph/0503176</span>
+    <span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">gammaincinv</span><span class="p">,</span> <span class="n">gamma</span>
+    <span class="n">b_n</span> <span class="o">=</span> <span class="n">gammaincinv</span><span class="p">(</span><span class="mf">2.</span> <span class="o">*</span> <span class="n">morph</span><span class="o">.</span><span class="n">sersic_n</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">f_n</span> <span class="o">=</span> <span class="n">gamma</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">morph</span><span class="o">.</span><span class="n">sersic_n</span><span class="p">)</span><span class="o">*</span><span class="n">morph</span><span class="o">.</span><span class="n">sersic_n</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">b_n</span><span class="p">)</span><span class="o">/</span><span class="n">b_n</span><span class="o">**</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">morph</span><span class="o">.</span><span class="n">sersic_n</span><span class="p">)</span>
+    <span class="n">mu_e</span> <span class="o">=</span> <span class="n">zpt</span> <span class="o">-</span> <span class="mf">2.5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">morph</span><span class="o">.</span><span class="n">sersic_amplitude</span><span class="o">/</span><span class="n">pixscale</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">mu_e_ave</span> <span class="o">=</span> <span class="n">mu_e</span> <span class="o">-</span> <span class="mf">2.5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">f_n</span><span class="p">)</span>
+    <span class="n">r_circ</span> <span class="o">=</span> <span class="n">morph</span><span class="o">.</span><span class="n">sersic_rhalf</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">morph</span><span class="o">.</span><span class="n">sersic_ellip</span><span class="p">)</span>
+    <span class="n">A_eff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="n">r_circ</span> <span class="o">*</span> <span class="n">pixscale</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">m_tot</span> <span class="o">=</span> <span class="n">mu_e_ave</span> <span class="o">-</span> <span class="mf">2.5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">A_eff</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">m_tot</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Total magnitude in the </span><span class="si">{</span><span class="n">band</span><span class="si">}</span><span class="s1"> band:&#39;</span><span class="p">,</span> <span class="n">calc_mtot</span><span class="p">(</span><span class="n">morph</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total magnitude in the i band: 20.627837847524347
 </pre></div>
 </div>
 </div>
 </div>
 <p><strong>Exercise 3</strong></p>
 <ol class="arabic simple">
-<li><p>Repeat this Sersic fitting for a few other galaxies, and make sure it works for most of them</p></li>
+<li><p>Repeat this Sersic fitting for a few other galaxies, and make sure it works for most of them. Also try it in other bands, such as <code class="docutils literal notranslate"><span class="pre">N708</span></code>.</p></li>
 <li><p>When extracting the segmentation map, let’s try to smooth the image a bit so small-scale noise peaks can be smeared out. We can do this by convolving the image with the PSF. Note that this is only important for detection; we won’t use this convolved image for Sersic fitting. You can use <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">astropy.convolution</span> <span class="pre">import</span> <span class="pre">convolve</span></code>, and use the PSF from above. Then, use the convolved image in the <code class="docutils literal notranslate"><span class="pre">detect_sources()</span></code> function.</p></li>
 </ol>
 <p><strong>Exercise 4</strong></p>
 <ol class="arabic simple">
-<li><p>Do Sersic fitting for all galaxies in <code class="docutils literal notranslate"><span class="pre">cat_inband</span></code>. If you see failures, write them down, and briefly explain why it might have failed.</p></li>
+<li><p>For this galaxy <code class="docutils literal notranslate"><span class="pre">refID=10</span></code> and <code class="docutils literal notranslate"><span class="pre">Name:</span> <span class="pre">J095828.56+013901.69</span></code>, write a function to calculate its physical half-light size using the half-light radius from Sersic fit and its spec-z. You can use <code class="docutils literal notranslate"><span class="pre">astropy.cosmology</span></code> to calculate the angular diameter distance at a given distance. Express the physical size of this galaxy in <code class="docutils literal notranslate"><span class="pre">kpc</span></code>.</p></li>
+<li><p>For all galaxies in our sample, do Sersic fitting, then extract their physical sizes. Make a scatter plot for their sizes and stellar masses.</p></li>
 </ol>
 </section>
 </section>
