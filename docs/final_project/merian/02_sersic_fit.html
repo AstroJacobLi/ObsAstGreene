@@ -1,0 +1,864 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Merian Part 2: images and Sersic fitting &#8212; Observational Astronomy</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script src="../../../_static/redirect.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/final_project/merian/02_sersic_fit';</script>
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/lsst-full.jpg" class="logo__image only-light" alt="Observational Astronomy - Home"/>
+    <script>document.write(`<img src="../../../_static/lsst-full.jpg" class="logo__image only-dark" alt="Observational Astronomy - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to Python</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../intro_python/about_py.html">About Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intro_python/getting_started.html">Setting up Your Python Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intro_python/numpy_and_plotting.html">Getting started with arrays and plots in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gaia_part1_jared_v2_class_ready.html">Understand stars in Gaia data</a></li>
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Statistics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../stats/basic_stats.html">Basic Statistics (Part 1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stats/more_stats_jared_v2.html">Basic Statistics (Part 2)</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Detector and Imaging</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../imaging/calibration_frames.html">Calibration frames</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../../imaging/img_simulation.html">Simulate an artificial image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../imaging/plotting_jwst.html">Plotting JWST images</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Homework</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../homework/hw2.html">Homework 2 Notebook</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Final Projects</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../variable_stars_and_planets.html">Lightcurves, transits, and TESS! Oh My!</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../GalaxyZoo_NeuralNet.html">Solve package versions</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../lrd/are_LRD_resolved.html">LRD project</a></li>
+
+
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Merian Project</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="00_photoz.html">Photometric Redshifts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_merian_intro.html">Merian Part 1: catalogs and scaling relations</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/AstroJacobLi/ObsAstGreene/blob/main//book/docs/final_project/merian/02_sersic_fit.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/docs/final_project/merian/02_sersic_fit.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Merian Part 2: images and Sersic fitting</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#enjoy-merian-images">1: Enjoy Merian images!</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sersic-fitting">2: Sersic fitting</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="merian-part-2-images-and-sersic-fitting">
+<h1>Merian Part 2: images and Sersic fitting<a class="headerlink" href="#merian-part-2-images-and-sersic-fitting" title="Permalink to this heading">#</a></h1>
+<p><strong>Prerequisites</strong></p>
+<ul class="simple">
+<li><p>Need to install <code class="docutils literal notranslate"><span class="pre">photutils</span></code> and <code class="docutils literal notranslate"><span class="pre">statmorph</span></code></p></li>
+<li><p>Finished the Photometric Redshift notebook and Merian Part 1 notebook</p></li>
+</ul>
+<div class="cell tag_hide docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> autoreload
+<span class="o">%</span><span class="k">autoreload</span> 2
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">clear_output</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">astropy.table</span> <span class="kn">import</span> <span class="n">Table</span>
+<span class="kn">from</span> <span class="nn">astropy.coordinates</span> <span class="kn">import</span> <span class="n">SkyCoord</span>
+
+<span class="c1"># We can beautify our plots by changing the matpltlib setting a little</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">18</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;image.origin&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;lower&#39;</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">90</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.linewidth&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">required_packages</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;statmorph&#39;</span><span class="p">,</span> <span class="s1">&#39;photutils&#39;</span><span class="p">]</span>  <span class="c1"># Define the required packages for this notebook</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">google.colab</span>
+    <span class="n">IN_COLAB</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">IN_COLAB</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="k">if</span> <span class="n">IN_COLAB</span><span class="p">:</span>
+    <span class="c1"># Download utils.py</span>
+    <span class="o">!</span>wget<span class="w"> </span>-q<span class="w"> </span>-O<span class="w"> </span>/content/utils.py<span class="w"> </span>https://raw.githubusercontent.com/AstroJacobLi/ObsAstGreene/refs/heads/main/book/docs/utils.py
+    <span class="c1"># Function to check and install missing packages</span>
+    <span class="k">def</span> <span class="nf">install_packages</span><span class="p">(</span><span class="n">packages</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">package</span> <span class="ow">in</span> <span class="n">packages</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="nb">__import__</span><span class="p">(</span><span class="n">package</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Installing </span><span class="si">{</span><span class="n">package</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+                <span class="n">subprocess</span><span class="o">.</span><span class="n">check_call</span><span class="p">([</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s1">&#39;-m&#39;</span><span class="p">,</span> <span class="s1">&#39;pip&#39;</span><span class="p">,</span> <span class="s1">&#39;install&#39;</span><span class="p">,</span> <span class="n">package</span><span class="p">])</span>
+    <span class="c1"># Install any missing packages</span>
+    <span class="n">install_packages</span><span class="p">(</span><span class="n">required_packages</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># If not in Colab, adjust the path for local development</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;/Users/jiaxuanl/Dropbox/Courses/ObsAstGreene/book/docs/&#39;</span><span class="p">)</span>
+
+<span class="c1"># Get the directory right</span>
+<span class="k">if</span> <span class="n">IN_COLAB</span><span class="p">:</span>
+  <span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
+  <span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">&#39;/content/drive/&#39;</span><span class="p">)</span>
+  <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;/content/drive/Shareddrives/AST207/data&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;../../../_static/ObsAstroData/&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">pad_psf</span><span class="p">,</span> <span class="n">show_image</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="enjoy-merian-images">
+<h2>1: Enjoy Merian images!<a class="headerlink" href="#enjoy-merian-images" title="Permalink to this heading">#</a></h2>
+<p>We’ve been playing with catalogs so far. But the Merian images are truly amazing! In this part, let’s take a look at those images and try to make a color-composite image by combining the Hyper Suprime-Cam (HSC) data with Merian.</p>
+<p>The Merian (and the corresponding HSC) images for objects in the Merian redshift range are made available in class’s google drive.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cat</span> <span class="o">=</span> <span class="n">Table</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;./merian/cosmos_Merian_DR1_photoz_v1.0.fits&#39;</span><span class="p">)</span>
+<span class="n">cat</span> <span class="o">=</span> <span class="n">cat</span><span class="p">[</span><span class="n">cat</span><span class="p">[</span><span class="s1">&#39;z_desi&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mf">99.0</span><span class="p">]</span>
+<span class="n">cat</span> <span class="o">=</span> <span class="n">cat</span><span class="p">[</span><span class="n">cat</span><span class="p">[</span><span class="s1">&#39;good_desi&#39;</span><span class="p">]]</span> <span class="c1"># ensure good DESI spec-z</span>
+<span class="n">cat</span> <span class="o">=</span> <span class="n">cat</span><span class="p">[</span><span class="n">cat</span><span class="p">[</span><span class="s1">&#39;z_desi&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">0.6</span><span class="p">]</span>
+
+<span class="n">zp</span> <span class="o">=</span> <span class="mf">31.4</span> <span class="c1"># this is the photometric zeropoint for Merian</span>
+<span class="k">for</span> <span class="n">filt</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;N708&#39;</span><span class="p">,</span> <span class="s1">&#39;N540&#39;</span><span class="p">]:</span>
+    <span class="n">cat</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;mag_</span><span class="si">{</span><span class="n">filt</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">zp</span> <span class="o">-</span> <span class="mf">2.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">cat</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">filt</span><span class="si">}</span><span class="s1">_gaap1p0Flux_Merian&#39;</span><span class="p">])</span>
+<span class="n">z_spec</span> <span class="o">=</span> <span class="n">cat</span><span class="p">[</span><span class="s1">&#39;z_desi&#39;</span><span class="p">]</span>
+<span class="n">cat_inband</span> <span class="o">=</span> <span class="n">cat</span><span class="p">[(</span><span class="n">z_spec</span> <span class="o">&lt;</span> <span class="mf">0.11</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">z_spec</span> <span class="o">&gt;</span> <span class="mf">0.05</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">cat</span><span class="p">[</span><span class="s1">&#39;mag_i&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">21.5</span><span class="p">)]</span> <span class="c1"># we require i_mag &lt; 21.5 to make sure all galaxies have high S/N</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cutout_dir</span> <span class="o">=</span> <span class="s2">&quot;./merian/cutouts/&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">fits</span>
+<span class="n">i</span> <span class="o">=</span> <span class="mi">1850</span>
+<span class="n">obj</span> <span class="o">=</span> <span class="n">merian</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="n">coord</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="p">(</span><span class="n">obj</span><span class="p">[</span><span class="s1">&#39;coord_ra_Merian&#39;</span><span class="p">],</span> <span class="n">obj</span><span class="p">[</span><span class="s1">&#39;coord_dec_Merian&#39;</span><span class="p">],</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;deg&#39;</span><span class="p">)</span>
+<span class="n">cname</span> <span class="o">=</span> <span class="n">obj</span><span class="p">[</span><span class="s1">&#39;cname&#39;</span><span class="p">]</span>
+
+<span class="c1"># Open images and psfs</span>
+<span class="n">cutouts</span> <span class="o">=</span> <span class="p">{</span><span class="n">band</span><span class="p">:</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cutout_dir</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cname</span><span class="si">}</span><span class="s2">_HSC-</span><span class="si">{</span><span class="n">band</span><span class="si">}</span><span class="s2">.fits&quot;</span><span class="p">))[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">data</span> <span class="k">for</span> <span class="n">band</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">]}</span>
+<span class="n">cutouts</span><span class="p">[</span><span class="s1">&#39;N708&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cutout_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cname</span><span class="si">}</span><span class="s2">_N708_merim.fits&quot;</span><span class="p">))[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We use the function <code class="docutils literal notranslate"><span class="pre">show_image</span></code> to display the data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">percl</span> <span class="o">=</span> <span class="mi">92</span> <span class="c1"># this changes the contrast and dynamic range of the display</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">band</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cutouts</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+    <span class="n">show_image</span><span class="p">(</span><span class="n">cutouts</span><span class="p">[</span><span class="n">band</span><span class="p">],</span> <span class="n">fig</span><span class="o">=</span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Greys&#39;</span><span class="p">,</span> <span class="n">percl</span><span class="o">=</span><span class="n">percl</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">band</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/c32559e90c075c2945b536761c483a21e68fe2fae205ea9581c6ab018df648b7.png" src="../../../_images/c32559e90c075c2945b536761c483a21e68fe2fae205ea9581c6ab018df648b7.png" />
+</div>
+</div>
+<p><strong>Exercise 1</strong></p>
+<p>Change the <code class="docutils literal notranslate"><span class="pre">percl</span></code> parameter from 92 to 99.9, and comment on how that changes the look of the galaxy. If you are interested in the low-surface-brightness features, should you tune <code class="docutils literal notranslate"><span class="pre">percl</span></code> low or high?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## your answer</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Black &amp; White images are cool but a bit boring… Let’s make them colorful! Here we use the method in <a class="reference external" href="https://ui.adsabs.harvard.edu/abs/2004PASP..116..133L/abstract">Lupton et al. (2004)</a>, featuring our own <a class="reference external" href="https://web.astro.princeton.edu/people/robert-lupton">Robert Lupton</a>!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.visualization</span> <span class="kn">import</span> <span class="n">make_lupton_rgb</span>
+<span class="n">rgb</span> <span class="o">=</span> <span class="n">make_lupton_rgb</span><span class="p">(</span><span class="n">cutouts</span><span class="p">[</span><span class="s1">&#39;i&#39;</span><span class="p">],</span> <span class="n">cutouts</span><span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">],</span> <span class="n">cutouts</span><span class="p">[</span><span class="s1">&#39;g&#39;</span><span class="p">],</span> <span class="n">stretch</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Q</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">minimum</span><span class="o">=-</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rgb</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Lupton RGB image&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.06</span><span class="p">,</span> <span class="mf">1.02</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.03</span><span class="p">,</span> <span class="mf">1.02</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.02</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 1.02, &#39;g&#39;)
+</pre></div>
+</div>
+<img alt="../../../_images/add696f3faaa0fe9f58f2522f54a8e6b03e7c44d8306882b86aa1e00c11fc76a.png" src="../../../_images/add696f3faaa0fe9f58f2522f54a8e6b03e7c44d8306882b86aa1e00c11fc76a.png" />
+</div>
+</div>
+<p><strong>Exercise 2</strong></p>
+<p>There are three parameters in the <code class="docutils literal notranslate"><span class="pre">lupton_rgb</span></code> function: <code class="docutils literal notranslate"><span class="pre">stretch</span></code>, <code class="docutils literal notranslate"><span class="pre">Q</span></code>, and <code class="docutils literal notranslate"><span class="pre">minimum</span></code>. Try to play with these parameters, and find a combination that makes the most beautiful color image.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## your answer</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="sersic-fitting">
+<h2>2: Sersic fitting<a class="headerlink" href="#sersic-fitting" title="Permalink to this heading">#</a></h2>
+<p>A galaxy’s light distribution is often described by a <a class="reference external" href="https://en.wikipedia.org/wiki/S%C3%A9rsic_profile">Sersic</a> model. For a comprehensive introduction to the Sersic model, see <a class="reference external" href="https://arxiv.org/abs/astro-ph/0503176">this paper</a>. Here let’s try to fit a Sersic model to the Merian galaxies.</p>
+<!-- - We can make them do their own Source Extractor: define threshold, then do detection, and generate a segmantation map -->
+<!-- - Then we use `statmorph` to do the Sersic fit + other non-par measurement --><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statmorph</span>
+<span class="kn">from</span> <span class="nn">photutils.segmentation</span> <span class="kn">import</span> <span class="n">detect_threshold</span><span class="p">,</span> <span class="n">detect_sources</span>
+<span class="kn">from</span> <span class="nn">astropy.convolution</span> <span class="kn">import</span> <span class="n">convolve_fft</span>
+<span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">get_img_central_region</span>
+<span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">fits</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">i</span> <span class="o">=</span> <span class="mi">1850</span>
+<span class="n">obj</span> <span class="o">=</span> <span class="n">merian</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="n">coord</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="p">(</span><span class="n">obj</span><span class="p">[</span><span class="s1">&#39;coord_ra_Merian&#39;</span><span class="p">],</span> <span class="n">obj</span><span class="p">[</span><span class="s1">&#39;coord_dec_Merian&#39;</span><span class="p">],</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;deg&#39;</span><span class="p">)</span>
+<span class="n">cname</span> <span class="o">=</span> <span class="n">obj</span><span class="p">[</span><span class="s1">&#39;cname&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Open images and psfs</span>
+<span class="n">cutouts</span> <span class="o">=</span> <span class="p">{</span><span class="n">band</span><span class="p">:</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cutout_dir</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cname</span><span class="si">}</span><span class="s2">_HSC-</span><span class="si">{</span><span class="n">band</span><span class="si">}</span><span class="s2">.fits&quot;</span><span class="p">))[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">data</span> <span class="k">for</span> <span class="n">band</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">]}</span>
+<span class="n">cutouts</span><span class="p">[</span><span class="s1">&#39;N708&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cutout_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cname</span><span class="si">}</span><span class="s2">_N708_merim.fits&quot;</span><span class="p">))[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+
+<span class="n">cutout_headers</span> <span class="o">=</span> <span class="p">{</span><span class="n">band</span><span class="p">:</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cutout_dir</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cname</span><span class="si">}</span><span class="s2">_HSC-</span><span class="si">{</span><span class="n">band</span><span class="si">}</span><span class="s2">.fits&quot;</span><span class="p">))[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">header</span> <span class="k">for</span> <span class="n">band</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">]}</span>
+<span class="n">cutout_headers</span><span class="p">[</span><span class="s1">&#39;N708&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cutout_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cname</span><span class="si">}</span><span class="s2">_N708_merim.fits&quot;</span><span class="p">))[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">header</span>
+
+<span class="n">psfs</span> <span class="o">=</span> <span class="p">{</span><span class="n">band</span><span class="p">:</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cutout_dir</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cname</span><span class="si">}</span><span class="s2">_HSC-</span><span class="si">{</span><span class="n">band</span><span class="si">}</span><span class="s2">_psf.fits&quot;</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span> <span class="k">for</span> <span class="n">band</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">]}</span>
+<span class="n">psfs</span><span class="p">[</span><span class="s1">&#39;N708&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cutout_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cname</span><span class="si">}</span><span class="s2">_N708_merpsf.fits&quot;</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We only include the central region of the bigger image</span>
+<span class="c1"># This makes the fitting faster</span>
+<span class="n">imgs</span> <span class="o">=</span> <span class="n">get_img_central_region</span><span class="p">(</span><span class="n">cutouts</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">imgs</span><span class="p">[</span><span class="s1">&#39;N708&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We first need to detect the “footprint” of the galaxy that we are intersted. We use <code class="docutils literal notranslate"><span class="pre">detect_sources</span></code> function in <code class="docutils literal notranslate"><span class="pre">photutils.segmentation</span></code> to extract sources that are <span class="math notranslate nohighlight">\(1.5\sigma\)</span> above the noise level. The <code class="docutils literal notranslate"><span class="pre">detect_threshold</span></code> function roughly estimates the background noise level.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">threshold</span> <span class="o">=</span> <span class="n">detect_threshold</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
+<span class="n">npixels</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c1"># minimum number of connected pixels</span>
+<span class="n">segmap</span> <span class="o">=</span> <span class="n">detect_sources</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">threshold</span><span class="p">,</span> <span class="n">npixels</span><span class="p">)</span>
+<span class="n">obj_mask</span> <span class="o">=</span> <span class="o">~</span><span class="n">segmap</span><span class="o">.</span><span class="n">data_ma</span><span class="o">.</span><span class="n">mask</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="p">[</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">]</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">segmap</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Paired&#39;</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+
+<span class="n">ind</span> <span class="o">=</span> <span class="n">segmap</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">//</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">segmap</span><span class="o">.</span><span class="n">keep_label</span><span class="p">(</span><span class="n">ind</span><span class="p">)</span>
+
+<span class="n">ax2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">segmap</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Paired&#39;</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x154f074d0&gt;
+</pre></div>
+</div>
+<img alt="../../../_images/1ce5a96532358e71779663da20e1602b95233c52e35ae48d0d1c2d6177beec9a.png" src="../../../_images/1ce5a96532358e71779663da20e1602b95233c52e35ae48d0d1c2d6177beec9a.png" />
+</div>
+</div>
+<p>In the left panel, we show the “segmentation map” for all sources above <span class="math notranslate nohighlight">\(1.5\sigma\)</span>. Many sources are detected. However, we only want the central one, so we use <code class="docutils literal notranslate"><span class="pre">segmap.keep_label(ind)</span></code>. The right panel shows the segmentation map after this step. This segmentation map will be used in the Sersic fitting.</p>
+<p>Sersic fitting needs the background noise level to calculate the chi-square. Let’s use <code class="docutils literal notranslate"><span class="pre">photutils.background.Backgroud2D</span></code> to estimate the background noise. In this step, we will provide an object mask <code class="docutils literal notranslate"><span class="pre">obj_mask</span></code> such that the light from astrophysical sources will not bias the background estimation. <code class="docutils literal notranslate"><span class="pre">obj_mask</span></code> was constructed when we first extracted the segmentation map: <code class="docutils literal notranslate"><span class="pre">obj_mask</span> <span class="pre">=</span> <span class="pre">~segmap.data_ma.mask</span></code>. In this mask, <code class="docutils literal notranslate"><span class="pre">True</span></code> means that the pixel belongs to a real source and should be masked; <code class="docutils literal notranslate"><span class="pre">False</span></code> means that it should not be masked.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">photutils.background</span> <span class="kn">import</span> <span class="n">Background2D</span>
+<span class="n">bkg</span> <span class="o">=</span> <span class="n">Background2D</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">obj_mask</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This <code class="docutils literal notranslate"><span class="pre">bkg</span></code> object contains many information about the background, including the rms of the background level. This is exactly what we need.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bkg</span><span class="o">.</span><span class="n">background_rms</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.0804221 , 0.0804221 , 0.0804221 , ..., 0.08041927, 0.08041922,
+        0.08041916],
+       [0.0804221 , 0.0804221 , 0.0804221 , ..., 0.08041926, 0.0804192 ,
+        0.08041915],
+       [0.0804221 , 0.0804221 , 0.0804221 , ..., 0.08041923, 0.08041917,
+        0.08041911],
+       ...,
+       [0.08022214, 0.08022214, 0.08022214, ..., 0.08032062, 0.08032095,
+        0.08032127],
+       [0.08022214, 0.08022214, 0.08022214, ..., 0.08032009, 0.08032042,
+        0.08032075],
+       [0.08022214, 0.08022214, 0.08022214, ..., 0.08031956, 0.0803199 ,
+        0.08032023]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now it’s time to do Sersic fitting! We use a package called <code class="docutils literal notranslate"><span class="pre">statmorph</span></code>. It also provides many other measurements. See <a class="reference external" href="https://statmorph.readthedocs.io/en/latest/">its documentation</a> for details.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">source_morphs</span> <span class="o">=</span> <span class="n">statmorph</span><span class="o">.</span><span class="n">source_morphology</span><span class="p">(</span>
+    <span class="n">img</span><span class="p">,</span> <span class="n">segmap</span><span class="p">,</span> <span class="n">weightmap</span><span class="o">=</span><span class="n">bkg</span><span class="o">.</span><span class="n">background_rms</span><span class="p">,</span> <span class="n">psf</span><span class="o">=</span><span class="n">psf</span><span class="p">)</span>
+<span class="n">morph</span> <span class="o">=</span> <span class="n">source_morphs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>That’s it! Let’s visualize the results:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statmorph.utils.image_diagnostics</span> <span class="kn">import</span> <span class="n">make_figure</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">make_figure</span><span class="p">(</span><span class="n">morph</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/286d502c0a3e87856c945bd6413da9e5f077eed7daee3874d1ff4f32ad718309.png" src="../../../_images/286d502c0a3e87856c945bd6413da9e5f077eed7daee3874d1ff4f32ad718309.png" />
+</div>
+</div>
+<p>We see lots of information on this plot! For Sersic fitting, we should only focus on the first three panels. The first panel shows the original image, the second shows the best-fit Sersic model, and the third shows the residual. Overall, the fit is pretty good (also indicated by <code class="docutils literal notranslate"><span class="pre">flag_sersic</span> <span class="pre">=</span> <span class="pre">0</span></code>)! As seen in the residual, there are some structures not captured by the Sersic model, e.g., the bright blob above the center of the galaxy. Sersic model is not perfect, but it’s useful. It gives you a rough idea of the size and luminosity of the galaxy.</p>
+<p>Let’s check the best-fit parameters, such as the half-light radius, ellipticity, etc.
+In this way, we can measure the properties of many more galaxies.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Half light radius:&#39;</span><span class="p">,</span> <span class="n">morph</span><span class="o">.</span><span class="n">sersic_rhalf</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ellipticity:&#39;</span><span class="p">,</span> <span class="n">morph</span><span class="o">.</span><span class="n">sersic_ellip</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Sersic index:&#39;</span><span class="p">,</span> <span class="n">morph</span><span class="o">.</span><span class="n">sersic_n</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Sersic amplitude:&#39;</span><span class="p">,</span> <span class="n">morph</span><span class="o">.</span><span class="n">sersic_amplitude</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Half light radius: 11.965680875477142
+Ellipticity: 0.7161691468369256
+Sersic index: 0.9160618674054026
+Sersic amplitude: 5.41225976642093
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise 3</strong></p>
+<ol class="arabic simple">
+<li><p>Repeat this Sersic fitting for a few other galaxies, and make sure it works for most of them</p></li>
+<li><p>When extracting the segmentation map, let’s try to smooth the image a bit so small-scale noise peaks can be smeared out. We can do this by convolving the image with the PSF. Note that this is only important for detection; we won’t use this convolved image for Sersic fitting. You can use <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">astropy.convolution</span> <span class="pre">import</span> <span class="pre">convolve</span></code>, and use the PSF from above. Then, use the convolved image in the <code class="docutils literal notranslate"><span class="pre">detect_sources()</span></code> function.</p></li>
+</ol>
+<p><strong>Exercise 4</strong></p>
+<ol class="arabic simple">
+<li><p>Do Sersic fitting for all galaxies in <code class="docutils literal notranslate"><span class="pre">cat_inband</span></code>. If you see failures, write them down, and briefly explain why it might have failed.</p></li>
+</ol>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/final_project/merian"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#enjoy-merian-images">1: Enjoy Merian images!</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sersic-fitting">2: Sersic fitting</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jenny Greene, Jared Siegel, Erin Flowers, Jiaxuan Li
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
