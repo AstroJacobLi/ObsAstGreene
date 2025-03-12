@@ -1,3 +1,5 @@
+book/_static/ObsAstroData/merian/cutouts/
+book/_static/ObsAstroData/merian/cutouts/*
 _build/
 .DS_Store
 # Byte-compiled / optimized / DLL files
