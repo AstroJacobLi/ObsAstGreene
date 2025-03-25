@@ -228,6 +228,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="00_photoz.html">Photometric Redshifts</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Merian Part 1: catalogs and scaling relations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_sersic_fit.html">Merian Part 2: images and Sersic fitting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_Halpha_map.html">Merian project Part 2</a></li>
+
 </ul>
 
     </div>
@@ -493,9 +495,10 @@ document.write(`
 <h2>1: Understand the Merian survey<a class="headerlink" href="#understand-the-merian-survey" title="Permalink to this heading">#</a></h2>
 <p>The Merian survey uses two medium-band filters (N540 and N708) on the 4-m Blanco telescope to obtain deep imaging data for dwarf galaxies. From the Photometric Redshift notebook, we already know that galaxies at different redshifts will have different magnitudes in certain bands as the emission lines pass through these filters. In this notebook, we start to work on the real Merian data and try to have a deeper understanding of photo-<span class="math notranslate nohighlight">\(z\)</span>s. To start with, we will look at how the <span class="math notranslate nohighlight">\(i - \rm N708\)</span> color depends on the galaxy’s redshift.</p>
 <p>In the cell below, we load the master catalog and only select those galaxies with solid spectroscopic redshifts (<code class="docutils literal notranslate"><span class="pre">cat['z_desi']</span></code> is the spectroscopic redshift), such that we have a truth for redshift to compare with photo-zs. We also narrow the redshift range to <span class="math notranslate nohighlight">\(0 &lt; z &lt; 0.6\)</span>.</p>
-<p>We will also convert the measured “flux” to magnitudes:
-$<span class="math notranslate nohighlight">\( m = -2.5 \log10 (f) + \mathrm{ZP},\)</span><span class="math notranslate nohighlight">\(
-where \)</span>f<span class="math notranslate nohighlight">\( is the flux (in any unit), and \)</span>\rm ZP<span class="math notranslate nohighlight">\( is the zeropoint. Note that different surveys use different flux units (e.g., some use micro-Jansky, some fix their zeropoint to 22.5 mag, etc.). For Merian, we use \)</span>\rm ZP = 31.4<span class="math notranslate nohighlight">\(, such that \)</span>f$ has a unit of nano-Jansky.</p>
+<p>We will also convert the measured “flux” to magnitudes:</p>
+<div class="math notranslate nohighlight">
+\[ m = -2.5 \log10 (f) + \mathrm{ZP},\]</div>
+<p>where <span class="math notranslate nohighlight">\(f\)</span> is the flux (in any unit), and <span class="math notranslate nohighlight">\(\rm ZP\)</span> is the zeropoint. For Merian, we use <span class="math notranslate nohighlight">\(\rm ZP = 31.4\)</span> for these catalogs.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cat</span> <span class="o">=</span> <span class="n">Table</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;./merian/cosmos_Merian_DR1_photoz_v1.0.fits&#39;</span><span class="p">)</span>
@@ -604,7 +607,7 @@ where \)</span>f<span class="math notranslate nohighlight">\( is the flux (in an
 <ol class="arabic simple">
 <li><p>Make a scatter plot for the spec-z v.s. photo-z. Also, plot a one-to-one line for reference, and set <code class="docutils literal notranslate"><span class="pre">xlim</span></code> and <code class="docutils literal notranslate"><span class="pre">ylim</span></code> to <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0.6)</span></code>. Make sure to add axis labels.</p></li>
 <li><p>Is photo-z a perfect indicator of a galaxy’s redshift? Can we 100% trust it?</p></li>
-<li><p>To quantify the scatter of the photo-z w.r.t. spec-z, people define a quantity <span class="math notranslate nohighlight">\(\Delta z / (1+z_{\rm spec})\)</span>, where <span class="math notranslate nohighlight">\(\Delta z = z_{\rm phot} - z_{\rm spec}\)</span>. Please calculate the median and 1-sigma standard deviation (using 16 and 84 percentiles) of this quantity for galaxies at <span class="math notranslate nohighlight">\(z&lt;0.1\)</span>. The standard deviation, <span class="math notranslate nohighlight">\(\sigma_{\Delta z / (1+z)}\)</span>, is often used to quantify the photo-z accuracy.</p></li>
+<li><p>To quantify the scatter of the photo-z w.r.t. spec-z, people define a quantity <span class="math notranslate nohighlight">\(\Delta z / (1+z_{\rm spec})\)</span>, where <span class="math notranslate nohighlight">\(\Delta z = z_{\rm phot} - z_{\rm spec}\)</span>. Please calculate the median and 1-sigma standard deviation of this quantity for galaxies at <span class="math notranslate nohighlight">\(z&lt;0.1\)</span>. The standard deviation, <span class="math notranslate nohighlight">\(\sigma_{\Delta z / (1+z)}\)</span>, is often used to quantify the photo-z accuracy.</p></li>
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
